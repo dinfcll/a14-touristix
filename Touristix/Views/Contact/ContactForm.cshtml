@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "ContactForm";
+}
+
+<h2>Nous Contacter</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("Nom")<br>
+    @Html.TextBox("Nom")<br>
+    
+    @Html.Label("Courriel")<br>
+    @Html.TextBox("Courriel")<br>
+    
+    @Html.Label("Suggestion")
+    @Html.RadioButton("Suggestion", "Categorie")
+    @Html.Label("Information")
+    @Html.RadioButton("Information", "Categorie")
+    @Html.Label("Commentaire")
+    @Html.RadioButton("Commentaire", "Categorie")
+    @Html.Label("Plainte")
+    @Html.RadioButton("Plainte", "Categorie")<br />
+    
+    @Html.Label("Commentaires")<br>
+    @Html.TextArea("Commentaires")<br>
+    
+   
+    
+    <button type ="submit">Soumettre le formulaire</button>
+}
