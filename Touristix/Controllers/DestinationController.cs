@@ -21,10 +21,70 @@ namespace Touristix.Controllers
             return View(db.Destinations.ToList());
         }
 
+        public ActionResult Recherche(string DestinationNom, string DestinationPays, string DestinationRegion)
+        {
+            var Destinations = from m in db.Destinations
+                         select m;
+
+            if (!string.IsNullOrEmpty(DestinationNom))
+                RechercheParNom(Destinations, DestinationNom);
+
+            if (!string.IsNullOrEmpty(DestinationPays))
+                RechercheParPays(Destinations, DestinationPays);
+
+            if (!string.IsNullOrEmpty(DestinationRegion))
+                RechercheParRegion(Destinations, DestinationRegion);
+
+            return View(Destinations);
+        }
+
+        public IQueryable<DestinationModel> RechercheParNom(IQueryable<DestinationModel> Destinations, string DestinationNom)
+        {
+            if (!String.IsNullOrEmpty(DestinationNom))
+            {
+                Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
+            }
+
+            return Destinations;
+        }
+
+        public IQueryable<DestinationModel> RechercheParPays(IQueryable<DestinationModel> Destinations, string DestinationPays)
+        {
+            if (!String.IsNullOrEmpty(DestinationPays))
+            {
+                Destinations = Destinations.Where(s => s.Pays.Contains(DestinationPays));
+            }
+
+            return Destinations;
+        }
+
+        public IQueryable<DestinationModel> RechercheParRegion(IQueryable<DestinationModel> Destinations, string DestinationRegion)
+        {
+            if (!String.IsNullOrEmpty(DestinationRegion))
+            {
+                Destinations = Destinations.Where(s => s.Region.Contains(DestinationRegion));
+            }
+
+            return Destinations;
+        }
+
         //
         // GET: /Destination/Details/5
 
         public ActionResult Details(int id = 0)
+        {
+            DestinationModel destinationmodel = db.Destinations.Find(id);
+            if (destinationmodel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(destinationmodel);
+        }
+
+        //
+        // GET: /Destination/Information/
+
+        public ActionResult Information(int id = 0)
         {
             DestinationModel destinationmodel = db.Destinations.Find(id);
             if (destinationmodel == null)

@@ -305,6 +305,12 @@
   <ItemGroup>
     <Content Include="Views\Destination\Delete.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\Information.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
