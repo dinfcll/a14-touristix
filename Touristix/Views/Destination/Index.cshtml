@@ -1,14 +1,42 @@
-﻿@model IEnumerable<Touristix.Models.DestinationModel>
+﻿@model Tuple<Touristix.Models.DestinationModel[], IQueryable<Touristix.Models.DestinationModel>>
 
 @{
     ViewBag.Title = "Index";
 }
-
+@Styles.Render("~/Content/css/Custom")
 <h2>Index</h2>
+@section scripts {
+    <script type="text/javascript">
 
-<p>
-    @using (Html.BeginForm())
-    {    
+        function MouseOverImage(Image, Nom) {
+            document.getElementById("Text").innerHTML = Nom;
+            document.getElementById("ImageActive").style.background = Image;
+        }
+    </script>
+}
+<div id="tabs">
+
+    <div class="outer" id="ImageActive">
+    <div class="bottomleft" id="Text">
+    <p>(text to appear at the bottom left of the image)</p>
+    </div>
+    <p class="topright">(text to appear at the top right of the image)</p>
+    </div>
+
+     <ul>
+         @foreach (var p in Model.Item1)
+         {
+             @RenderTab(p);
+         }
+     </ul>
+</div>
+@helper RenderTab(Touristix.Models.DestinationModel tab)
+{
+    <img onmouseover="MouseOverImage('@tab.Image', '@tab.Nom')" src="@Html.Encode(tab.Image)" alt="@Html.Encode(tab.Nom)" /> 
+}
+<div id="Recherche">
+    @using (Html.BeginForm("Index", "Destination", FormMethod.Get))
+    {
         <p> Nom: @Html.TextBox("DestinationNom") <br />
         
         Pays: @Html.TextBox("DestinationPays") <br />
@@ -17,9 +45,15 @@
         
         <input type="submit" value="Recherche" /></p>
     } 
-</p>
+</div>
 
-@foreach (var group in Model.GroupBy(item => item.Pays))
+<div id="Liste Destination">
+<p>
+@Html.RadioButton("Trier par pays", 0) Trier par pays
+@Html.RadioButton("Trier par régions", 1) Trier par régions
+@Html.RadioButton("Trier par villes", 2) Trier par villes
+</p>
+@foreach (var group in Model.Item2.GroupBy(item => item.Pays))
 {
     @Html.Encode(group.Key)
     <ul>
@@ -29,3 +63,5 @@
     }
     </ul>
 }
+
+</div>

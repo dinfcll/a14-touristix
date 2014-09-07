@@ -16,29 +16,29 @@ namespace Touristix.Controllers
         //
         // GET: /Destination/
 
-        public ActionResult Index()
+        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "")
         {
-            return View(db.Destinations.ToList());
-        }
-
-        public ActionResult Recherche(string DestinationNom, string DestinationPays, string DestinationRegion)
-        {
-            var Destinations = from m in db.Destinations
-                         select m;
+            IQueryable<DestinationModel> Destinations = from m in db.Destinations
+                               select m;
 
             if (!string.IsNullOrEmpty(DestinationNom))
-                RechercheParNom(Destinations, DestinationNom);
+                RechercheParNom(ref Destinations, DestinationNom);
 
             if (!string.IsNullOrEmpty(DestinationPays))
-                RechercheParPays(Destinations, DestinationPays);
+                RechercheParPays(ref Destinations, DestinationPays);
 
             if (!string.IsNullOrEmpty(DestinationRegion))
-                RechercheParRegion(Destinations, DestinationRegion);
+                RechercheParRegion(ref Destinations, DestinationRegion);
 
-            return View(Destinations);
+            DestinationModel[] Array5DerniereDestination = db.Destinations
+                    .OrderByDescending(m => m.Nom)
+                    .Take(5)
+                    .ToArray();
+
+            return View(new Tuple<DestinationModel[], IQueryable<DestinationModel>>(Array5DerniereDestination, Destinations));
         }
 
-        public IQueryable<DestinationModel> RechercheParNom(IQueryable<DestinationModel> Destinations, string DestinationNom)
+        public IQueryable<DestinationModel> RechercheParNom(ref IQueryable<DestinationModel> Destinations, string DestinationNom)
         {
             if (!String.IsNullOrEmpty(DestinationNom))
             {
@@ -48,7 +48,7 @@ namespace Touristix.Controllers
             return Destinations;
         }
 
-        public IQueryable<DestinationModel> RechercheParPays(IQueryable<DestinationModel> Destinations, string DestinationPays)
+        public IQueryable<DestinationModel> RechercheParPays(ref IQueryable<DestinationModel> Destinations, string DestinationPays)
         {
             if (!String.IsNullOrEmpty(DestinationPays))
             {
@@ -58,7 +58,7 @@ namespace Touristix.Controllers
             return Destinations;
         }
 
-        public IQueryable<DestinationModel> RechercheParRegion(IQueryable<DestinationModel> Destinations, string DestinationRegion)
+        public IQueryable<DestinationModel> RechercheParRegion(ref IQueryable<DestinationModel> Destinations, string DestinationRegion)
         {
             if (!String.IsNullOrEmpty(DestinationRegion))
             {
@@ -69,16 +69,11 @@ namespace Touristix.Controllers
         }
 
         //
-        // GET: /Destination/Details/5
+        // GET: /Destination/Admin
 
-        public ActionResult Details(int id = 0)
+        public ActionResult Admin()
         {
-            DestinationModel destinationmodel = db.Destinations.Find(id);
-            if (destinationmodel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(destinationmodel);
+            return View(db.Destinations.ToList());
         }
 
         //
