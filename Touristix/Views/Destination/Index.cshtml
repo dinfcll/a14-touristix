@@ -7,7 +7,6 @@
 <h2>Index</h2>
 @section scripts {
     <script type="text/javascript">
-
         function MouseOverImage(Image, Nom) {
             document.getElementById("Text").innerHTML = Nom;
             document.getElementById("ImageActive").style.background = Image;
@@ -43,25 +42,44 @@
         
         Région: @Html.TextBox("DestinationRegion") <br />
         
-        <input type="submit" value="Recherche" /></p>
-    } 
+        <input type="submit" value="Filtrer" /></p>
+        
+    <div id="Trier">
+        @Html.RadioButton("Trier", 0, new { onchange = "this.form.submit();", @checked = "checked" }) Trier par pays
+        @Html.RadioButton("Trier", 1, new { onchange = "this.form.submit();" }) Trier par régions
+        @Html.RadioButton("Trier", 2, new { onchange = "this.form.submit();" }) Trier par villes
+    </div>
+    }
 </div>
 
 <div id="Liste Destination">
-<p>
-@Html.RadioButton("Trier par pays", 0) Trier par pays
-@Html.RadioButton("Trier par régions", 1) Trier par régions
-@Html.RadioButton("Trier par villes", 2) Trier par villes
-</p>
-@foreach (var group in Model.Item2.GroupBy(item => item.Pays))
-{
-    @Html.Encode(group.Key)
-    <ul>
-    @foreach (var item in group)
+@{
+    IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationRecu = null;
+    string ValeurTriger = Request.QueryString["Trier"];
+    
+    if (ValeurTriger == "0" || ValeurTriger == null)
     {
-        <li>@Html.ActionLink(@Html.Encode(item.Nom), "Information", new { id = item.ID })</li>  
+        DestinationRecu = Model.Item2.GroupBy(item => item.Pays);
     }
-    </ul>
+    else if (ValeurTriger == "1")
+    {
+        DestinationRecu = Model.Item2.GroupBy(item => item.Region);
+    }
+    else if (ValeurTriger == "2")
+    {
+        DestinationRecu = Model.Item2.GroupBy(item => item.Ville);
+    }
+    
+    foreach (var group in DestinationRecu)
+    {
+        @Html.Encode(group.Key)
+        <ul>
+        @foreach (var item in group)
+        {
+            <li>@Html.ActionLink(@Html.Encode(item.Nom), "Information", new { id = item.ID })</li>  
+        }
+        </ul>
+    }
 }
 
 </div>

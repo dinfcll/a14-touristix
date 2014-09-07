@@ -16,7 +16,7 @@ namespace Touristix.Controllers
         //
         // GET: /Destination/
 
-        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "")
+        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
                                select m;
