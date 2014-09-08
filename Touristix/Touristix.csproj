@@ -173,6 +173,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\ImageText.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -294,9 +295,6 @@
     <Content Include="Views\Destination\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Destination\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +302,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\Information.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
