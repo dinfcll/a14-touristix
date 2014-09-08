@@ -7,10 +7,10 @@
 <h2>Index</h2>
 @section scripts {
     <script type="text/javascript">
-        function MouseOverImage(Image, Nom) {
-            document.getElementById("Text").innerHTML = Nom;
-            document.getElementById("ImageActive").style.backgroundImage = "url('Images/Destinations/" + Image + "')";
-            document.getElementById("ImageActive").style.backgroundSize = "500px 300px";
+        function MouseOverImage(Image, Nom, Apercu) {
+            document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
+            document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Destinations/" + Image + "')";
+            document.getElementById("ImagePrincipale").style.backgroundSize = "500px 300px";
         }
     </script>
 }
@@ -19,22 +19,24 @@
 @{
     string Image = "";
     string Nom = "";
+    string Apercu = "";
     if (Model.Item1.Count() > 0)
     {
         Image = Model.Item1.First().Image;
         Nom = Model.Item1.First().Nom;
+        Apercu = Model.Item1.First().Apercu;
     }
-    <div class="outer" id="ImageActive" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
-    <div class="bottomleft" id="Text">
-        @Nom
+    <div class="ImagePrincipale" id="ImagePrincipale" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
+    <div class="TexteEnBas" id="Text">
+        @Nom <br /> @Apercu
     </div>
-    <p class="topright">(text to appear at the top right of the image)</p>
+    <p class="TexteEnHaut">(text to appear at the top right of the image)</p>
     </div>
 
      <ul>
          @foreach (var p in Model.Item1)
          {
-            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom')" class="BottomImage" src="Images/Destinations/@p.Image" alt="@Html.Encode(p.Nom)" /> 
+            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Destinations/@p.Image" alt="@Html.Encode(p.Nom)" /> 
          }
      </ul>
 }

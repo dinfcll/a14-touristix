@@ -301,13 +301,13 @@
     <Content Include="Views\Destination\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Create.cshtml" />
+    <Content Include="Views\Destination\Creer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Edit.cshtml" />
+    <Content Include="Views\Destination\Modifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Delete.cshtml" />
+    <Content Include="Views\Destination\Supprimer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\Admin.cshtml" />

@@ -6,6 +6,10 @@
 
 <h2>Administration</h2>
 
+<p>
+@Html.ActionLink("Créer nouvelle destination", "Creer")
+</p>
+
 <table>
     <tr>
         <th>
@@ -39,8 +43,8 @@
             @Html.DisplayFor(modelItem => item.Ville)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            @Html.ActionLink("Modifier", "Modifier", new { id = item.ID }) |
+            @Html.ActionLink("Supprimer", "Supprimer", new { id = item.ID })
         </td>
     </tr>
 }

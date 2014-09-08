@@ -1,16 +1,18 @@
 ﻿@model Touristix.Models.DestinationModel
 
 @{
-    ViewBag.Title = "Créer";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Créer</h2>
+<h2>Edit</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>DestinationModel</legend>
+
+        @Html.HiddenFor(model => model.ID)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nom)
@@ -52,14 +54,30 @@
             @Html.ValidationMessageFor(model => model.Image)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Apercu)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Apercu)
+            @Html.ValidationMessageFor(model => model.Apercu)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Details)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Details)
+            @Html.ValidationMessageFor(model => model.Details)
+        </div>
+
         <p>
-            <input type="submit" value="Créer" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Retour à l'index", "Index")
+    @Html.ActionLink("Retour à l'index", "Admin")
 </div>
 
 @section Scripts {
