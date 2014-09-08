@@ -19,7 +19,7 @@ namespace Touristix.Controllers
         public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
-                               select m;
+                                                        select m;
 
             if (!string.IsNullOrEmpty(DestinationNom))
                 RechercheParNom(ref Destinations, DestinationNom);
@@ -30,12 +30,28 @@ namespace Touristix.Controllers
             if (!string.IsNullOrEmpty(DestinationRegion))
                 RechercheParRegion(ref Destinations, DestinationRegion);
 
+            IQueryable<IGrouping<string, DestinationModel>> DestinationRecu;
+
+            switch (Trier)
+            {
+                case 0:
+                default:
+                DestinationRecu = Destinations.GroupBy(item => item.Pays);
+                    break;
+                case 1:
+                DestinationRecu = Destinations.GroupBy(item => item.Region);
+                    break;
+                case 2:
+                DestinationRecu = Destinations.GroupBy(item => item.Ville);
+                    break;
+            }
+
             DestinationModel[] Array5DerniereDestination = db.Destinations
                     .OrderByDescending(m => m.Nom)
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], IQueryable<DestinationModel>>(Array5DerniereDestination, Destinations));
+            return View(new Tuple<DestinationModel[], IQueryable<IGrouping<string, DestinationModel>>>(Array5DerniereDestination, DestinationRecu));
         }
 
         public IQueryable<DestinationModel> RechercheParNom(ref IQueryable<DestinationModel> Destinations, string DestinationNom)
