@@ -1,13 +1,12 @@
 ﻿@model Touristix.Models.DestinationModel
 
 @{
-    ViewBag.Title = "Information";
+    ViewBag.Title = "Supprimer";
 }
 
-<h2>Information</h2>
+<h2>Supprimer</h2>
 
-<img src= "~/Images/@Url.Content(Model.Image)" alt="Image" />
-
+<h3>Voulez-vous vraiment supprimer cette destination?</h3>
 <fieldset>
     <legend>DestinationModel</legend>
 
@@ -39,6 +38,9 @@
         @Html.DisplayFor(model => model.Ville)
     </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Retour à l'index", "Index")
-</p>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Supprimer" /> |
+        @Html.ActionLink("Retour à l'index", "Admin")
+    </p>
+}

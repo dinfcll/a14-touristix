@@ -1,16 +1,18 @@
-﻿@model Touristix.Models.DestinationModel
+﻿@model Touristix.Models.ActiviteModel
 
 @{
-    ViewBag.Title = "Créer";
+    ViewBag.Title = "Modifier";
 }
 
-<h2>Créer</h2>
+<h2>Modifier</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    
+
     <fieldset>
         <legend>DestinationModel</legend>
+
+        @Html.HiddenFor(model => model.ID)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nom)
@@ -21,27 +23,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Pays)
+            @Html.LabelFor(model => model.Lieu)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Pays)
-            @Html.ValidationMessageFor(model => model.Pays)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Region)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Region)
-            @Html.ValidationMessageFor(model => model.Region)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ville)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ville)
-            @Html.ValidationMessageFor(model => model.Ville)
+            @Html.EditorFor(model => model.Lieu)
+            @Html.ValidationMessageFor(model => model.Lieu)
         </div>
 
         <div class="editor-label">
@@ -69,7 +55,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Créer" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>
 }

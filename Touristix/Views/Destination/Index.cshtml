@@ -68,7 +68,7 @@
         <ul>
         @foreach (var item in group)
         {
-            <li>@Html.ActionLink(@Html.Encode(item.Nom), "Information", new { id = item.ID })</li>  
+            <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.ID })</li>  
         }
         </ul>
     }

@@ -59,6 +59,13 @@ namespace Touristix.Models
         public string Details { get; set; }
     }
 
+    public class AdminitrationList
+    {
+        public List<DestinationModel> ListDestinationModel;
+        public List<BatimentModel> ListBatimentModel;
+        public List<ActiviteModel> ListActiviteModel;
+    }
+
     public class DestinationDBContext : DbContext
     {
         public DbSet<DestinationModel> Destinations { get; set; }

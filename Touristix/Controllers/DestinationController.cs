@@ -57,72 +57,206 @@ namespace Touristix.Controllers
         // GET: /Destination/Admin
         public ActionResult Admin()
         {
-            return View(db.Destinations.ToList());
+            AdminitrationList NouvelleList = new AdminitrationList();
+            NouvelleList.ListDestinationModel = db.Destinations.ToList();
+            NouvelleList.ListBatimentModel = db.Batiments.ToList();
+            NouvelleList.ListActiviteModel = db.Activites.ToList();
+            return View(NouvelleList);
         }
 
         //
-        // GET: /Destination/Information/
-        public ActionResult Information(int id = 0)
+        // GET: /Destination/InformationDestination/
+        public ActionResult InformationDestination(int id = 0)
         {
-            DestinationModel destinationmodel = db.Destinations.Find(id);
-            if (destinationmodel == null)
+            DestinationModel DestinationModelActif = db.Destinations.Find(id);
+            if (DestinationModelActif == null)
             {
                 return HttpNotFound();
             }
-            return View(destinationmodel);
+            return View(DestinationModelActif);
         }
 
         //
-        // GET: /Destination/Create
-        public ActionResult Creer()
+        // GET: /Destination/InformationBatiment/
+        public ActionResult InformationBatiment(int id = 0)
+        {
+            BatimentModel BatimentModelActif = db.Batiments.Find(id);
+            if (BatimentModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(BatimentModelActif);
+        }
+
+        //
+        // GET: /Destination/InformationDestination/
+        public ActionResult InformationActivite(int id = 0)
+        {
+            ActiviteModel ActiviteModelActif = db.Activites.Find(id);
+            if (ActiviteModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ActiviteModelActif);
+        }
+
+        #region Créer
+
+        //
+        // GET: /Destination/CreerDestination
+        public ActionResult CreerDestination()
         {
             return View();
         }
 
         //
-        // POST: /Destination/Create
+        // POST: /Destination/CreerDestination
         [HttpPost]
-        public ActionResult Creer(DestinationModel destinationmodel)
+        public ActionResult CreerDestination(DestinationModel DestinationModelActif)
         {
             if (ModelState.IsValid)
             {
-                db.Destinations.Add(destinationmodel);
+                db.Destinations.Add(DestinationModelActif);
                 db.SaveChanges();
                 return RedirectToAction("Admin");
             }
 
-            return View(destinationmodel);
+            return View(DestinationModelActif);
         }
 
         //
-        // GET: /Destination/Edit/5
-        public ActionResult Modifier(int id = 0)
+        // GET: /Destination/CreerBatiment
+        public ActionResult CreerBatiment()
         {
-            DestinationModel destinationmodel = db.Destinations.Find(id);
-            if (destinationmodel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(destinationmodel);
+            return View();
         }
 
         //
-        // POST: /Destination/Edit/5
+        // POST: /Destination/CreerBatiment
         [HttpPost]
-        public ActionResult Modifier(DestinationModel destinationmodel)
+        public ActionResult CreerBatiment(BatimentModel BatimentModelActif)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(destinationmodel).State = EntityState.Modified;
+                db.Batiments.Add(BatimentModelActif);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
-            return View(destinationmodel);
+
+            return View(BatimentModelActif);
         }
 
         //
-        // GET: /Destination/Delete/5
-        public ActionResult Supprimer(int id = 0)
+        // GET: /Destination/CreerActivite
+        public ActionResult CreerActivite()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Destination/CreerActivite
+        [HttpPost]
+        public ActionResult CreerActivite(ActiviteModel ActiviteModelActif)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Activites.Add(ActiviteModelActif);
+                db.SaveChanges();
+                return RedirectToAction("Admin");
+            }
+
+            return View(ActiviteModelActif);
+        }
+
+        #endregion
+
+        #region Modifier
+
+        //
+        // GET: /Destination/ModifierDestination
+        public ActionResult ModifierDestination(int id = 0)
+        {
+            DestinationModel DestinationModelActif = db.Destinations.Find(id);
+            if (DestinationModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(DestinationModelActif);
+        }
+
+        //
+        // POST: /Destination/ModifierDestination
+        [HttpPost]
+        public ActionResult ModifierDestination(DestinationModel DestinationModelActif)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(DestinationModelActif).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Admin");
+            }
+            return View(DestinationModelActif);
+        }
+
+        //
+        // GET: /Destination/ModifierBatiment
+        public ActionResult ModifierBatiment(int id = 0)
+        {
+            BatimentModel BatimentModelActif = db.Batiments.Find(id);
+            if (BatimentModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(BatimentModelActif);
+        }
+
+        //
+        // POST: /Destination/ModifierDestination
+        [HttpPost]
+        public ActionResult ModifierBatiment(BatimentModel BatimentModelActif)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(BatimentModelActif).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Admin");
+            }
+            return View(BatimentModelActif);
+        }
+
+        //
+        // GET: /Destination/ModifierActivites
+        public ActionResult ModifierActivite(int id = 0)
+        {
+            ActiviteModel ActiviteModelActif = db.Activites.Find(id);
+            if (ActiviteModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ActiviteModelActif);
+        }
+
+        //
+        // POST: /Destination/ModifierActivites
+        [HttpPost]
+        public ActionResult ModifierActivite(ActiviteModel ActiviteModelActif)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(ActiviteModelActif).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Admin");
+            }
+            return View(ActiviteModelActif);
+        }
+
+        #endregion
+
+        #region Supprimer
+
+        //
+        // GET: /Destination/SupprimerDestination
+        public ActionResult SupprimerDestination(int id = 0)
         {
             DestinationModel destinationmodel = db.Destinations.Find(id);
             if (destinationmodel == null)
@@ -133,15 +267,63 @@ namespace Touristix.Controllers
         }
 
         //
-        // POST: /Destination/Delete/5
-        [HttpPost, ActionName("Supprimer")]
-        public ActionResult DeleteConfirmed(int id)
+        // POST: /Destination/SupprimerDestination
+        [HttpPost, ActionName("SupprimerDestination")]
+        public ActionResult ConfirmationSupprimerDestination(int id)
         {
             DestinationModel destinationmodel = db.Destinations.Find(id);
             db.Destinations.Remove(destinationmodel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //
+        // GET: /Destination/SupprimerBatiment
+        public ActionResult SupprimerBatiment(int id = 0)
+        {
+            BatimentModel BatimentModelActif = db.Batiments.Find(id);
+            if (BatimentModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(BatimentModelActif);
+        }
+
+        //
+        // POST: /Destination/SupprimerBatiment
+        [HttpPost, ActionName("SupprimerBatiment")]
+        public ActionResult ConfirmationSupprimerBatiment(int id)
+        {
+            BatimentModel BatimentModelActif = db.Batiments.Find(id);
+            db.Batiments.Remove(BatimentModelActif);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Destination/SupprimerActivite
+        public ActionResult SupprimerActivite(int id = 0)
+        {
+            ActiviteModel ActiviteModelActif = db.Activites.Find(id);
+            if (ActiviteModelActif == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ActiviteModelActif);
+        }
+
+        //
+        // POST: /Destination/SupprimerActivite
+        [HttpPost, ActionName("SupprimerActivite")]
+        public ActionResult ConfirmationSupprimerActivite(int id)
+        {
+            ActiviteModel ActiviteModelActif = db.Activites.Find(id);
+            db.Activites.Remove(ActiviteModelActif);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

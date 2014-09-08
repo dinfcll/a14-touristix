@@ -1,18 +1,16 @@
 ﻿@model Touristix.Models.DestinationModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Créer destination";
 }
 
-<h2>Edit</h2>
+<h2>Créer destination</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
+    
     <fieldset>
         <legend>DestinationModel</legend>
-
-        @Html.HiddenFor(model => model.ID)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nom)
@@ -71,7 +69,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Créer" />
         </p>
     </fieldset>
 }
