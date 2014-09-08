@@ -12,12 +12,12 @@
         return NombreHasard;
     }
 
-   
+
     var Repertoire = 'Images/';
-    var Images = new Array
+    var Images = new Array;
     Images[1] = "land1.png",
         Images[2] = "land2.png",
-        RafraichirImage()
+        RafraichirImage();
 
 
     function BoutonImageSuivante() {
@@ -34,6 +34,8 @@
 
         document.getElementById("ImageActive").style.backgroundImage = "url(" + Repertoire + Images[Hasard()] + ")";
     }
+
+    setInterval(function () { RafraichirImage() }, 10000);
 
 </script>
 }
