@@ -1,10 +1,12 @@
 ﻿@model Touristix.Models.DestinationModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Information";
 }
 
-<h2>Details</h2>
+<h2>Information</h2>
+
+<img src= "~/Images/@Url.Content(Model.Image)" alt="Image" />
 
 <fieldset>
     <legend>DestinationModel</legend>
@@ -38,6 +40,5 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à l'index", "Index")
 </p>

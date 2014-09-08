@@ -1,51 +1,92 @@
-﻿@model IEnumerable<Touristix.Models.DestinationModel>
+﻿@model Tuple<Touristix.Models.DestinationModel[], IQueryable<Touristix.Models.DestinationModel>>
 
 @{
     ViewBag.Title = "Index";
 }
-
+@Styles.Render("~/Content/css/Custom")
 <h2>Index</h2>
+@section scripts {
+    <script type="text/javascript">
+        function MouseOverImage(Image, Nom) {
+            document.getElementById("Text").innerHTML = Nom;
+            var ImageComplet = "url('Images/Destinations/" + Image + "')";
+            document.getElementById("ImageActive").style.backgroundImage = ImageComplet;
+            document.getElementById("ImageActive").style.backgroundSize = "500px 300px";
+        }
+    </script>
+}
+<div id="tabs">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ville)
-        </th>
-        <th></th>
-    </tr>
+@{
+    string Image = "";
+    string Nom = "";
+    if (Model.Item1.Count() > 0)
+    {
+        Image = Model.Item1.First().Image;
+        Nom = Model.Item1.First().Nom;
+    }
+    <div class="outer" id="ImageActive" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
+    <div class="bottomleft" id="Text">
+        @Nom
+    </div>
+    <p class="topright">(text to appear at the top right of the image)</p>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pays)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ville)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+     <ul>
+         @foreach (var p in Model.Item1)
+         {
+            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom')" class="BottomImage" src="Images/Destinations/@p.Image" alt="@Html.Encode(p.Nom)" /> 
+         }
+     </ul>
+}
+</div>
+<div id="Recherche">
+    @using (Html.BeginForm("Index", "Destination", FormMethod.Get))
+    {
+        <p> Nom: @Html.TextBox("DestinationNom") <br />
+        
+        Pays: @Html.TextBox("DestinationPays") <br />
+        
+        Région: @Html.TextBox("DestinationRegion") <br />
+        
+        <input type="submit" value="Filtrer" /></p>
+        
+    <div id="Trier">
+        @Html.RadioButton("Trier", 0, new { onchange = "this.form.submit();", @checked = "checked" }) Trier par pays
+        @Html.RadioButton("Trier", 1, new { onchange = "this.form.submit();" }) Trier par régions
+        @Html.RadioButton("Trier", 2, new { onchange = "this.form.submit();" }) Trier par villes
+    </div>
+    }
+</div>
+
+<div id="Liste Destination">
+@{
+    IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationRecu = null;
+    string ValeurTriger = Request.QueryString["Trier"];
+
+    if (ValeurTriger == "0" || ValeurTriger == null)
+    {
+        DestinationRecu = Model.Item2.GroupBy(item => item.Pays);
+    }
+    else if (ValeurTriger == "1")
+    {
+        DestinationRecu = Model.Item2.GroupBy(item => item.Region);
+    }
+    else if (ValeurTriger == "2")
+    {
+        DestinationRecu = Model.Item2.GroupBy(item => item.Ville);
+    }
+
+    foreach (var group in DestinationRecu)
+    {
+        @Html.Encode(group.Key)
+        <ul>
+        @foreach (var item in group)
+        {
+            <li>@Html.ActionLink(@Html.Encode(item.Nom), "Information", new { id = item.ID })</li>  
+        }
+        </ul>
+    }
 }
 
-</table>
+</div>
