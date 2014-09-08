@@ -2,4 +2,39 @@
     ViewBag.Title = "Index";
 }
 
+@section scripts {
+<script type="text/javascript">
+
+    document.getElementById('ImageId').innerHTML = getXMLValue(xmlData, 'ImageId');
+
+    NouvelleImage=getXMLValue(xmlData, 'ImageId')
+
+    document.getElementById('ImageActive').innerHTML="<image src='Images/Accueil"+NouvelleImage+".png' />";
+
+
+    var ImageId = "1";
+
+    function BoutonImageSuivante() {
+        ImageId = "2";
+        document.write('<img src="Images/land' + ImageId + '.png" />');
+    }
+
+    function BoutonImagePrecedente() {
+        ImageId = "1";
+    }
+</script>
+}
+
 <h2>Index</h2>
+
+
+    
+    <div>
+
+        <div class="outer" id="ImageActive" style="background-image:url('Images/land1.png'); background-size:500px 300px">
+
+            <button onclick = "BoutonImagePrecedente()"><-</button>
+            <button onclick = "BoutonImageSuivante()">-></button>
+        </div>
+    </div>
+

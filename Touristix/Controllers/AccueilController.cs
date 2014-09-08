@@ -13,8 +13,12 @@ namespace Touristix.Controllers
 
         public ActionResult Index()
         {
+            string image1 = "Z:\\a14-touristix\\Touristix\\Images\\Accueil";
+
+
             return View();
         }
 
+        
     }
 }
