@@ -9,15 +9,25 @@
     <script type="text/javascript">
         function MouseOverImage(Image, Nom) {
             document.getElementById("Text").innerHTML = Nom;
-            document.getElementById("ImageActive").style.background = Image;
+            var ImageComplet = "url('Images/Destinations/" + Image + "')";
+            document.getElementById("ImageActive").style.backgroundImage = ImageComplet;
+            document.getElementById("ImageActive").style.backgroundSize = "500px 300px";
         }
     </script>
 }
 <div id="tabs">
 
-    <div class="outer" id="ImageActive">
+@{
+    string Image = "";
+    string Nom = "";
+    if (Model.Item1.Count() > 0)
+    {
+        Image = Model.Item1.First().Image;
+        Nom = Model.Item1.First().Nom;
+    }
+    <div class="outer" id="ImageActive" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
     <div class="bottomleft" id="Text">
-    <p>(text to appear at the bottom left of the image)</p>
+        @Nom
     </div>
     <p class="topright">(text to appear at the top right of the image)</p>
     </div>
@@ -25,14 +35,11 @@
      <ul>
          @foreach (var p in Model.Item1)
          {
-             @RenderTab(p);
+            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom')" class="BottomImage" src="Images/Destinations/@p.Image" alt="@Html.Encode(p.Nom)" /> 
          }
      </ul>
-</div>
-@helper RenderTab(Touristix.Models.DestinationModel tab)
-{
-    <img onmouseover="MouseOverImage('@tab.Image', '@tab.Nom')" src="@Html.Encode(tab.Image)" alt="@Html.Encode(tab.Nom)" /> 
 }
+</div>
 <div id="Recherche">
     @using (Html.BeginForm("Index", "Destination", FormMethod.Get))
     {
@@ -56,7 +63,7 @@
 @{
     IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationRecu = null;
     string ValeurTriger = Request.QueryString["Trier"];
-    
+
     if (ValeurTriger == "0" || ValeurTriger == null)
     {
         DestinationRecu = Model.Item2.GroupBy(item => item.Pays);
@@ -69,7 +76,7 @@
     {
         DestinationRecu = Model.Item2.GroupBy(item => item.Ville);
     }
-    
+
     foreach (var group in DestinationRecu)
     {
         @Html.Encode(group.Key)
