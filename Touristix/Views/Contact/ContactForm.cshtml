@@ -3,15 +3,15 @@
     ViewBag.Title = "ContactForm";
 }
 
-<h2>Nous Contacter</h2><br /><br>
+<h2>Nous Contacter</h2><br /><br/>
 
 @using (Html.BeginForm())
 {
     
-    @Html.LabelFor(model => Model.Nom)<br>        
+    @Html.LabelFor(model => Model.Nom)<br/>        
     @Html.TextBoxFor(Model => Model.Nom ,null, new { style = "width:300px" })   <br />
     @Html.ValidationMessageFor(model => Model.Nom)<br /> 
-    @Html.LabelFor(Model => Model.Courriel)<br>
+    @Html.LabelFor(Model => Model.Courriel)<br/>
     @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />
     @Html.ValidationMessageFor(Model => Model.Courriel)<br />
    
@@ -26,8 +26,8 @@
    </div>   
     
     
-    @Html.LabelFor(model => model.Commentaires)<br>
-    @Html.TextAreaFor(model => model.Commentaires)<br> <br />
+    @Html.LabelFor(model => model.Commentaires)<br/>
+    @Html.TextAreaFor(model => model.Commentaires)<br/> <br />
     @Html.ValidationMessageFor(model => model.Commentaires)<br />
     
     <button type ="submit">Soumettre le formulaire</button>

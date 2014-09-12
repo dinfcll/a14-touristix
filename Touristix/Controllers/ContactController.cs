@@ -45,6 +45,7 @@ namespace Touristix.Controllers
 
                 MailMessage message = new MailMessage(courriel, "lauwarrior@yahoo.ca", categorie, commentaires);
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
                 
                 client.Send(message);
             }
