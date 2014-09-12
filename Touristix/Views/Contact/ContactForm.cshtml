@@ -1,30 +1,34 @@
-﻿@{
+﻿@model Touristix.Models.ContactModel
+@{
     ViewBag.Title = "ContactForm";
 }
 
-<h2>Nous Contacter</h2>
+<h2>Nous Contacter</h2><br /><br>
 
 @using (Html.BeginForm())
 {
-    @Html.Label("Nom")<br>
-    @Html.TextBox("Nom")<br>
     
-    @Html.Label("Courriel")<br>
-    @Html.TextBox("Courriel")<br>
-    
-    @Html.Label("Suggestion")
-    @Html.RadioButton("Suggestion", "Categorie")
-    @Html.Label("Information")
-    @Html.RadioButton("Information", "Categorie")
-    @Html.Label("Commentaire")
-    @Html.RadioButton("Commentaire", "Categorie")
-    @Html.Label("Plainte")
-    @Html.RadioButton("Plainte", "Categorie")<br />
-    
-    @Html.Label("Commentaires")<br>
-    @Html.TextArea("Commentaires")<br>
-    
+    @Html.LabelFor(model => Model.Nom)<br>        
+    @Html.TextBoxFor(Model => Model.Nom ,null, new { style = "width:300px" })   <br />
+    @Html.ValidationMessageFor(model => Model.Nom)<br /> 
+    @Html.LabelFor(Model => Model.Courriel)<br>
+    @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />
+    @Html.ValidationMessageFor(Model => Model.Courriel)<br />
    
+    
+   <div>
+        @Html.Label("Catégorie")<br />
+        @Html.RadioButtonFor(model => model.Categorie, "Sugestion")Suggestion &nbsp;&nbsp;&nbsp;
+        @Html.RadioButtonFor(model => model.Categorie, "Information")Information   &nbsp;&nbsp;&nbsp;
+        @Html.RadioButtonFor(model => model.Categorie, "Commentaire")Commentaire   &nbsp;&nbsp;&nbsp;
+        @Html.RadioButtonFor(model => model.Categorie, "Plainte")Plainte<br /> <br />
+        @Html.ValidationMessageFor(model => model.Categorie)<br />
+   </div>   
+    
+    
+    @Html.LabelFor(model => model.Commentaires)<br>
+    @Html.TextAreaFor(model => model.Commentaires)<br> <br />
+    @Html.ValidationMessageFor(model => model.Commentaires)<br />
     
     <button type ="submit">Soumettre le formulaire</button>
 }
