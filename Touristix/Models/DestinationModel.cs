@@ -25,6 +25,8 @@ namespace Touristix.Models
         public string Apercu { get; set; }
         [Required]
         public string Details { get; set; }
+
+        public List<int> ListBatiment { get; set; }
     }
 
     public class BatimentModel

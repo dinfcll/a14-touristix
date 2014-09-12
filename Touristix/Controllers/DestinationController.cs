@@ -64,15 +64,13 @@ namespace Touristix.Controllers
             return View(NouvelleList);
         }
 
+        #region Information
+
         //
         // GET: /Destination/InformationDestination/
         public ActionResult InformationDestination(int id = 0)
         {
             DestinationModel DestinationModelActif = db.Destinations.Find(id);
-            if (DestinationModelActif == null)
-            {
-                return HttpNotFound();
-            }
             return View(DestinationModelActif);
         }
 
@@ -99,6 +97,8 @@ namespace Touristix.Controllers
             }
             return View(ActiviteModelActif);
         }
+
+        #endregion
 
         #region Créer
 
@@ -191,6 +191,13 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
+                int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
+                DestinationModelActif.ListBatiment = new List<int>(DernierBatiment);
+                for (int B = 0; B < DernierBatiment; B++)
+                {
+                    int ID = Convert.ToInt32(Request["Batiment" + B]);
+                    DestinationModelActif.ListBatiment.Add(ID);
+                }
                 db.Entry(DestinationModelActif).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
@@ -324,6 +331,31 @@ namespace Touristix.Controllers
         }
 
         #endregion
+
+        public JsonResult ObtenirListeBatiment(string ID)
+        {
+            int IDNumber = Convert.ToInt32(ID);
+            List<SelectListItem> ListBatiment = new List<SelectListItem>();
+
+            IQueryable<BatimentModel> Batiments = from m in db.Batiments
+                                                  select m;
+
+            ListBatiment.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (BatimentModel BatimentActif in Batiments)
+            {
+                ListBatiment.Add(new SelectListItem { Text = BatimentActif.Nom, Value = BatimentActif.ID.ToString(), Selected = BatimentActif.ID == IDNumber ? true : false });
+            }
+
+            return Json(new SelectList(ListBatiment, "Value", "Text"));
+        }
+
+        public JsonResult ObtenirBatiment(string ID)
+        {
+            BatimentModel Batiment = db.Batiments.Find(Convert.ToInt32(ID));
+
+            return Json(Batiment);
+        }
 
         protected override void Dispose(bool disposing)
         {

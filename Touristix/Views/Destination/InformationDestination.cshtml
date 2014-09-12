@@ -8,6 +8,44 @@
 
 <img src= "/Images/Destinations/@Model.Image" alt="Image" />
 
+<script type="text/javascript">
+    function ObtenirListeBatiment(ID, NomObjet) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var url = '@Url.Action("ObtenirBatiment")';
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                Succes(xmlhttp.responseText);
+            }
+        }
+        var params = "ID=" + ID
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-length", params.length);
+        xmlhttp.setRequestHeader("ID", ID);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(params);
+
+        function Succes(response) {
+            var arr = JSON.parse(response);
+            var i;
+            var out = "";
+
+            for (i = 0; i < arr.length; i++) {
+                out += '<option value="' + arr[i].Value + '">' +
+                            arr[i].Text + '</option>';
+            }
+            document.getElementById(NomObjet).innerHTML = out;
+        }
+    }
+</script>
+
 <fieldset>
     <legend>DestinationModel</legend>
 
@@ -38,6 +76,17 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Ville)
     </div>
+    
+    @if (Model.ListBatiment != null)
+    {
+        for (int B = 0; B < Model.ListBatiment.Count; B++)
+        {
+            <div class="display-field" id="Batiment" + @B>
+                @Html.DisplayFor(model => model.Ville)
+            </div>
+            <script type="text/javascript">ObtenirBatiment(Model.ListBatiment[B], "Batiment" + B);</script>
+        }
+    }
 </fieldset>
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
