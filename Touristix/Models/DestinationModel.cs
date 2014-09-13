@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Touristix.Models
 {
@@ -26,7 +27,7 @@ namespace Touristix.Models
         [Required]
         public string Details { get; set; }
 
-        public List<int> ListBatiment { get; set; }
+        public int ProchainBatimentID { get; set; }
     }
 
     public class BatimentModel
@@ -61,6 +62,33 @@ namespace Touristix.Models
         public string Details { get; set; }
     }
 
+    public class DestinationModfiable
+    {
+        public DestinationModel Destination;
+        public List<int> ListChaineBatimentID;
+    }
+
+    public class ChaineBatiment
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
+
+        public int BatimentID { get; set; }
+
+        public int ProchainBatimentID { get; set; }
+
+        public ChaineBatiment()
+        {
+        }
+
+        public ChaineBatiment(int ID, int BatimentID, int ProchainBatimentID = -1)
+        {
+            this.ID = ID;
+            this.BatimentID = BatimentID;
+            this.ProchainBatimentID = ProchainBatimentID;
+        }
+    }
+
     public class AdminitrationList
     {
         public List<DestinationModel> ListDestinationModel;
@@ -73,5 +101,6 @@ namespace Touristix.Models
         public DbSet<DestinationModel> Destinations { get; set; }
         public DbSet<BatimentModel> Batiments { get; set; }
         public DbSet<ActiviteModel> Activites { get; set; }
+        public DbSet<ChaineBatiment> ChaineBatiments { get; set; }
     }
 }

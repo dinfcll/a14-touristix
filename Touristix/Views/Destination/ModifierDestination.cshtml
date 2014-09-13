@@ -1,4 +1,4 @@
-﻿@model Touristix.Models.DestinationModel
+﻿@model Touristix.Models.DestinationModfiable
 
 @{
     ViewBag.Title = "Modifier";
@@ -38,8 +38,15 @@
             var out = "";
 
             for (i = 0; i < arr.length; i++) {
-                out += '<option value="' + arr[i].Value + '">' +
+                var Selected = arr[i].Value == ID;
+                if (Selected) {
+                    out += '<option value="' + arr[i].Value + '" selected>' +
                             arr[i].Text + '</option>';
+                }
+                else {
+                    out += '<option value="' + arr[i].Value + '">' +
+                            arr[i].Text + '</option>';
+                }
             }
             document.getElementById(NomObjet).innerHTML = out;
         }
@@ -79,83 +86,82 @@
     <fieldset>
         <legend>DestinationModel</legend>
         
-        @Html.HiddenFor(model => model.ID)
-        @Html.Hidden("DernierBatiment", 0)
+        @Html.HiddenFor(model => model.Destination.ID)
+        @Html.HiddenFor(model => model.Destination.ProchainBatimentID)
+
+        @Html.Hidden("DernierBatiment", @Model.ListChaineBatimentID.Count - 1)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Nom)
+            @Html.LabelFor(model => model.Destination.Nom)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Nom)
-            @Html.ValidationMessageFor(model => model.Nom)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Pays)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Pays)
-            @Html.ValidationMessageFor(model => model.Pays)
+            @Html.EditorFor(model => model.Destination.Nom)
+            @Html.ValidationMessageFor(model => model.Destination.Nom)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Region)
+            @Html.LabelFor(model => model.Destination.Pays)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Region)
-            @Html.ValidationMessageFor(model => model.Region)
+            @Html.EditorFor(model => model.Destination.Pays)
+            @Html.ValidationMessageFor(model => model.Destination.Pays)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Ville)
+            @Html.LabelFor(model => model.Destination.Region)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Ville)
-            @Html.ValidationMessageFor(model => model.Ville)
+            @Html.EditorFor(model => model.Destination.Region)
+            @Html.ValidationMessageFor(model => model.Destination.Region)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Image)
+            @Html.LabelFor(model => model.Destination.Ville)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
-            @Html.ValidationMessageFor(model => model.Image)
+            @Html.EditorFor(model => model.Destination.Ville)
+            @Html.ValidationMessageFor(model => model.Destination.Ville)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Apercu)
+            @Html.LabelFor(model => model.Destination.Image)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Apercu)
-            @Html.ValidationMessageFor(model => model.Apercu)
+            @Html.EditorFor(model => model.Destination.Image)
+            @Html.ValidationMessageFor(model => model.Destination.Image)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Details)
+            @Html.LabelFor(model => model.Destination.Apercu)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Details)
-            @Html.ValidationMessageFor(model => model.Details)
+            @Html.TextAreaFor(model => model.Destination.Apercu)
+            @Html.ValidationMessageFor(model => model.Destination.Apercu)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Details)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Destination.Details)
+            @Html.ValidationMessageFor(model => model.Destination.Details)
         </div>
 
         <div id="Batiments">
-
-        @if (Model.ListBatiment == null)
-        {
-            Model.ListBatiment = new List<int>();
-        }
-        
-        @for (int B = 0; B < Model.ListBatiment.Count; B++)
+        @for (int B = 0; B < Model.ListChaineBatimentID.Count; B++)
         {
             @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                            new { style = "width:250px", @class = "dropdown1", onchange = "Stuff(this)" })
-            <script type="text/javascript">ObtenirListeBatiment(@Model.ListBatiment[B], "Batiment" + B);</script>
-            <script type="text/javascript">alert("");</script>
+                                new { style = "width:250px", @class = "dropdown1", onchange = "Stuff(this)" })
+            <br /> <br />
+            if (Model.ListChaineBatimentID[B] == -1)
+            {
+                <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment" + @B);</script>
+            }
+            else
+            {
+                <script type="text/javascript">ObtenirListeBatiment(@Model.ListChaineBatimentID[B], "Batiment" + @B);</script>
+            }
         }
-        @Html.DropDownList("Batiment" + Model.ListBatiment.Count, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                            new { style = "width:250px", @class = "dropdown1", onchange = "Stuff(this)" })
-        <br /> <br />
-        <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment" + @Model.ListBatiment.Count);</script>
         </div>
         <p>
             <input type="submit" value="Save" />

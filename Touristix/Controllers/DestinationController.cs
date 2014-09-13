@@ -181,28 +181,84 @@ namespace Touristix.Controllers
             {
                 return HttpNotFound();
             }
-            return View(DestinationModelActif);
+            DestinationModfiable NouveauDestinationModfiable = new DestinationModfiable();
+            NouveauDestinationModfiable.Destination = DestinationModelActif;
+            NouveauDestinationModfiable.ListChaineBatimentID = new List<int>();
+            int ProchainBatimentID = DestinationModelActif.ProchainBatimentID;
+            ChaineBatiment ProchainBatiment = null;
+            do
+            {
+                ProchainBatiment = db.ChaineBatiments.Find(ProchainBatimentID);
+                if (ProchainBatiment == null)
+                {
+                    ProchainBatimentID = -1;
+                    NouveauDestinationModfiable.ListChaineBatimentID.Add(0);
+                }
+                else
+                {
+                    ProchainBatimentID = ProchainBatiment.ProchainBatimentID;
+                    NouveauDestinationModfiable.ListChaineBatimentID.Add(ProchainBatiment.BatimentID);
+                }
+            }
+            while (ProchainBatiment != null);
+            return View(NouveauDestinationModfiable);
         }
 
         //
         // POST: /Destination/ModifierDestination
         [HttpPost]
-        public ActionResult ModifierDestination(DestinationModel DestinationModelActif)
+        public ActionResult ModifierDestination(DestinationModel Destination)
         {
+            int DernierID = 0;
+            if (db.ChaineBatiments.Count() > 0)
+                DernierID = db.ChaineBatiments.ToList().Last().ID;
             if (ModelState.IsValid)
             {
                 int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
-                DestinationModelActif.ListBatiment = new List<int>(DernierBatiment);
-                for (int B = 0; B < DernierBatiment; B++)
+
+                if (DernierBatiment >= 1)
                 {
-                    int ID = Convert.ToInt32(Request["Batiment" + B]);
-                    DestinationModelActif.ListBatiment.Add(ID);
+                    ChaineBatiment VieilleChaineBatiment = db.ChaineBatiments.Find(Destination.ProchainBatimentID);
+                    if (VieilleChaineBatiment == null)
+                    {
+                        ++DernierID;
+                        ChaineBatiment ChaineBatimentActive = new ChaineBatiment(DernierID, Convert.ToInt32(Request["Batiment0"]));
+                        Destination.ProchainBatimentID = DernierID;
+                        VieilleChaineBatiment = ChaineBatimentActive;
+                        db.ChaineBatiments.Add(ChaineBatimentActive);
+                    }
+
+                    if (DernierID <= 0)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    for (int B = 1; B < DernierBatiment; B++)
+                    {
+                        int ID = Convert.ToInt32(Request["Batiment" + B]);
+                        ChaineBatiment ChaineBatimentActive = null;
+
+                        if (VieilleChaineBatiment != null)
+                        {
+                            if (VieilleChaineBatiment.ProchainBatimentID >= 0)
+                                ChaineBatimentActive = db.ChaineBatiments.Find(VieilleChaineBatiment.ProchainBatimentID);
+                            if (ChaineBatimentActive == null)
+                            {
+                                ++DernierID;
+                                ChaineBatimentActive = new ChaineBatiment(DernierID, ID);
+                                db.ChaineBatiments.Add(ChaineBatimentActive);
+                            }
+                            VieilleChaineBatiment.ProchainBatimentID = ChaineBatimentActive.ID;
+                        }
+
+                        VieilleChaineBatiment = ChaineBatimentActive;
+                    }
                 }
-                db.Entry(DestinationModelActif).State = EntityState.Modified;
+                db.Entry(Destination).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
             }
-            return View(DestinationModelActif);
+            return View(Destination.ID);
         }
 
         //
@@ -344,9 +400,8 @@ namespace Touristix.Controllers
 
             foreach (BatimentModel BatimentActif in Batiments)
             {
-                ListBatiment.Add(new SelectListItem { Text = BatimentActif.Nom, Value = BatimentActif.ID.ToString(), Selected = BatimentActif.ID == IDNumber ? true : false });
+                ListBatiment.Add(new SelectListItem { Text = BatimentActif.Nom, Value = BatimentActif.ID.ToString() });
             }
-
             return Json(new SelectList(ListBatiment, "Value", "Text"));
         }
 
