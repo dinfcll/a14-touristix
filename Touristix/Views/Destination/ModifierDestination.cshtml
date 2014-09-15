@@ -10,7 +10,7 @@
 
     var ListBatiment = [];
 
-    function ObtenirListeBatiment(ID, NomObjet) {
+    function ObtenirListeBatiment(Id, NomObjet) {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -25,7 +25,7 @@
                 Succes(xmlhttp.responseText);
             }
         }
-        var params = "ID=" + ID
+        var params = "Id=" + Id
         xmlhttp.open("POST", url);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.setRequestHeader("Content-length", params.length);
@@ -38,7 +38,7 @@
             var out = "";
 
             for (i = 0; i < arr.length; i++) {
-                var Selected = arr[i].Value == ID;
+                var Selected = arr[i].Value == Id;
                 if (Selected) {
                     out += '<option value="' + arr[i].Value + '" selected>' +
                             arr[i].Text + '</option>';
@@ -52,7 +52,7 @@
         }
     }
 
-    function Stuff(BatimentActif) {
+    function AjoutDropDownListBatiment(BatimentActif) {
         var DernierBatimentTag = document.getElementById("DernierBatiment");
         var DernierBatiment = parseInt(DernierBatimentTag.value, 10);
 
@@ -68,7 +68,7 @@
             addButton.id = "Batiment" + DernierBatiment;
             addButton.name = "Batiment" + DernierBatiment;
             addButton.setAttribute("class", "dropdown1");
-            addButton.setAttribute("onchange", "Stuff(this)");
+            addButton.setAttribute("onchange", "AjoutDropDownListBatiment(this)");
             addButton.style.width = "250px";
             var o2 = document.createElement("br");
             var o3 = document.createElement("br");
@@ -151,7 +151,7 @@
         @for (int B = 0; B < Model.ListChaineBatimentID.Count; B++)
         {
             @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                new { style = "width:250px", @class = "dropdown1", onchange = "Stuff(this)" })
+                                     new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
             <br /> <br />
             if (Model.ListChaineBatimentID[B] == -1)
             {

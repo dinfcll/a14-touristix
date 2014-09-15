@@ -13,8 +13,6 @@ namespace Touristix.Controllers
     {
         private DestinationDBContext db = new DestinationDBContext();
 
-        //
-        // GET: /Destination/
         public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
@@ -29,7 +27,7 @@ namespace Touristix.Controllers
             if (!string.IsNullOrEmpty(DestinationRegion))
                 Destinations = Destinations.Where(s => s.Region.Contains(DestinationRegion));
 
-            IQueryable<IGrouping<string, DestinationModel>> DestinationRecu;
+            object DestinationRecu;
 
             switch (Trier)
             {
@@ -39,10 +37,13 @@ namespace Touristix.Controllers
                     break;
                 case 1:
                 DestinationRecu = Destinations.GroupBy(item => item.Region);
-                    break;
+                break;
                 case 2:
                 DestinationRecu = Destinations.GroupBy(item => item.Ville);
-                    break;
+                break;
+                case 3:
+                DestinationRecu = Destinations.OrderBy(item => item.Nom);
+                break;
             }
 
             DestinationModel[] Array5DerniereDestination = db.Destinations
@@ -50,14 +51,12 @@ namespace Touristix.Controllers
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], IQueryable<IGrouping<string, DestinationModel>>>(Array5DerniereDestination, DestinationRecu));
+            return View(new Tuple<DestinationModel[], object>(Array5DerniereDestination, DestinationRecu));
         }
 
-        //
-        // GET: /Destination/Admin
         public ActionResult Admin()
         {
-            AdminitrationList NouvelleList = new AdminitrationList();
+            AdministrationList NouvelleList = new AdministrationList();
             NouvelleList.ListDestinationModel = db.Destinations.ToList();
             NouvelleList.ListBatimentModel = db.Batiments.ToList();
             NouvelleList.ListActiviteModel = db.Activites.ToList();
@@ -81,9 +80,9 @@ namespace Touristix.Controllers
             return Json(new SelectList(ListBatiment, "Value", "Text"));
         }
 
-        public JsonResult ObtenirBatiment(string ID)
+        public JsonResult ObtenirBatiment(string Id)
         {
-            BatimentModel Batiment = db.Batiments.Find(Convert.ToInt32(ID));
+            BatimentModel Batiment = db.Batiments.Find(Convert.ToInt32(Id));
 
             return Json(Batiment);
         }

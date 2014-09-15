@@ -11,15 +11,11 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
-        //
-        // GET: /Destination/CreerDestination
         public ActionResult CreerDestination()
         {
             return View();
         }
 
-        //
-        // POST: /Destination/CreerDestination
         [HttpPost]
         public ActionResult CreerDestination(DestinationModel DestinationModelActif)
         {
@@ -33,15 +29,11 @@ namespace Touristix.Controllers
             return View(DestinationModelActif);
         }
 
-        //
-        // GET: /Destination/CreerBatiment
         public ActionResult CreerBatiment()
         {
             return View();
         }
 
-        //
-        // POST: /Destination/CreerBatiment
         [HttpPost]
         public ActionResult CreerBatiment(BatimentModel BatimentModelActif)
         {
@@ -55,15 +47,11 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        //
-        // GET: /Destination/CreerActivite
         public ActionResult CreerActivite()
         {
             return View();
         }
 
-        //
-        // POST: /Destination/CreerActivite
         [HttpPost]
         public ActionResult CreerActivite(ActiviteModel ActiviteModelActif)
         {

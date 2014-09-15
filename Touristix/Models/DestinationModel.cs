@@ -75,24 +75,24 @@ namespace Touristix.Models
 
         public int BatimentID { get; set; }
 
-        public int ProchainBatimentID { get; set; }
+        public int ProchainID { get; set; }
 
         public ChaineBatiment()
         {
         }
 
-        public ChaineBatiment(int ID, int BatimentID, int ProchainBatimentID = -1)
+        public ChaineBatiment(int ID, int BatimentID, int ProchainID = -1)
         {
             this.ID = ID;
             this.BatimentID = BatimentID;
-            this.ProchainBatimentID = ProchainBatimentID;
+            this.ProchainID = ProchainID;
         }
     }
 
     /// <summary>
     /// Utilisé pour envoyer toute les données à la page d'administration.
     /// </summary>
-    public class AdminitrationList
+    public class AdministrationList
     {
         public List<DestinationModel> ListDestinationModel;
         public List<BatimentModel> ListBatimentModel;

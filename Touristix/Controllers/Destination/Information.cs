@@ -11,16 +11,12 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
-        //
-        // GET: /Destination/InformationDestination/
         public ActionResult InformationDestination(int id = 0)
         {
             DestinationModel DestinationModelActif = db.Destinations.Find(id);
             return View(DestinationModelActif);
         }
 
-        //
-        // GET: /Destination/InformationBatiment/
         public ActionResult InformationBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
@@ -31,8 +27,6 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        //
-        // GET: /Destination/InformationDestination/
         public ActionResult InformationActivite(int id = 0)
         {
             ActiviteModel ActiviteModelActif = db.Activites.Find(id);

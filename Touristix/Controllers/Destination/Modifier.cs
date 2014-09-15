@@ -11,8 +11,6 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
-        //
-        // GET: /Destination/ModifierDestination
         public ActionResult ModifierDestination(int id = 0)
         {
             DestinationModel DestinationModelActif = db.Destinations.Find(id);
@@ -20,14 +18,20 @@ namespace Touristix.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Récupérer les batiments liés.
             DestinationModfiable NouveauDestinationModfiable = new DestinationModfiable();
-            NouveauDestinationModfiable.Destination = DestinationModelActif;
             NouveauDestinationModfiable.ListChaineBatimentID = new List<int>();
+
+            NouveauDestinationModfiable.Destination = DestinationModelActif;
             int ProchainBatimentID = DestinationModelActif.ProchainBatimentID;
             ChaineBatiment ProchainBatiment = null;
+
+            //Ajoute les batiments trouvé à la liste et complète la liste avec -1 pour un dropdownlist supplémentaire vide.
             do
             {
                 ProchainBatiment = db.ChaineBatiments.Find(ProchainBatimentID);
+
                 if (ProchainBatiment == null)
                 {
                     ProchainBatimentID = -1;
@@ -35,22 +39,22 @@ namespace Touristix.Controllers
                 }
                 else
                 {
-                    ProchainBatimentID = ProchainBatiment.ProchainBatimentID;
+                    ProchainBatimentID = ProchainBatiment.ProchainID;
                     NouveauDestinationModfiable.ListChaineBatimentID.Add(ProchainBatiment.BatimentID);
                 }
             }
             while (ProchainBatiment != null);
+
             return View(NouveauDestinationModfiable);
         }
 
-        //
-        // POST: /Destination/ModifierDestination
         [HttpPost]
         public ActionResult ModifierDestination(DestinationModel Destination)
         {
             int DernierID = 0;
             if (db.ChaineBatiments.Count() > 0)
                 DernierID = db.ChaineBatiments.ToList().Last().ID;
+
             if (ModelState.IsValid)
             {
                 int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
@@ -58,6 +62,7 @@ namespace Touristix.Controllers
                 if (DernierBatiment >= 1)
                 {
                     ChaineBatiment VieilleChaineBatiment = db.ChaineBatiments.Find(Destination.ProchainBatimentID);
+
                     if (VieilleChaineBatiment == null)
                     {
                         ++DernierID;
@@ -79,20 +84,23 @@ namespace Touristix.Controllers
 
                         if (VieilleChaineBatiment != null)
                         {
-                            if (VieilleChaineBatiment.ProchainBatimentID >= 0)
-                                ChaineBatimentActive = db.ChaineBatiments.Find(VieilleChaineBatiment.ProchainBatimentID);
+                            if (VieilleChaineBatiment.ProchainID >= 0)
+                                ChaineBatimentActive = db.ChaineBatiments.Find(VieilleChaineBatiment.ProchainID);
+
                             if (ChaineBatimentActive == null)
                             {
                                 ++DernierID;
                                 ChaineBatimentActive = new ChaineBatiment(DernierID, ID);
                                 db.ChaineBatiments.Add(ChaineBatimentActive);
                             }
-                            VieilleChaineBatiment.ProchainBatimentID = ChaineBatimentActive.ID;
+
+                            VieilleChaineBatiment.ProchainID = ChaineBatimentActive.ID;
                         }
 
                         VieilleChaineBatiment = ChaineBatimentActive;
                     }
                 }
+
                 db.Entry(Destination).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
@@ -100,8 +108,6 @@ namespace Touristix.Controllers
             return View(Destination.ID);
         }
 
-        //
-        // GET: /Destination/ModifierBatiment
         public ActionResult ModifierBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
@@ -112,8 +118,6 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        //
-        // POST: /Destination/ModifierDestination
         [HttpPost]
         public ActionResult ModifierBatiment(BatimentModel BatimentModelActif)
         {
@@ -126,8 +130,6 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        //
-        // GET: /Destination/ModifierActivites
         public ActionResult ModifierActivite(int id = 0)
         {
             ActiviteModel ActiviteModelActif = db.Activites.Find(id);
@@ -138,8 +140,6 @@ namespace Touristix.Controllers
             return View(ActiviteModelActif);
         }
 
-        //
-        // POST: /Destination/ModifierActivites
         [HttpPost]
         public ActionResult ModifierActivite(ActiviteModel ActiviteModelActif)
         {

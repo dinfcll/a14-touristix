@@ -1,4 +1,4 @@
-﻿@model Tuple<Touristix.Models.DestinationModel[], IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>>
+﻿@model Tuple<Touristix.Models.DestinationModel[], object>
 
 @{
     ViewBag.Title = "Index";
@@ -56,21 +56,65 @@
         @Html.RadioButton("Trier", 0, new { onchange = "this.form.submit();", @checked = "checked" }) Trier par pays
         @Html.RadioButton("Trier", 1, new { onchange = "this.form.submit();" }) Trier par régions
         @Html.RadioButton("Trier", 2, new { onchange = "this.form.submit();" }) Trier par villes
+        @Html.RadioButton("Trier", 3, new { onchange = "this.form.submit();" }) Trier par nom
     </div>
     }
 </div>
 
 <div id="Liste Destination">
 @{
-    foreach (var group in Model.Item2)
+    int Trier = Convert.ToInt32(Request.Params.Get("Trier"));
+    switch (Trier)
     {
-        @Html.Encode(group.Key)
-        <ul>
-        @foreach (var item in group)
-        {
-            <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.ID })</li>  
-        }
-        </ul>
+        case 0:
+            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            foreach (var group in DestinationParPays)
+            {
+                @Html.Encode(group.Key)
+                <ul>
+                @foreach (var item in group)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.ID })</li>  
+                }
+                </ul>
+            }
+            break;
+        case 1:
+            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParRegion = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            foreach (var group in DestinationParRegion)
+            {
+                @Html.Encode(group.Key)
+                <ul>
+                @foreach (var item in group)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Region), "InformationDestination", new { id = item.ID })</li>  
+                }
+                </ul>
+            }
+            break;
+        case 2:
+            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParVille = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            foreach (var group in DestinationParVille)
+            {
+                @Html.Encode(group.Key)
+                <ul>
+                @foreach (var item in group)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Ville), "InformationDestination", new { id = item.ID })</li>  
+                }
+                </ul>
+            }
+            break;
+
+        case 3:
+            IOrderedQueryable<Touristix.Models.DestinationModel> DestinationParOrdre = (IOrderedQueryable<Touristix.Models.DestinationModel>)Model.Item2;
+                <ul>
+                @foreach (var item in DestinationParOrdre)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.ID })</li>  
+                }
+                </ul>
+                break;
     }
 }
 
