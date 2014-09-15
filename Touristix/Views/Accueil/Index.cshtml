@@ -11,6 +11,8 @@
     var Repertoire = 'Images/ImagesAccueil/';
     var Images = new Array;
     var NombreImages = 0;
+    var ImageActuelle = 0;
+    var NombreHasard = 0;
 
     @foreach(var image in Model.TableauImagesAccueil)
     {
@@ -23,7 +25,11 @@
     RafraichirImage();
 
     function Hasard() {
-        var NombreHasard = Math.round(Math.random() * (NombreImages - 1))
+        while(NombreImages > 1 && ImageActuelle == NombreHasard)
+        {
+            NombreHasard = Math.round(Math.random() * (NombreImages - 1))
+        }
+        ImageActuelle = NombreHasard;
         return NombreHasard;
     }
 
