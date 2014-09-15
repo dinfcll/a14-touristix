@@ -15,20 +15,24 @@ namespace Touristix.Controllers
 
         public ActionResult Index()
         {
-            var model = new ImagesAccueilModel();
+            var modelImagesAccueil = new ImagesAccueilModel();
             {
-                model.TableauImagesAccueil = Directory.GetFiles(Server.MapPath("~/Images/ImagesAccueil/"), "*.png");
 
-                for (int IndiceImage = 0; IndiceImage < model.TableauImagesAccueil.Length; IndiceImage++)
+                string[] ExtensionsRecherche = { ".png", ".jpg", ".bmp" };
+
+                modelImagesAccueil.TableauImagesAccueil = Directory.GetFiles(Server.MapPath("~/Images/ImagesAccueil/"), "*.*")
+                    .Where(f => ExtensionsRecherche.Contains(new FileInfo(f).Extension.ToLower())).ToArray();
+
+                for (int IndiceImage = 0; IndiceImage < modelImagesAccueil.TableauImagesAccueil.Length; IndiceImage++)
                 {
-                    string strCheminImage = model.TableauImagesAccueil[IndiceImage];
+                    string strCheminImage = modelImagesAccueil.TableauImagesAccueil[IndiceImage];
 
-                    model.TableauImagesAccueil[IndiceImage] = Path.GetFileName(strCheminImage);
+                    modelImagesAccueil.TableauImagesAccueil[IndiceImage] = Path.GetFileName(strCheminImage);
                 }
                 
             };
 
-            return View(model);
+            return View(modelImagesAccueil);
         }
     }
 }
