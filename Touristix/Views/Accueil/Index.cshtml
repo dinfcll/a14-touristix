@@ -33,16 +33,6 @@
         return NombreHasard;
     }
 
-    function BoutonImageSuivante() {
-
-        RafraichirImage()
-    }
-
-    function BoutonImagePrecedente() {
-
-        RafraichirImage()
-    }
-
     function RafraichirImage() {
 
         document.getElementById("ImageActive").style.backgroundImage = "url(" + Repertoire + Images[Hasard()] + ")";
@@ -58,11 +48,4 @@
 
     <div>
         <div class="outer" id="ImageActive" style="background-size: cover; height:300px ; width:500px"></div>
-
-            <button onclick = "BoutonImagePrecedente()"><-</button>
-            <button onclick = "BoutonImageSuivante()">-></button>
-            
-            <h1></h1>
     </div>
-
-
