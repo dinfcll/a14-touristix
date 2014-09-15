@@ -1,24 +1,31 @@
-﻿@{
+﻿@using Touristix.Models
+@model Touristix.Models.ImagesAccueilModel
+
+@{
     ViewBag.Title = "Index";
 }
 
 @section scripts {
 <script type="text/javascript">
 
-    var NombreImages = 2;
+    var Repertoire = 'Images/ImagesAccueil/';
+    var Images = new Array;
+    var NombreImages = 0;
 
-    function Hasard() {
-        var NombreHasard = Math.round(Math.random() * (NombreImages - 1)) + 1
-        return NombreHasard;
+    @foreach(var image in Model.TableauImagesAccueil)
+    {
+        <text>
+            Images[NombreImages] = "@image";
+            NombreImages++;
+        </text>
     }
 
+    RafraichirImage();
 
-    var Repertoire = 'Images/';
-    var Images = new Array;
-    Images[1] = "land1.png",
-        Images[2] = "land2.png",
-        RafraichirImage();
-
+    function Hasard() {
+        var NombreHasard = Math.round(Math.random() * (NombreImages - 1))
+        return NombreHasard;
+    }
 
     function BoutonImageSuivante() {
 
@@ -37,17 +44,19 @@
 
     setInterval(function () { RafraichirImage() }, 10000);
 
+
 </script>
-}
+    }
 
 <h2>Index</h2>
 
     <div>
-
         <div class="outer" id="ImageActive" style="background-size: cover; height:300px ; width:500px"></div>
 
             <button onclick = "BoutonImagePrecedente()"><-</button>
             <button onclick = "BoutonImageSuivante()">-></button>
-        
+            
+            <h1></h1>
     </div>
+
 
