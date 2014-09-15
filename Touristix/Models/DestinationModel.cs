@@ -89,6 +89,9 @@ namespace Touristix.Models
         }
     }
 
+    /// <summary>
+    /// Utilisé pour envoyer toute les données à la page d'administration.
+    /// </summary>
     public class AdminitrationList
     {
         public List<DestinationModel> ListDestinationModel;
