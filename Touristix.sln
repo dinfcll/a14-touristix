@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touristix", "Touristix\Touristix.csproj", "{9E8D7195-FD63-44F7-BC52-DA8F43A91732}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EFE4B236-6AD9-4E7E-B5D8-7C053A594F7B}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Touristix.vsmdi = Touristix.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetDeTest", "ProjetDeTest\ProjetDeTest.csproj", "{0758EF7B-2B31-49B8-A744-59D5C7C1669A}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Touristix.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -13,6 +25,10 @@ Global
 		{9E8D7195-FD63-44F7-BC52-DA8F43A91732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E8D7195-FD63-44F7-BC52-DA8F43A91732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E8D7195-FD63-44F7-BC52-DA8F43A91732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0758EF7B-2B31-49B8-A744-59D5C7C1669A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0758EF7B-2B31-49B8-A744-59D5C7C1669A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0758EF7B-2B31-49B8-A744-59D5C7C1669A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0758EF7B-2B31-49B8-A744-59D5C7C1669A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
