@@ -1,53 +1,38 @@
-﻿<!DOCTYPE html>
-<html lang="fr">
+﻿<html>
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - Mon application ASP.NET MVC</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+         <meta charset="utf-8" />
+         <meta name="viewport" content="width=device-width" />
+         <title>@ViewBag.Title</title>
+         @Styles.Render("~/Content/bootstrapcss")
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Touristix", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
-                            <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                            <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
-                        </ul>
-                    </nav>
+         <div class="container-fluid">
+             <div class="row-fluid">
+                 <div class="span3">
+                     <div class="well sidebar-nav">
+                         <ul class="nav nav-list">
+                         <li class="nav-header">1st Navigation Header</li>
+                         <li>@Html.ActionLink("Link 1","../")</li>
+                         <li>@Html.ActionLink("Link 2","../")</li>
+                         <li>@Html.ActionLink("Link 3","../")</li>
+                         <li>@Html.ActionLink("Link 4","../")</li>
+                         <li class="nav-header">2nd Navigation Header</li>
+                         <li>@Html.ActionLink("Link AA","../")</li>
+                         <li>@Html.ActionLink("Link BB","../")</li>
+                         <li>@Html.ActionLink("Link CC","../")</li>
+                         </ul>
+                    </div>
+                         </div>
+                         <div class="span9">
+                             @RenderSection("featured", required: false)
+                             <div class="row-fluid">
+                             @RenderBody()
+                        </div>
                 </div>
             </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @if (TempData["notice"] != null)
-                {
-                    <h2>@TempData["notice"]</h2>
-                }
-                @RenderBody()
-            </section>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Mon application ASP.NET MVC</p>
-                </div>
-            </div>
-        </footer>
-
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrapjs")
         @RenderSection("scripts", required: false)
     </body>
 </html>
