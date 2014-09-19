@@ -164,6 +164,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Destination\Information.cs" />
+    <Compile Include="Controllers\Destination\Supprimer.cs" />
+    <Compile Include="Controllers\Destination\Modifier.cs" />
+    <Compile Include="Controllers\Destination\Créer.cs" />
+    <Compile Include="Controllers\Destination\DestinationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -171,9 +176,11 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\ImageText.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -230,6 +237,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Batiments\Ashton.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Destinations\Galleries Chagnon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Destinations\Varadero Park.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -293,6 +309,40 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Contact\ContactForm.cshtml" />
+    <Content Include="Views\Destination\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\ModifierDestination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\SupprimerDestination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\Admin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\InformationDestination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerDestination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerBatiment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\ModifierActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\ModifierBatiment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\SupprimerActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\SupprimerBatiment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -311,6 +361,7 @@
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1513</DevelopmentServerPort>
+          <DevelopmentServerPort>6230</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

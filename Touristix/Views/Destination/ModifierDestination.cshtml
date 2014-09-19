@@ -1,0 +1,174 @@
+﻿@model Touristix.Models.DestinationModfiable
+
+@{
+    ViewBag.Title = "Modifier";
+}
+
+<h2>Modifier</h2>
+
+<script type="text/javascript">
+
+    var ListBatiment = [];
+
+    function ObtenirListeBatiment(Id, NomObjet) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var url = '@Url.Action("ObtenirListeBatiment")';
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                Succes(xmlhttp.responseText);
+            }
+        }
+        var params = "Id=" + Id
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-length", params.length);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(params);
+
+        function Succes(response) {
+            var arr = JSON.parse(response);
+            var i;
+            var out = "";
+
+            for (i = 0; i < arr.length; i++) {
+                var Selected = arr[i].Value == Id;
+                if (Selected) {
+                    out += '<option value="' + arr[i].Value + '" selected>' +
+                            arr[i].Text + '</option>';
+                }
+                else {
+                    out += '<option value="' + arr[i].Value + '">' +
+                            arr[i].Text + '</option>';
+                }
+            }
+            document.getElementById(NomObjet).innerHTML = out;
+        }
+    }
+
+    function AjoutDropDownListBatiment(BatimentActif) {
+        var DernierBatimentTag = document.getElementById("DernierBatiment");
+        var DernierBatiment = parseInt(DernierBatimentTag.value, 10);
+
+        if (BatimentActif.id == "Batiment" + DernierBatiment) {
+            ListBatiment.push({
+                "ID": DernierBatiment
+            });
+            DernierBatiment += 1;
+            DernierBatimentTag.value = DernierBatiment;
+            var DivBatiments = document.getElementById("Batiments");
+            var addButton = document.createElement("select");
+            addButton.type = "select";
+            addButton.id = "Batiment" + DernierBatiment;
+            addButton.name = "Batiment" + DernierBatiment;
+            addButton.setAttribute("class", "dropdown1");
+            addButton.setAttribute("onchange", "AjoutDropDownListBatiment(this)");
+            addButton.style.width = "250px";
+            var o2 = document.createElement("br");
+            var o3 = document.createElement("br");
+            DivBatiments.appendChild(addButton);
+            DivBatiments.appendChild(o2);
+            DivBatiments.appendChild(o3);
+            ObtenirListeBatiment(-1, "Batiment" + DernierBatiment);
+        }
+    }
+</script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DestinationModel</legend>
+        
+        @Html.HiddenFor(model => model.Destination.ID)
+        @Html.HiddenFor(model => model.Destination.ProchainBatimentID)
+
+        @Html.Hidden("DernierBatiment", @Model.ListChaineBatimentID.Count - 1)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Nom)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Destination.Nom)
+            @Html.ValidationMessageFor(model => model.Destination.Nom)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Pays)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Destination.Pays)
+            @Html.ValidationMessageFor(model => model.Destination.Pays)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Region)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Destination.Region)
+            @Html.ValidationMessageFor(model => model.Destination.Region)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Ville)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Destination.Ville)
+            @Html.ValidationMessageFor(model => model.Destination.Ville)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Image)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Destination.Image)
+            @Html.ValidationMessageFor(model => model.Destination.Image)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Apercu)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Destination.Apercu)
+            @Html.ValidationMessageFor(model => model.Destination.Apercu)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination.Details)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Destination.Details)
+            @Html.ValidationMessageFor(model => model.Destination.Details)
+        </div>
+
+        <div id="Batiments">
+        @for (int B = 0; B < Model.ListChaineBatimentID.Count; B++)
+        {
+            @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                     new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
+            <br /> <br />
+            if (Model.ListChaineBatimentID[B] == -1)
+            {
+                <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment" + @B);</script>
+            }
+            else
+            {
+                <script type="text/javascript">ObtenirListeBatiment(@Model.ListChaineBatimentID[B], "Batiment" + @B);</script>
+            }
+        }
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Retour à l'index", "Admin")
+</div>
