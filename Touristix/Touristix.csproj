@@ -163,6 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Destination\Information.cs" />
     <Compile Include="Controllers\Destination\Supprimer.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
+    <Compile Include="Models\ImagesAccueilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +239,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ImagesAccueil\land1.png" />
+    <Content Include="Images\ImagesAccueil\land2.png" />
+    <Content Include="Images\ImagesAccueil\s_n01_nursingm.png" />
     <Content Include="Images\Batiments\Ashton.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -344,6 +349,9 @@
   <ItemGroup>
     <Content Include="Views\Destination\SupprimerBatiment.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Accueil\Index.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -360,7 +368,6 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1513</DevelopmentServerPort>
           <DevelopmentServerPort>6230</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>

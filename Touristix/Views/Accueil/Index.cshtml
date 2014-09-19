@@ -1,0 +1,49 @@
+﻿@using Touristix.Models
+@model Touristix.Models.ImagesAccueilModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts {
+<script type="text/javascript">
+
+    var Repertoire = 'Images/ImagesAccueil/';
+    var Images = new Array;
+    var NombreImages = 0;
+    var ImageActuelle = 0;
+    var NombreHasard = 0;
+
+    @foreach(var image in Model.TableauImagesAccueil)
+    {
+        <text>
+            Images[NombreImages] = "@image";
+            NombreImages++;
+        </text>
+    }
+
+    RafraichirImage();
+
+    function NombreAleatoire() {
+        while(NombreImages > 1 && ImageActuelle == NombreHasard)
+        {
+            NombreHasard = Math.round(Math.random() * (NombreImages - 1))
+        }
+        ImageActuelle = NombreHasard;
+        return NombreHasard;
+    }
+
+    function RafraichirImage() {
+
+        document.getElementById("ImageActive").style.backgroundImage = "url(" + Repertoire + Images[NombreAleatoire()] + ")";
+    }
+
+    setInterval(function () { RafraichirImage() }, 10000);
+
+</script>
+    }
+
+<h2>Index</h2>
+
+    <div class="outer" id="ImageActive" style="background-size: cover; height:300px ; width:500px">
+    </div>
