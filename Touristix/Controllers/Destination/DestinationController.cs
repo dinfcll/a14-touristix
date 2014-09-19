@@ -63,9 +63,9 @@ namespace Touristix.Controllers
             return View(NouvelleList);
         }
                 
-        public JsonResult ObtenirListeBatiment(string ID)
+        public JsonResult ObtenirListeBatiment(string Id)
         {
-            int IDNumber = Convert.ToInt32(ID);
+            int IdNumber = Convert.ToInt32(Id);
             List<SelectListItem> ListBatiment = new List<SelectListItem>();
 
             IQueryable<BatimentModel> Batiments = from m in db.Batiments
@@ -75,7 +75,7 @@ namespace Touristix.Controllers
 
             foreach (BatimentModel BatimentActif in Batiments)
             {
-                ListBatiment.Add(new SelectListItem { Text = BatimentActif.Nom, Value = BatimentActif.ID.ToString() });
+                ListBatiment.Add(new SelectListItem { Text = BatimentActif.Nom, Value = BatimentActif.Id.ToString() });
             }
             return Json(new SelectList(ListBatiment, "Value", "Text"));
         }

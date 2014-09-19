@@ -10,7 +10,7 @@ namespace Touristix.Models
 {
     public class DestinationModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Nom { get; set; }
@@ -27,12 +27,12 @@ namespace Touristix.Models
         [Required]
         public string Details { get; set; }
 
-        public int ProchainBatimentID { get; set; }
+        public int ProchainBatimentId { get; set; }
     }
 
     public class BatimentModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Nom { get; set; }
@@ -48,7 +48,7 @@ namespace Touristix.Models
 
     public class ActiviteModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Nom { get; set; }
@@ -65,27 +65,27 @@ namespace Touristix.Models
     public class DestinationModfiable
     {
         public DestinationModel Destination;
-        public List<int> ListChaineBatimentID;
+        public List<int> ListChaineBatimentId;
     }
 
     public class ChaineBatiment
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        public int BatimentID { get; set; }
+        public int BatimentId { get; set; }
 
-        public int ProchainID { get; set; }
+        public int ProchainId { get; set; }
 
         public ChaineBatiment()
         {
         }
 
-        public ChaineBatiment(int ID, int BatimentID, int ProchainID = -1)
+        public ChaineBatiment(int Id, int BatimentId, int ProchainId = -1)
         {
-            this.ID = ID;
-            this.BatimentID = BatimentID;
-            this.ProchainID = ProchainID;
+            this.Id = Id;
+            this.BatimentId = BatimentId;
+            this.ProchainId = ProchainId;
         }
     }
 

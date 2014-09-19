@@ -27,13 +27,13 @@ namespace Touristix.Controllers
             DestinationModel destinationmodel = db.Destinations.Find(id);
             db.Destinations.Remove(destinationmodel);
 
-            ChaineBatiment ProchainBatiment = db.ChaineBatiments.Find(destinationmodel.ProchainBatimentID);
+            ChaineBatiment ProchainBatiment = db.ChaineBatiments.Find(destinationmodel.ProchainBatimentId);
             do
             {
-                BatimentModel BatimentModelActif = db.Batiments.Find(ProchainBatiment.BatimentID);
+                BatimentModel BatimentModelActif = db.Batiments.Find(ProchainBatiment.BatimentId);
                 db.ChaineBatiments.Remove(ProchainBatiment);
 
-                ProchainBatiment = db.ChaineBatiments.Find(ProchainBatiment.ProchainID);
+                ProchainBatiment = db.ChaineBatiments.Find(ProchainBatiment.ProchainId);
             }
             while (ProchainBatiment != null);
 
