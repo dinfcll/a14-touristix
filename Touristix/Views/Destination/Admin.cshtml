@@ -1,4 +1,4 @@
-﻿@model Touristix.Models.AdminitrationList
+﻿@model Touristix.Models.AdministrationList
 
 @{
     ViewBag.Title = "Administration";
@@ -45,8 +45,8 @@
                 @Html.DisplayFor(modelItem => item.Ville)
             </td>
             <td>
-                @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.ID }) |
-                @Html.ActionLink("Supprimer", "SupprimerDestination", new { id = item.ID })
+                @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
+                @Html.ActionLink("Supprimer", "SupprimerDestination", new { id = item.Id })
             </td>
         </tr>
     }
@@ -82,8 +82,8 @@
                 @Html.DisplayFor(modelItem => item.URL)
             </td>
             <td>
-                @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.ID }) |
-                @Html.ActionLink("Supprimer", "SupprimerBatiment", new { id = item.ID })
+                @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.Id }) |
+                @Html.ActionLink("Supprimer", "SupprimerBatiment", new { id = item.Id })
             </td>
         </tr>
     }
@@ -119,8 +119,8 @@
                 @Html.DisplayFor(modelItem => item.Lieu)
             </td>
             <td>
-                @Html.ActionLink("Modifier", "ModifierActivite", new { id = item.ID }) |
-                @Html.ActionLink("Supprimer", "SupprimerActivite", new { id = item.ID })
+                @Html.ActionLink("Modifier", "ModifierActivite", new { id = item.Id }) |
+                @Html.ActionLink("Supprimer", "SupprimerActivite", new { id = item.Id })
             </td>
         </tr>
     }

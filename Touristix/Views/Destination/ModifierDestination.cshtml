@@ -86,10 +86,10 @@
     <fieldset>
         <legend>DestinationModel</legend>
         
-        @Html.HiddenFor(model => model.Destination.ID)
-        @Html.HiddenFor(model => model.Destination.ProchainBatimentID)
+        @Html.HiddenFor(model => model.Destination.Id)
+        @Html.HiddenFor(model => model.Destination.ProchainBatimentId)
 
-        @Html.Hidden("DernierBatiment", @Model.ListChaineBatimentID.Count - 1)
+        @Html.Hidden("DernierBatiment", @Model.ListChaineBatimentId.Count - 1)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Destination.Nom)
@@ -148,18 +148,18 @@
         </div>
 
         <div id="Batiments">
-        @for (int B = 0; B < Model.ListChaineBatimentID.Count; B++)
+        @for (int B = 0; B < Model.ListChaineBatimentId.Count; B++)
         {
             @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
                                      new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
             <br /> <br />
-            if (Model.ListChaineBatimentID[B] == -1)
+            if (Model.ListChaineBatimentId[B] == -1)
             {
                 <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment" + @B);</script>
             }
             else
             {
-                <script type="text/javascript">ObtenirListeBatiment(@Model.ListChaineBatimentID[B], "Batiment" + @B);</script>
+                <script type="text/javascript">ObtenirListeBatiment(@Model.ListChaineBatimentId[B], "Batiment" + @B);</script>
             }
         }
         </div>
