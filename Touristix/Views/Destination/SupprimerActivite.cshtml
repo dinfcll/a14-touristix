@@ -1,0 +1,32 @@
+﻿@model Touristix.Models.ActiviteModel
+
+@{
+    ViewBag.Title = "Supprimer";
+}
+
+<h2>Supprimer</h2>
+
+<h3>Voulez-vous vraiment supprimer cette activité?</h3>
+<fieldset>
+    <legend>DestinationModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nom)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nom)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Lieu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Lieu)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Supprimer" /> |
+        @Html.ActionLink("Retour à l'index", "Admin")
+    </p>
+}
