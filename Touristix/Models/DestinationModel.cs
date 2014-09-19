@@ -27,7 +27,7 @@ namespace Touristix.Models
         [Required]
         public string Details { get; set; }
 
-        public string BatimentIds { get; set; }//Id the batiments sépéarés par des ;.
+        public string BatimentIds { get; set; }//Id des bâtiments séparés par des ;.
     }
 
     public class BatimentModel
