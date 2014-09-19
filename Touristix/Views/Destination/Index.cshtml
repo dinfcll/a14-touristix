@@ -74,7 +74,7 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.ID })</li>  
+                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.Id })</li>  
                 }
                 </ul>
             }
@@ -87,7 +87,7 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@Html.Encode(item.Region), "InformationDestination", new { id = item.ID })</li>  
+                    <li>@Html.ActionLink(@Html.Encode(item.Region), "InformationDestination", new { id = item.Id })</li>  
                 }
                 </ul>
             }
@@ -100,7 +100,7 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@Html.Encode(item.Ville), "InformationDestination", new { id = item.ID })</li>  
+                    <li>@Html.ActionLink(@Html.Encode(item.Ville), "InformationDestination", new { id = item.Id })</li>  
                 }
                 </ul>
             }
@@ -111,7 +111,7 @@
                 <ul>
                 @foreach (var item in DestinationParOrdre)
                 {
-                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.ID })</li>  
+                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.Id })</li>  
                 }
                 </ul>
                 break;
