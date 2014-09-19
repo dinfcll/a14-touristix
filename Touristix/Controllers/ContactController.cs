@@ -24,38 +24,44 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
-                InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires);
-                TempData["notice"] = "Votre formulaire a été soumis";
-                return RedirectToAction("Index", "Home");
+                if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
+                {
+                    TempData["notice"] = "Votre formulaire a été soumis";
+                    return RedirectToAction("Index", "Home");
+                }
+                
             }
             return View();
             
         }
-        private void InsererContact(string nom, string courriel,  string categorie, string commentaires)
+        private bool InsererContact(string nom, string courriel, string pass, string categorie, string commentaires)
         {
+            bool valide = true;
             try
             {
                 SmtpClient client = new SmtpClient();
+                string chaine;
+
                 client.Port = 587;
-                client.Host = "smtp.gmail.com";                
+                client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");
+                client.Credentials = new System.Net.NetworkCredential(courriel, pass);
 
-                MailMessage message = new MailMessage(courriel, "lauwarrior@yahoo.ca", categorie, commentaires);
+                chaine = "Ceci est un message de: " + nom + "\n\n" + commentaires;
+
+                MailMessage message = new MailMessage(courriel, "e_casault@hotmail.com", categorie, chaine); //lauwarrior@yahoo.ca
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
-                
                 client.Send(message);
             }
-            catch (SmtpException sex)
+            catch (Exception)
             {
-                string a = sex.Message;
+                valide = false;
             }
+            return valide;     
 
-                            
-            
         }
     }
 }

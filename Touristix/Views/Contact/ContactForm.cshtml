@@ -9,11 +9,16 @@
 {
     
     @Html.LabelFor(model => Model.Nom)<br/>        
-    @Html.TextBoxFor(Model => Model.Nom ,null, new { style = "width:300px" })   <br />
+    @Html.TextBoxFor(Model => Model.Nom ,null, new { style = "width:300px" })   <br />  
     @Html.ValidationMessageFor(model => Model.Nom)<br /> 
     @Html.LabelFor(Model => Model.Courriel)<br/>
     @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />
     @Html.ValidationMessageFor(Model => Model.Courriel)<br />
+    @Html.Label("Mot de passe")<br />
+    @Html.PasswordFor(Model => Model.Pass)<br />
+    @Html.ValidationMessageFor(Model => Model.Pass)<br />
+    
+    
    
     
    <div>
