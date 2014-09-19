@@ -26,19 +26,8 @@ namespace Touristix.Controllers
         {
             DestinationModel destinationmodel = db.Destinations.Find(id);
             db.Destinations.Remove(destinationmodel);
-
-            ChaineBatiment ProchainBatiment = db.ChaineBatiments.Find(destinationmodel.ProchainBatimentId);
-            do
-            {
-                BatimentModel BatimentModelActif = db.Batiments.Find(ProchainBatiment.BatimentId);
-                db.ChaineBatiments.Remove(ProchainBatiment);
-
-                ProchainBatiment = db.ChaineBatiments.Find(ProchainBatiment.ProchainId);
-            }
-            while (ProchainBatiment != null);
-
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
 
         public ActionResult SupprimerBatiment(int id = 0)
@@ -57,7 +46,7 @@ namespace Touristix.Controllers
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
             db.Batiments.Remove(BatimentModelActif);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
 
         public ActionResult SupprimerActivite(int id = 0)
@@ -76,7 +65,7 @@ namespace Touristix.Controllers
             ActiviteModel ActiviteModelActif = db.Activites.Find(id);
             db.Activites.Remove(ActiviteModelActif);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
     }
 }
