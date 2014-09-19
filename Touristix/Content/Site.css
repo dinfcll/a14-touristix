@@ -430,13 +430,14 @@ input, textarea {
     color: #333;
     font-size: 1.2em;
     margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
+    padding: 5px;    
 }
+
+
 
 textarea {
     font-family: inherit;
-    width: 500px;
+    width: 500px;    
 }
 
     input:focus, textarea:focus {
@@ -447,7 +448,9 @@ textarea {
         background: transparent;
         border: inherit;
         width: auto;
-    }
+    } 
+    
+ 
 
     input[type="submit"],
     input[type="button"],
@@ -459,7 +462,7 @@ textarea {
         font-weight: 600;
         padding: 7px;
         margin-right: 8px;
-        width: auto;
+        width: 300px;
     }
 
     td input[type="submit"],
@@ -754,3 +757,16 @@ tr.pager td {
             margin: 0;
         }
 }
+
+
+/*css rajouté
+-----------------------------------------------------------------------------*/
+#BoutonFormContact
+{
+    width: 400px;    
+}
+
+
+
+
+

@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -62,9 +66,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -163,13 +164,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
-    <Compile Include="Controllers\DestinationController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Destination\Information.cs" />
+    <Compile Include="Controllers\Destination\Supprimer.cs" />
+    <Compile Include="Controllers\Destination\Modifier.cs" />
+    <Compile Include="Controllers\Destination\Créer.cs" />
+    <Compile Include="Controllers\Destination\DestinationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\ImagesAccueilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,6 +242,15 @@
     <Content Include="Images\ImagesAccueil\land1.png" />
     <Content Include="Images\ImagesAccueil\land2.png" />
     <Content Include="Images\ImagesAccueil\s_n01_nursingm.png" />
+    <Content Include="Images\Batiments\Ashton.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Destinations\Galleries Chagnon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Destinations\Varadero Park.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -297,22 +313,41 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Contact\ContactForm.cshtml" />
     <Content Include="Views\Destination\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Create.cshtml" />
+    <Content Include="Views\Destination\ModifierDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Destination\Delete.cshtml" />
+    <Content Include="Views\Destination\SupprimerDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\Information.cshtml" />
+    <Content Include="Views\Destination\InformationDestination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerDestination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerBatiment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\ModifierActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\ModifierBatiment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\SupprimerActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\SupprimerBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accueil\Index.cshtml" />
@@ -333,7 +368,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1963</DevelopmentServerPort>
+          <DevelopmentServerPort>6230</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

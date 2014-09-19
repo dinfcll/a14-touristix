@@ -1,4 +1,4 @@
-﻿@model Tuple<Touristix.Models.DestinationModel[], IQueryable<Touristix.Models.DestinationModel>>
+﻿@model Tuple<Touristix.Models.DestinationModel[], object>
 
 @{
     ViewBag.Title = "Index";
@@ -7,35 +7,36 @@
 <h2>Index</h2>
 @section scripts {
     <script type="text/javascript">
-        function MouseOverImage(Image, Nom) {
-            document.getElementById("Text").innerHTML = Nom;
-            var ImageComplet = "url('Images/Destinations/" + Image + "')";
-            document.getElementById("ImageActive").style.backgroundImage = ImageComplet;
-            document.getElementById("ImageActive").style.backgroundSize = "500px 300px";
+        function MouseOverImage(Image, Nom, Apercu) {
+            document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
+            document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Destinations/" + Image + "')";
+            document.getElementById("ImagePrincipale").style.backgroundSize = "500px 300px";
         }
     </script>
 }
-<div id="tabs">
+<div id="Intro">
 
 @{
     string Image = "";
     string Nom = "";
+    string Apercu = "";
     if (Model.Item1.Count() > 0)
     {
         Image = Model.Item1.First().Image;
         Nom = Model.Item1.First().Nom;
+        Apercu = Model.Item1.First().Apercu;
     }
-    <div class="outer" id="ImageActive" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
-    <div class="bottomleft" id="Text">
-        @Nom
+    <div class="ImagePrincipale" id="ImagePrincipale" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
+    <div class="TexteEnBas" id="Text">
+        @Nom <br /> @Apercu
     </div>
-    <p class="topright">(text to appear at the top right of the image)</p>
+    <p class="TexteEnHaut">(text to appear at the top right of the image)</p>
     </div>
 
      <ul>
          @foreach (var p in Model.Item1)
          {
-            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom')" class="BottomImage" src="Images/Destinations/@p.Image" alt="@Html.Encode(p.Nom)" /> 
+            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Destinations/@p.Image" alt="@Html.Encode(p.Nom)" /> 
          }
      </ul>
 }
@@ -55,37 +56,65 @@
         @Html.RadioButton("Trier", 0, new { onchange = "this.form.submit();", @checked = "checked" }) Trier par pays
         @Html.RadioButton("Trier", 1, new { onchange = "this.form.submit();" }) Trier par régions
         @Html.RadioButton("Trier", 2, new { onchange = "this.form.submit();" }) Trier par villes
+        @Html.RadioButton("Trier", 3, new { onchange = "this.form.submit();" }) Trier par nom
     </div>
     }
 </div>
 
 <div id="Liste Destination">
 @{
-    IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationRecu = null;
-    string ValeurTriger = Request.QueryString["Trier"];
+    int Trier = Convert.ToInt32(Request.Params.Get("Trier"));
+    switch (Trier)
+    {
+        case 0:
+            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            foreach (var group in DestinationParPays)
+            {
+                @Html.Encode(group.Key)
+                <ul>
+                @foreach (var item in group)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.Id })</li>  
+                }
+                </ul>
+            }
+            break;
+        case 1:
+            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParRegion = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            foreach (var group in DestinationParRegion)
+            {
+                @Html.Encode(group.Key)
+                <ul>
+                @foreach (var item in group)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Region), "InformationDestination", new { id = item.Id })</li>  
+                }
+                </ul>
+            }
+            break;
+        case 2:
+            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParVille = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            foreach (var group in DestinationParVille)
+            {
+                @Html.Encode(group.Key)
+                <ul>
+                @foreach (var item in group)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Ville), "InformationDestination", new { id = item.Id })</li>  
+                }
+                </ul>
+            }
+            break;
 
-    if (ValeurTriger == "0" || ValeurTriger == null)
-    {
-        DestinationRecu = Model.Item2.GroupBy(item => item.Pays);
-    }
-    else if (ValeurTriger == "1")
-    {
-        DestinationRecu = Model.Item2.GroupBy(item => item.Region);
-    }
-    else if (ValeurTriger == "2")
-    {
-        DestinationRecu = Model.Item2.GroupBy(item => item.Ville);
-    }
-
-    foreach (var group in DestinationRecu)
-    {
-        @Html.Encode(group.Key)
-        <ul>
-        @foreach (var item in group)
-        {
-            <li>@Html.ActionLink(@Html.Encode(item.Nom), "Information", new { id = item.ID })</li>  
-        }
-        </ul>
+        case 3:
+            IOrderedQueryable<Touristix.Models.DestinationModel> DestinationParOrdre = (IOrderedQueryable<Touristix.Models.DestinationModel>)Model.Item2;
+                <ul>
+                @foreach (var item in DestinationParOrdre)
+                {
+                    <li>@Html.ActionLink(@Html.Encode(item.Nom), "InformationDestination", new { id = item.Id })</li>  
+                }
+                </ul>
+                break;
     }
 }
 

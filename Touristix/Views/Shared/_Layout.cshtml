@@ -23,7 +23,7 @@
                         <ul id="menu">
                             <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
                             <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
                         </ul>
                     </nav>
                 </div>
@@ -32,6 +32,10 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                @if (TempData["notice"] != null)
+                {
+                    <h2>@TempData["notice"]</h2>
+                }
                 @RenderBody()
             </section>
         </div>
