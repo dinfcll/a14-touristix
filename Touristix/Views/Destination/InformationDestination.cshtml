@@ -76,17 +76,7 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Ville)
     </div>
-    
-    @if (Model.ListBatiment != null)
-    {
-        for (int B = 0; B < Model.ListBatiment.Count; B++)
-        {
-            <div class="display-field" id="Batiment" + @B>
-                @Html.DisplayFor(model => model.Ville)
-            </div>
-            <script type="text/javascript">ObtenirBatiment(Model.ListBatiment[B], "Batiment" + B);</script>
-        }
-    }
+
 </fieldset>
 <p>
     @Html.ActionLink("Retour à l'index", "Index")

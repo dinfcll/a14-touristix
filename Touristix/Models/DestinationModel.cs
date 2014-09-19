@@ -27,7 +27,7 @@ namespace Touristix.Models
         [Required]
         public string Details { get; set; }
 
-        public int ProchainBatimentId { get; set; }
+        public string BatimentIds { get; set; }//Id the batiments sépéarés par des ;.
     }
 
     public class BatimentModel
@@ -62,33 +62,6 @@ namespace Touristix.Models
         public string Details { get; set; }
     }
 
-    public class DestinationModfiable
-    {
-        public DestinationModel Destination;
-        public List<int> ListChaineBatimentId;
-    }
-
-    public class ChaineBatiment
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
-
-        public int BatimentId { get; set; }
-
-        public int ProchainId { get; set; }
-
-        public ChaineBatiment()
-        {
-        }
-
-        public ChaineBatiment(int Id, int BatimentId, int ProchainId = -1)
-        {
-            this.Id = Id;
-            this.BatimentId = BatimentId;
-            this.ProchainId = ProchainId;
-        }
-    }
-
     /// <summary>
     /// Utilisé pour envoyer toute les données à la page d'administration.
     /// </summary>
@@ -104,6 +77,5 @@ namespace Touristix.Models
         public DbSet<DestinationModel> Destinations { get; set; }
         public DbSet<BatimentModel> Batiments { get; set; }
         public DbSet<ActiviteModel> Activites { get; set; }
-        public DbSet<ChaineBatiment> ChaineBatiments { get; set; }
     }
 }
