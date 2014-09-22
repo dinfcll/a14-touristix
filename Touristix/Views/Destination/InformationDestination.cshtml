@@ -9,7 +9,7 @@
 <img src= "/Images/Destinations/@Model.Image" alt="Image" />
 
 <script type="text/javascript">
-    function ObtenirBatiment(ID, NomObjet) {
+    function ObtenirBatiment(Id, NomObjet) {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -35,7 +35,7 @@
             var Batiment = JSON.parse(response);
             var i;
             var out = "<a href=";
-            out += "InformationBatiment/" + Id
+            out += "/InformationBatiment/" + Id + ">"
             out += Batiment.Nom;
             out += "</a>"
 
@@ -67,7 +67,8 @@
     @for (int B = 0; B < ArrayBatiment.Length; B++)
     {
         int IdActif = Convert.ToInt32(ArrayBatiment[B]);
-        <dt id="Batiment" + @B></dt>
+        string IdNom = "Batiment" + B;
+        <dt id=@IdNom></dt>
         <br /> <br />
 
         <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
