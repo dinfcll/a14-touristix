@@ -35,7 +35,7 @@
             var Batiment = JSON.parse(response);
             var i;
             var out = "<a href=";
-            out += "/InformationBatiment/" + Id + ">"
+            out += "/Destination/InformationBatiment/" + Id + ">"
             out += Batiment.Nom;
             out += "</a>"
 
@@ -74,36 +74,6 @@
         <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
     }
     </dl> 
-
-    <legend>DestinationModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nom)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nom)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Pays)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Pays)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Region)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Region)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Ville)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Ville)
-    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
