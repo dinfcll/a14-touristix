@@ -4,7 +4,7 @@
     ViewBag.Title = "Information";
 }
 <ol class="breadcrumb inline">
-  <li><a href="/Index">Acceuil</a></li>
+  <li><a href="/Index">Accueil</a></li>
   <li><a href="/Destination">Destination</a></li>
   <li class="active">Batiment</li>
 </ol>
@@ -16,7 +16,7 @@
 
     <dl>
       <dt>@Html.DisplayNameFor(model => model.URL)</dt>
-      <dd>@Html.DisplayFor(model => model.URL)</dd>
+      <dd><a href="@Html.DisplayFor(model => model.URL)">@Html.DisplayFor(model => model.URL)</a></dd>
       <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
       <dd>@Html.DisplayFor(model => model.Apercu)</dd>
       <dt>@Html.DisplayNameFor(model => model.Details)</dt>
