@@ -1,0 +1,30 @@
+﻿@model Touristix.Models.BatimentModel
+
+@{
+    ViewBag.Title = "Information";
+}
+
+<h2>Information</h2>
+
+<img src= "/Images/Batiments/@Model.Image" alt="Image" />
+
+<fieldset>
+    <legend>DestinationModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nom)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nom)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.URL)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.URL)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Retour à l'index", "Index")
+</p>
