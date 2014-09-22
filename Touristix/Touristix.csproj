@@ -356,7 +356,7 @@
     <Content Include="Views\Accueil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Connexion\ConnexionAdmin.cshtml" />
+    <Content Include="Views\Connexion\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
