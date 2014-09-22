@@ -5,30 +5,31 @@
          <title>@ViewBag.Title</title>
          @Styles.Render("~/Content/bootstrapcss")
     </head>
+    <header>
+        <div class="container-fluid hero-unit">
+            <div class="span3">
+            </div>
+            <div class="span3">
+                <h1>@Html.ActionLink("Touristix", "Index", "Home", new { @class = "page-header" })</h1>
+            </div>
+            <div class="text-right">
+                <ul class="inline">
+                    <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
+                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Nous Contacter", "ContactForm")</li>
+                </ul>
+            </div>
+        </div>
+    </header>
     <body>
-         <div class="container-fluid">
-             <div class="row-fluid">
-                 <div class="span3">
-                     <div class="well sidebar-nav">
-                         <ul class="nav nav-list">
-                         <li class="nav-header">1st Navigation Header</li>
-                         <li>@Html.ActionLink("Link 1","../")</li>
-                         <li>@Html.ActionLink("Link 2","../")</li>
-                         <li>@Html.ActionLink("Link 3","../")</li>
-                         <li>@Html.ActionLink("Link 4","../")</li>
-                         <li class="nav-header">2nd Navigation Header</li>
-                         <li>@Html.ActionLink("Link AA","../")</li>
-                         <li>@Html.ActionLink("Link BB","../")</li>
-                         <li>@Html.ActionLink("Link CC","../")</li>
-                         </ul>
-                    </div>
-                         </div>
-                         <div class="span9">
-                             @RenderSection("featured", required: false)
-                             <div class="row-fluid">
-                             @RenderBody()
-                        </div>
-                </div>
+        <div class="container-fluid">
+            <div class="span3">
+            </div>
+            <div class="span6">
+                @RenderSection("featured", required: false)
+                @RenderBody()
+            </div>
+            <div class="span3">
             </div>
         </div>
         @Scripts.Render("~/bundles/jquery")
