@@ -3,27 +3,25 @@
 @{
     ViewBag.Title = "Information";
 }
-
-<h2>Information</h2>
+<ol class="breadcrumb inline">
+  <li><a href="/Index">Acceuil</a></li>
+  <li><a href="/Destination">Destination</a></li>
+  <li class="active">Batiment</li>
+</ol>
 
 <img src= "/Images/Batiments/@Model.Image" alt="Image" />
 
 <fieldset>
-    <legend>DestinationModel</legend>
+    <legend>@Html.DisplayFor(model => model.Nom)</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nom)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nom)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.URL)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.URL)
-    </div>
+    <dl>
+      <dt>@Html.DisplayNameFor(model => model.URL)</dt>
+      <dd>@Html.DisplayFor(model => model.URL)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
+      <dd>@Html.DisplayFor(model => model.Apercu)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Details)</dt>
+      <dd>@Html.DisplayFor(model => model.Details)</dd>
+    </dl>
 </fieldset>
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
