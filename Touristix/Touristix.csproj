@@ -171,6 +171,7 @@
     <Compile Include="Controllers\Destination\Créer.cs" />
     <Compile Include="Controllers\Destination\DestinationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MeteoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +180,7 @@
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\ImagesAccueilModel.cs" />
+    <Compile Include="Models\MeteoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +353,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accueil\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Meteo\MeteoForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Meteo\MeteoRecherche.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

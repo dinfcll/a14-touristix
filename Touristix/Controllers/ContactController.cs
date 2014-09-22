@@ -27,10 +27,14 @@ namespace Touristix.Controllers
                 if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
                 {
                     TempData["notice"] = "Votre formulaire a été soumis";
+                    ViewData["Verif"] = null;
                     return RedirectToAction("Index", "Home");
                 }
-                
-            }
+                else
+                {
+                    ViewData["Verif"] = "erreur";  
+                }                
+            }                      
             return View();
             
         }

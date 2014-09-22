@@ -1,0 +1,24 @@
+﻿@using System.Linq
+@model Touristix.Models.Temperature
+
+@{
+    ViewBag.Title = "Conditions m&eacute;t&eacute;orologiques";
+}
+
+<h2>Previsions actuelles</h2>
+
+    <br />
+    Pays: @Model.sys.country <br />
+    Temp&eacute;rature actuelle: @Model.main.temp<br/>  
+    Pression: @Model.main.pressure kPa <br />
+    Taux d'humidité: @Model.main.humidity % <br />
+    Vitesse du vent: @Model.wind.speed km/h<br/>
+    Direction du vent: @Model.wind.DirectionVent<br />
+    Description: @Model.weather[0].description
+     <img src ="@Model.weather[0].icon" alt="image manquant" /><br/>  
+    
+    
+<h2>Tendances</h2> 
+<br />
+    Temp&eacute;rature minimale: @Model.main.temp_min<br/>
+    Temp&eacute;rature maximale: @Model.main.temp_max<br/>   

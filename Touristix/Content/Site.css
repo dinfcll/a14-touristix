@@ -766,6 +766,12 @@ tr.pager td {
     width: 400px;    
 }
 
+.ErrorMessage
+{
+    font-size: 24px;
+    color: red;
+}
+
 
 
 
