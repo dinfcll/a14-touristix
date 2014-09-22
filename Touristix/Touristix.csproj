@@ -354,6 +354,9 @@
   <ItemGroup>
     <Content Include="Views\Accueil\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Connexion\ConnexionAdmin.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
