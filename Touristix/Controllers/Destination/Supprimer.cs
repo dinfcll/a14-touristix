@@ -11,6 +11,7 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
+        [Authorize]
         public ActionResult SupprimerDestination(int id = 0)
         {
             DestinationModel destinationmodel = db.Destinations.Find(id);
@@ -41,6 +42,7 @@ namespace Touristix.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult SupprimerBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
@@ -60,6 +62,7 @@ namespace Touristix.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult SupprimerActivite(int id = 0)
         {
             ActiviteModel ActiviteModelActif = db.Activites.Find(id);

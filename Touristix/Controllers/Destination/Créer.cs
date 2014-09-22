@@ -11,6 +11,7 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
+        [Authorize]
         public ActionResult CreerDestination()
         {
             return View();
@@ -29,6 +30,7 @@ namespace Touristix.Controllers
             return View(DestinationModelActif);
         }
 
+        [Authorize]
         public ActionResult CreerBatiment()
         {
             return View();
@@ -47,6 +49,7 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
+        [Authorize]
         public ActionResult CreerActivite()
         {
             return View();
