@@ -54,7 +54,7 @@ namespace Touristix.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Accueil");
         }
 
         //

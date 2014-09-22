@@ -22,6 +22,7 @@ namespace Touristix.Controllers
             return View(destinationmodel);
         }
 
+        [Authorize]
         [HttpPost, ActionName("SupprimerDestination")]
         public ActionResult ConfirmationSupprimerDestination(int id)
         {
@@ -53,6 +54,7 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
+        [Authorize]
         [HttpPost, ActionName("SupprimerBatiment")]
         public ActionResult ConfirmationSupprimerBatiment(int id)
         {
@@ -73,6 +75,7 @@ namespace Touristix.Controllers
             return View(ActiviteModelActif);
         }
 
+        [Authorize]
         [HttpPost, ActionName("SupprimerActivite")]
         public ActionResult ConfirmationSupprimerActivite(int id)
         {

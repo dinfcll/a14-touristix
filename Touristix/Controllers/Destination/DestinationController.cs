@@ -54,6 +54,7 @@ namespace Touristix.Controllers
             return View(new Tuple<DestinationModel[], object>(Array5DerniereDestination, DestinationRecu));
         }
 
+        [Authorize]
         public ActionResult Admin()
         {
             AdministrationList NouvelleList = new AdministrationList();

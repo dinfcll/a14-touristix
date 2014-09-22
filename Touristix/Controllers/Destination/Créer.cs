@@ -17,6 +17,7 @@ namespace Touristix.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreerDestination(DestinationModel DestinationModelActif)
         {
@@ -36,6 +37,7 @@ namespace Touristix.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreerBatiment(BatimentModel BatimentModelActif)
         {
@@ -55,6 +57,7 @@ namespace Touristix.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreerActivite(ActiviteModel ActiviteModelActif)
         {

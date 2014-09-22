@@ -48,6 +48,7 @@ namespace Touristix.Controllers
             return View(NouveauDestinationModfiable);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult ModifierDestination(DestinationModel Destination)
         {
@@ -119,6 +120,7 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult ModifierBatiment(BatimentModel BatimentModelActif)
         {
@@ -142,6 +144,7 @@ namespace Touristix.Controllers
             return View(ActiviteModelActif);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult ModifierActivite(ActiviteModel ActiviteModelActif)
         {

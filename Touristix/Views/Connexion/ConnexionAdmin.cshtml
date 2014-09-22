@@ -1,5 +1,35 @@
-﻿@{
+﻿@model Touristix.Models.LoginModel
+
+@{
     ViewBag.Title = "ConnexionAdmin";
 }
 
 <h2>ConnexionAdmin</h2>
+
+<section id="loginForm">
+<h2>Utilisez un compte local pour vous connecter.</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formulaire de connexion</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+        </ol>
+        <input type="submit" value="Se connecter" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Register", "Register") si vous n’avez pas de compte.
+    </p>
+}
+</section>

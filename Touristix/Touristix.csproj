@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\ImagesAccueilModel.cs" />
