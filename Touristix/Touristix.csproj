@@ -165,7 +165,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
-    <Compile Include="Controllers\ConnexionController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Destination\Information.cs" />
     <Compile Include="Controllers\Destination\Supprimer.cs" />
@@ -179,7 +178,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\ImagesAccueilModel.cs" />
@@ -355,9 +353,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accueil\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Connexion\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
