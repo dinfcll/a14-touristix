@@ -10,6 +10,7 @@ namespace Touristix.Controllers
 {
     public class ContactController : Controller
     {
+        private ContactDBContext db = new ContactDBContext();
         //
         // GET: /Contact/
 
@@ -24,19 +25,16 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
-                {
+              //  if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
+               // {
+                    Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
-                    ViewData["Verif"] = null;
                     return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewData["Verif"] = "erreur";  
-                }                
-            }                      
+               // }
+
+            }
             return View();
-            
+
         }
         private bool InsererContact(string nom, string courriel, string pass, string categorie, string commentaires)
         {
@@ -64,8 +62,46 @@ namespace Touristix.Controllers
             {
                 valide = false;
             }
-            return valide;     
+            return valide;
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        private void Create(ContactModel modele)
+        {
+            ContactDB contact = new ContactDB();
+            contact.nom = modele.Nom;
+            contact.courriel = modele.Courriel;
+            contact.categorie = modele.Categorie;
+            contact.commentaires = modele.Commentaires;
+            db.Contacts.Add(contact);
+            db.SaveChanges();
+        }
+
+        public ActionResult Index()
+        {
+            return View(db.Contacts.ToList());
+        }
+
+        public ActionResult Effacer(int id = 0)
+        {
+            ContactDB contact = db.Contacts.Find(id);
+            if (contact == null)
+            {
+                return HttpNotFound();
+            }
+            return View(contact);
+        }
+
+        [HttpPost, ActionName("Effacer")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmationEffacer(int id)
+        {
+            ContactDB contact = db.Contacts.Find(id);
+            db.Contacts.Remove(contact);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

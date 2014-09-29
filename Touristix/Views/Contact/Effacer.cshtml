@@ -1,0 +1,47 @@
+﻿@model Touristix.Models.ContactDB
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Effacer</h2>
+
+<h3>Êtes-vous certain de vouloir supprimer ceci?</h3>
+<fieldset>
+    <legend>Contact</legend>
+
+    <div class="display-label">
+         @Html.DisplayName("Nom")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.nom)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayName("Courriel")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.courriel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayName("Catégorie")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.categorie)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayName("Commentaires")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.commentaires)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Effacer" /> |
+        @Html.ActionLink("Retour à la liste", "Index")
+    </p>
+}
