@@ -36,13 +36,19 @@ public class UserInitializationModule : IHttpModule
                 new InitializeSimpleMembershipAttribute().OnActionExecuting(null);
 
                 if (!WebSecurity.UserExists(m_NomUtilisateur))
+                {
                     WebSecurity.CreateUserAndAccount(m_NomUtilisateur, m_MotPasse);
+                }
 
                 if (!Roles.RoleExists(m_Role))
+                {
                     Roles.CreateRole(m_Role);
+                }
 
                 if (!Roles.IsUserInRole(m_NomUtilisateur, m_Role))
+                {
                     Roles.AddUserToRole(m_NomUtilisateur, m_Role);
+                }
             }
             m_Initialise = true;
         }
