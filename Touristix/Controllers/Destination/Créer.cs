@@ -11,13 +11,13 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
-        [Authorize]
+        [Authorize(Roles="admin")]
         public ActionResult CreerDestination()
         {
             return View();
         }
 
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult CreerDestination(DestinationModel DestinationModelActif)
         {
