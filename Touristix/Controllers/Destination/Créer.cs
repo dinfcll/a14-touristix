@@ -22,6 +22,27 @@ namespace Touristix.Controllers
             if (ModelState.IsValid)
             {
                 DestinationModelActif.BatimentIds = "";
+                int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
+                if (DernierBatiment >= 1)
+                {
+                    for (int B = 0; B < DernierBatiment; B++)
+                    {
+                        int Id = Convert.ToInt32(Request["Batiment" + B]);
+                        DestinationModelActif.BatimentIds += Id + ";";
+                    }
+                }
+
+                DestinationModelActif.ActiviteIds = "";
+                int DerniereActivite = Convert.ToInt32(Request["DerniereActivite"]);
+                if (DerniereActivite >= 1)
+                {
+                    for (int B = 0; B < DerniereActivite; B++)
+                    {
+                        int Id = Convert.ToInt32(Request["Activite" + B]);
+                        DestinationModelActif.ActiviteIds += Id + ";";
+                    }
+                }
+
                 db.Destinations.Add(DestinationModelActif);
                 db.SaveChanges();
                 return RedirectToAction("Admin");

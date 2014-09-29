@@ -4,72 +4,107 @@
     ViewBag.Title = "Créer destination";
 }
 
-<h2>Créer destination</h2>
+<legend>Créer destination</legend>
 
-@using (Html.BeginForm()) {
+<script type="text/javascript" src="/Scripts/destination.js"></script>
+
+@using (Html.BeginForm(new { role="form" })) {
     @Html.ValidationSummary(true)
-    
-    <fieldset>
-        <legend>DestinationModel</legend>
 
-        <div class="editor-label">
+    <fieldset>
+        
+        @Html.Hidden("DernierBatiment", (int)0)
+        @Html.Hidden("DerniereActivite", (int)0)
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Nom)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nom)
+            @Html.TextBoxFor(model => model.Nom, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez nom",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Pays)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Pays)
-            @Html.ValidationMessageFor(model => model.Pays)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Region)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Region)
-            @Html.ValidationMessageFor(model => model.Region)
-        </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Ville)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ville)
+            @Html.TextBoxFor(model => model.Ville, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez ville",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Ville)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Image)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Region)
+            @Html.TextBoxFor(model => model.Region, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez region",
+           type = "text"
+       })
+            @Html.ValidationMessageFor(model => model.Region)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pays)
+            @Html.TextBoxFor(model => model.Pays, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez pays",
+           type = "text"
+       })
+            @Html.ValidationMessageFor(model => model.Pays)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image)
+            @Html.TextBoxFor(model => model.Image, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez image",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Apercu)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Apercu)
+            @Html.TextAreaFor(model => model.Apercu, new { @class = "form-control", placeholder = "Entrez aperçu" })
             @Html.ValidationMessageFor(model => model.Apercu)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Details)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Details)
+            @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Entrez détails" })
             @Html.ValidationMessageFor(model => model.Details)
+        </div>
+        
+        <div id="Batiments">
+
+        @Html.DropDownList("Batiment0", new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                    new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
+        <br /> <br />
+
+        <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment0");</script>
+        </div>
+        
+        <div id="Activites">
+
+        @Html.DropDownList("Activite0", new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                     new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
+        <br /> <br />
+
+        <script type="text/javascript"> 
+            ObtenirListeActivite(-1, "Activite0");
+        </script>
         </div>
 
         <p>
-            <input type="submit" value="Créer" />
+            <input type="submit" value="Créer" class="btn btn-default" />
         </p>
     </fieldset>
 }
@@ -77,7 +112,3 @@
 <div>
     @Html.ActionLink("Retour à l'index", "Admin")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
