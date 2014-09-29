@@ -40,47 +40,47 @@ namespace Touristix.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe actuel")]
-        public string OldPassword { get; set; }
+        public string VieuxMotPasse { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nouveau mot de passe")]
-        public string NewPassword { get; set; }
+        public string NouveauMotPasse { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmer le nouveau mot de passe")]
-        [Compare("NewPassword", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
-        public string ConfirmPassword { get; set; }
+        [Compare("NouveauMotPasse", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        public string ConfirmationMotPasse { get; set; }
     }
 
     public class ConnecterModel
     {
         [Required]
         [Display(Name = "Nom d'utilisateur")]
-        public string UserName { get; set; }
+        public string NomUtilisateur { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
-        public string Password { get; set; }
+        public string MotPasse { get; set; }
     }
 
     public class EnregistrerModel
     {
         [Required]
         [Display(Name = "Nom d'utilisateur")]
-        public string UserName { get; set; }
+        public string NomUtilisateur { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
-        public string Password { get; set; }
+        public string MotPasse { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmer le mot de passe ")]
-        [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
-        public string ConfirmPassword { get; set; }
+        [Compare("MotPasse", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        public string ConfirmationMotPasse { get; set; }
     }
 }

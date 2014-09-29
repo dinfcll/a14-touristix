@@ -11,7 +11,7 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult SupprimerDestination(int id = 0)
         {
             DestinationModel destinationmodel = db.Destinations.Find(id);
@@ -22,7 +22,7 @@ namespace Touristix.Controllers
             return View(destinationmodel);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("SupprimerDestination")]
         public ActionResult ConfirmationSupprimerDestination(int id)
         {
@@ -43,7 +43,7 @@ namespace Touristix.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult SupprimerBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
@@ -54,7 +54,7 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("SupprimerBatiment")]
         public ActionResult ConfirmationSupprimerBatiment(int id)
         {
@@ -64,7 +64,7 @@ namespace Touristix.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult SupprimerActivite(int id = 0)
         {
             ActiviteModel ActiviteModelActif = db.Activites.Find(id);
@@ -75,7 +75,7 @@ namespace Touristix.Controllers
             return View(ActiviteModelActif);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("SupprimerActivite")]
         public ActionResult ConfirmationSupprimerActivite(int id)
         {

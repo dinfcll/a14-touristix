@@ -11,7 +11,7 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult ModifierDestination(int id = 0)
         {
             DestinationModel DestinationModelActif = db.Destinations.Find(id);
@@ -48,7 +48,7 @@ namespace Touristix.Controllers
             return View(NouveauDestinationModfiable);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult ModifierDestination(DestinationModel Destination)
         {
@@ -109,7 +109,7 @@ namespace Touristix.Controllers
             return View(Destination.Id);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult ModifierBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
@@ -120,7 +120,7 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult ModifierBatiment(BatimentModel BatimentModelActif)
         {
@@ -133,7 +133,7 @@ namespace Touristix.Controllers
             return View(BatimentModelActif);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult ModifierActivite(int id = 0)
         {
             ActiviteModel ActiviteModelActif = db.Activites.Find(id);
@@ -144,7 +144,7 @@ namespace Touristix.Controllers
             return View(ActiviteModelActif);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult ModifierActivite(ActiviteModel ActiviteModelActif)
         {
