@@ -2,7 +2,7 @@
 @model Touristix.Models.Temperature
 
 @{
-    ViewBag.Title = "Conditions m&eacute;t&eacute;orologiques";
+    ViewBag.Title = "Prévisions météorologiques";
 }
 
 <h2>Previsions actuelles</h2>
@@ -15,8 +15,7 @@
     Vitesse du vent: @Model.wind.speed km/h<br/>
     Direction du vent: @Model.wind.DirectionVent<br />
     Description: @Model.weather[0].description
-     <img src ="@Model.weather[0].icon" alt="image manquant" /><br/>  
-    
+     <img src ="@Model.weather[0].icon" alt="image manquante" /><br/>      
     
 <h2>Tendances</h2> 
 <br />
