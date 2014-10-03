@@ -31,34 +31,14 @@
                     <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
                     <li>@Html.ActionLink("Destinations", "Index", "Destination")</li>
                     <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
+                    <li>@Html.ActionLink("Meteo", "MeteoForm", "Météo")</li>
                 </ul>
             </div>
         </div>
     </header>
     <body>
-<<<<<<< HEAD
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Touristix", "Index", "Accueil")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
-                            <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                            <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
-                            <li>@Html.ActionLink("Meteo", "MeteoForm", "Meteo")</li>
-                        </ul>
-                    </nav>
-                </div>
-=======
         <div class="container-fluid">
             <div class="span3">
->>>>>>> origin/master
             </div>
             <div class="span6">
                 @RenderSection("featured", required: false)
