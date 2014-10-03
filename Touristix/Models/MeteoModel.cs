@@ -76,4 +76,7 @@ namespace Touristix.Models
         public int all { get; set; }
     }    
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master

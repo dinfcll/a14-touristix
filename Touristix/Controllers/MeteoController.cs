@@ -34,7 +34,7 @@ namespace Touristix.Controllers
                 if (temperature.cod == 200)
                 {
                     FormatterDonnees(temperature);
-                    ViewData["Verif"] = null;
+                    ViewData["Verif"] = "";
                     return View(temperature);
                 }
 
@@ -47,9 +47,9 @@ namespace Touristix.Controllers
         public void FormatterDonnees(Temperature temperature)
         {
             string icone = temperature.weather[0].icon;
-            temperature.main.temp = (int)(temperature.main.temp - 273);
-            temperature.main.temp_min = (int)(temperature.main.temp_min - 273);
-            temperature.main.temp_max = (int)(temperature.main.temp_max - 273);
+            temperature.main.temp = (int)(temperature.main.temp - 273.2);
+            temperature.main.temp_min = (int)(temperature.main.temp_min - 273.2);
+            temperature.main.temp_max = (int)(temperature.main.temp_max - 273.2);
             temperature.weather[0].icon = "http://openweathermap.org/img/w/" + icone + ".png";
             temperature.main.pressure /= 10;
             temperature.wind.speed = Math.Round((3.6 * temperature.wind.speed), 0);
@@ -58,12 +58,20 @@ namespace Touristix.Controllers
             {
                 indDegree = 0;
             }
+<<<<<<< HEAD
             FormatterDirectionVent(indDegree, temperature.wind);
+=======
+            FormatterDirectionVent(indDegree, temperature.wind);            
+>>>>>>> origin/master
         }
 
         public void FormatterDirectionVent(int ind, Wind vent)
         {
+<<<<<<< HEAD
             string[] tVent = { "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord" };
+=======
+            string[] tVent = {"Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord"};
+>>>>>>> origin/master
             vent.DirectionVent = tVent[ind];
         }
     }

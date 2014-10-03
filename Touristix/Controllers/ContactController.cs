@@ -28,7 +28,13 @@ namespace Touristix.Controllers
                 {
                     Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
+<<<<<<< HEAD
                     return RedirectToAction("Index", "Home");
+=======
+
+                    ViewData["Verif"] = "";
+                    return RedirectToAction("Index", "Accueil");
+>>>>>>> origin/master
                 }
                 ViewData["Verif"] = "Erreur";
             }

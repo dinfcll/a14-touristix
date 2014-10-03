@@ -7,7 +7,11 @@
 
 @using (Html.BeginForm())
 {
+<<<<<<< HEAD
     if (ViewData["Verif"] == "Erreur")
+=======
+    if (ViewData["Verif"] != null)
+>>>>>>> origin/master
     {
         <span class="ErrorMessage">Échec lors de l'envoi du courriel</span> <br />        
     }

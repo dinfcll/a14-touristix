@@ -2,7 +2,11 @@
 @model Touristix.Models.Temperature
 
 @{
+<<<<<<< HEAD
     ViewBag.Title = "Conditions météorologiques";
+=======
+    ViewBag.Title = "Prévisions météorologiques";
+>>>>>>> origin/master
 }
 
 <h2>Prévisions actuelles</h2>
@@ -15,6 +19,7 @@
     Vitesse du vent: @Model.wind.speed km/h<br/>
     Direction du vent: @Model.wind.DirectionVent<br />
     Description: @Model.weather[0].description
+<<<<<<< HEAD
     <img src ="@Model.weather[0].icon" alt="image manquant" /><br/>  
     
     
@@ -24,3 +29,11 @@
     Température maximale: @Model.main.temp_max<br/>  
 
      
+=======
+     <img src ="@Model.weather[0].icon" alt="image manquante" /><br/>      
+    
+<h2>Tendances</h2> 
+<br />
+    Temp&eacute;rature minimale: @Model.main.temp_min<br/>
+    Temp&eacute;rature maximale: @Model.main.temp_max<br/>   
+>>>>>>> origin/master
