@@ -10,9 +10,7 @@ namespace Touristix.Controllers
 {
     public class ContactController : Controller
     {
-        private ContactDBContext db = new ContactDBContext();
-        //
-        // GET: /Contact/
+        private ContactDBContext db = new ContactDBContext();       
 
         [HttpGet]
         public ActionResult ContactForm()
@@ -23,15 +21,16 @@ namespace Touristix.Controllers
         [HttpPost]
         public ActionResult ContactForm(ContactModel modele)
         {
+            ViewData["Verif"] = "";
             if (ModelState.IsValid)
             {
-              //  if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
-               // {
+                if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
+                {
                     Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
                     return RedirectToAction("Index", "Home");
-               // }
-
+                }
+                ViewData["Verif"] = "Erreur";
             }
             return View();
 
@@ -53,7 +52,7 @@ namespace Touristix.Controllers
 
                 chaine = "Ceci est un message de: " + nom + "\n\n" + commentaires;
 
-                MailMessage message = new MailMessage(courriel, "e_casault@hotmail.com", categorie, chaine); //lauwarrior@yahoo.ca
+                MailMessage message = new MailMessage(courriel, "e_casault@hotmail.com", categorie, chaine); 
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
                 client.Send(message);
