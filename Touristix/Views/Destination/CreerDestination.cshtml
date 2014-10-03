@@ -4,7 +4,7 @@
     ViewBag.Title = "Créer destination";
 }
 
-<legend>Créer destination</legend>
+<h2>Créer destination</h2>
 
 <script type="text/javascript" src="/Scripts/destination.js"></script>
 
@@ -84,23 +84,23 @@
         </div>
         
         <div id="Batiments">
+            <legend>Bâtiements</legend>
+            @Html.DropDownList("Batiment0", new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                        new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
+            <br /> <br />
 
-        @Html.DropDownList("Batiment0", new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                    new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
-        <br /> <br />
-
-        <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment0");</script>
+            <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment0");</script>
         </div>
         
         <div id="Activites">
+            <legend>Activités</legend>
+            @Html.DropDownList("Activite0", new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                         new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
+            <br /> <br />
 
-        @Html.DropDownList("Activite0", new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                     new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
-        <br /> <br />
-
-        <script type="text/javascript"> 
-            ObtenirListeActivite(-1, "Activite0");
-        </script>
+            <script type="text/javascript"> 
+                ObtenirListeActivite(-1, "Activite0");
+            </script>
         </div>
 
         <p>

@@ -6,7 +6,7 @@
 
 <script type="text/javascript" src="/Scripts/destination.js"></script>
 
-<legend>Modifier destination</legend>
+<h2>Modifier destination</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -88,53 +88,55 @@
         </div>
         
         <div id="Batiments">
-        @{
-    string[] ArrayParametreBatiment = new string[1];
-    ArrayParametreBatiment[0] = ";";
-    string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
-        }
-        @for (int B = 0; B < ArrayBatiment.Length; B++)
-        {
-            int IdActif = Convert.ToInt32(ArrayBatiment[B]);
-            @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+            <legend>Bâtiements</legend>
+                @{
+                string[] ArrayParametreBatiment = new string[1];
+                ArrayParametreBatiment[0] = ";";
+                string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+            }
+            @for (int B = 0; B < ArrayBatiment.Length; B++)
+            {
+                int IdActif = Convert.ToInt32(ArrayBatiment[B]);
+                @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                            new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
+                <br /> <br />
+
+                <script type="text/javascript">ObtenirListeBatiment(@IdActif, "Batiment" + @B);</script>
+            }
+        
+            @Html.DropDownList("Batiment" + ArrayBatiment.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
                                         new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
             <br /> <br />
 
-            <script type="text/javascript">ObtenirListeBatiment(@IdActif, "Batiment" + @B);</script>
-        }
-        
-        @Html.DropDownList("Batiment" + ArrayBatiment.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                    new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
-        <br /> <br />
-
-        <script type="text/javascript"> 
-            ObtenirListeBatiment(-1, "Batiment" + @ArrayBatiment.Length);
-        </script>
+            <script type="text/javascript"> 
+                ObtenirListeBatiment(-1, "Batiment" + @ArrayBatiment.Length);
+            </script>
         </div>
         
         <div id="Activites">
-        @{
-        string[] ArrayParametreActivite = new string[1];
-        ArrayParametreActivite[0] = ";";
-        string[] ArrayActivite = @Model.BatimentIds.Split(ArrayParametreActivite, StringSplitOptions.RemoveEmptyEntries);
-        }
-        @for (int A = 0; A < ArrayActivite.Length; A++)
-        {
-            int IdActif = Convert.ToInt32(ArrayActivite[A]);
-            @Html.DropDownList("Activite" + A, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                             new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
+            <legend>Activités</legend>
+            @{
+                string[] ArrayParametreActivite = new string[1];
+                ArrayParametreActivite[0] = ";";
+                string[] ArrayActivite = @Model.ActiviteIds.Split(ArrayParametreActivite, StringSplitOptions.RemoveEmptyEntries);
+            }
+            @for (int A = 0; A < ArrayActivite.Length; A++)
+            {
+                int IdActif = Convert.ToInt32(ArrayActivite[A]);
+                @Html.DropDownList("Activite" + A, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                                 new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
+                <br /> <br />
+
+                <script type="text/javascript">ObtenirListeActivite(@IdActif, "Activite" + @A);</script>
+            }
+        
+            @Html.DropDownList("Activite" + ArrayActivite.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                         new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
             <br /> <br />
 
-            <script type="text/javascript">ObtenirListeActivite(@IdActif, "Activite" + @A);</script>
-        }
-        
-        @Html.DropDownList("Activite" + ArrayActivite.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                     new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
-        <br /> <br />
-
-        <script type="text/javascript"> 
-            ObtenirListeActivite(-1, "Activite" + @ArrayActivite.Length);
-        </script>
+            <script type="text/javascript"> 
+                ObtenirListeActivite(-1, "Activite" + @ArrayActivite.Length);
+            </script>
         </div>
 
         <p>
