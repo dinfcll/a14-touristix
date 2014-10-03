@@ -7,22 +7,23 @@
          @Styles.Render("~/Content/bootstrapcss")
     </head>
     <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Touristix", "Index", "Accueil")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
-                            <li>@Html.ActionLink("Destinations", "Index", "Destination")</li>
-                            <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
-                        </ul>
-                    </nav>
-                </div>
+        <div class="container-fluid hero-unit">
+            <div class="span3">
+            </div>
+            <div class="span3">
+                <h1>@Html.ActionLink("Touristix", "Index", "Accueil", new { @class = "page-header" })</h1>
+            </div>
+            <div class="text-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <ul class="inline">
+                    <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
+                    <li>@Html.ActionLink("Destinations", "Index", "Destination")</li>
+                    <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
+                </ul>
+            </div>
+        </div>
     </header>
     <body>
         <div class="container-fluid">
