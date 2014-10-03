@@ -19,84 +19,22 @@ namespace Touristix.Controllers
                 return HttpNotFound();
             }
 
-            //Récupérer les batiments liés.
-            DestinationModfiable NouveauDestinationModfiable = new DestinationModfiable();
-            NouveauDestinationModfiable.ListChaineBatimentId = new List<int>();
-
-            NouveauDestinationModfiable.Destination = DestinationModelActif;
-            int ProchainBatimentId = DestinationModelActif.ProchainBatimentId;
-            ChaineBatiment ProchainBatiment = null;
-
-            do
-            {
-                ProchainBatiment = db.ChaineBatiments.Find(ProchainBatimentId);
-
-                if (ProchainBatiment == null)
-                {
-                    ProchainBatimentId = -1;
-                    NouveauDestinationModfiable.ListChaineBatimentId.Add(0);
-                }
-                else
-                {
-                    ProchainBatimentId = ProchainBatiment.ProchainId;
-                    NouveauDestinationModfiable.ListChaineBatimentId.Add(ProchainBatiment.BatimentId);
-                }
-            }
-            while (ProchainBatiment != null);
-
-            return View(NouveauDestinationModfiable);
+            return View(DestinationModelActif);
         }
 
         [HttpPost]
         public ActionResult ModifierDestination(DestinationModel Destination)
         {
-            int DernierId = 0;
-            if (db.ChaineBatiments.Count() > 0)
-                DernierId = db.ChaineBatiments.ToList().Last().Id;
-
             if (ModelState.IsValid)
             {
+                Destination.BatimentIds = "";
                 int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
-
                 if (DernierBatiment >= 1)
                 {
-                    ChaineBatiment VieilleChaineBatiment = db.ChaineBatiments.Find(Destination.ProchainBatimentId);
-
-                    if (VieilleChaineBatiment == null)
-                    {
-                        ++DernierId;
-                        ChaineBatiment ChaineBatimentActive = new ChaineBatiment(DernierId, Convert.ToInt32(Request["Batiment0"]));
-                        Destination.ProchainBatimentId = DernierId;
-                        VieilleChaineBatiment = ChaineBatimentActive;
-                        db.ChaineBatiments.Add(ChaineBatimentActive);
-                    }
-
-                    if (DernierId <= 0)
-                    {
-                        return HttpNotFound();
-                    }
-
-                    for (int B = 1; B < DernierBatiment; B++)
+                    for (int B = 0; B < DernierBatiment; B++)
                     {
                         int Id = Convert.ToInt32(Request["Batiment" + B]);
-                        ChaineBatiment ChaineBatimentActive = null;
-
-                        if (VieilleChaineBatiment != null)
-                        {
-                            if (VieilleChaineBatiment.ProchainId >= 0)
-                                ChaineBatimentActive = db.ChaineBatiments.Find(VieilleChaineBatiment.ProchainId);
-
-                            if (ChaineBatimentActive == null)
-                            {
-                                ++DernierId;
-                                ChaineBatimentActive = new ChaineBatiment(DernierId, Id);
-                                db.ChaineBatiments.Add(ChaineBatimentActive);
-                            }
-
-                            VieilleChaineBatiment.ProchainId = ChaineBatimentActive.Id;
-                        }
-
-                        VieilleChaineBatiment = ChaineBatimentActive;
+                        Destination.BatimentIds += Id + ";";
                     }
                 }
 

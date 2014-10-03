@@ -4,12 +4,10 @@
     ViewBag.Title = "Information";
 }
 
-<h2>Information</h2>
-
 <img src= "/Images/Destinations/@Model.Image" alt="Image" />
 
 <script type="text/javascript">
-    function ObtenirListeBatiment(ID, NomObjet) {
+    function ObtenirBatiment(Id, NomObjet) {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -24,69 +22,56 @@
                 Succes(xmlhttp.responseText);
             }
         }
-        var params = "ID=" + ID
+        var params = "Id=" + Id
         xmlhttp.open("POST", url);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.setRequestHeader("Content-length", params.length);
-        xmlhttp.setRequestHeader("ID", ID);
         xmlhttp.setRequestHeader("Connection", "close");
         xmlhttp.send(params);
 
         function Succes(response) {
-            var arr = JSON.parse(response);
+            var Batiment = JSON.parse(response);
             var i;
-            var out = "";
+            var out = "<a href=";
+            out += "/Destination/InformationBatiment/" + Id + ">"
+            out += Batiment.Nom;
+            out += "</a>"
 
-            for (i = 0; i < arr.length; i++) {
-                out += '<option value="' + arr[i].Value + '">' +
-                            arr[i].Text + '</option>';
-            }
             document.getElementById(NomObjet).innerHTML = out;
         }
     }
 </script>
 
 <fieldset>
-    <legend>DestinationModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nom)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nom)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Pays)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Pays)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Region)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Region)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Ville)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Ville)
-    </div>
-    
-    @if (Model.ListBatiment != null)
-    {
-        for (int B = 0; B < Model.ListBatiment.Count; B++)
-        {
-            <div class="display-field" id="Batiment" + @B>
-                @Html.DisplayFor(model => model.Ville)
-            </div>
-            <script type="text/javascript">ObtenirBatiment(Model.ListBatiment[B], "Batiment" + B);</script>
-        }
+    <legend>@Html.DisplayFor(model => model.Nom)</legend>
+    <dl> 
+      <dt>@Html.DisplayNameFor(model => model.Pays)</dt>
+      <dd>@Html.DisplayFor(model => model.Pays)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Region)</dt>
+      <dd>@Html.DisplayFor(model => model.Region)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Ville)</dt>
+      <dd>@Html.DisplayFor(model => model.Ville)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
+      <dd>@Html.DisplayFor(model => model.Apercu)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Details)</dt>
+      <dd>@Html.DisplayFor(model => model.Details)</dd>
+      <dt>Batiments</dt>
+      
+    @{
+        string[] ArrayParametre = new string[1];
+        ArrayParametre[0] = ";";
+        string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametre, StringSplitOptions.RemoveEmptyEntries);
     }
+    @for (int B = 0; B < ArrayBatiment.Length; B++)
+    {
+        int IdActif = Convert.ToInt32(ArrayBatiment[B]);
+        string IdNom = "Batiment" + B;
+        <dt id=@IdNom></dt>
+        <br /> <br />
+
+        <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
+    }
+    </dl> 
 </fieldset>
 <p>
     @Html.ActionLink("Retour à l'index", "Index")

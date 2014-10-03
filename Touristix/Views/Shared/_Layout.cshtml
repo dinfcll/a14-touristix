@@ -1,19 +1,15 @@
-﻿<!DOCTYPE html>
-<html lang="fr">
+﻿<!DOCTYPE HTML>
+<html>
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - Mon application ASP.NET MVC</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+         <meta charset="utf-8" />
+         <meta name="viewport" content="width=device-width" />
+         <title>@ViewBag.Title</title>
+         @Styles.Render("~/Content/bootstrapcss")
     </head>
-    <body>
-        <header>
+    <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Touristix", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Touristix", "Index", "Accueil")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -27,27 +23,20 @@
                         </ul>
                     </nav>
                 </div>
+    </header>
+    <body>
+        <div class="container-fluid">
+            <div class="span3">
             </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @if (TempData["notice"] != null)
-                {
-                    <h2>@TempData["notice"]</h2>
-                }
+            <div class="span6">
+                @RenderSection("featured", required: false)
                 @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Mon application ASP.NET MVC</p>
-                </div>
             </div>
-        </footer>
-
+            <div class="span3">
+            </div>
+        </div>
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrapjs")
         @RenderSection("scripts", required: false)
     </body>
 </html>
