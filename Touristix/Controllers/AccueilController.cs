@@ -22,11 +22,11 @@ namespace Touristix.Controllers
             modelImagesAccueil.TableauImagesAccueil = Directory.GetFiles(Server.MapPath("~/Images/ImagesAccueil/"), "*.*")
                 .Where(f => ExtensionsRecherche.Contains(new FileInfo(f).Extension.ToLower())).ToArray();
 
-            for (int IndiceImage = 0; IndiceImage < modelImagesAccueil.TableauImagesAccueil.Length; IndiceImage++)
+            for (int i = 0; i < modelImagesAccueil.TableauImagesAccueil.Length; i++)
             {
-                string strCheminImage = modelImagesAccueil.TableauImagesAccueil[IndiceImage];
+                string strCheminImage = modelImagesAccueil.TableauImagesAccueil[i];
 
-                modelImagesAccueil.TableauImagesAccueil[IndiceImage] = Path.GetFileName(strCheminImage);
+                modelImagesAccueil.TableauImagesAccueil[i] = Path.GetFileName(strCheminImage);
             }
 
             return View(modelImagesAccueil);
