@@ -4,66 +4,52 @@
     ViewBag.Title = "Modifier";
 }
 
-<h2>Modifier</h2>
+<legend>@Model.Nom</legend>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(new { role="form" }))
+{
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>DestinationModel</legend>
 
         @Html.HiddenFor(model => model.Id)
 
-        <div class="editor-label">
+        <div class="form-group">
             @Html.LabelFor(model => model.Nom)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nom)
+            @Html.EditorFor(model => model.Nom, new { @class = "form-control",
+                placeholder = "Entrez nom", type = "text" })
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Lieu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Lieu)
+            @Html.EditorFor(model => model.Lieu, new { @class = "form-control",
+                placeholder = "Entrez lieu", type = "text" })
             @Html.ValidationMessageFor(model => model.Lieu)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Image)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
+            @Html.EditorFor(model => model.Image, new { @class = "form-control",
+                placeholder = "Entrez image", type = "text" })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Apercu)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Apercu)
+            @Html.TextAreaFor(model => model.Apercu, new { @class = "form-control", placeholder = "Entrez aperçu" })
             @Html.ValidationMessageFor(model => model.Apercu)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Details)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Details)
+            @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Entrez détails" })
             @Html.ValidationMessageFor(model => model.Details)
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Modifier" class="btn btn-default" />
         </p>
-    </fieldset>
 }
 
 <div>
     @Html.ActionLink("Retour à l'index", "Admin")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

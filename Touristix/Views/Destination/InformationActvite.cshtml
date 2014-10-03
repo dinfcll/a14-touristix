@@ -1,0 +1,28 @@
+﻿@model Touristix.Models.ActiviteModel
+
+@{
+    ViewBag.Title = "Information";
+}
+<ol class="breadcrumb">
+  <li><a href="/Index">Accueil</a></li>
+  <li><a href="/Destination">Destination</a></li>
+  <li class="active">Activité</li>
+</ol>
+
+<img src= "/Images/Activite/@Model.Image" alt="Image" />
+
+<fieldset>
+    <legend>@Html.DisplayFor(model => model.Nom)</legend>
+
+    <dl>
+      <dt>@Html.DisplayNameFor(model => model.Lieu)</dt>
+      <dd>@Html.DisplayFor(model => model.Lieu)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
+      <dd>@Html.DisplayFor(model => model.Apercu)</dd>
+      <dt>@Html.DisplayNameFor(model => model.Details)</dt>
+      <dd>@Html.DisplayFor(model => model.Details)</dd>
+    </dl>
+</fieldset>
+<p>
+    @Html.ActionLink("Retour à l'index", "Index")
+</p>
