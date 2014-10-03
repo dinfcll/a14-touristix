@@ -11,7 +11,7 @@
    
     @Html.Label("Ville")<br/> 
     @Html.TextBoxFor(Model => Model.VilleCible)
-     if (ViewData["Verif"] != null)
+     if (ViewData["Verif"] == "Erreur")
     {
         <span class="ErrorMessage">Erreur de recherche de la ville</span>
         
