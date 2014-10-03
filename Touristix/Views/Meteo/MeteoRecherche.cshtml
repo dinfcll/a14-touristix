@@ -4,12 +4,13 @@
     ViewBag.Title = "MeteoRecherche";
 }
 
-<h2>Test</h2>
+<h2>Recherche d'une ville</h2>
 
 @using (Html.BeginForm())
 {   
     @Html.Label("Ville")<br/> 
     @Html.TextBoxFor(Model => Model.VilleCible)
+
     if (ViewData["Verif"] == "Erreur")
     {
         <span class="ErrorMessage">Erreur de recherche de la ville</span>        
@@ -18,3 +19,4 @@
     
     <button type ="submit">Soumettre</button>
 }
+

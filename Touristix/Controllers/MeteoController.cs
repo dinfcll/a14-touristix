@@ -10,9 +10,7 @@ using System.Web.Script.Serialization;
 namespace Touristix.Controllers
 {
     public class MeteoController : Controller
-    {
-        //
-        // GET: /Meteo/
+    {    
 
         [HttpGet]
         public ActionResult MeteoForm()
@@ -60,13 +58,15 @@ namespace Touristix.Controllers
             {
                 indDegree = 0;
             }
-            FormatterDirectionVent(indDegree, temperature.wind);            
+            FormatterDirectionVent(indDegree, temperature.wind);
+
         }
 
         public void FormatterDirectionVent(int ind, Wind vent)
         {
-            string[] tVent = {"Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord"};
+            string[] tVent = { "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord" }; 
             vent.DirectionVent = tVent[ind];
         }
     }
 }
+

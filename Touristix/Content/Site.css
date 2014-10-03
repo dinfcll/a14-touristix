@@ -701,6 +701,12 @@ tr.pager td {
             ol.round li.nine {
                 background: none;
             }
+            
+     .display-label
+     {
+         font-weight: bold;
+         font-size: 20px;
+     }
 
      /* features */
      section.feature {

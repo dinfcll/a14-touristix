@@ -7,10 +7,10 @@
 
 @using (Html.BeginForm())
 {
-    if (ViewData["Verif"] != null)
+
+    if (ViewData["Verif"] == "Erreur")
     {
-        <span class="ErrorMessage">Échec lors de l'envoi du courriel</span> <br />
-        
+        <span class="ErrorMessage">Échec lors de l'envoi du courriel</span> <br />        
     }
     <br/> 
     
@@ -43,3 +43,5 @@
     
     <button type ="submit">Soumettre le formulaire</button>
 }
+
+
