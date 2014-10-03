@@ -58,20 +58,13 @@ namespace Touristix.Controllers
             {
                 indDegree = 0;
             }
-<<<<<<< HEAD
             FormatterDirectionVent(indDegree, temperature.wind);
-=======
-            FormatterDirectionVent(indDegree, temperature.wind);            
->>>>>>> origin/master
+
         }
 
         public void FormatterDirectionVent(int ind, Wind vent)
         {
-<<<<<<< HEAD
-            string[] tVent = { "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord" };
-=======
-            string[] tVent = {"Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord"};
->>>>>>> origin/master
+            string[] tVent = { "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord" }; 
             vent.DirectionVent = tVent[ind];
         }
     }
