@@ -32,7 +32,7 @@ namespace Touristix.Controllers
                 }
                 else
                 {
-                    ViewData["Verif"] = "erreur";  
+                    ViewData["Verif"] = "Erreur";  
                 }                
             }                      
             return View();
