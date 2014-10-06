@@ -1,5 +1,4 @@
-﻿
-var ListBatiment = [];
+﻿var ListBatiment = [];
 
 function ObtenirListeBatiment(Id, NomObjet) {
     var xmlhttp;
