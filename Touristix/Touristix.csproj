@@ -320,7 +320,7 @@
     <Content Include="Views\Destination\InformationBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\InformationActvite.cshtml" />
+    <Content Include="Views\Destination\InformationActivite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Contact\Index.cshtml" />
