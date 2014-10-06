@@ -79,11 +79,13 @@ namespace Touristix.Controllers
             db.SaveChanges();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.Contacts.ToList());
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Effacer(int id = 0)
         {
             ContactDB contact = db.Contacts.Find(id);
@@ -94,6 +96,7 @@ namespace Touristix.Controllers
             return View(contact);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Effacer")]
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmationEffacer(int id)
