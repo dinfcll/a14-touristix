@@ -33,7 +33,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Nom).ToString(), "InformationDestination", new { id = item.Id })
+                @Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Pays)
@@ -76,7 +76,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Nom).ToString(), "InformationBatiment", new { id = item.Id })
+                @Html.ActionLink(@item.Nom, "InformationBatiment", new { id = item.Id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.URL)
