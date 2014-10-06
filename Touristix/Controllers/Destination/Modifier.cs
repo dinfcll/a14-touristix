@@ -25,26 +25,17 @@ namespace Touristix.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult ModifierDestination(DestinationModel Destination)
+        public ActionResult ModifierDestination(DestinationModel DestinationModelActif)
         {
             if (ModelState.IsValid)
             {
-                Destination.BatimentIds = "";
-                int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
-                if (DernierBatiment >= 1)
-                {
-                    for (int B = 0; B < DernierBatiment; B++)
-                    {
-                        int Id = Convert.ToInt32(Request["Batiment" + B]);
-                        Destination.BatimentIds += Id + ";";
-                    }
-                }
+                MettreAJourDestination(DestinationModelActif);
 
-                db.Entry(Destination).State = EntityState.Modified;
+                db.Entry(DestinationModelActif).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
             }
-            return View(Destination.Id);
+            return View(DestinationModelActif.Id);
         }
 
         [Authorize(Roles = "admin")]

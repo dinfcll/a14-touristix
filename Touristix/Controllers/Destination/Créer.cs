@@ -23,7 +23,8 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
-                DestinationModelActif.BatimentIds = "";
+                MettreAJourDestination(DestinationModelActif);
+
                 db.Destinations.Add(DestinationModelActif);
                 db.SaveChanges();
                 return RedirectToAction("Admin");

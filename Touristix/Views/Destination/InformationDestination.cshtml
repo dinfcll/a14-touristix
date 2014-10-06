@@ -40,37 +40,84 @@
             document.getElementById(NomObjet).innerHTML = out;
         }
     }
+    function ObtenirActivite(Id, NomObjet) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var url = '@Url.Action("ObtenirActivite")';
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                Succes(xmlhttp.responseText);
+            }
+        }
+        var params = "Id=" + Id
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-length", params.length);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(params);
+
+        function Succes(response) {
+            var Activite = JSON.parse(response);
+            var i;
+            var out = "<a href=";
+            out += "/Destination/InformationActivite/" + Id + ">"
+            out += Activite.Nom;
+            out += "</a>"
+
+            document.getElementById(NomObjet).innerHTML = out;
+        }
+    }
 </script>
 
 <fieldset>
-    <legend>@Html.DisplayFor(model => model.Nom)</legend>
+    <h2>@Html.DisplayFor(model => model.Nom)</h2>
     <dl> 
-      <dt>@Html.DisplayNameFor(model => model.Pays)</dt>
-      <dd>@Html.DisplayFor(model => model.Pays)</dd>
-      <dt>@Html.DisplayNameFor(model => model.Region)</dt>
-      <dd>@Html.DisplayFor(model => model.Region)</dd>
-      <dt>@Html.DisplayNameFor(model => model.Ville)</dt>
-      <dd>@Html.DisplayFor(model => model.Ville)</dd>
-      <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
-      <dd>@Html.DisplayFor(model => model.Apercu)</dd>
-      <dt>@Html.DisplayNameFor(model => model.Details)</dt>
-      <dd>@Html.DisplayFor(model => model.Details)</dd>
-      <dt>Batiments</dt>
+    <dt>@Html.DisplayNameFor(model => model.Pays)</dt>
+    <dd>@Html.DisplayFor(model => model.Pays)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Region)</dt>
+    <dd>@Html.DisplayFor(model => model.Region)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Ville)</dt>
+    <dd>@Html.DisplayFor(model => model.Ville)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
+    <dd>@Html.DisplayFor(model => model.Apercu)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Details)</dt>
+    <dd>@Html.DisplayFor(model => model.Details)</dd>
+    <dt><legend>Bâtiments</legend></dt>
       
-    @{
-        string[] ArrayParametre = new string[1];
-        ArrayParametre[0] = ";";
-        string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametre, StringSplitOptions.RemoveEmptyEntries);
-    }
-    @for (int B = 0; B < ArrayBatiment.Length; B++)
-    {
-        int IdActif = Convert.ToInt32(ArrayBatiment[B]);
-        string IdNom = "Batiment" + B;
-        <dt id=@IdNom></dt>
-        <br /> <br />
+        @{
+            string[] ArrayParametreBatiment = new string[1];
+            ArrayParametreBatiment[0] = ";";
+            string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+        }
+        @for (int B = 0; B < ArrayBatiment.Length; B++)
+        {
+            int IdActif = Convert.ToInt32(ArrayBatiment[B]);
+            string IdNom = "Batiment" + B;
+            <dt id=@IdNom></dt>
 
-        <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
-    }
+            <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
+        }
+        <br />
+    <dt><legend>Activités</legend></dt>
+        @{
+            string[] ArrayParametreActivite = new string[1];
+            ArrayParametreActivite[0] = ";";
+            string[] ArrayActivite = @Model.ActiviteIds.Split(ArrayParametreActivite, StringSplitOptions.RemoveEmptyEntries);
+        }
+        @for (int B = 0; B < ArrayActivite.Length; B++)
+        {
+            int IdActif = Convert.ToInt32(ArrayActivite[B]);
+            string IdNom = "Activite" + B;
+            <dt id=@IdNom></dt>
+
+            <script type="text/javascript">ObtenirActivite(@IdActif, "Activite" + @B);</script>
+        }
     </dl> 
 </fieldset>
 <p>

@@ -4,171 +4,141 @@
     ViewBag.Title = "Modifier";
 }
 
-<h2>Modifier</h2>
+<script type="text/javascript" src="/Scripts/destination.js"></script>
 
-<script type="text/javascript">
-
-    var ListBatiment = [];
-
-    function ObtenirListeBatiment(Id, NomObjet) {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        }
-        else {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        var url = '@Url.Action("ObtenirListeBatiment")';
-
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                Succes(xmlhttp.responseText);
-            }
-        }
-        var params = "Id=" + Id
-        xmlhttp.open("POST", url);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.setRequestHeader("Content-length", params.length);
-        xmlhttp.setRequestHeader("Connection", "close");
-        xmlhttp.send(params);
-
-        function Succes(response) {
-            var arr = JSON.parse(response);
-            var i;
-            var out = "";
-
-            for (i = 0; i < arr.length; i++) {
-                var Selected = arr[i].Value == Id;
-                if (Selected) {
-                    out += '<option value="' + arr[i].Value + '" selected>' +
-                            arr[i].Text + '</option>';
-                }
-                else {
-                    out += '<option value="' + arr[i].Value + '">' +
-                            arr[i].Text + '</option>';
-                }
-            }
-            document.getElementById(NomObjet).innerHTML = out;
-        }
-    }
-
-    function AjoutDropDownListBatiment(BatimentActif) {
-        var DernierBatimentTag = document.getElementById("DernierBatiment");
-        var DernierBatiment = parseInt(DernierBatimentTag.value, 10);
-
-        if (BatimentActif.id == "Batiment" + DernierBatiment) {
-            ListBatiment.push({
-                "ID": DernierBatiment
-            });
-            DernierBatiment += 1;
-            DernierBatimentTag.value = DernierBatiment;
-            var DivBatiments = document.getElementById("Batiments");
-            var addButton = document.createElement("select");
-            addButton.type = "select";
-            addButton.id = "Batiment" + DernierBatiment;
-            addButton.name = "Batiment" + DernierBatiment;
-            addButton.setAttribute("class", "dropdown1");
-            addButton.setAttribute("onchange", "AjoutDropDownListBatiment(this)");
-            addButton.style.width = "250px";
-            var o2 = document.createElement("br");
-            var o3 = document.createElement("br");
-            DivBatiments.appendChild(addButton);
-            DivBatiments.appendChild(o2);
-            DivBatiments.appendChild(o3);
-            ObtenirListeBatiment(-1, "Batiment" + DernierBatiment);
-        }
-    }
-</script>
+<h2>Modifier destination</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>DestinationModel</legend>
         
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.BatimentIds)
-
+        @Html.HiddenFor(model => model.ActiviteIds)
+        
         @Html.Hidden("DernierBatiment", @Model.BatimentIds.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).Length)
-
-        <div class="editor-label">
+        @Html.Hidden("DerniereActivite", @Model.ActiviteIds.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).Length)
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Nom)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nom)
+            @Html.TextBoxFor(model => model.Nom, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez nom",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Pays)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Pays)
-            @Html.ValidationMessageFor(model => model.Pays)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Region)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Region)
-            @Html.ValidationMessageFor(model => model.Region)
-        </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Ville)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ville)
+            @Html.TextBoxFor(model => model.Ville, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez ville",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Ville)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Image)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Region)
+            @Html.TextBoxFor(model => model.Region, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez region",
+           type = "text"
+       })
+            @Html.ValidationMessageFor(model => model.Region)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pays)
+            @Html.TextBoxFor(model => model.Pays, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez pays",
+           type = "text"
+       })
+            @Html.ValidationMessageFor(model => model.Pays)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image)
+            @Html.TextBoxFor(model => model.Image, new
+       {
+           @class = "form-control",
+           placeholder = "Entrez image",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Apercu)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Apercu)
+            @Html.TextAreaFor(model => model.Apercu, new { @class = "form-control", placeholder = "Entrez aperçu" })
             @Html.ValidationMessageFor(model => model.Apercu)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Details)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Details)
+            @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Entrez détails" })
             @Html.ValidationMessageFor(model => model.Details)
         </div>
-
+        
         <div id="Batiments">
-        @{
-            string[] ArrayParametre = new string[1];
-            ArrayParametre[0] = ";";
-            string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametre, StringSplitOptions.RemoveEmptyEntries);
-        }
-        @for (int B = 0; B < ArrayBatiment.Length; B++)
-        {
-            int IdActif = Convert.ToInt32(ArrayBatiment[B]);
-            @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+            <legend>Bâtiements</legend>
+                @{
+                string[] ArrayParametreBatiment = new string[1];
+                ArrayParametreBatiment[0] = ";";
+                string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+            }
+            @for (int B = 0; B < ArrayBatiment.Length; B++)
+            {
+                int IdActif = Convert.ToInt32(ArrayBatiment[B]);
+                @Html.DropDownList("Batiment" + B, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                            new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
+                <br /> <br />
+
+                <script type="text/javascript">ObtenirListeBatiment(@IdActif, "Batiment" + @B);</script>
+            }
+        
+            @Html.DropDownList("Batiment" + ArrayBatiment.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
                                         new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
             <br /> <br />
 
-            <script type="text/javascript">ObtenirListeBatiment(@IdActif, "Batiment" + @B);</script>
-        }
-        
-        @Html.DropDownList("Batiment" + ArrayBatiment.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
-                                    new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListBatiment(this)" })
-        <br /> <br />
-
-        <script type="text/javascript"> ObtenirListeBatiment(-1, "Batiment" + @ArrayBatiment.Length);</script>
+            <script type="text/javascript"> 
+                ObtenirListeBatiment(-1, "Batiment" + @ArrayBatiment.Length);
+            </script>
         </div>
+        
+        <div id="Activites">
+            <legend>Activités</legend>
+            @{
+                string[] ArrayParametreActivite = new string[1];
+                ArrayParametreActivite[0] = ";";
+                string[] ArrayActivite = @Model.ActiviteIds.Split(ArrayParametreActivite, StringSplitOptions.RemoveEmptyEntries);
+            }
+            @for (int A = 0; A < ArrayActivite.Length; A++)
+            {
+                int IdActif = Convert.ToInt32(ArrayActivite[A]);
+                @Html.DropDownList("Activite" + A, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                                 new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
+                <br /> <br />
+
+                <script type="text/javascript">ObtenirListeActivite(@IdActif, "Activite" + @A);</script>
+            }
+        
+            @Html.DropDownList("Activite" + ArrayActivite.Length, new SelectList(string.Empty, "Value", "Text"), "Please select a State",
+                                         new { style = "width:250px", @class = "dropdown1", onchange = "AjoutDropDownListActivite(this)" })
+            <br /> <br />
+
+            <script type="text/javascript"> 
+                ObtenirListeActivite(-1, "Activite" + @ArrayActivite.Length);
+            </script>
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>

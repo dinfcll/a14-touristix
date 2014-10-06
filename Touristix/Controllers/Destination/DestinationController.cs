@@ -63,7 +63,32 @@ namespace Touristix.Controllers
             NouvelleList.ListActiviteModel = db.Activites.ToList();
             return View(NouvelleList);
         }
-                
+
+        public void MettreAJourDestination(DestinationModel DestinationModelActif)
+        {
+            DestinationModelActif.BatimentIds = "";
+            int DernierBatiment = Convert.ToInt32(Request["DernierBatiment"]);
+            if (DernierBatiment >= 1)
+            {
+                for (int B = 0; B < DernierBatiment; B++)
+                {
+                    int Id = Convert.ToInt32(Request["Batiment" + B]);
+                    DestinationModelActif.BatimentIds += Id + ";";
+                }
+            }
+
+            DestinationModelActif.ActiviteIds = "";
+            int DerniereActivite = Convert.ToInt32(Request["DerniereActivite"]);
+            if (DerniereActivite >= 1)
+            {
+                for (int B = 0; B < DerniereActivite; B++)
+                {
+                    int Id = Convert.ToInt32(Request["Activite" + B]);
+                    DestinationModelActif.ActiviteIds += Id + ";";
+                }
+            }
+        }
+
         public JsonResult ObtenirListeBatiment(string Id)
         {
             int IdNumber = Convert.ToInt32(Id);
@@ -86,6 +111,30 @@ namespace Touristix.Controllers
             BatimentModel Batiment = db.Batiments.Find(Convert.ToInt32(Id));
 
             return Json(Batiment);
+        }
+
+        public JsonResult ObtenirListeActivite(string Id)
+        {
+            int IdNumber = Convert.ToInt32(Id);
+            List<SelectListItem> ListActivite = new List<SelectListItem>();
+
+            IQueryable<ActiviteModel> Activites = from m in db.Activites
+                                                  select m;
+
+            ListActivite.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (ActiviteModel ActiviteActif in Activites)
+            {
+                ListActivite.Add(new SelectListItem { Text = ActiviteActif.Nom, Value = ActiviteActif.Id.ToString() });
+            }
+            return Json(new SelectList(ListActivite, "Value", "Text"));
+        }
+
+        public JsonResult ObtenirActivite(string Id)
+        {
+            ActiviteModel Activite = db.Activites.Find(Convert.ToInt32(Id));
+
+            return Json(Activite);
         }
 
         protected override void Dispose(bool disposing)
