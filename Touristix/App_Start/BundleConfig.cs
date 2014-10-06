@@ -17,8 +17,8 @@ namespace Touristix
                         "~/Scripts/bootstrap.min.js"));
  
             bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
-                        "~/Content/bootstrap.min.css",
-                        "~/Content/bootstrap-responsive.min.css"));
+                        "~/Content/bootstrap.css",
+                        "~/Content/bootstrap-responsive.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/Custom").Include("~/Content/CSS/ImageText.css"));
         }

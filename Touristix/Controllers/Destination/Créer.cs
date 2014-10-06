@@ -11,11 +11,13 @@ namespace Touristix.Controllers
 {
     public partial class DestinationController : Controller
     {
+        [Authorize(Roles="admin")]
         public ActionResult CreerDestination()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult CreerDestination(DestinationModel DestinationModelActif)
         {
@@ -31,11 +33,13 @@ namespace Touristix.Controllers
             return View(DestinationModelActif);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult CreerBatiment()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult CreerBatiment(BatimentModel BatimentModelActif)
         {
@@ -43,17 +47,19 @@ namespace Touristix.Controllers
             {
                 db.Batiments.Add(BatimentModelActif);
                 db.SaveChanges();
-                return RedirectToAction("Admin");
+                return RedirectToAction("admin");
             }
 
             return View(BatimentModelActif);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult CreerActivite()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult CreerActivite(ActiviteModel ActiviteModelActif)
         {

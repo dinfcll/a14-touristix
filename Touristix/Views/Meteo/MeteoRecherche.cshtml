@@ -1,0 +1,22 @@
+﻿@model Touristix.Models.Ville
+
+@{
+    ViewBag.Title = "MeteoRecherche";
+}
+
+<h2>Recherche d'une ville</h2>
+
+@using (Html.BeginForm())
+{   
+    @Html.Label("Ville")<br/> 
+    @Html.TextBoxFor(Model => Model.VilleCible)
+
+    if (ViewData["Verif"] == "Erreur")
+    {
+        <span class="ErrorMessage">Erreur de recherche de la ville</span>        
+    }
+    <br/>  
+    
+    <button type ="submit">Soumettre</button>
+}
+
