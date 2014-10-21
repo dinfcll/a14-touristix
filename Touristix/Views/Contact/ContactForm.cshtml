@@ -6,8 +6,7 @@
 <h2>Nous Contacter</h2><br /><br/>
 
 @using (Html.BeginForm())
-{
-
+{    
     if (ViewData["Verif"] == "Erreur")
     {
         <span class="ErrorMessage">Échec lors de l'envoi du courriel</span> <br />        
@@ -19,8 +18,7 @@
     @Html.TextBoxFor(Model => Model.Nom, null, new { style = "width:300px" })   <br />      
     @Html.LabelFor(Model => Model.Courriel)<br/>
     @Html.ValidationMessageFor(Model => Model.Courriel)<br />
-    @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />
-      
+    @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />      
     
    <div>
         @Html.Label("Catégorie")<br />

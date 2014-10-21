@@ -37,7 +37,6 @@ namespace Touristix.Controllers
                     ViewData["Verif"] = "";
                     return View(temperature);
                 }
-
             }
                 
             ViewData["Verif"] = "Erreur";
