@@ -32,11 +32,11 @@ namespace Touristix.Controllers
                     ViewData["Verif"] = "";
                     return RedirectToAction("Index", "Accueil");
                 }
-                ViewData["Verif"] = "Erreur";                
-            }            
+                ViewData["Verif"] = "Erreur";
+            }
             return View();
-
         }
+
         private bool InsererContact(string nom, string courriel, string categorie, string commentaires)
         {
             bool valide = true;
@@ -64,7 +64,6 @@ namespace Touristix.Controllers
                 valide = false;
             }
             return valide;
-
         }
 
         [HttpPost]
