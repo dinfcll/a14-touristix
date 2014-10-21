@@ -1,25 +1,13 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<style>
-.container {
-    width: 500px;
-    margin: 0 auto;
-}
-.progress_outer {
-    border: 1px solid #000;
-}
-.progress {
-    width: 20%;
-    background: #DEDEDE;
-    height: 20px;  
-}
-</style>
 <p>
     Choisir image: <input type='file' id='Fichier' accept="image/*"> <input type='button' id='Envoyer' value='Envoyer'>
 </p>
-<div class='progress_outer'>
-    <div id='Barre de progression' class='progress'></div>
+<div class="progress">
+  <div class="progress bar" role="progressbar" style="width: 10%;" id="Barre de progression">
+    0%
+  </div>
 </div>
 
 <script>
@@ -35,29 +23,38 @@
 
         var data = new FormData();
         data.append('SelectedFile', _file.files[0]);
-
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-            if (request.readyState == 4) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
                 try {
-                    var resp = JSON.parse(request.response);
+                    var resp = JSON.parse(xmlhttp.response);
                 } catch (e) {
                     var resp = {
                         status: 'error',
-                        data: 'Une erreur est survenue: [' + request.responseText + ']'
+                        data: 'Une erreur est survenue: [' + xmlhttp.responseText + ']'
                     };
                 }
                 console.log(resp.status + ': ' + resp.data);
             }
         };
 
-        request.upload.addEventListener('progress', function (e) {
-            _progress.style.width = Math.ceil(e.loaded / e.total) * 100 + '%';
+        xmlhttp.upload.addEventListener('progress', function (e) {
+            var ProgressValue = Math.ceil(e.loaded / e.total) * 100;
+            if (ProgressValue > 10) {
+                _progress.style.width = ProgressValue + '%';
+                _progress.innerHTML = ProgressValue + '%';
+            } 
         }, false);
 
         var url = '@Url.Action("ReceptionImage")';
-        request.open('POST', url);
-        request.send(data);
+        xmlhttp.open('POST', url);
+        xmlhttp.send(data);
     }
 
     _submit.addEventListener('click', upload);
