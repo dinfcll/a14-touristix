@@ -16,15 +16,16 @@
 }
 </style>
 <p>
-    Select File: <input type='file' id='_file'> <input type='button' id='_submit' value='Upload!'>
+    Choisir image: <input type='file' id='Fichier'> <input type='button' id='Envoyer' value='Envoyer'>
 </p>
 <div class='progress_outer'>
-    <div id='_progress' class='progress'></div>
+    <div id='Barre de progression' class='progress'></div>
 </div>
+
 <script>
-    var _submit = document.getElementById('_submit'),
-    _file = document.getElementById('_file'),
-    _progress = document.getElementById('_progress');
+    var _submit = document.getElementById('Envoyer'),
+    _file = document.getElementById('Fichier'),
+    _progress = document.getElementById('Barre de progression');
 
     var upload = function () {
 
@@ -43,7 +44,7 @@
                 } catch (e) {
                     var resp = {
                         status: 'error',
-                        data: 'Unknown error occurred: [' + request.responseText + ']'
+                        data: 'Une erreur est survenue: [' + request.responseText + ']'
                     };
                 }
                 console.log(resp.status + ': ' + resp.data);
@@ -54,7 +55,7 @@
             _progress.style.width = Math.ceil(e.loaded / e.total) * 100 + '%';
         }, false);
 
-        var url = '@Url.Action("Magic")';
+        var url = '@Url.Action("ReceptionImage")';
         request.open('POST', url);
         request.send(data);
     }
