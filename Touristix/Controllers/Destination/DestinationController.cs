@@ -29,6 +29,18 @@ namespace Touristix.Controllers
                 ListePays.Add(new SelectListItem { Text = strPays, Value = strPays });
             }
 
+            /*IQueryable<String> SelectVilles = (from m in db.Destinations select m.Ville).Distinct().OrderBy(Ville => Ville);
+
+            List<SelectListItem> ListeVilles = new List<SelectListItem>(SelectPays.Count());
+
+            ListeVilles.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (string strVille in SelectVilles)
+            {
+                ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
+            }*/
+
+
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
 
