@@ -1,4 +1,4 @@
-﻿@model Tuple<Touristix.Models.DestinationModel[], object>
+﻿@model Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>
 
 @{
     ViewBag.Title = "Index";
@@ -45,8 +45,8 @@
     @using (Html.BeginForm("Index", "Destination", FormMethod.Get))
     {
         <p> Nom: @Html.TextBox("DestinationNom") <br />
-        
-        Pays: @Html.TextBox("DestinationPays") <br />
+
+        Pays: @Html.DropDownList("DestinationPays", Model.Item3) <br />
         
         Région: @Html.TextBox("DestinationRegion") <br />
         
@@ -121,8 +121,8 @@
                 </ul>
                 break;
     }
-    
-    if(NbDestination == 0)
+
+    if (NbDestination == 0)
     {
         <p><b>Aucun résultat trouvé</b></p>
     }

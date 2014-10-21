@@ -18,6 +18,17 @@ namespace Touristix.Controllers
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
                                                         select m;
 
+            IQueryable<String> SelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays=>Pays);
+
+            List<SelectListItem> ListePays = new List<SelectListItem>(SelectPays.Count());
+
+            ListePays.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (string strPays in SelectPays)
+            {
+                ListePays.Add(new SelectListItem { Text = strPays, Value = strPays });
+            }
+
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
 
@@ -51,7 +62,7 @@ namespace Touristix.Controllers
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], object>(Array5DerniereDestination, DestinationRecu));
+            return View(new Tuple<DestinationModel[], object, List<SelectListItem>>(Array5DerniereDestination, DestinationRecu, ListePays));
         }
 
         [Authorize(Roles = "admin")]
