@@ -35,6 +35,7 @@
                 @RenderBody()
             </div>
             <div class="span3">
+                @RenderSection("Map", required: false)
             </div>
         </div>
         @Scripts.Render("~/bundles/jquery")
