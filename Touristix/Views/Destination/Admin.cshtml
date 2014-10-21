@@ -113,7 +113,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nom)
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Nom).ToString(), "InformationActivite", new { id = item.Id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Lieu)
