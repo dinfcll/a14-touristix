@@ -35,7 +35,7 @@
          @Html.DisplayName("Commentaires")
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.commentaires)
+        @Html.TextAreaFor(model => model.commentaires, new { @readonly = true, style = "width: 675px; height:80px;" })
     </div>
 </fieldset>
 @using (Html.BeginForm()) {
