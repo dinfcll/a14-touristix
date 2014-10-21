@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
+using System.IO;
 
 namespace Touristix.Controllers
 {
@@ -61,6 +62,13 @@ namespace Touristix.Controllers
             NouvelleList.ListDestinationModel = db.Destinations.ToList();
             NouvelleList.ListBatimentModel = db.Batiments.ToList();
             NouvelleList.ListActiviteModel = db.Activites.ToList();
+            string[] ArrayDestinationImage = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
+            NouvelleList.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
+            for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
+            {
+                NouvelleList.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
+            }
+            NouvelleList.ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
             return View(NouvelleList);
         }
 
