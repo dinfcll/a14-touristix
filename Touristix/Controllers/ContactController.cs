@@ -25,14 +25,14 @@ namespace Touristix.Controllers
             ViewData["Verif"] = "";
             if (ModelState.IsValid)
             {
-                //if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
-               // {
+                if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
+                {
                     Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
                     ViewData["Verif"] = "";
                     return RedirectToAction("Index", "Accueil");
-               // }
-               // ViewData["Verif"] = "Erreur";                
+                }
+                ViewData["Verif"] = "Erreur";                
             }            
             return View();
 
