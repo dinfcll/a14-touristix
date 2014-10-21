@@ -64,6 +64,7 @@
 <div id="Liste Destination">
 @{
     int Trier = Convert.ToInt32(Request.Params.Get("Trier"));
+    int NbDestination = 0;
     switch (Trier)
     {
         case 0:
@@ -74,7 +75,8 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>  
+                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>
+                    NbDestination++;
                 }
                 </ul>
             }
@@ -87,7 +89,8 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@item.Region, "InformationDestination", new { id = item.Id })</li>  
+                    <li>@Html.ActionLink(@item.Region, "InformationDestination", new { id = item.Id })</li>
+                    NbDestination++;
                 }
                 </ul>
             }
@@ -100,7 +103,8 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@item.Ville, "InformationDestination", new { id = item.Id })</li>  
+                    <li>@Html.ActionLink(@item.Ville, "InformationDestination", new { id = item.Id })</li>
+                    NbDestination++;
                 }
                 </ul>
             }
@@ -111,10 +115,16 @@
                 <ul>
                 @foreach (var item in DestinationParOrdre)
                 {
-                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>  
+                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>
+                    NbDestination++;
                 }
                 </ul>
                 break;
+    }
+    
+    if(NbDestination == 0)
+    {
+        <p><b>Aucun résultat trouvé</b></p>
     }
 }
 
