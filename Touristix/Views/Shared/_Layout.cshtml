@@ -32,6 +32,10 @@
             </div>
             <div class="span6">
                 @RenderSection("featured", required: false)
+                @if (TempData["notice"] != null)
+                {
+                    <h3>@TempData["notice"]</h3>
+                }
                 @RenderBody()
             </div>
             <div class="span3">
