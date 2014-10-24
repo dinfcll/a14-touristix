@@ -6,6 +6,9 @@
 @Styles.Render("~/Content/css/Custom")
 <h2>Index</h2>
 @section scripts {
+
+    <script type="text/javascript" src="/Scripts/listVilleDestination.js"></script>
+
     <script type="text/javascript">
         function MouseOverImage(Image, Nom, Apercu) {
             document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
@@ -46,9 +49,12 @@
     {
         <p> Nom: @Html.TextBox("DestinationNom") <br />
 
-        Pays: @Html.DropDownList("DestinationPays", Model.Item3) <br />
+        Pays: @Html.DropDownList("DestinationPays", Model.Item3,
+            new { onchange = "ObtenirListeVilles(this)" }) <br />
         
-        Ville: @Html.DropDownList("DestinationVille", Model.Item3) <br />
+        
+        <!--Ville: Html.DropDownList("DestinationVille", Model.Item3,
+            new { id = "ddlVilles"}) <br />-->
 
         Région: @Html.TextBox("DestinationRegion") <br />
         

@@ -13,7 +13,7 @@ namespace Touristix.Controllers
     {
         private DestinationDBContext db = new DestinationDBContext();
 
-        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "", int Trier = 0)
+        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationVille = "", string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
                                                         select m;
@@ -29,23 +29,33 @@ namespace Touristix.Controllers
                 ListePays.Add(new SelectListItem { Text = strPays, Value = strPays });
             }
 
-            /*IQueryable<String> SelectVilles = (from m in db.Destinations select m.Ville).Distinct().OrderBy(Ville => Ville);
+            /*List<KeyValuePair<string, List<SelectListItem>>> ListeVillesSelonPays = new List<KeyValuePair<string, List<SelectListItem>>>();
 
-            List<SelectListItem> ListeVilles = new List<SelectListItem>(SelectPays.Count());
 
-            ListeVilles.Add(new SelectListItem { Text = "", Value = "" });
-
-            foreach (string strVille in SelectVilles)
+            for (int i = 0; i < ListePays.Count; i++)
             {
-                ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
+                string strPays = ListePays[i].ToString();
+                IQueryable<String> SelectVilles = (from m in db.Destinations where m.Pays == strPays select m.Ville).Distinct().OrderBy(Ville => Ville);
+                List<SelectListItem> ListeVilles = new List<SelectListItem>(SelectPays.Count());
+
+                ListeVilles.Add(new SelectListItem { Text = "", Value = "" });
+
+                foreach (string strVille in SelectVilles)
+                {
+                    ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
+                }
+
+                ListeVillesSelonPays.Add(new KeyValuePair<string, List<SelectListItem>>(strPays, ListeVilles));
             }*/
-
-
+            
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
 
             if (!string.IsNullOrEmpty(DestinationPays))
                 Destinations = Destinations.Where(s => s.Pays.Contains(DestinationPays));
+
+            if (!string.IsNullOrEmpty(DestinationVille))
+                Destinations = Destinations.Where(s => s.Pays.Contains(DestinationVille));
 
             if (!string.IsNullOrEmpty(DestinationRegion))
                 Destinations = Destinations.Where(s => s.Region.Contains(DestinationRegion));
@@ -158,6 +168,22 @@ namespace Touristix.Controllers
             ActiviteModel Activite = db.Activites.Find(Convert.ToInt32(Id));
 
             return Json(Activite);
+        }
+
+        public JsonResult ObtenirVille(string Id, string strPays)
+        {
+
+            IQueryable<String> SelectVilles = (from m in db.Destinations where m.Pays == strPays select m.Ville).Distinct().OrderBy(Ville => Ville);
+            List<SelectListItem> ListeVilles = new List<SelectListItem>(SelectVilles.Count());
+
+            ListeVilles.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (string strVille in SelectVilles)
+            {
+                ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
+            }
+
+            return Json(ListeVilles);
         }
 
         protected override void Dispose(bool disposing)
