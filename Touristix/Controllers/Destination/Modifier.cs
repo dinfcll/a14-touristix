@@ -42,6 +42,12 @@ namespace Touristix.Controllers
         public ActionResult ModifierBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
+
+            if (BatimentModelActif.URL.StartsWith("www."))
+            {
+                BatimentModelActif.URL.Insert(0, "http://");
+            }
+
             if (BatimentModelActif == null)
             {
                 return HttpNotFound();
