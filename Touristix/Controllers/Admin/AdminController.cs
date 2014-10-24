@@ -26,7 +26,9 @@ namespace Touristix.Controllers
                                        Server.MapPath("~/Images/Destinations/"), System.IO.Path.GetFileName(Image.FileName));
 
                 if (System.IO.File.Exists(CheminComplet))
+                {
                     return Json("Le téléversement a échoué");
+                }
 
                 Image.SaveAs(CheminComplet);
             }
