@@ -1,10 +1,10 @@
-﻿@model Touristix.Models.DestinationModel
+﻿@model Tuple<Touristix.Models.DestinationModel, Touristix.Models.Temperature >
 
 @{
     ViewBag.Title = "Information";
 }
 
-<img src= "/Images/Destinations/@Model.Image" alt="Image" />
+<img src= "/Images/Destinations/@Model.Item1.Image" alt="Image" />
 
 <script type="text/javascript">
     function ObtenirBatiment(Id, NomObjet) {
@@ -76,24 +76,24 @@
 </script>
 
 <fieldset>
-    <h2>@Html.DisplayFor(model => model.Nom)</h2>
+    <h2>@Html.DisplayFor(model => model.Item1.Nom)</h2>
     <dl> 
-    <dt>@Html.DisplayNameFor(model => model.Pays)</dt>
-    <dd>@Html.DisplayFor(model => model.Pays)</dd>
-    <dt>@Html.DisplayNameFor(model => model.Region)</dt>
-    <dd>@Html.DisplayFor(model => model.Region)</dd>
-    <dt>@Html.DisplayNameFor(model => model.Ville)</dt>
-    <dd>@Html.DisplayFor(model => model.Ville)</dd>
-    <dt>@Html.DisplayNameFor(model => model.Apercu)</dt>
-    <dd>@Html.DisplayFor(model => model.Apercu)</dd>
-    <dt>@Html.DisplayNameFor(model => model.Details)</dt>
-    <dd>@Html.DisplayFor(model => model.Details)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Item1.Pays)</dt>
+    <dd>@Html.DisplayFor(model => model.Item1.Pays)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Item1.Region)</dt>
+    <dd>@Html.DisplayFor(model => model.Item1.Region)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Item1.Ville)</dt>
+    <dd>@Html.DisplayFor(model => model.Item1.Ville)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Item1.Apercu)</dt>
+    <dd>@Html.DisplayFor(model => model.Item1.Apercu)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Item1.Details)</dt>
+    <dd>@Html.DisplayFor(model => model.Item1.Details)</dd>
     <dt><legend>Bâtiments</legend></dt>
       
         @{
             string[] ArrayParametreBatiment = new string[1];
             ArrayParametreBatiment[0] = ";";
-            string[] ArrayBatiment = @Model.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+            string[] ArrayBatiment = @Model.Item1.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
         }
         @for (int B = 0; B < ArrayBatiment.Length; B++)
         {
@@ -108,7 +108,7 @@
         @{
             string[] ArrayParametreActivite = new string[1];
             ArrayParametreActivite[0] = ";";
-            string[] ArrayActivite = @Model.ActiviteIds.Split(ArrayParametreActivite, StringSplitOptions.RemoveEmptyEntries);
+            string[] ArrayActivite = @Model.Item1.ActiviteIds.Split(ArrayParametreActivite, StringSplitOptions.RemoveEmptyEntries);
         }
         @for (int B = 0; B < ArrayActivite.Length; B++)
         {
@@ -132,7 +132,7 @@
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-        new google.maps.Geocoder().geocode({ 'address': "@Model.Pays, @Model.Region, @Model.Ville, @Model.Nom" }, function (results, status) {
+        new google.maps.Geocoder().geocode({ 'address': "@Model.Item1.Pays, @Model.Item1.Region, @Model.Item1.Ville, @Model.Item1.Nom" }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var marker = new google.maps.Marker({
                     map: map,
@@ -154,6 +154,21 @@
 @section Map {
 <div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;">
 }
+<br /><br />
+<h4>Météo</h4>
+<h5>Prévisions actuelles</h5>    
+    Pays: @Model.Item2.sys.country <br />
+    Température actuelle: @Model.Item2.main.temp<br/>  
+    Pression: @Model.Item2.main.pressure kPa <br />
+    Taux d'humidité: @Model.Item2.main.humidity % <br />
+    Vitesse du vent: @Model.Item2.wind.speed km/h<br/>
+    Direction du vent: @Model.Item2.wind.DirectionVent<br />
+    Temps actuel: @Model.Item2.weather[0].description
+    <img src ="@Model.Item2.weather[0].icon" alt="image manquant" /><br/>      
+    
+<h5>Tendances</h5>
+    Température minimale: @Model.Item2.main.temp_min<br/>
+    Température maximale: @Model.Item2.main.temp_max<br/> <br/> <br/> 
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
 </p>
