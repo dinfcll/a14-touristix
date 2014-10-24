@@ -1,25 +1,89 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<p>
+
+<style>
+.PopUp {
+    position: absolute;
+    left: 100px;
+    top: 300px;
+    width: 500px;
+    height: 200px;
+    visibility: hidden;
+    background-color: white;
+    border: 1px;
+    border-style: solid;
+}
+#Contenantprogressbar {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+#BoutonVoirImage{
+    position: absolute;
+    bottom: 0px;
+}
+#BoutonFermer{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+#LabelNomImage{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+#Aperçu{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 150px;
+    height 100px;
+    border: 1px;
+    border-style: solid;
+}
+</style>
+<form id="FileForm">
     Choisir image: <input type='file' id='Fichier' accept="image/*"> <input type='button' id='Envoyer' value='Envoyer'>
-</p>
-<div class="progress">
-  <div class="progress bar" role="progressbar" style="width: 10%;" id="Barre de progression">
-    0%
-  </div>
+<div class="PopUp" id="Boite de contenu">
+    <img id="Aperçu"/>
+    <div class="progress" id="Contenantprogressbar">
+      <div class="progress bar" role="progressbar" style="width: 10%; height=100%" id="Barre de progression">
+        0%
+      </div>
+    </div>
+    <a class="btn btn-default" id="BoutonVoirImage" href="">Voir Image</a>
+    <button class="btn btn-default" id="BoutonFermer">Fermer</button>
+    <label id="LabelNomImage">Nom image</label>
 </div>
+</form>
 
 <script>
-    var _submit = document.getElementById('Envoyer'),
+    var Envoyer = document.getElementById('Envoyer'),
     _file = document.getElementById('Fichier'),
-    _progress = document.getElementById('Barre de progression');
+    _progress = document.getElementById('Barre de progression'),
+    BoiteDeContenu = document.getElementById('Boite de contenu'),
+    BoutonVoirImage = document.getElementById('BoutonVoirImage'),
+    BoutonFermer = document.getElementById('BoutonFermer'),
+    Image = document.getElementById("Aperçu"),
+    NomImage = document.getElementById('LabelNomImage'),
+    FileForm = document.getElementById('FileForm');
 
-    var upload = function () {
+    var EnovyerImage = function () {
 
         if (_file.files.length === 0) {
             return;
         }
+
+        BoiteDeContenu.style.visibility = "visible";
+        Image.file = _file.files[0];
+        var reader = new FileReader();
+        reader.onload = (function (aImg) {
+            return function (e) {
+                aImg.src = e.target.result;
+            };
+        })(Image);
+        reader.readAsDataURL(_file.files[0]);
 
         var data = new FormData();
         data.append('SelectedFile', _file.files[0]);
@@ -31,25 +95,24 @@
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4) {
-                try {
-                    var resp = JSON.parse(xmlhttp.response);
-                } catch (e) {
-                    var resp = {
-                        status: 'error',
-                        data: 'Une erreur est survenue: [' + xmlhttp.responseText + ']'
-                    };
-                }
-                console.log(resp.status + ': ' + resp.data);
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                BoutonVoirImage.href = "Images/Destinations/" + _file.value;
+                NomImage.innerHTML = _file.value;
             }
         };
 
         xmlhttp.upload.addEventListener('progress', function (e) {
             var ProgressValue = Math.ceil(e.loaded / e.total) * 100;
             if (ProgressValue > 10) {
-                _progress.style.width = ProgressValue + '%';
-                _progress.innerHTML = ProgressValue + '%';
-            } 
+                if (ProgressValue < 100) {
+                    _progress.style.width = ProgressValue + '%';
+                    _progress.innerHTML = ProgressValue + '%';
+                }
+                else {
+                    _progress.style.width = '100%';
+                    _progress.innerHTML = "Téléversement terminé";
+                }
+            }
         }, false);
 
         var url = '@Url.Action("ReceptionImage")';
@@ -57,5 +120,11 @@
         xmlhttp.send(data);
     }
 
-    _submit.addEventListener('click', upload);
+    var Fermer = function () {
+        BoiteDeContenu.style.visibility = "hidden";
+        FileForm.reset();
+    }
+
+    Envoyer.addEventListener('click', EnovyerImage);
+    BoutonFermer.addEventListener('click', Fermer);
 </script>
