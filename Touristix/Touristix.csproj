@@ -174,7 +174,6 @@
     <Compile Include="Controllers\Destination\Créer.cs" />
     <Compile Include="Controllers\Destination\DestinationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MeteoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -307,10 +306,6 @@
     <Content Include="Views\Accueil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Meteo\MeteoForm.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Meteo\MeteoRecherche.cshtml" />
     <Content Include="Views\Destination\InformationBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>

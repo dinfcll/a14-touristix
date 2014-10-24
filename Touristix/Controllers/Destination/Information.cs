@@ -73,6 +73,7 @@ namespace Touristix.Controllers
                 indDegree = 0;
             }
             FormatterDirectionVent(indDegree, temperature.wind);
+            DescAnglaisaFrancais(temperature.weather[0]);
 
         }
 
@@ -80,6 +81,106 @@ namespace Touristix.Controllers
         {
             string[] tVent = { "Nord-Est", "Est", "Sud-Est", "Sud", "Sud-Ouest", "Ouest", "Nord-Ouest", "Nord" };
             vent.DirectionVent = tVent[ind];
+        }
+
+        public void DescAnglaisaFrancais(Weather temp)
+        {
+            bool Trouve = false;
+            int i = 0;
+            string[,] tDescription =    {{"thunderstorm with light rain","Orages avec faible pluie"},
+                                         {"thunderstorm with rain","Orages avec pluie"},
+                                         {"thunderstorm with heavy rain","Orages avec forte pluie"},
+                                         {"light thunderstorm ","Faible orages"},
+                                         {"thunderstorm","Orages"},
+                                         {"heavy thunderstorm","Fortes orages"},
+                                         {"ragged thunderstorm","Orages violentes"},
+                                         {"thunderstorm with light drizzle","Orages avec faible bruine"},
+                                         {"thunderstorm with drizzle","Orages avec bruine"},
+                                         {"thunderstorm with heavy drizzle","Orages avec forte bruine"},
+                                         {"light intensity drizzle","Faible bruine"},
+                                         {"drizzle","Bruine"},
+                                         {"heavy intensity drizzle","Bruine de forte intensitée"},
+                                         {"light intensity drizzle rain","Bruine de faible intensitée mêlée de pluie"},
+                                         {"drizzle rain","Bruine mêlée de pluie"},
+                                         {"heavy intensity drizzle rain","Bruine de forte intensitée mêlée de pluie"},
+                                         {"shower rain and drizzle","Averses de pluie mêlée de bruine"},
+                                         {"heavy shower rain and drizzle","Fortes averses de pluie mêlée de bruine"},
+                                         {"shower drizzle","Averses de bruines"},
+                                         {"light rain","Faible pluie"},
+                                         {"moderate rain","Pluie modérée"},
+                                         {"heavy intensity rain","Pluie de forte intensitée"},
+                                         {"very heavy rain","Très forte pluie"},
+                                         {"extreme rain","Pluie extrème"},
+                                         {"freezing rain","Pluie verglaçante"},
+                                         {"light intensity shower rain","Averses de pluie de faible intensité"},
+                                         {"shower rain","Averses de pluie"},
+                                         {"heavy intensity shower rain","Averses de pluie de forte intensité"},
+                                         {"ragged shower rain","Averses de pluie violente"},
+                                         {"light snow","Faible neige"},
+                                         {"snow","Neige"},
+                                         {"heavy snow","Forte neige"},
+                                         {"sleet","Neige fondante"},
+                                         {"shower sleet","Averse de neige fondante"},
+                                         {"light rain and snow","Légère pluie mêlée de neige"},
+                                         {"rain and snow","Pluie mêlée de neige"},
+                                         {"light shower snow","Faibles averses de neige"},
+                                         {"shower snow","Averses de neige"},
+                                         {"heavy shower snow","Fortes averses de neige"},
+                                         {"mist","Brume"},
+                                         {"smoke","Fumée"},
+                                         {"haze","Brume"},
+                                         {"sand, dust whirls","Tempête de sable"},
+                                         {"fog","Brouillard"},
+                                         {"sand","Sable"},
+                                         {"dust","Poussière"},
+                                         {"volcanic ash","Éruption volcanique"},
+                                         {"squalls","Rafales"},
+                                         {"clear sky","Ciel dégagé"},
+                                         {"few clouds","Quelques nuages"},
+                                         {"scattered Nuages dispersés",""},
+                                         {"broken clouds","Partiellement nuageux"},
+                                         {"overcast clouds","Ciel couvert"},
+                                         {"tornado","Tornade"},
+                                         {"tropical storm","Tempête Tropical"},
+                                         {"hurricane","Ouragan"},
+                                         {"cold","Froid"},
+                                         {"hot","Chaud"},
+                                         {"windy","Venteux"},
+                                         {"hail","Grêle"},
+                                         {"calm ","Calme"},
+                                         {"light breeze","Légère Brise"},
+                                         {"gentle breeze","Brise"},
+                                         {"moderate breeze","Brise modérée"},
+                                         {"fresh breeze","Brise fraîche"},
+                                         {"strong breeze","Forte Brise"},
+                                         {"high wind, near gale","Très forts vents"},
+                                         {"gale","Tempête"},
+                                         {"severe gale","Tempête violente"},
+                                         {"storm","Tenpête"},
+                                         {"violent storm","Tempête violente"},
+                                         {"hurricane","Ouragan"}};
+           
+            while (!Trouve && i < 72)
+            {
+                if (tDescription[i, 0] == temp.description)
+                {
+                    Trouve = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+
+            if (Trouve)
+            {
+                temp.description = tDescription[i, 1];
+            }
+            else
+            {
+                temp.description = "Description non Disponible";
+
+            }
         }
     }
 }
