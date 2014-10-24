@@ -1,7 +1,7 @@
 ﻿var Envoyer = document.getElementById('Envoyer'),
 _file = document.getElementById('Fichier'),
 _progress = document.getElementById('Barre de progression'),
-BoiteDeContenu = document.getElementById('Boite de contenu'),
+BoiteDeContenu = document.getElementById('BoiteDeContenu'),
 BoutonVoirImage = document.getElementById('BoutonVoirImage'),
 BoutonFermer = document.getElementById('BoutonFermer'),
 Image = document.getElementById("Aperçu"),
@@ -15,7 +15,7 @@ var EnovyerImage = function () {
     }
 
     BoiteDeContenu.style.visibility = "visible";
-    $('#MonModal').modal('show');
+    $('#BoiteDeContenu').modal('show');
     Image.file = _file.files[0];
     var reader = new FileReader();
     reader.onload = (function (aImg) {

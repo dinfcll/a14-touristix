@@ -7,8 +7,7 @@
 <form id="FileForm">
     Choisir image: <input type='file' id='Fichier' accept="image/*"> <input type='button' class="btn btn-default" id='Envoyer' value='Envoyer'>
     
-    <div class="modal fade" id="MonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="PopUp" id="Boite de contenu">
+    <div class="modal fade" id="BoiteDeContenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <img id="Aperçu"/>
             <div class="progress" id="Contenantprogressbar">
               <div class="progress bar" role="progressbar" style="width: 10%; height=100%" id="Barre de progression">
@@ -19,7 +18,6 @@
             <button class="btn btn-default" data-dismiss="modal" id="BoutonFermer">Fermer</button>
             <label id="LabelNomImage">Nom image</label>
         </div>
-    </div>
 </form>
 
 <script type="text/javascript" src="/Scripts/Téléversement.js"></script>
