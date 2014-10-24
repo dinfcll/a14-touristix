@@ -2,12 +2,12 @@
     ViewBag.Title = "Index";
 }
 
-@Styles.Render("~/Content/css/Televersement.css")
+@Styles.Render("~/Content/css/Téléversement.css")
 
 <form id="FileForm">
-    Choisir image: <input type='file' id='Fichier' accept="image/*"> <input type='button' id='Envoyer' value='Envoyer' data-toggle="modal" data-target="#myModal">
+    Choisir image: <input type='file' id='Fichier' accept="image/*"> <input type='button' class="btn btn-default" id='Envoyer' value='Envoyer'>
     
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="MonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="PopUp" id="Boite de contenu">
             <img id="Aperçu"/>
             <div class="progress" id="Contenantprogressbar">

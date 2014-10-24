@@ -15,6 +15,7 @@ var EnovyerImage = function () {
     }
 
     BoiteDeContenu.style.visibility = "visible";
+    $('#MonModal').modal('show');
     Image.file = _file.files[0];
     var reader = new FileReader();
     reader.onload = (function (aImg) {
