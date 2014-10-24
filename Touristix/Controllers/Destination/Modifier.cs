@@ -43,11 +43,6 @@ namespace Touristix.Controllers
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
 
-            if (BatimentModelActif.URL.StartsWith("www."))
-            {
-                BatimentModelActif.URL.Insert(0, "http://");
-            }
-
             if (BatimentModelActif == null)
             {
                 return HttpNotFound();
@@ -61,6 +56,10 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (BatimentModelActif.URL.StartsWith("www."))
+                {
+                    BatimentModelActif.URL.Insert(0, "http://");
+                }
                 db.Entry(BatimentModelActif).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
