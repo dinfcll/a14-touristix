@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
 using System.Net.Mail;
+using System.Net.Mime;
 
 namespace Touristix.Controllers
 {
@@ -24,7 +25,7 @@ namespace Touristix.Controllers
             ViewData["Verif"] = "";
             if (ModelState.IsValid)
             {
-                if (InsererContact(modele.Nom, modele.Courriel, modele.Pass, modele.Categorie, modele.Commentaires))
+                if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
                 {
                     Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
@@ -34,9 +35,9 @@ namespace Touristix.Controllers
                 ViewData["Verif"] = "Erreur";
             }
             return View();
-
         }
-        private bool InsererContact(string nom, string courriel, string pass, string categorie, string commentaires)
+
+        private bool InsererContact(string nom, string courriel, string categorie, string commentaires)
         {
             bool valide = true;
             try
@@ -49,11 +50,11 @@ namespace Touristix.Controllers
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new System.Net.NetworkCredential(courriel, pass);
+                client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");
 
-                chaine = "Ceci est un message de: " + nom + "\n\n" + commentaires;
+                chaine = "Ceci est un message automatique de: " + nom + "\n\n" + commentaires;                
 
-                MailMessage message = new MailMessage(courriel, "e_casault@hotmail.com", categorie, chaine); 
+                MailMessage message = new MailMessage(courriel, "touristix21@gmail.com", categorie, chaine);                              
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
                 client.Send(message);
@@ -63,7 +64,6 @@ namespace Touristix.Controllers
                 valide = false;
             }
             return valide;
-
         }
 
         [HttpPost]

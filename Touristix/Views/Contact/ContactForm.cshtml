@@ -6,40 +6,33 @@
 <h2>Nous Contacter</h2><br /><br/>
 
 @using (Html.BeginForm())
-{
-
+{    
     if (ViewData["Verif"] == "Erreur")
     {
         <span class="ErrorMessage">Échec lors de l'envoi du courriel</span> <br />        
     }
     <br/> 
     
-    @Html.LabelFor(model => Model.Nom)<br/>        
-    @Html.TextBoxFor(Model => Model.Nom, null, new { style = "width:300px" })   <br />  
-    @Html.ValidationMessageFor(model => Model.Nom)<br /> 
+    @Html.LabelFor(model => Model.Nom)<br/>  
+    @Html.ValidationMessageFor(model => Model.Nom)<br />       
+    @Html.TextBoxFor(Model => Model.Nom, null, new { style = "width:300px" })   <br />      
     @Html.LabelFor(Model => Model.Courriel)<br/>
-    @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />
     @Html.ValidationMessageFor(Model => Model.Courriel)<br />
-    @Html.Label("Mot de passe")<br />
-    @Html.PasswordFor(Model => Model.Pass)<br />
-    @Html.ValidationMessageFor(Model => Model.Pass)<br />
-    
-    
-   
+    @Html.TextBoxFor(Model => Model.Courriel, null, new { style = "width:300px" })  <br /><br />      
     
    <div>
         @Html.Label("Catégorie")<br />
+        @Html.ValidationMessageFor(model => model.Categorie)<br />
         @Html.RadioButtonFor(model => model.Categorie, "Sugestion")Suggestion &nbsp;&nbsp;&nbsp;
         @Html.RadioButtonFor(model => model.Categorie, "Information")Information   &nbsp;&nbsp;&nbsp;
         @Html.RadioButtonFor(model => model.Categorie, "Commentaire")Commentaire   &nbsp;&nbsp;&nbsp;
         @Html.RadioButtonFor(model => model.Categorie, "Plainte")Plainte<br /> <br />
         @Html.ValidationMessageFor(model => model.Categorie)<br />
-   </div>   
-    
+   </div>  
     
     @Html.LabelFor(model => model.Commentaires)<br/>
-    @Html.TextAreaFor(model => model.Commentaires)<br/> <br />
     @Html.ValidationMessageFor(model => model.Commentaires)<br />
+    @Html.TextAreaFor(model => model.Commentaires, new { @class = "form-control", @rows = 4, @cols = 100, @maxlength = 400, })   <br />
     
     <button type ="submit">Soumettre le formulaire</button>
 }

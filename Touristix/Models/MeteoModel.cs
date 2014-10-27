@@ -5,12 +5,6 @@ using System.Web;
 
 namespace Touristix.Models
 {
-    public class MeteoModel
-    {
-        public Ville ville { get; set; }
-        public Temperature temperature{ get; set;}
-    }
-
     public class Ville
     {
         public string VilleCible { get; set; }
