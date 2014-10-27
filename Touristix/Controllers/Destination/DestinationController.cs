@@ -22,12 +22,7 @@ namespace Touristix.Controllers
 
             List<SelectListItem> ListePays = new List<SelectListItem>(SelectPays.Count());
 
-            ListePays.Add(new SelectListItem { Text = "", Value = "" });
-
-            foreach (string strPays in SelectPays)
-            {
-                ListePays.Add(new SelectListItem { Text = strPays, Value = strPays });
-            }
+            RemplirListe(ref ListePays, SelectPays);
 
             List<SelectListItem> ListeVilles = new List<SelectListItem>();
 
@@ -170,20 +165,20 @@ namespace Touristix.Controllers
 
             List<SelectListItem> ListeVilles = new List<SelectListItem>();
 
-            ListeVilles.Add(new SelectListItem { Text = "", Value = "" });
-
-            foreach (string strVille in SelectVilles)
-            {
-                ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
-            }
+            RemplirListe(ref ListeVilles, SelectVilles);
 
             return Json(ListeVilles, JsonRequestBehavior.AllowGet);
         }
 
-        /*private void RemplirListe(ref List<SelectListItem> ListeARemplir)
+        private void RemplirListe(ref List<SelectListItem> ListeARemplir, IQueryable<String> SelectElem)
         {
+            ListeARemplir.Add(new SelectListItem { Text = "", Value = "" });
 
-        }*/
+            foreach (string strElem in SelectElem)
+            {
+                ListeARemplir.Add(new SelectListItem { Text = strElem, Value = strElem });
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
