@@ -103,8 +103,6 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    string Texte = item.Nom;
-                    
                     <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
                     nbDestination++;
                 }
