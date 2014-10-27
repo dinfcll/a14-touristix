@@ -56,10 +56,8 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (BatimentModelActif.URL.StartsWith("www."))
-                {
-                    BatimentModelActif.URL.Insert(0, "http://");
-                }
+                MettreAJourBatiment(BatimentModelActif);
+
                 db.Entry(BatimentModelActif).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
