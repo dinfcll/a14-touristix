@@ -99,7 +99,7 @@
             IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
             foreach (var group in DestinationParPays)
             {
-                @Html.Encode(group.Key)
+                @group.Key
                 <ul>
                 @foreach (var item in group)
                 {
