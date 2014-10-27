@@ -7,8 +7,6 @@
 <h2>Index</h2>
 @section scripts {
 
-    <script type="text/javascript" src="~/Scripts/jquery-1.7.1.js"></script>
-
     <script type="text/javascript">
         function MouseOverImage(Image, Nom, Apercu) {
             document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
@@ -19,19 +17,24 @@
     </script>
 
     <script type="text/javascript">
-        $(function () {
-            $("#DestinationPays").change(function () {
-                var pays = $("#DestinationPays :selected").text();  //if user select the tournament 
+        $(document).ready(function () {
+
+            function fRemplirVilles() {
+                var pays = $("#DestinationPays :selected").text();
                 var url = 'Destination/ObtenirVille';
                 var data1 = { "strPays": pays };
-                $.post(url, data1, function (data) {    //ajax call
+                $.post(url, data1, function (data) {
                     var items = [];
                     for (var i = 0; i < data.length; i++) {
                         items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
-                    }                                         //all data from the team table push into array
+                    }
                     $("#DestinationVille").html(items.join(' '));
                 });
-            });                                            //array object bind to dropdown list
+            }
+
+            fRemplirVilles();
+
+            $("#DestinationPays").change(fRemplirVilles);
         });
     </script>
 }
