@@ -108,7 +108,7 @@ namespace Touristix.Controllers
         {
             if (BatimentModelActif.URL.StartsWith("www."))
             {
-                BatimentModelActif.URL.Insert(0, "http://");
+                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
             }
         }
 
