@@ -174,7 +174,6 @@
     <Compile Include="Controllers\Destination\Créer.cs" />
     <Compile Include="Controllers\Destination\DestinationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MeteoController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
