@@ -89,6 +89,16 @@ namespace Touristix.Controllers
             }
         }
 
+        public void MettreAJourBatiment(BatimentModel BatimentModelActif)
+        {
+            if (BatimentModelActif.URL.StartsWith("www."))
+            {
+                BatimentModelActif.URL.Insert(0, "http://");
+            }
+        }
+
+        #region Fonctions AJAX
+
         public JsonResult ObtenirListeBatiment(string Id)
         {
             int IdNumber = Convert.ToInt32(Id);
@@ -136,6 +146,8 @@ namespace Touristix.Controllers
 
             return Json(Activite);
         }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
