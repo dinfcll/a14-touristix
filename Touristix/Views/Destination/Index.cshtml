@@ -22,13 +22,13 @@
             function fRemplirVilles() {
                 var pays = $("#DestinationPays :selected").text();
                 var url = 'Destination/ObtenirVille';
-                var data1 = { "strPays": pays };
-                $.post(url, data1, function (data) {
-                    var items = [];
-                    for (var i = 0; i < data.length; i++) {
-                        items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                var donnees = { "strPays": pays };
+                $.post(url, donnees, function (reponse) {
+                    var liste = [];
+                    for (var i = 0; i < reponse.length; i++) {
+                        liste.push("<option value=" + reponse[i].Value + ">" + reponse[i].Text + "</option>");
                     }
-                    $("#DestinationVille").html(items.join(' '));
+                    $("#DestinationVille").html(liste.join(' '));
                 });
             }
 
