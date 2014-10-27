@@ -7,7 +7,7 @@
 <h2>Index</h2>
 @section scripts {
 
-    <script type="text/javascript" src="/Scripts/listVilleDestination.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.7.1.js"></script>
 
     <script type="text/javascript">
         function MouseOverImage(Image, Nom, Apercu) {
@@ -15,6 +15,24 @@
             document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Destinations/" + Image + "')";
             document.getElementById("ImagePrincipale").style.backgroundSize = "500px 300px";
         }
+
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#DestinationPays").change(function () {
+                var pays = $("#DestinationPays :selected").text();  //if user select the tournament 
+                var url = 'Destination/ObtenirVille';
+                var data1 = { "strPays": pays };
+                $.post(url, data1, function (data) {    //ajax call
+                    var items = [];
+                    for (var i = 0; i < data.length; i++) {
+                        items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                    }                                         //all data from the team table push into array
+                    $("#DestinationVille").html(items.join(' '));
+                });
+            });                                            //array object bind to dropdown list
+        });
     </script>
 }
 <div id="Intro">
@@ -49,12 +67,9 @@
     {
         <p> Nom: @Html.TextBox("DestinationNom") <br />
 
-        Pays: @Html.DropDownList("DestinationPays", Model.Item3,
-            new { onchange = "ObtenirListeVilles(this)" }) <br />
-        
-        
-        <!--Ville: Html.DropDownList("DestinationVille", Model.Item3,
-            new { id = "ddlVilles"}) <br />-->
+        Pays: @Html.DropDownList("DestinationPays", Model.Item3) <br />
+
+        Ville: @Html.DropDownList("DestinationVille", "") <br />
 
         Région: @Html.TextBox("DestinationRegion") <br />
         

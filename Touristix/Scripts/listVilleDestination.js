@@ -1,4 +1,4 @@
-﻿var ListVille = [];
+﻿//var ListVille = [];
 
 function ObtenirListeVilles(NomObjet) {
     var xmlhttp;
@@ -16,13 +16,13 @@ function ObtenirListeVilles(NomObjet) {
         }
     }
     var params = "Id=" + Id + "strPays=" + NomObjet.Value;
-    xmlhttp.open("POST", url);
+    xmlhttp.open("GET", url);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.setRequestHeader("Content-length", params.length);
     xmlhttp.setRequestHeader("Connection", "close");
     xmlhttp.send(params);
 
-    function Succes(response) {
+    function Success(response) {
         var arr = JSON.parse(response);
         var i;
         var out = "";
@@ -38,5 +38,6 @@ function ObtenirListeVilles(NomObjet) {
             }
         }
         document.getElementById("ddlVille").innerHTML = out;
+        document.getElementById("Intro").innerHTML = "allo";
     }
 }

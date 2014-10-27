@@ -29,6 +29,11 @@ namespace Touristix.Controllers
                 ListePays.Add(new SelectListItem { Text = strPays, Value = strPays });
             }
 
+            List<SelectListItem> ListeVilles = new List<SelectListItem>();
+
+
+            ViewBag.DestinationVille = ListeVilles;
+
             /*List<KeyValuePair<string, List<SelectListItem>>> ListeVillesSelonPays = new List<KeyValuePair<string, List<SelectListItem>>>();
 
 
@@ -55,7 +60,7 @@ namespace Touristix.Controllers
                 Destinations = Destinations.Where(s => s.Pays.Contains(DestinationPays));
 
             if (!string.IsNullOrEmpty(DestinationVille))
-                Destinations = Destinations.Where(s => s.Pays.Contains(DestinationVille));
+                Destinations = Destinations.Where(s => s.Ville.Contains(DestinationVille));
 
             if (!string.IsNullOrEmpty(DestinationRegion))
                 Destinations = Destinations.Where(s => s.Region.Contains(DestinationRegion));
@@ -170,7 +175,7 @@ namespace Touristix.Controllers
             return Json(Activite);
         }
 
-        public JsonResult ObtenirVille(string Id, string strPays)
+        /*public JsonResult ObtenirVille(string Id, string strPays)
         {
 
             IQueryable<String> SelectVilles = (from m in db.Destinations where m.Pays == strPays select m.Ville).Distinct().OrderBy(Ville => Ville);
@@ -183,8 +188,25 @@ namespace Touristix.Controllers
                 ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
             }
 
-            return Json(ListeVilles);
+            return Json(ListeVilles, JsonRequestBehavior.AllowGet);
+        }*/
+
+        public JsonResult ObtenirVille(string strPays)
+        {
+
+            IQueryable<String> SelectVilles = (from m in db.Destinations where m.Pays == strPays select m.Ville).Distinct().OrderBy(Ville => Ville);
+            List<SelectListItem> ListeVilles = new List<SelectListItem>(SelectVilles.Count());
+
+            ListeVilles.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (string strVille in SelectVilles)
+            {
+                ListeVilles.Add(new SelectListItem { Text = strVille, Value = strVille });
+            }
+
+            return Json(ListeVilles, JsonRequestBehavior.AllowGet);
         }
+
 
         protected override void Dispose(bool disposing)
         {
