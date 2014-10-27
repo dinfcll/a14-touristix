@@ -6,11 +6,10 @@
 
 <h2>Créer batiment</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(new { role="form" })) {
     @Html.ValidationSummary(true)
     
     <fieldset>
-        <legend>BatimentModel</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nom)
@@ -53,7 +52,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Créer" />
+            <input type="submit" value="Créer" class="btn btn-default" />
         </p>
     </fieldset>
 }

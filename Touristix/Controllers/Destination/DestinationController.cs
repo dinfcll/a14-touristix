@@ -68,7 +68,14 @@ namespace Touristix.Controllers
             {
                 NouvelleList.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
-            NouvelleList.ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+
+            string[] ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+            NouvelleList.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
+            for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleList.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
+            }
+
             return View(NouvelleList);
         }
 
