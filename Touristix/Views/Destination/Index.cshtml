@@ -94,6 +94,8 @@
     switch (trier)
     {
         case 0:
+        case 1:
+        case 2:
             IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
             foreach (var group in DestinationParPays)
             {
@@ -101,35 +103,20 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>
-                    nbDestination++;
-                }
-                </ul>
-            }
-            break;
-        case 1:
-            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParRegion = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
-            foreach (var group in DestinationParRegion)
-            {
-                @Html.Encode(group.Key)
-                <ul>
-                @foreach (var item in group)
-                {
-                    <li>@Html.ActionLink(@item.Region, "InformationDestination", new { id = item.Id })</li>
-                    nbDestination++;
-                }
-                </ul>
-            }
-            break;
-        case 2:
-            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParVille = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
-            foreach (var group in DestinationParVille)
-            {
-                @Html.Encode(group.Key)
-                <ul>
-                @foreach (var item in group)
-                {
-                    <li>@Html.ActionLink(@item.Ville, "InformationDestination", new { id = item.Id })</li>
+                    string Texte = "";
+                    if (trier == 0)
+                    {
+                        Texte = item.Nom;
+                    }
+                    else if (trier == 1)
+                    {
+                        Texte = item.Region;
+                    }
+                    else if (trier == 2)
+                    {
+                        Texte = item.Ville;
+                    }
+                    <li>@Html.ActionLink(Texte, "InformationDestination", new { id = item.Id })</li>
                     nbDestination++;
                 }
                 </ul>
