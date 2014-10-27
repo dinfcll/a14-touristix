@@ -14,16 +14,30 @@ namespace Touristix.Controllers
     {
         private DestinationDBContext db = new DestinationDBContext();
 
-        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "", int Trier = 0)
+        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationVille = "",
+                                    string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
                                                         select m;
 
+            var SelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays=>Pays);
+
+            var ListePays = new List<SelectListItem>(SelectPays.Count());
+
+            RemplirListe(ref ListePays, SelectPays);
+
+            var ListeVilles = new List<SelectListItem>();
+
+            ViewBag.DestinationVille = ListeVilles;
+            
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
 
             if (!string.IsNullOrEmpty(DestinationPays))
                 Destinations = Destinations.Where(s => s.Pays.Contains(DestinationPays));
+
+            if (!string.IsNullOrEmpty(DestinationVille))
+                Destinations = Destinations.Where(s => s.Ville.Contains(DestinationVille));
 
             if (!string.IsNullOrEmpty(DestinationRegion))
                 Destinations = Destinations.Where(s => s.Region.Contains(DestinationRegion));
@@ -52,7 +66,7 @@ namespace Touristix.Controllers
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], object>(Array5DerniereDestination, DestinationRecu));
+            return View(new Tuple<DestinationModel[], object, List<SelectListItem>>(Array5DerniereDestination, DestinationRecu, ListePays));
         }
 
         [Authorize(Roles = "admin")]
@@ -162,7 +176,37 @@ namespace Touristix.Controllers
             return Json(Activite);
         }
 
+        public JsonResult ObtenirVille(string strPays)
+        {
+            IQueryable<String> SelectVilles;
+
+            if (strPays != "")
+            {
+                SelectVilles = (from m in db.Destinations where m.Pays == strPays select m.Ville).Distinct().OrderBy(Ville => Ville);
+            }
+            else
+            {
+                SelectVilles = (from m in db.Destinations select m.Ville).Distinct().OrderBy(Ville => Ville);
+            }
+
+            var ListeVilles = new List<SelectListItem>();
+
+            RemplirListe(ref ListeVilles, SelectVilles);
+
+            return Json(ListeVilles, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
+
+        private void RemplirListe(ref List<SelectListItem> ListeARemplir, IQueryable<String> SelectElem)
+        {
+            ListeARemplir.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (string strElem in SelectElem)
+            {
+                ListeARemplir.Add(new SelectListItem { Text = strElem, Value = strElem });
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
