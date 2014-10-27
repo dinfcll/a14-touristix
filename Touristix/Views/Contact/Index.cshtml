@@ -43,8 +43,8 @@
         <td>
             @Html.TextAreaFor(modelItem => item.commentaires, new { @readonly = true, style = "width: 675px; height:80px;" })
         </td>     
-        <td>           
-            @Html.ActionLink("Effacer", "Effacer", new { id=item.id })
+        <td> 
+            <a href="#" onclick ='MessageBox(@item.id, "/Contact/ConfirmationEffacer")'>Effacer</a>             
         </td>
     </tr>
 }

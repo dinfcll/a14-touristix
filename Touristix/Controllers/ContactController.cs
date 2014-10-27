@@ -25,13 +25,13 @@ namespace Touristix.Controllers
             ViewData["Verif"] = "";
             if (ModelState.IsValid)
             {
-                if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
-                {
+                //if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
+              //  {
                     Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
                     ViewData["Verif"] = "";
                     return RedirectToAction("Index", "Accueil");
-                }
+              //  }
                 ViewData["Verif"] = "Erreur";
             }
             return View();
@@ -84,27 +84,14 @@ namespace Touristix.Controllers
         {
             return View(db.Contacts.ToList());
         }
-
-        [Authorize(Roles = "admin")]
-        public ActionResult Effacer(int id = 0)
-        {
-            ContactDB contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        [Authorize(Roles = "admin")]
-        [HttpPost, ActionName("Effacer")]
-        [ValidateAntiForgeryToken]
-        public ActionResult ConfirmationEffacer(int id)
+     
+        [Authorize(Roles = "admin")] 
+        [HttpPost]
+        public void ConfirmationEffacer(int id)       
         {
             ContactDB contact = db.Contacts.Find(id);
             db.Contacts.Remove(contact);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            db.SaveChanges();            
         }
     }
 }
