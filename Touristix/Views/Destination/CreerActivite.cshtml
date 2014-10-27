@@ -4,13 +4,12 @@
     ViewBag.Title = "Créer activité";
 }
 
-<legend>Créer activité</legend>
+<h2>Créer activité</h2>
 
 @using (Html.BeginForm(new { role="form" })) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>DestinationModel</legend>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nom)

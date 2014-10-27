@@ -58,18 +58,25 @@ namespace Touristix.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Admin()
         {
-            AdministrationList NouvelleList = new AdministrationList();
-            NouvelleList.ListDestinationModel = db.Destinations.ToList();
-            NouvelleList.ListBatimentModel = db.Batiments.ToList();
-            NouvelleList.ListActiviteModel = db.Activites.ToList();
+            AdministrationList NouvelleListe = new AdministrationList();
+            NouvelleListe.ListDestinationModel = db.Destinations.ToList();
+            NouvelleListe.ListBatimentModel = db.Batiments.ToList();
+            NouvelleListe.ListActiviteModel = db.Activites.ToList();
             string[] ArrayDestinationImage = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
-            NouvelleList.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
+            NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
             for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
             {
-                NouvelleList.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
+                NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
-            NouvelleList.ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
-            return View(NouvelleList);
+
+            string[] ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+            NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
+            for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
+            }
+
+            return View(NouvelleListe);
         }
 
         public void MettreAJourDestination(DestinationModel DestinationModelActif)
@@ -101,7 +108,7 @@ namespace Touristix.Controllers
         {
             if (BatimentModelActif.URL.StartsWith("www."))
             {
-                BatimentModelActif.URL.Insert(0, "http://");
+                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
             }
         }
 

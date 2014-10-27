@@ -142,6 +142,11 @@
             <br />
         }
         <h3>Batiments</h3>
+        @foreach (var item in Model.ArrayBatimentImage)
+        {
+            @Html.ActionLink(item, "Batiments/" + item, "Images")
+            <br />
+        }
         <h3>Activités</h3>
     </div>
 </div>
