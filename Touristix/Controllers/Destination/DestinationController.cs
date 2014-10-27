@@ -176,7 +176,6 @@ namespace Touristix.Controllers
             return Json(Activite);
         }
 
-<<<<<<< HEAD
         public JsonResult ObtenirVille(string strPays)
         {
             IQueryable<String> SelectVilles;
@@ -197,6 +196,8 @@ namespace Touristix.Controllers
             return Json(ListeVilles, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
         private void RemplirListe(ref List<SelectListItem> ListeARemplir, IQueryable<String> SelectElem)
         {
             ListeARemplir.Add(new SelectListItem { Text = "", Value = "" });
@@ -206,9 +207,6 @@ namespace Touristix.Controllers
                 ListeARemplir.Add(new SelectListItem { Text = strElem, Value = strElem });
             }
         }
-=======
-        #endregion
->>>>>>> origin/master
 
         protected override void Dispose(bool disposing)
         {
