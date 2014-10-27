@@ -58,25 +58,25 @@ namespace Touristix.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Admin()
         {
-            AdministrationList NouvelleList = new AdministrationList();
-            NouvelleList.ListDestinationModel = db.Destinations.ToList();
-            NouvelleList.ListBatimentModel = db.Batiments.ToList();
-            NouvelleList.ListActiviteModel = db.Activites.ToList();
+            AdministrationList NouvelleListe = new AdministrationList();
+            NouvelleListe.ListDestinationModel = db.Destinations.ToList();
+            NouvelleListe.ListBatimentModel = db.Batiments.ToList();
+            NouvelleListe.ListActiviteModel = db.Activites.ToList();
             string[] ArrayDestinationImage = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
-            NouvelleList.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
+            NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
             for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
             {
-                NouvelleList.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
+                NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
 
             string[] ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
-            NouvelleList.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
+            NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
             for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
             {
-                NouvelleList.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
+                NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
 
-            return View(NouvelleList);
+            return View(NouvelleListe);
         }
 
         public void MettreAJourDestination(DestinationModel DestinationModelActif)
