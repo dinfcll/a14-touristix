@@ -103,20 +103,9 @@
                 <ul>
                 @foreach (var item in group)
                 {
-                    string Texte = "";
-                    if (trier == 0)
-                    {
-                        Texte = item.Nom;
-                    }
-                    else if (trier == 1)
-                    {
-                        Texte = item.Region;
-                    }
-                    else if (trier == 2)
-                    {
-                        Texte = item.Ville;
-                    }
-                    <li>@Html.ActionLink(Texte, "InformationDestination", new { id = item.Id })</li>
+                    string Texte = item.Nom;
+                    
+                    <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
                     nbDestination++;
                 }
                 </ul>
@@ -128,7 +117,7 @@
                 <ul>
                 @foreach (var item in DestinationParOrdre)
                 {
-                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
                     nbDestination++;
                 }
                 </ul>
