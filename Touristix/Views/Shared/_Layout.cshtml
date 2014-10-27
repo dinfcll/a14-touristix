@@ -20,8 +20,7 @@
                 <ul class="inline">
                     <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
                     <li>@Html.ActionLink("Destinations", "Index", "Destination")</li>
-                    <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>
-                    <li>@Html.ActionLink("Météo", "MeteoForm", "Meteo")</li>
+                    <li>@Html.ActionLink("Nous Contacter", "ContactForm", "Contact")</li>                    
                 </ul>
             </div>
         </div>
@@ -32,6 +31,10 @@
             </div>
             <div class="span6">
                 @RenderSection("featured", required: false)
+                @if (TempData["notice"] != null)
+                {
+                    <h3>@TempData["notice"]</h3>
+                }
                 @RenderBody()
             </div>
             <div class="span3">

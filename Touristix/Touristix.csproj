@@ -310,10 +310,6 @@
     <Content Include="Views\Accueil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Meteo\MeteoForm.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Meteo\MeteoRecherche.cshtml" />
     <Content Include="Views\Destination\InformationBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -344,7 +340,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>6230</DevelopmentServerPort>
+          <DevelopmentServerPort>4544</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
