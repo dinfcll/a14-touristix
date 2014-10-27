@@ -71,6 +71,9 @@ namespace Touristix.Models
         public List<DestinationModel> ListDestinationModel;
         public List<BatimentModel> ListBatimentModel;
         public List<ActiviteModel> ListActiviteModel;
+        public string[] ArrayDestinationImage;
+        public string[] ArrayBatimentImage;
+        public string[] ArrayActiviteImage;
     }
 
     public class DestinationDBContext : DbContext
