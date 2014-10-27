@@ -13,18 +13,19 @@ namespace Touristix.Controllers
     {
         private DestinationDBContext db = new DestinationDBContext();
 
-        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationVille = "", string DestinationRegion = "", int Trier = 0)
+        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationVille = "",
+                                    string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
                                                         select m;
 
-            IQueryable<String> SelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays=>Pays);
+            var SelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays=>Pays);
 
-            List<SelectListItem> ListePays = new List<SelectListItem>(SelectPays.Count());
+            var ListePays = new List<SelectListItem>(SelectPays.Count());
 
             RemplirListe(ref ListePays, SelectPays);
 
-            List<SelectListItem> ListeVilles = new List<SelectListItem>();
+            var ListeVilles = new List<SelectListItem>();
 
             ViewBag.DestinationVille = ListeVilles;
             
@@ -163,7 +164,7 @@ namespace Touristix.Controllers
                 SelectVilles = (from m in db.Destinations select m.Ville).Distinct().OrderBy(Ville => Ville);
             }
 
-            List<SelectListItem> ListeVilles = new List<SelectListItem>();
+            var ListeVilles = new List<SelectListItem>();
 
             RemplirListe(ref ListeVilles, SelectVilles);
 
