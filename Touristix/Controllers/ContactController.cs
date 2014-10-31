@@ -25,13 +25,13 @@ namespace Touristix.Controllers
             ViewData["Verif"] = "";
             if (ModelState.IsValid)
             {
-                //if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
-              //  {
+                if (InsererContact(modele.Nom, modele.Courriel, modele.Categorie, modele.Commentaires))
+                {
                     Create(modele);
                     TempData["notice"] = "Votre formulaire a été soumis";
                     ViewData["Verif"] = "";
                     return RedirectToAction("Index", "Accueil");
-              //  }
+                }
                 ViewData["Verif"] = "Erreur";
             }
             return View();
@@ -42,22 +42,35 @@ namespace Touristix.Controllers
             bool valide = true;
             try
             {
-                SmtpClient client = new SmtpClient();
-                string chaine;
-
+                SmtpClient client = new SmtpClient();              
                 client.Port = 587;
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");
+                client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");                            
 
-                chaine = "Ceci est un message automatique de: " + nom + "\n\n" + commentaires;                
+                MailMessage email = new MailMessage(courriel, "touristix21@gmail.com");
+                email.Subject = categorie;
+                email.BodyEncoding = System.Text.Encoding.UTF8;
+                email.IsBodyHtml = true;
+                email.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                
+                email.Body = "<html>"
+                + "<head>"
+	            + "<meta charset='utf-8' />"
+                + "<style>"
+                + "body {background-color:lightgray}"
+                + "h2 {color:blue}"
+                + "</style>"
+	            + "</head>"
+	            + "<body>"
+                +"<h2>Ceci est un message automatique de: "+nom+" </h2>"
+	            + "<p>"+commentaires+"</p>"
+	            + "</body>"
+	            + "</html>";
 
-                MailMessage message = new MailMessage(courriel, "touristix21@gmail.com", categorie, chaine);                              
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-                client.Send(message);
+                client.Send(email);
             }
             catch (Exception)
             {

@@ -274,9 +274,6 @@
     <Content Include="Views\Destination\ModifierDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\SupprimerDestination.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Destination\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -296,12 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\ModifierBatiment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Destination\SupprimerActivite.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Destination\SupprimerBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accueil\Index.cshtml" />
@@ -331,7 +322,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4544</DevelopmentServerPort>
+          <DevelopmentServerPort>3992</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
