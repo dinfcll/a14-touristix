@@ -21,6 +21,9 @@ namespace Touristix
                         "~/Content/bootstrap-responsive.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/Custom").Include("~/Content/CSS/ImageText.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ModifEffacer").Include(
+                        "~/Scripts/ModifEffacer.js"));
         }
     }
 }

@@ -40,24 +40,38 @@ namespace Touristix.Controllers
         private bool InsererContact(string nom, string courriel, string categorie, string commentaires)
         {
             bool valide = true;
+            const string mailto = "touristix21@gmail.com";
             try
             {
-                SmtpClient client = new SmtpClient();
-                string chaine;
-
+                SmtpClient client = new SmtpClient();                
                 client.Port = 587;
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-                client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");
+                client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");                            
 
-                chaine = "Ceci est un message automatique de: " + nom + "\n\n" + commentaires;                
+                MailMessage email = new MailMessage(courriel, mailto);
+                email.Subject = categorie;
+                email.BodyEncoding = System.Text.Encoding.UTF8;
+                email.IsBodyHtml = true;
+                email.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                
+                email.Body = "<html>"
+                + "<head>"
+	            + "<meta charset='utf-8' />"
+                + "<style>"
+                + "body {background-color:lightgray}"
+                + "h2 {color:blue}"
+                + "</style>"
+	            + "</head>"
+	            + "<body>"
+                +"<h2>Ceci est un message automatique de: "+nom+" </h2>"
+	            + "<p>"+commentaires+"</p>"
+	            + "</body>"
+	            + "</html>";
 
-                MailMessage message = new MailMessage(courriel, "touristix21@gmail.com", categorie, chaine);                              
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-                client.Send(message);
+                client.Send(email);
             }
             catch (Exception)
             {
@@ -84,27 +98,14 @@ namespace Touristix.Controllers
         {
             return View(db.Contacts.ToList());
         }
-
-        [Authorize(Roles = "admin")]
-        public ActionResult Effacer(int id = 0)
-        {
-            ContactDB contact = db.Contacts.Find(id);
-            if (contact == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contact);
-        }
-
-        [Authorize(Roles = "admin")]
-        [HttpPost, ActionName("Effacer")]
-        [ValidateAntiForgeryToken]
-        public ActionResult ConfirmationEffacer(int id)
+     
+        [Authorize(Roles = "admin")] 
+        [HttpPost]
+        public void ConfirmationEffacer(int id)       
         {
             ContactDB contact = db.Contacts.Find(id);
             db.Contacts.Remove(contact);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            db.SaveChanges();            
         }
     }
 }

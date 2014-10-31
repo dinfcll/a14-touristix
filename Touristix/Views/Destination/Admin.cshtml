@@ -52,7 +52,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
-                        @Html.ActionLink("Supprimer", "SupprimerDestination", new { id = item.Id })
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a>
                     </td>
                 </tr>
             }
@@ -89,7 +89,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.Id }) |
-                        @Html.ActionLink("Supprimer", "SupprimerBatiment", new { id = item.Id })
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerBatiment")'>Effacer</a>
                     </td>
                 </tr>
             }
@@ -126,7 +126,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierActivite", new { id = item.Id }) |
-                        @Html.ActionLink("Supprimer", "SupprimerActivite", new { id = item.Id })
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerActivite")'>Effacer</a>
                     </td>
                 </tr>
             }
