@@ -45,6 +45,8 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
+                MettreAJourBatiment(BatimentModelActif);
+
                 db.Batiments.Add(BatimentModelActif);
                 db.SaveChanges();
                 return RedirectToAction("admin");

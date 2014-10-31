@@ -6,54 +6,61 @@
 
 <h2>Créer batiment</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(new { role="form" })) {
     @Html.ValidationSummary(true)
-    
-    <fieldset>
-        <legend>BatimentModel</legend>
 
-        <div class="editor-label">
+    <fieldset>
+        
+        @Html.Hidden("DernierBatiment", (int)0)
+        @Html.Hidden("DerniereActivite", (int)0)
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Nom)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nom)
+            @Html.TextBoxFor(model => model.Nom, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez nom",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.URL)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.URL)
+            @Html.TextBoxFor(model => model.URL, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez URL",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.URL)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Image)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
+            @Html.TextBoxFor(model => model.Image, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez image",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Apercu)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Apercu)
+        
+        <div class="form-group">
+            Aperçu<br/>
+            @Html.TextAreaFor(model => model.Apercu, new { @class = "form-control", placeholder = "Entrez aperçu" })
             @Html.ValidationMessageFor(model => model.Apercu)
         </div>
-
-        <div class="editor-label">
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Details)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Details)
+            @Html.TextAreaFor(model => model.Details, new { @class = "form-control", placeholder = "Entrez détails" })
             @Html.ValidationMessageFor(model => model.Details)
         </div>
-
+        
         <p>
-            <input type="submit" value="Créer" />
+            <input type="submit" value="Créer" class="btn btn-default" />
         </p>
     </fieldset>
 }

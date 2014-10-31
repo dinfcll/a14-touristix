@@ -1,4 +1,4 @@
-﻿@model Tuple<Touristix.Models.DestinationModel[], object>
+﻿@model Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>
 
 @{
     ViewBag.Title = "Index";
@@ -6,12 +6,36 @@
 @Styles.Render("~/Content/css/Custom")
 <h2>Index</h2>
 @section scripts {
+
     <script type="text/javascript">
         function MouseOverImage(Image, Nom, Apercu) {
             document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
             document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Destinations/" + Image + "')";
             document.getElementById("ImagePrincipale").style.backgroundSize = "500px 300px";
         }
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function fRemplirVilles() {
+                var pays = $("#DestinationPays :selected").text();
+                var url = 'Destination/ObtenirVille';
+                var donnees = { "strPays": pays };
+                $.post(url, donnees, function (reponse) {
+                    var liste = [];
+                    for (var i = 0; i < reponse.length; i++) {
+                        liste.push("<option value=" + reponse[i].Value + ">" + reponse[i].Text + "</option>");
+                    }
+                    $("#DestinationVille").html(liste.join(' '));
+                });
+            }
+
+            fRemplirVilles();
+
+            $("#DestinationPays").change(fRemplirVilles);
+        });
     </script>
 }
 <div id="Intro">
@@ -45,9 +69,11 @@
     @using (Html.BeginForm("Index", "Destination", FormMethod.Get))
     {
         <p> Nom: @Html.TextBox("DestinationNom") <br />
-        
-        Pays: @Html.TextBox("DestinationPays") <br />
-        
+
+        Pays: @Html.DropDownList("DestinationPays", Model.Item3) <br />
+
+        Ville: @Html.DropDownList("DestinationVille", "") <br />
+
         Région: @Html.TextBox("DestinationRegion") <br />
         
         <input type="submit" value="Filtrer" /></p>
@@ -63,44 +89,22 @@
 
 <div id="Liste Destination">
 @{
-    int Trier = Convert.ToInt32(Request.Params.Get("Trier"));
-    switch (Trier)
+    int trier = Convert.ToInt32(Request.Params.Get("Trier"));
+    int nbDestination = 0;
+    switch (trier)
     {
         case 0:
+        case 1:
+        case 2:
             IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
             foreach (var group in DestinationParPays)
             {
-                @Html.Encode(group.Key)
+                @group.Key
                 <ul>
                 @foreach (var item in group)
                 {
-                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>  
-                }
-                </ul>
-            }
-            break;
-        case 1:
-            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParRegion = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
-            foreach (var group in DestinationParRegion)
-            {
-                @Html.Encode(group.Key)
-                <ul>
-                @foreach (var item in group)
-                {
-                    <li>@Html.ActionLink(@item.Region, "InformationDestination", new { id = item.Id })</li>  
-                }
-                </ul>
-            }
-            break;
-        case 2:
-            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParVille = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
-            foreach (var group in DestinationParVille)
-            {
-                @Html.Encode(group.Key)
-                <ul>
-                @foreach (var item in group)
-                {
-                    <li>@Html.ActionLink(@item.Ville, "InformationDestination", new { id = item.Id })</li>  
+                    <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
+                    nbDestination++;
                 }
                 </ul>
             }
@@ -111,10 +115,16 @@
                 <ul>
                 @foreach (var item in DestinationParOrdre)
                 {
-                    <li>@Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })</li>  
+                    <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
+                    nbDestination++;
                 }
                 </ul>
                 break;
+    }
+
+    if (nbDestination == 0)
+    {
+        <p><b>Aucun résultat trouvé</b></p>
     }
 }
 

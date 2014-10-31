@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
+using System.IO;
 
 namespace Touristix.Controllers
 {
@@ -13,16 +14,30 @@ namespace Touristix.Controllers
     {
         private DestinationDBContext db = new DestinationDBContext();
 
-        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationRegion = "", int Trier = 0)
+        public ActionResult Index(string DestinationNom = "", string DestinationPays = "", string DestinationVille = "",
+                                    string DestinationRegion = "", int Trier = 0)
         {
             IQueryable<DestinationModel> Destinations = from m in db.Destinations
                                                         select m;
 
+            var SelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays=>Pays);
+
+            var ListePays = new List<SelectListItem>(SelectPays.Count());
+
+            RemplirListe(ref ListePays, SelectPays);
+
+            var ListeVilles = new List<SelectListItem>();
+
+            ViewBag.DestinationVille = ListeVilles;
+            
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
 
             if (!string.IsNullOrEmpty(DestinationPays))
                 Destinations = Destinations.Where(s => s.Pays.Contains(DestinationPays));
+
+            if (!string.IsNullOrEmpty(DestinationVille))
+                Destinations = Destinations.Where(s => s.Ville.Contains(DestinationVille));
 
             if (!string.IsNullOrEmpty(DestinationRegion))
                 Destinations = Destinations.Where(s => s.Region.Contains(DestinationRegion));
@@ -51,17 +66,31 @@ namespace Touristix.Controllers
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], object>(Array5DerniereDestination, DestinationRecu));
+            return View(new Tuple<DestinationModel[], object, List<SelectListItem>>(Array5DerniereDestination, DestinationRecu, ListePays));
         }
 
         [Authorize(Roles = "admin")]
         public ActionResult Admin()
         {
-            AdministrationList NouvelleList = new AdministrationList();
-            NouvelleList.ListDestinationModel = db.Destinations.ToList();
-            NouvelleList.ListBatimentModel = db.Batiments.ToList();
-            NouvelleList.ListActiviteModel = db.Activites.ToList();
-            return View(NouvelleList);
+            AdministrationList NouvelleListe = new AdministrationList();
+            NouvelleListe.ListDestinationModel = db.Destinations.ToList();
+            NouvelleListe.ListBatimentModel = db.Batiments.ToList();
+            NouvelleListe.ListActiviteModel = db.Activites.ToList();
+            string[] ArrayDestinationImage = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
+            NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
+            for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
+            {
+                NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
+            }
+
+            string[] ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+            NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
+            for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
+            }
+
+            return View(NouvelleListe);
         }
 
         public void MettreAJourDestination(DestinationModel DestinationModelActif)
@@ -88,6 +117,16 @@ namespace Touristix.Controllers
                 }
             }
         }
+
+        public void MettreAJourBatiment(BatimentModel BatimentModelActif)
+        {
+            if (BatimentModelActif.URL.StartsWith("www."))
+            {
+                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
+            }
+        }
+
+        #region Fonctions AJAX
 
         public JsonResult ObtenirListeBatiment(string Id)
         {
@@ -135,6 +174,38 @@ namespace Touristix.Controllers
             ActiviteModel Activite = db.Activites.Find(Convert.ToInt32(Id));
 
             return Json(Activite);
+        }
+
+        public JsonResult ObtenirVille(string strPays)
+        {
+            IQueryable<String> SelectVilles;
+
+            if (strPays != "")
+            {
+                SelectVilles = (from m in db.Destinations where m.Pays == strPays select m.Ville).Distinct().OrderBy(Ville => Ville);
+            }
+            else
+            {
+                SelectVilles = (from m in db.Destinations select m.Ville).Distinct().OrderBy(Ville => Ville);
+            }
+
+            var ListeVilles = new List<SelectListItem>();
+
+            RemplirListe(ref ListeVilles, SelectVilles);
+
+            return Json(ListeVilles, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        private void RemplirListe(ref List<SelectListItem> ListeARemplir, IQueryable<String> SelectElem)
+        {
+            ListeARemplir.Add(new SelectListItem { Text = "", Value = "" });
+
+            foreach (string strElem in SelectElem)
+            {
+                ListeARemplir.Add(new SelectListItem { Text = strElem, Value = strElem });
+            }
         }
 
         protected override void Dispose(bool disposing)

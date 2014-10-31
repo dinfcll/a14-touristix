@@ -23,60 +23,60 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nom)
             @Html.TextBoxFor(model => model.Nom, new
-       {
-           @class = "form-control",
-           placeholder = "Entrez nom",
-           type = "text"
-       })
+            {
+                @class = "form-control",
+                placeholder = "Entrez nom",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Ville)
             @Html.TextBoxFor(model => model.Ville, new
-       {
-           @class = "form-control",
-           placeholder = "Entrez ville",
-           type = "text"
-       })
+            {
+                @class = "form-control",
+                placeholder = "Entrez ville",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Ville)
         </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Region)
             @Html.TextBoxFor(model => model.Region, new
-       {
-           @class = "form-control",
-           placeholder = "Entrez region",
-           type = "text"
-       })
+            {
+                @class = "form-control",
+                placeholder = "Entrez region",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Region)
         </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Pays)
             @Html.TextBoxFor(model => model.Pays, new
-       {
-           @class = "form-control",
-           placeholder = "Entrez pays",
-           type = "text"
-       })
+            {
+                @class = "form-control",
+                placeholder = "Entrez pays",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Pays)
         </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Image)
             @Html.TextBoxFor(model => model.Image, new
-       {
-           @class = "form-control",
-           placeholder = "Entrez image",
-           type = "text"
-       })
+            {
+                @class = "form-control",
+                placeholder = "Entrez image",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Apercu)
+            Aperçu<br/>
             @Html.TextAreaFor(model => model.Apercu, new { @class = "form-control", placeholder = "Entrez aperçu" })
             @Html.ValidationMessageFor(model => model.Apercu)
         </div>
@@ -88,7 +88,7 @@
         </div>
         
         <div id="Batiments">
-            <legend>Bâtiements</legend>
+            <legend>Bâtiments</legend>
                 @{
                 string[] ArrayParametreBatiment = new string[1];
                 ArrayParametreBatiment[0] = ";";

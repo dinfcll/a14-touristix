@@ -6,124 +6,147 @@
 
 <h2>Administration</h2>
 
-<div id="Destinations">
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#Données" role="tab" data-toggle="tab">Données</a></li>
+  <li><a href="#Images" role="tab" data-toggle="tab">Images</a></li>
+</ul>
 
-    <h3>Destinations</h3>
-    <p>
-    @Html.ActionLink("Créer nouvelle destination", "CreerDestination")
-    </p>
+<div class="tab-content">
+    <div class="tab-pane active" id="Données">
+        <div id="ListeDestinations">
+            <h3>Destinations</h3>
+            <p>
+            @Html.ActionLink("Créer nouvelle destination", "CreerDestination")
+            </p>
 
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayText("Nom")
-            </th>
-            <th>
-                @Html.DisplayText("Pays")
-            </th>
-            <th>
-                @Html.DisplayText("Region")
-            </th>
-            <th>
-                @Html.DisplayText("Ville")
-            </th>
-            <th></th>
-        </tr>
-    @foreach (var item in Model.ListDestinationModel)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ville)
-            </td>
-            <td>
-                @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
-                <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a>
-            </td>
-        </tr>
-    }
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayText("Nom")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Pays")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Region")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Ville")
+                    </th>
+                    <th></th>
+                </tr>
+            @foreach (var item in Model.ListDestinationModel)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(@item.Nom, "InformationDestination", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ville)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a>
+                    </td>
+                </tr>
+            }
 
-    </table>
-</div>
+            </table>
+        </div>
 
-<div id="Batiments">
+        <div id="ListeBatiments">
 
-    <h3>Batiments</h3>
-    <p>
-    @Html.ActionLink("Créer nouveau batiment", "CreerBatiment")
-    </p>
+            <h3>Batiments</h3>
+            <p>
+            @Html.ActionLink("Créer nouveau batiment", "CreerBatiment")
+            </p>
 
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayText("Nom")
-            </th>
-            <th>
-                @Html.DisplayText("URL")
-            </th>
-            <th></th>
-        </tr>
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayText("Nom")
+                    </th>
+                    <th>
+                        @Html.DisplayText("URL")
+                    </th>
+                    <th></th>
+                </tr>
 
-    @foreach (var item in Model.ListBatimentModel)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(@item.Nom, "InformationBatiment", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.URL)
-            </td>
-            <td>
-                @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.Id }) |
-                <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerBatiment")'>Effacer</a>
-            </td>
-        </tr>
-    }
+            @foreach (var item in Model.ListBatimentModel)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(@item.Nom, "InformationBatiment", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.URL)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.Id }) |
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerBatiment")'>Effacer</a>
+                    </td>
+                </tr>
+            }
 
-    </table>
-</div>
+            </table>
+        </div>
 
-<div id="Activités">
+        <div id="ListeActivités">
 
-    <h3>Activités</h3>
-    <p>
-    @Html.ActionLink("Créer nouvelle activités", "CreerActivite")
-    </p>
+            <h3>Activités</h3>
+            <p>
+            @Html.ActionLink("Créer nouvelle activités", "CreerActivite")
+            </p>
 
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayText("Nom")
-            </th>
-            <th>
-                @Html.DisplayText("URL")
-            </th>
-            <th></th>
-        </tr>
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayText("Nom")
+                    </th>
+                    <th>
+                        @Html.DisplayText("URL")
+                    </th>
+                    <th></th>
+                </tr>
 
-    @foreach (var item in Model.ListActiviteModel)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Nom).ToString(), "InformationActivite", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lieu)
-            </td>
-            <td>
-                @Html.ActionLink("Modifier", "ModifierActivite", new { id = item.Id }) |
-                <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerActivite")'>Effacer</a>
-            </td>
-        </tr>
-    }
+            @foreach (var item in Model.ListActiviteModel)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(@Html.DisplayFor(modelItem => item.Nom).ToString(), "InformationActivite", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lieu)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modifier", "ModifierActivite", new { id = item.Id }) |
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerActivite")'>Effacer</a>
+                    </td>
+                </tr>
+            }
 
-    </table>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane" id="Images">
+        <h3>Destinations</h3>
+        @foreach (var item in Model.ArrayDestinationImage)
+        {
+            @Html.ActionLink(item, "Destinations/" + item, "Images")
+            <br />
+        }
+        <h3>Batiments</h3>
+        @foreach (var item in Model.ArrayBatimentImage)
+        {
+            @Html.ActionLink(item, "Batiments/" + item, "Images")
+            <br />
+        }
+        <h3>Activités</h3>
+    </div>
 </div>

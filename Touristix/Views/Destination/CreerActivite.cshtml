@@ -4,37 +4,48 @@
     ViewBag.Title = "Créer activité";
 }
 
-<legend>Créer activité</legend>
+<h2>Créer activité</h2>
 
 @using (Html.BeginForm(new { role="form" })) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>DestinationModel</legend>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nom)
-            @Html.TextBoxFor(model => model.Nom, new { @class = "form-control",
-                placeholder = "Entrez nom", type = "text" })
+            @Html.TextBoxFor(model => model.Nom, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez nom",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Lieu)
-            @Html.TextBoxFor(model => model.Lieu, new { @class = "form-control",
-                placeholder = "Entrez lieu", type = "text" })
+            @Html.TextBoxFor(model => model.Lieu, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez lieu",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Lieu)
         </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Image)
-            @Html.TextBoxFor(model => model.Image, new { @class = "form-control",
-                placeholder = "Entrez image", type = "text" })
+            @Html.TextBoxFor(model => model.Image, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez image",
+                type = "text"
+            })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Apercu)
+            Aperçu<br/>
             @Html.TextAreaFor(model => model.Apercu, new { @class = "form-control", placeholder = "Entrez aperçu" })
             @Html.ValidationMessageFor(model => model.Apercu)
         </div>

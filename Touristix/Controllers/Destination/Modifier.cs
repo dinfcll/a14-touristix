@@ -42,6 +42,7 @@ namespace Touristix.Controllers
         public ActionResult ModifierBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
+
             if (BatimentModelActif == null)
             {
                 return HttpNotFound();
@@ -55,6 +56,8 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
+                MettreAJourBatiment(BatimentModelActif);
+
                 db.Entry(BatimentModelActif).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
