@@ -40,9 +40,10 @@ namespace Touristix.Controllers
         private bool InsererContact(string nom, string courriel, string categorie, string commentaires)
         {
             bool valide = true;
+            const string mailto = "touristix21@gmail.com";
             try
             {
-                SmtpClient client = new SmtpClient();              
+                SmtpClient client = new SmtpClient();                
                 client.Port = 587;
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
@@ -50,7 +51,7 @@ namespace Touristix.Controllers
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("touristix21@gmail.com", "qazedctgb");                            
 
-                MailMessage email = new MailMessage(courriel, "touristix21@gmail.com");
+                MailMessage email = new MailMessage(courriel, mailto);
                 email.Subject = categorie;
                 email.BodyEncoding = System.Text.Encoding.UTF8;
                 email.IsBodyHtml = true;
