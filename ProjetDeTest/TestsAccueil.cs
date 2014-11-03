@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Touristix.Controllers;
 using System.Web.Mvc;
 using Touristix.Models;
+using Rhino.Mocks;
 
 namespace ProjetDeTest
 {
