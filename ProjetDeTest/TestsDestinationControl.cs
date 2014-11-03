@@ -10,12 +10,12 @@ using Touristix.Models;
 namespace ProjetDeTest
 {
     [TestClass]
-    public class UniteDeTests
+    class TestsDestinationControl
     {
         [TestMethod]
-        public void TestOuvrirAccueilControlleur()
+        public void TestOuvrirDestinationControlleur()
         {
-            var controller = new AccueilController();
+            var controller = new DestinationController();
             var result = controller.Index() as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }

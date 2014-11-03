@@ -34,7 +34,7 @@
     }
 
     function RafraichirImage() {
-        document.getElementById("ImageActive").style.backgroundImage = "url(" + Repertoire + Images[NombreAleatoire()] + ")";
+        document.getElementById("ImageActive").style.backgroundImage = "url('" + Repertoire + Images[NombreAleatoire()] + "')";
     }
 
     setInterval(function () { RafraichirImage() }, 10000);

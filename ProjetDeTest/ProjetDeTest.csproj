@@ -47,8 +47,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestsDestinationControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UniteDeTests.cs" />
+    <Compile Include="TestsAccueil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Touristix\Touristix.csproj">
