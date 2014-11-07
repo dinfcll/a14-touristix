@@ -109,28 +109,28 @@ namespace Touristix.Controllers
             contact.contacts = new List<ContactDB>();
             ContactDB unepersonne = new ContactDB();
 
-            var asdf = db.Contacts.Where(s => s.categorie.Contains(tri));
-            
-            ViewData["query"] = "vrai";
-
-            foreach (ContactDB message in asdf)
+            if (tri != "Aucun")
             {
+                var cat = db.Contacts.Where(s => s.categorie.Contains(tri));
 
-                unepersonne = new ContactDB();
-                unepersonne.id = message.id;
-                unepersonne.nom = message.nom;
-                unepersonne.courriel = message.courriel;
-                unepersonne.categorie = message.categorie;
-                unepersonne.commentaires = message.commentaires;
-                contact.contacts.Add(unepersonne);
-                //contact.contacts.Add
+                ViewData["query"] = "vrai";
 
+                foreach (ContactDB message in cat)
+                {
+
+                    unepersonne = new ContactDB();
+                    unepersonne.id = message.id;
+                    unepersonne.nom = message.nom;
+                    unepersonne.courriel = message.courriel;
+                    unepersonne.categorie = message.categorie;
+                    unepersonne.commentaires = message.commentaires;
+                    contact.contacts.Add(unepersonne);
+                }
             }
-
-            //var bla = (ContactDB)ViewData["asdf"];
-
-            //ViewBag.numQuery = numQuery;
-
+            else
+            {
+                ViewData["query"] = "";
+            }
             return View(new Tuple<Touristix.Models.ContactMessage, IEnumerable<Touristix.Models.ContactDB>>(contact, db.Contacts.ToList()));
         }
      

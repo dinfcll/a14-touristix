@@ -11,13 +11,13 @@
 @using (Html.BeginForm())
 {
     <div>
-        @Html.Label("Trier par: ")
-        @Html.RadioButton("tri", "Suggestion", new { @checked = true })Suggestion &nbsp;&nbsp;&nbsp;
-        @Html.RadioButton("tri","Information")Information   &nbsp;&nbsp;&nbsp;
-        @Html.RadioButton("tri", "Commentaire")Commentaire   &nbsp;&nbsp;&nbsp;
-        @Html.RadioButton("tri", "Plainte")Plainte<br /> <br />       
-    </div>
-    <button type ="submit">Trier</button>
+        @Html.Label("Filtrer par: ")
+        @Html.RadioButton("tri", "Suggestion", new {  onchange = "this.form.submit();" })Suggestions &nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Information", new { onchange = "this.form.submit();" })Informations   &nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Commentaire", new { onchange = "this.form.submit();" })Commentaires   &nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Plainte", new { onchange = "this.form.submit();" })Plaintes&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Aucun", new { onchange = "this.form.submit();" })Aucun filtre<br /> <br />      
+    </div>   
 }
 
 <table>
