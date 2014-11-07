@@ -10,7 +10,7 @@ using Touristix.Models;
 namespace ProjetDeTest
 {
     [TestClass]
-    class TestsDestinationControl
+    public class TestsDestinationControl
     {
         [TestMethod]
         public void TestOuvrirDestinationControlleur()
