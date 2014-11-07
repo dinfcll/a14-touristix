@@ -88,6 +88,8 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
 
+            NouvelleListe.ArrayActiviteImage = new string[0];
+
             return View(NouvelleListe);
         }
 
