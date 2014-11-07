@@ -26,9 +26,7 @@ namespace Touristix.Controllers
 
             Assistant.RemplirListe(ref ListePays, SelectPays);
 
-            var ListeVilles = new List<SelectListItem>();
-
-            ViewBag.DestinationVille = ListeVilles;
+            ViewBag.DestinationVille = new List<SelectListItem>();
             
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));

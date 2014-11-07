@@ -11,13 +11,13 @@ namespace Touristix.Controllers
 {
     public static class Assistant
     {
-        public static void RemplirListe(ref List<SelectListItem> ListeARemplir, IQueryable<String> SelectElem)
+        public static void RemplirListe(ref List<SelectListItem> ListeItem, IQueryable<String> SelectElem)
         {
-            ListeARemplir.Add(new SelectListItem { Text = "", Value = "" });
+            ListeItem.Add(new SelectListItem { Text = "", Value = "" });
 
             foreach (string strElem in SelectElem)
             {
-                ListeARemplir.Add(new SelectListItem { Text = strElem, Value = strElem });
+                ListeItem.Add(new SelectListItem { Text = strElem, Value = strElem });
             }
         }
     }
