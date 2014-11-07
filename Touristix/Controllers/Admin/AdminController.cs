@@ -40,5 +40,17 @@ namespace Touristix.Controllers
             System.IO.File.Delete(Server.MapPath("~/Images/Destinations/" + Nom));
             return Json("Image supprimée");
         }
+
+        public JsonResult SupprimerImageBatiment(string Nom)
+        {
+            System.IO.File.Delete(Server.MapPath("~/Images/Batiments/" + Nom));
+            return Json("Image supprimée");
+        }
+
+        public JsonResult SupprimerImageActivite(string Nom)
+        {
+            System.IO.File.Delete(Server.MapPath("~/Images/Activités/" + Nom));
+            return Json("Image supprimée");
+        }
     }
 }

@@ -10,7 +10,7 @@
         width: 50px;
         height: 50px;
     }
-    .Something
+    .GrilleImages
     {
         display: table-cell;
         padding: 1px 5px;
@@ -19,7 +19,7 @@
 
 <script type="text/javascript">
 
-    function SupprimerImage(TagImage, Nom) {
+    function SupprimerImageDestination(TagImage, Nom) {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -28,6 +28,34 @@
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         var url = "/Admin/SupprimerImageDestination";
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                Succes(xmlhttp.responseText);
+            }
+        }
+        var params = "Nom=" + Nom
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-length", params.length);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(params);
+
+        function Succes(response) {
+            alert("Image supprimée");
+            TagImage.parentNode.removeChild(TagImage);
+        }
+    }
+
+    function SupprimerImageBatiment(TagImage, Nom) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var url = "/Admin/SupprimerImageBatiment";
 
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -185,7 +213,7 @@
             <div class="thumbnails">
                 @foreach (var item in Model.ArrayDestinationImage)
                 {
-                    <div class="Something" onclick="SupprimerImage(this, '@item')">
+                    <div class="GrilleImages" onclick="SupprimerImageDestination(this, '@item')">
                         <div class="thumbnail">
                             <a href="/Images/Destinations/@item">
                                 <img src="/Images/Destinations/@item" alt="" />
@@ -199,11 +227,23 @@
             </div>
         </div>
         <h3>Batiments</h3>
-        @foreach (var item in Model.ArrayBatimentImage)
-        {
-            @Html.ActionLink(item, "Batiments/" + item, "Images")
-            <br />
-        }
+        <div class="row-fluid">
+            <div class="thumbnails">
+                @foreach (var item in Model.ArrayBatimentImage)
+                {
+                    <div class="GrilleImages" onclick="SupprimerImageBatiment(this, '@item')">
+                        <div class="thumbnail">
+                            <a href="/Images/Batiments/@item">
+                                <img src="/Images/Batiments/@item" alt="" />
+                            </a>
+                            <br />
+                            <div><button class="close pull-right">&times;</button></div>
+                            <br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         <h3>Activités</h3>
     </div>
 </div>
