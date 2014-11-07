@@ -1,16 +1,16 @@
-﻿@model Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>
+﻿@model Tuple<Touristix.Models.ActiviteModel[], object, List<SelectListItem>>
 
 @{
     ViewBag.Title = "Index";
 }
 @Styles.Render("~/Content/css/Custom")
-<h2>Destinations</h2>
+<h2>Activités</h2>
 @section scripts {
 
     <script type="text/javascript">
         function MouseOverImage(Image, Nom, Apercu) {
             document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
-            document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Destinations/" + Image + "')";
+            document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Activités/" + Image + "')";
             document.getElementById("ImagePrincipale").style.backgroundSize = "500px 300px";
         }
 
@@ -50,23 +50,22 @@
         Nom = Model.Item1.First().Nom;
         Apercu = Model.Item1.First().Apercu;
     }
-    <div class="ImagePrincipale" id="ImagePrincipale" style="background-image:url('Images/Destinations/@Image'); background-size:500px 300px">
-    <div class="TexteEnBas" id="Text">
-        @Nom <br /> @Apercu
-    </div>
-    <p class="TexteEnHaut">(text to appear at the top right of the image)</p>
+    <div class="ImagePrincipale" id="ImagePrincipale" style="background-image:url('Images/Activités/@Image'); background-size:500px 300px">
+        <div class="TexteEnBas" id="Text">
+            @Nom <br /> @Apercu
+        </div>
     </div>
 
      <ul>
          @foreach (var p in Model.Item1)
          {
-            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Destinations/@p.Image" alt="@p.Nom" /> 
+            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Activités/@p.Image" alt="@p.Nom" /> 
          }
      </ul>
 }
 </div>
 <div id="Recherche">
-    @using (Html.BeginForm("Index", "Destination", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Activité", FormMethod.Get))
     {
         <p> Nom: @Html.TextBox("DestinationNom") <br />
 
@@ -87,42 +86,42 @@
     }
 </div>
 
-<div id="Liste Destination">
+<div id="Liste Activité">
 @{
     int trier = Convert.ToInt32(Request.Params.Get("Trier"));
-    int nbDestination = 0;
+    int nbActivité = 0;
     switch (trier)
     {
         case 0:
         case 1:
         case 2:
-            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
-            foreach (var group in DestinationParPays)
+            Dictionary<string, List<Touristix.Models.ActiviteModel>> ActivitéParPays = (Dictionary<string, List<Touristix.Models.ActiviteModel>>)Model.Item2;
+            foreach (var group in ActivitéParPays)
             {
                 @group.Key
                 <ul>
-                @foreach (var item in group)
+                @foreach (var item in group.Value)
                 {
-                    <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
-                    nbDestination++;
+                    <li>@Html.ActionLink(item.Nom, "InformationActivité", new { id = item.Id })</li>
+                    nbActivité++;
                 }
                 </ul>
             }
             break;
 
         case 3:
-            IOrderedQueryable<Touristix.Models.DestinationModel> DestinationParOrdre = (IOrderedQueryable<Touristix.Models.DestinationModel>)Model.Item2;
+            IOrderedQueryable<Touristix.Models.ActiviteModel> ActivitéParOrdre = (IOrderedQueryable<Touristix.Models.ActiviteModel>)Model.Item2;
                 <ul>
-                @foreach (var item in DestinationParOrdre)
+                @foreach (var item in ActivitéParOrdre)
                 {
-                    <li>@Html.ActionLink(item.Nom, "InformationDestination", new { id = item.Id })</li>
-                    nbDestination++;
+                    <li>@Html.ActionLink(item.Nom, "InformationActivité", new { id = item.Id })</li>
+                    nbActivité++;
                 }
                 </ul>
                 break;
     }
 
-    if (nbDestination == 0)
+    if (nbActivité == 0)
     {
         <p><b>Aucun résultat trouvé</b></p>
     }

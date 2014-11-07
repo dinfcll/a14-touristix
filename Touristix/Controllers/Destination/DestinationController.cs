@@ -24,11 +24,9 @@ namespace Touristix.Controllers
 
             var ListePays = new List<SelectListItem>(SelectPays.Count());
 
-            RemplirListe(ref ListePays, SelectPays);
+            Assistant.RemplirListe(ref ListePays, SelectPays);
 
-            var ListeVilles = new List<SelectListItem>();
-
-            ViewBag.DestinationVille = ListeVilles;
+            ViewBag.DestinationVille = new List<SelectListItem>();
             
             if (!string.IsNullOrEmpty(DestinationNom))
                 Destinations = Destinations.Where(s => s.Nom.Contains(DestinationNom));
@@ -89,6 +87,8 @@ namespace Touristix.Controllers
             {
                 NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
+
+            NouvelleListe.ArrayActiviteImage = new string[0];
 
             return View(NouvelleListe);
         }
@@ -191,22 +191,12 @@ namespace Touristix.Controllers
 
             var ListeVilles = new List<SelectListItem>();
 
-            RemplirListe(ref ListeVilles, SelectVilles);
+            Assistant.RemplirListe(ref ListeVilles, SelectVilles);
 
             return Json(ListeVilles, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
-
-        private void RemplirListe(ref List<SelectListItem> ListeARemplir, IQueryable<String> SelectElem)
-        {
-            ListeARemplir.Add(new SelectListItem { Text = "", Value = "" });
-
-            foreach (string strElem in SelectElem)
-            {
-                ListeARemplir.Add(new SelectListItem { Text = strElem, Value = strElem });
-            }
-        }
 
         protected override void Dispose(bool disposing)
         {
