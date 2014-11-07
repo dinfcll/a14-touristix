@@ -75,6 +75,34 @@
         }
     }
 
+    function SupprimerImageActivite(TagImage, Nom) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var url = "/Admin/SupprimerImageActivite";
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                Succes(xmlhttp.responseText);
+            }
+        }
+        var params = "Nom=" + Nom
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-length", params.length);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(params);
+
+        function Succes(response) {
+            alert("Image supprimée");
+            TagImage.parentNode.removeChild(TagImage);
+        }
+    }
+
 </script>
 
 <h2>Administration</h2>
@@ -245,5 +273,23 @@
             </div>
         </div>
         <h3>Activités</h3>
+        
+        <div class="row-fluid">
+            <div class="thumbnails">
+                @foreach (var item in Model.ArrayActiviteImage)
+                {
+                    <div class="GrilleImages" onclick="SupprimerImageActivite(this, '@item')">
+                        <div class="thumbnail">
+                            <a href="/Images/Activités/@item">
+                                <img src="/Images/Activités/@item" alt="" />
+                            </a>
+                            <br />
+                            <div><button class="close pull-right">&times;</button></div>
+                            <br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
