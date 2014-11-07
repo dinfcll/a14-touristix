@@ -16,3 +16,8 @@
         });
     }
 }
+
+
+    $('.form-control').keyup(function(){
+     $('#nbcaract').text("Caractères restants: " + (400- $(this).val().length));
+});

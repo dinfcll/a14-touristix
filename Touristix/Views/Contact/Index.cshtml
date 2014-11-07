@@ -1,10 +1,24 @@
-﻿@model IEnumerable<Touristix.Models.ContactDB>
+﻿@model Tuple<Touristix.Models.ContactMessage, IEnumerable<Touristix.Models.ContactDB>>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Commentaires</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.Label("Filtrer par: ")
+        @Html.RadioButton("tri", "Suggestion", new {  onchange = "this.form.submit();" })Suggestions &nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Information", new { onchange = "this.form.submit();" })Informations   &nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Commentaire", new { onchange = "this.form.submit();" })Commentaires   &nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Plainte", new { onchange = "this.form.submit();" })Plaintes&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("tri", "Aucun", new { onchange = "this.form.submit();" })Aucun filtre<br /> <br />      
+    </div>   
+}
 
 <table>
     <tr>
@@ -25,28 +39,59 @@
         </th> 
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.courriel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.categorie)
-        </td> 
-        <td>
-            @Html.TextAreaFor(modelItem => item.commentaires, new { @readonly = true, style = "width: 675px; height:80px;" })
-        </td>     
-        <td> 
-            <a href="#" onclick ='MessageBox(@item.id, "/Contact/ConfirmationEffacer")'>Effacer</a>             
-        </td>
-    </tr>
+ 
+@if (@ViewData["query"] == "")
+{
+    foreach (var item in Model.Item2)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.courriel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categorie)
+            </td> 
+            <td>
+                @Html.TextAreaFor(modelItem => item.commentaires, new { @readonly = true, style = "width: 675px; height:80px;" })
+            </td>     
+            <td> 
+                <a href="#" onclick ='MessageBox(@item.id, "/Contact/ConfirmationEffacer")'>Effacer</a>             
+            </td>
+        </tr>
+    }
+}
+else
+{   
+    
+        foreach (var item in Model.Item1.contacts)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.courriel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categorie)
+            </td> 
+            <td>
+                @Html.TextAreaFor(modelItem => item.commentaires, new { @readonly = true, style = "width: 675px; height:80px;" })
+            </td>     
+            <td> 
+                <a href="#" onclick ='MessageBox(@item.id, "/Contact/ConfirmationEffacer")'>Effacer</a>             
+            </td>
+        </tr>
+        }
 }
 </table>
 
