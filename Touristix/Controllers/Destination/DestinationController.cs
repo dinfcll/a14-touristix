@@ -64,7 +64,8 @@ namespace Touristix.Controllers
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], object, List<SelectListItem>>(Array5DerniereDestination, DestinationRecu, ListePays));
+            return View("Index", new Tuple<DestinationModel[], object, List<SelectListItem>>
+                                    (Array5DerniereDestination, DestinationRecu, ListePays));
         }
 
         [Authorize(Roles = "admin")]

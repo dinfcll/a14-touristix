@@ -200,9 +200,6 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Images\ImagesAccueil\land1.png" />
-    <Content Include="Images\ImagesAccueil\land2.png" />
-    <Content Include="Images\ImagesAccueil\s_n01_nursingm.png" />
     <Content Include="Images\Batiments\Ashton.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
