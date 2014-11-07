@@ -34,5 +34,11 @@ namespace Touristix.Controllers
             }
             return Json("Téléversement complété");
         }
+
+        public JsonResult SupprimerImageDestination(string Nom)
+        {
+            System.IO.File.Delete(Server.MapPath("~/Images/Destinations/" + Nom));
+            return Json("Image supprimée");
+        }
     }
 }
