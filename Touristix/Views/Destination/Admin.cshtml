@@ -4,6 +4,50 @@
     ViewBag.Title = "Administration";
 }
 
+<style>
+    img
+    {
+        width: 50px;
+        height: 50px;
+    }
+    .GrilleImages
+    {
+        display: table-cell;
+        padding: 1px 5px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    function SupprimerImage(TagImage, Nom, url) {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                Succes(xmlhttp.responseText);
+            }
+        }
+        var params = "Nom=" + Nom
+        xmlhttp.open("POST", url);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.setRequestHeader("Content-length", params.length);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(params);
+
+        function Succes(response) {
+            alert("Image supprimée");
+            TagImage.parentNode.removeChild(TagImage);
+        }
+    }
+
+</script>
+
 <h2>Administration</h2>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -136,17 +180,59 @@
     </div>
     <div class="tab-pane" id="Images">
         <h3>Destinations</h3>
-        @foreach (var item in Model.ArrayDestinationImage)
-        {
-            @Html.ActionLink(item, "Destinations/" + item, "Images")
-            <br />
-        }
+        <div class="row-fluid">
+            <div class="thumbnails">
+                @foreach (var item in Model.ArrayDestinationImage)
+                {
+                    <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageDestination')">
+                        <div class="thumbnail">
+                            <a href="/Images/Destinations/@item">
+                                <img src="/Images/Destinations/@item" alt="" />
+                            </a>
+                            <br />
+                            <div><button class="close pull-right">&times;</button></div>
+                            <br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         <h3>Batiments</h3>
-        @foreach (var item in Model.ArrayBatimentImage)
-        {
-            @Html.ActionLink(item, "Batiments/" + item, "Images")
-            <br />
-        }
+        <div class="row-fluid">
+            <div class="thumbnails">
+                @foreach (var item in Model.ArrayBatimentImage)
+                {
+                    <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageBatiment')">
+                        <div class="thumbnail">
+                            <a href="/Images/Batiments/@item">
+                                <img src="/Images/Batiments/@item" alt="" />
+                            </a>
+                            <br />
+                            <div><button class="close pull-right">&times;</button></div>
+                            <br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         <h3>Activités</h3>
+        
+        <div class="row-fluid">
+            <div class="thumbnails">
+                @foreach (var item in Model.ArrayActiviteImage)
+                {
+                    <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageActivite')">
+                        <div class="thumbnail">
+                            <a href="/Images/Activités/@item">
+                                <img src="/Images/Activités/@item" alt="" />
+                            </a>
+                            <br />
+                            <div><button class="close pull-right">&times;</button></div>
+                            <br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>

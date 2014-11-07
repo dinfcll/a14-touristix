@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Collections;
+using Touristix.Models;
 
 namespace Touristix.Models
 {
@@ -30,6 +32,11 @@ namespace Touristix.Models
         public string courriel { get; set; }
         public string categorie { get; set;}
         public string commentaires { get; set;}
+    }
+
+    public class ContactMessage
+    {
+        public List <ContactDB> contacts{ get; set; }
     }
 
     public class ContactDBContext : DbContext

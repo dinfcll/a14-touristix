@@ -96,7 +96,42 @@ namespace Touristix.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            return View(db.Contacts.ToList());
+            ViewData["query"] = "";
+            ContactMessage mess = new ContactMessage();
+            return View(new Tuple<Touristix.Models.ContactMessage, IEnumerable<Touristix.Models.ContactDB>>(mess, db.Contacts.ToList()));
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult Index(string tri)
+        {
+            ContactMessage contact = new ContactMessage();
+            contact.contacts = new List<ContactDB>();
+            ContactDB unepersonne = new ContactDB();
+
+            if (tri != "Aucun")
+            {
+                var cat = db.Contacts.Where(s => s.categorie.Contains(tri));
+
+                ViewData["query"] = "vrai";
+
+                foreach (ContactDB message in cat)
+                {
+
+                    unepersonne = new ContactDB();
+                    unepersonne.id = message.id;
+                    unepersonne.nom = message.nom;
+                    unepersonne.courriel = message.courriel;
+                    unepersonne.categorie = message.categorie;
+                    unepersonne.commentaires = message.commentaires;
+                    contact.contacts.Add(unepersonne);
+                }
+            }
+            else
+            {
+                ViewData["query"] = "";
+            }
+            return View(new Tuple<Touristix.Models.ContactMessage, IEnumerable<Touristix.Models.ContactDB>>(contact, db.Contacts.ToList()));
         }
      
         [Authorize(Roles = "admin")] 
