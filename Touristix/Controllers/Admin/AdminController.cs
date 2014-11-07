@@ -9,6 +9,8 @@ namespace Touristix.Controllers
 {
     public class AdminController : Controller
     {
+        const string MessageSuppressImage = "Image supprimée";
+
         public ActionResult Index()
         {
             return View();
@@ -38,19 +40,19 @@ namespace Touristix.Controllers
         public JsonResult SupprimerImageDestination(string Nom)
         {
             System.IO.File.Delete(Server.MapPath("~/Images/Destinations/" + Nom));
-            return Json("Image supprimée");
+            return Json(MessageSuppressImage);
         }
 
         public JsonResult SupprimerImageBatiment(string Nom)
         {
             System.IO.File.Delete(Server.MapPath("~/Images/Batiments/" + Nom));
-            return Json("Image supprimée");
+            return Json(MessageSuppressImage);
         }
 
         public JsonResult SupprimerImageActivite(string Nom)
         {
             System.IO.File.Delete(Server.MapPath("~/Images/Activités/" + Nom));
-            return Json("Image supprimée");
+            return Json(MessageSuppressImage);
         }
     }
 }
