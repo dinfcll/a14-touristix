@@ -44,13 +44,16 @@ namespace Touristix.Controllers
 
             object ResultatRecherche;
             IQueryable<IGrouping<string, DestinationModel>> DestinationRecu;
+            Dictionary<string, List<BatimentModel>> DicTrieBatiment;
 
             switch (Trier)
             {
+                #region Tri par Pays
+
                 case 0:
                 default:
                     DestinationRecu = Destinations.GroupBy(item => item.Pays);
-                    Dictionary<string, List<BatimentModel>> DicTrieBatiment = new Dictionary<string, List<BatimentModel>>(DestinationRecu.Count());
+                    DicTrieBatiment = new Dictionary<string, List<BatimentModel>>(DestinationRecu.Count());
                     foreach (IGrouping<string, DestinationModel> Groupe in DestinationRecu)
                     {
                         List<BatimentModel> ListBatiment = new List<BatimentModel>(Groupe.Count());
@@ -73,22 +76,80 @@ namespace Touristix.Controllers
                     }
                     ResultatRecherche = DicTrieBatiment;
                     break;
+
+                #endregion
+
+                #region Tri par Region
+
                 case 1:
                     DestinationRecu = Destinations.GroupBy(item => item.Region);
-                    ResultatRecherche = DestinationRecu;
+                    DicTrieBatiment = new Dictionary<string, List<BatimentModel>>(DestinationRecu.Count());
+                    foreach (IGrouping<string, DestinationModel> Groupe in DestinationRecu)
+                    {
+                        List<BatimentModel> ListBatiment = new List<BatimentModel>(Groupe.Count());
+                        List<DestinationModel> GroupeList = Groupe.ToList();
+
+                        for (int i = 0; i < GroupeList.Count; i++)
+                        {
+                            string[] ArrayParametreBatiment = new string[1];
+                            ArrayParametreBatiment[0] = ";";
+
+                            string[] ArrayBatimentIds = GroupeList[i].BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+
+                            for (int B = 0; B < ArrayBatimentIds.Length; B++)
+                            {
+                                BatimentModel BatimentActif = db.Batiments.Find(Convert.ToInt32(ArrayBatimentIds[B]));
+                                ListBatiment.Add(BatimentActif);
+                            }
+                        }
+                        DicTrieBatiment.Add(Groupe.Key, ListBatiment);
+                    }
+                    ResultatRecherche = DicTrieBatiment;
                     break;
+
+                #endregion
+
+                #region Tri par Ville
+
                 case 2:
                     DestinationRecu = Destinations.GroupBy(item => item.Ville);
-                    ResultatRecherche = DestinationRecu;
+                    DicTrieBatiment = new Dictionary<string, List<BatimentModel>>(DestinationRecu.Count());
+                    foreach (IGrouping<string, DestinationModel> Groupe in DestinationRecu)
+                    {
+                        List<BatimentModel> ListBatiment = new List<BatimentModel>(Groupe.Count());
+                        List<DestinationModel> GroupeList = Groupe.ToList();
+
+                        for (int i = 0; i < GroupeList.Count; i++)
+                        {
+                            string[] ArrayParametreBatiment = new string[1];
+                            ArrayParametreBatiment[0] = ";";
+
+                            string[] ArrayBatimentIds = GroupeList[i].BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+
+                            for (int B = 0; B < ArrayBatimentIds.Length; B++)
+                            {
+                                BatimentModel BatimentActif = db.Batiments.Find(Convert.ToInt32(ArrayBatimentIds[B]));
+                                ListBatiment.Add(BatimentActif);
+                            }
+                        }
+                        DicTrieBatiment.Add(Groupe.Key, ListBatiment);
+                    }
+                    ResultatRecherche = DicTrieBatiment;
+                    break;
+
+                #endregion
+
+                case 3:
+                    ResultatRecherche = Batiments.OrderBy(item => item.Nom);
                     break;
             }
 
-            DestinationModel[] Array5DerniereDestination = db.Destinations
+            BatimentModel[] Array5DerniereBatimentModel = db.Batiments
                     .OrderByDescending(m => m.Nom)
                     .Take(5)
                     .ToArray();
 
-            return View(new Tuple<DestinationModel[], object, List<SelectListItem>>(Array5DerniereDestination, ResultatRecherche, ListePays));
+            return View(new Tuple<BatimentModel[], object, List<SelectListItem>>(Array5DerniereBatimentModel, ResultatRecherche, ListePays));
         }
     }
 }
