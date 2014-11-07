@@ -17,7 +17,7 @@ namespace Touristix.Controllers
         {
             if (url == null)
             {
-                url = Server.MapPath("~/Images/ImagesAccueil/");
+                url = Server.MapPath("~/Images/Destinations/");
             }
             
             var modelImagesAccueil = new ImagesAccueilModel(url);
