@@ -26,11 +26,6 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestAccueilRetourTableauImages()
         {
-            /*var controller = new AccueilController();
-            var result = controller.Index("../../../Touristix/Images/ImagesAccueil/") as ViewResult;
-            var images = (ImagesAccueilModel)result.ViewData.Model;
-            Assert.AreEqual("land1.png", images.TableauImagesAccueil[0]);*/
-
             var controller = new AccueilController();
             var result = controller.Index("../../../Touristix/Images/ImagesAccueil/") as ViewResult;
             var images = (ImagesAccueilModel)result.ViewData.Model;
