@@ -16,7 +16,7 @@ namespace Touristix.Controllers
             return View();
         }
 
-        public JsonResult ReceptionImage()
+        public JsonResult ReceptionImageDestination()
         {
             string[] Images = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
 

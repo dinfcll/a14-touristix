@@ -1,11 +1,38 @@
 ﻿var EnvoyerImageDestination = function () {
 
     var _file = document.getElementById('FichierDestination');
-
     if (_file.files.length === 0) {
         return;
     }
 
+    InitialisationEnvoi(_file);
+
+    var data = new FormData();
+    data.append('SelectedFile', _file.files[0]);
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            BoutonVoirImage.href = "Images/Destinations/" + _file.value;
+            NomImage.innerHTML = _file.value;
+        }
+    };
+
+    ProgressionHttp(xmlhttp);
+
+    var url = "/Admin/ReceptionImageDestination";
+    xmlhttp.open('POST', url);
+    xmlhttp.send(data);
+}
+
+var InitialisationEnvoi = function (_file) {
     BoiteDeContenu.style.visibility = "visible";
     $('#BoiteDeContenu').modal('show');
 
@@ -17,23 +44,9 @@
         };
     })(Image);
     reader.readAsDataURL(_file.files[0]);
+}
 
-    var data = new FormData();
-    data.append('SelectedFile', _file.files[0]);
-    var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            BoutonVoirImage.href = "Images/Destinations/" + _file.value;
-            NomImage.innerHTML = _file.value;
-        }
-    };
-
+var ProgressionHttp = function (xmlhttp) {
     xmlhttp.upload.addEventListener('progress', function (e) {
         var ProgressValue = Math.ceil(e.loaded / e.total) * 100;
         if (ProgressValue > 10) {
@@ -47,10 +60,6 @@
             }
         }
     }, false);
-
-    var url = "/Admin/ReceptionImageDestination";
-    xmlhttp.open('POST', url);
-    xmlhttp.send(data);
 }
 
 var FermerForm = function () {
