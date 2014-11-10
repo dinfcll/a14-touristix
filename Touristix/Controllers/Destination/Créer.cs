@@ -14,7 +14,7 @@ namespace Touristix.Controllers
         [Authorize(Roles="admin")]
         public ActionResult CreerDestination()
         {
-            return View();
+            return View("CreerDestination");
         }
 
         [Authorize(Roles = "admin")]
@@ -30,13 +30,13 @@ namespace Touristix.Controllers
                 return RedirectToAction("Admin");
             }
 
-            return View(DestinationModelActif);
+            return View("CreerDestination", DestinationModelActif);
         }
 
         [Authorize(Roles = "admin")]
         public ActionResult CreerBatiment()
         {
-            return View();
+            return View("CreerBatiment");
         }
 
         [Authorize(Roles = "admin")]
@@ -52,13 +52,13 @@ namespace Touristix.Controllers
                 return RedirectToAction("admin");
             }
 
-            return View(BatimentModelActif);
+            return View("CreerBatiment", BatimentModelActif);
         }
 
         [Authorize(Roles = "admin")]
         public ActionResult CreerActivite()
         {
-            return View();
+            return View("CreerActivite");
         }
 
         [Authorize(Roles = "admin")]
@@ -72,7 +72,7 @@ namespace Touristix.Controllers
                 return RedirectToAction("Admin");
             }
 
-            return View(ActiviteModelActif);
+            return View("CreerActivite", ActiviteModelActif);
         }
     }
 }

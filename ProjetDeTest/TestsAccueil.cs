@@ -15,7 +15,6 @@ namespace ProjetDeTest
         {
             var controller = new AccueilController();
             var result = controller.Index("../../../Touristix/Images/Destinations/") as ViewResult;
-            var images = (ImagesAccueilModel)result.ViewData.Model;
             Assert.AreEqual("Index", result.ViewName);
         }
 
