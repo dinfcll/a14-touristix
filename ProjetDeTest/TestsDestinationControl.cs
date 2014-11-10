@@ -84,7 +84,7 @@ namespace ProjetDeTest
             Assert.AreEqual("Admin", result.ViewName);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TestDestinationAdminRetourModelList()
         {
             var controller = new DestinationController();
@@ -141,6 +141,6 @@ namespace ProjetDeTest
             {
                 Assert.AreEqual(TestListAdmin.ArrayActiviteImage[i], liste.ArrayActiviteImage[i]);
             }
-        }
+        }*/
     }
 }
