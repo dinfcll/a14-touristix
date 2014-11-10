@@ -6177,3 +6177,8 @@ a.badge:focus {
     font-size: 12px;
     color: red;
 }
+
+.form-control
+{
+    width: 300px;
+}

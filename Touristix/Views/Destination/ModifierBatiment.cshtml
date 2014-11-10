@@ -26,13 +26,25 @@
         
         <div class="form-group">
             @Html.LabelFor(model => model.URL)
-            http://@Html.TextBoxFor(model => model.URL, new
+            @{
+                var listItems = new List<SelectListItem>()
+                {
+                    new SelectListItem {Text = "http",   Value = "http"},
+                    new SelectListItem {Text = "https", Value = "https"}
+                };
+                @Html.DropDownListFor(model => model.TypeURL, listItems, new
+                {
+                    @style = "width: 70px;" 
+                })
+            }  
+            @Html.TextBoxFor(model => model.URL, new
             {
                 @class = "form-control",
-                placeholder = "Entrez ville",
-                type = "text",
-                style = "width: 170px;" 
-            })
+                placeholder = "Entrez URL",
+                type = "text", 
+                style = "width: 200px;" 
+            })           
+     
             @Html.ValidationMessageFor(model => model.URL)
         </div>
         
