@@ -69,20 +69,31 @@ namespace Touristix.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult Admin()
+        public ActionResult Admin(string urlDestiation, string urlBatiment)
         {
             AdministrationList NouvelleListe = new AdministrationList();
             NouvelleListe.ListDestinationModel = db.Destinations.ToList();
             NouvelleListe.ListBatimentModel = db.Batiments.ToList();
             NouvelleListe.ListActiviteModel = db.Activites.ToList();
-            string[] ArrayDestinationImage = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
+
+            if (string.IsNullOrEmpty(urlDestiation))
+            {
+                urlDestiation = Server.MapPath("~/Images/Destinations/");
+            }
+
+            string[] ArrayDestinationImage = Directory.GetFiles(urlDestiation, "*.*");
             NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
             for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
             {
                 NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
 
-            string[] ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+            if (string.IsNullOrEmpty(urlBatiment))
+            {
+                urlBatiment = Server.MapPath("~/Images/Batiments/");
+            }
+
+            string[] ArrayBatimentImage = Directory.GetFiles(urlBatiment, "*.*");
             NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
             for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
             {
@@ -91,7 +102,7 @@ namespace Touristix.Controllers
 
             NouvelleListe.ArrayActiviteImage = new string[0];
 
-            return View(NouvelleListe);
+            return View("Admin", NouvelleListe);
         }
 
         public void MettreAJourDestination(DestinationModel DestinationModelActif)
