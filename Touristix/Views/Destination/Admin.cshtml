@@ -4,6 +4,8 @@
     ViewBag.Title = "Administration";
 }
 
+@Styles.Render("~/Content/css/Téléversement.css")
+
 <style>
     .Miniature
     {
@@ -17,6 +19,7 @@
     }
 </style>
 
+<script type="text/javascript" src="/Scripts/Téléversement.js"></script>
 <script type="text/javascript">
 
     function SupprimerImage(TagImage, Nom, url) {
@@ -54,6 +57,18 @@
   <li class="active"><a href="#Données" role="tab" data-toggle="tab">Données</a></li>
   <li><a href="#Images" role="tab" data-toggle="tab">Images</a></li>
 </ul>
+
+<div class="modal fade" id="BoiteDeContenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <img id="Aperçu"/>
+    <div class="progress" id="Contenantprogressbar">
+        <div class="progress bar" role="progressbar" style="width: 10%; height=100%" id="Barre de progression">
+        0%
+        </div>
+    </div>
+    <a class="btn btn-default" id="BoutonVoirImage" href="">Voir Image</a>
+    <button class="btn btn-default" data-dismiss="modal" id="BoutonFermer" onclick="FermerForm()">Fermer</button>
+    <label id="LabelNomImage">Nom image</label>
+</div>
 
 <div class="tab-content">
     <div class="tab-pane active" id="Données">
@@ -180,6 +195,12 @@
     </div>
     <div class="tab-pane" id="Images">
         <h3>Destinations</h3>
+
+        <form id="FileFormDestination">
+            Choisir image:  <input type='file' id='FichierDestination' accept="image/*">
+                            <input type='button' class="btn btn-default" value='Envoyer' onclick="EnvoyerImageDestination()">
+        </form>
+
         <div class="row-fluid">
             <div class="thumbnails">
                 @foreach (var item in Model.ArrayDestinationImage)
@@ -198,6 +219,12 @@
             </div>
         </div>
         <h3>Batiments</h3>
+
+        <form id="FileFormBatiment">
+            Choisir image:  <input type='file' id='FichierBatiment' accept="image/*">
+                            <input type='button' class="btn btn-default" value='Envoyer' onclick="EnvoyerImageDestination()">
+        </form>
+
         <div class="row-fluid">
             <div class="thumbnails">
                 @foreach (var item in Model.ArrayBatimentImage)
@@ -216,6 +243,11 @@
             </div>
         </div>
         <h3>Activités</h3>
+
+        <form id="FileFormActivité">
+            Choisir image:  <input type='file' id='FichierActivité' accept="image/*">
+                            <input type='button' class="btn btn-default" value='Envoyer' onclick="EnvoyerImageDestination()">
+        </form>
         
         <div class="row-fluid">
             <div class="thumbnails">
@@ -236,3 +268,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var _progress = document.getElementById('Barre de progression'),
+    BoiteDeContenu = document.getElementById('BoiteDeContenu'),
+    BoutonVoirImage = document.getElementById('BoutonVoirImage'),
+    Image = document.getElementById("Aperçu"),
+    NomImage = document.getElementById('LabelNomImage');
+</script>

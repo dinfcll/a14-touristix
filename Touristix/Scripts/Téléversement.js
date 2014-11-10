@@ -1,14 +1,6 @@
-﻿var Envoyer = document.getElementById('Envoyer'),
-_file = document.getElementById('Fichier'),
-_progress = document.getElementById('Barre de progression'),
-BoiteDeContenu = document.getElementById('BoiteDeContenu'),
-BoutonVoirImage = document.getElementById('BoutonVoirImage'),
-BoutonFermer = document.getElementById('BoutonFermer'),
-Image = document.getElementById("Aperçu"),
-NomImage = document.getElementById('LabelNomImage'),
-FileForm = document.getElementById('FileForm');
+﻿var EnvoyerImageDestination = function () {
 
-var EnovyerImage = function () {
+    var _file = document.getElementById('FichierDestination');
 
     if (_file.files.length === 0) {
         return;
@@ -16,6 +8,7 @@ var EnovyerImage = function () {
 
     BoiteDeContenu.style.visibility = "visible";
     $('#BoiteDeContenu').modal('show');
+
     Image.file = _file.files[0];
     var reader = new FileReader();
     reader.onload = (function (aImg) {
@@ -55,15 +48,19 @@ var EnovyerImage = function () {
         }
     }, false);
 
-    var url = "/Admin/ReceptionImage";
+    var url = "/Admin/ReceptionImageDestination";
     xmlhttp.open('POST', url);
     xmlhttp.send(data);
 }
 
-var Fermer = function () {
-    BoiteDeContenu.style.visibility = "hidden";
-    FileForm.reset();
-}
+var FermerForm = function () {
+    var FileFormDestination = document.getElementById('FileFormDestination'),
+    FileFormBatiment = document.getElementById('FileFormBatiment'),
+    FileFormActivite = document.getElementById('FileFormActivité');
 
-Envoyer.addEventListener('click', EnovyerImage);
-BoutonFermer.addEventListener('click', Fermer);
+    FileFormDestination.reset();
+    FileFormBatiment.reset();
+    FileFormActivite.reset();
+
+    BoiteDeContenu.style.visibility = "hidden";
+}
