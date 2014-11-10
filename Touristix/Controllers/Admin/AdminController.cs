@@ -37,6 +37,48 @@ namespace Touristix.Controllers
             return Json("Téléversement complété");
         }
 
+        public JsonResult ReceptionImageBatiment()
+        {
+            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase Image = Request.Files[i];
+
+                string CheminComplet = System.IO.Path.Combine(
+                                       Server.MapPath("~/Images/Batiments/"), System.IO.Path.GetFileName(Image.FileName));
+
+                if (System.IO.File.Exists(CheminComplet))
+                {
+                    return Json("Le téléversement a échoué");
+                }
+
+                Image.SaveAs(CheminComplet);
+            }
+            return Json("Téléversement complété");
+        }
+
+        public JsonResult ReceptionImageActivite()
+        {
+            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/Activités/"), "*.*");
+
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase Image = Request.Files[i];
+
+                string CheminComplet = System.IO.Path.Combine(
+                                       Server.MapPath("~/Images/Activités/"), System.IO.Path.GetFileName(Image.FileName));
+
+                if (System.IO.File.Exists(CheminComplet))
+                {
+                    return Json("Le téléversement a échoué");
+                }
+
+                Image.SaveAs(CheminComplet);
+            }
+            return Json("Téléversement complété");
+        }
+
         public JsonResult SupprimerImageDestination(string Nom)
         {
             System.IO.File.Delete(Server.MapPath("~/Images/Destinations/" + Nom));

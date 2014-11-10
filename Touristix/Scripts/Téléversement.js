@@ -32,6 +32,74 @@
     xmlhttp.send(data);
 }
 
+var EnvoyerImageBatiment = function () {
+
+    var _file = document.getElementById('FichierBatiment');
+    if (_file.files.length === 0) {
+        return;
+    }
+
+    InitialisationEnvoi(_file);
+
+    var data = new FormData();
+    data.append('SelectedFile', _file.files[0]);
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            BoutonVoirImage.href = "Images/Batiments/" + _file.value;
+            NomImage.innerHTML = _file.value;
+        }
+    };
+
+    ProgressionHttp(xmlhttp);
+
+    var url = "/Admin/ReceptionImageBatiment";
+    xmlhttp.open('POST', url);
+    xmlhttp.send(data);
+}
+
+var EnvoyerImageActivite = function () {
+
+    var _file = document.getElementById('FichierActivité');
+    if (_file.files.length === 0) {
+        return;
+    }
+
+    InitialisationEnvoi(_file);
+
+    var data = new FormData();
+    data.append('SelectedFile', _file.files[0]);
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            BoutonVoirImage.href = "Images/Activités/" + _file.value;
+            NomImage.innerHTML = _file.value;
+        }
+    };
+
+    ProgressionHttp(xmlhttp);
+
+    var url = "/Admin/ReceptionImageActivite";
+    xmlhttp.open('POST', url);
+    xmlhttp.send(data);
+}
+
 var InitialisationEnvoi = function (_file) {
     BoiteDeContenu.style.visibility = "visible";
     $('#BoiteDeContenu').modal('show');
