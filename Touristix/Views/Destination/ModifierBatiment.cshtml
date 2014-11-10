@@ -26,11 +26,12 @@
         
         <div class="form-group">
             @Html.LabelFor(model => model.URL)
-            @Html.TextBoxFor(model => model.URL, new
+            http://@Html.TextBoxFor(model => model.URL, new
             {
                 @class = "form-control",
                 placeholder = "Entrez ville",
-                type = "text"
+                type = "text",
+                style = "width: 170px;" 
             })
             @Html.ValidationMessageFor(model => model.URL)
         </div>

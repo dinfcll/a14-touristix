@@ -121,10 +121,7 @@ namespace Touristix.Controllers
 
         public void MettreAJourBatiment(BatimentModel BatimentModelActif)
         {
-            if (BatimentModelActif.URL.StartsWith("www."))
-            {
-                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
-            }
+             BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");            
         }
 
         #region Fonctions AJAX
