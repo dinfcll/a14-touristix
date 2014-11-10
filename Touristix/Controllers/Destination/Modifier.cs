@@ -47,6 +47,16 @@ namespace Touristix.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (BatimentModelActif.TypeURL == "http")
+            {
+                BatimentModelActif.URL = BatimentModelActif.URL.Remove(0, 7);
+            }
+            else
+            {
+                BatimentModelActif.URL = BatimentModelActif.URL.Remove(0, 8);
+            }
+
             return View(BatimentModelActif);
         }
 

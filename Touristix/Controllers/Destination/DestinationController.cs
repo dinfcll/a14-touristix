@@ -121,9 +121,13 @@ namespace Touristix.Controllers
 
         public void MettreAJourBatiment(BatimentModel BatimentModelActif)
         {
-            if (BatimentModelActif.URL.StartsWith("www."))
+            if (BatimentModelActif.TypeURL == "http")
             {
                 BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
+            }
+            else
+            {
+                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "https://");
             }
         }
 
