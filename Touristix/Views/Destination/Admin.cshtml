@@ -45,7 +45,8 @@
 
         function Succes(response) {
             alert("Image supprimée");
-            TagImage.parentNode.removeChild(TagImage);
+            var TagASupprimer = TagImage.parentNode.parentNode;
+            TagASupprimer.parentNode.removeChild(TagASupprimer);
         }
     }
 
@@ -205,13 +206,13 @@
             <div class="thumbnails" id="ThumbnailsDestination">
                 @foreach (var item in Model.ArrayDestinationImage)
                 {
-                    <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageDestination')">
+                    <div class="GrilleImages">
                         <div class="thumbnail">
                             <a href="/Images/Destinations/@item">
                                 <img src="/Images/Destinations/@item" class="Miniature" alt="" />
                             </a>
                             <br />
-                            <div><button class="close pull-right">&times;</button></div>
+                            <div><button class="close pull-right" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageDestination')">&times;</button></div>
                             <br />
                         </div>
                     </div>
