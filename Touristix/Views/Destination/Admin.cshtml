@@ -230,13 +230,13 @@
             <div class="thumbnails" id="ThumbnailsBatiment">
                 @foreach (var item in Model.ArrayBatimentImage)
                 {
-                    <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageBatiment')">
+                    <div class="GrilleImages">
                         <div class="thumbnail">
                             <a href="/Images/Batiments/@item">
                                 <img src="/Images/Batiments/@item" class="Miniature" alt="" />
                             </a>
                             <br />
-                            <div><button class="close pull-right">&times;</button></div>
+                            <div><button class="close pull-right" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageBatiment')">&times;</button></div>
                             <br />
                         </div>
                     </div>
@@ -254,13 +254,13 @@
             <div class="thumbnails" id="ThumbnailsActivité">
                 @foreach (var item in Model.ArrayActiviteImage)
                 {
-                    <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageActivite')">
+                    <div class="GrilleImages">
                         <div class="thumbnail">
                             <a href="/Images/Activités/@item">
                                 <img src="/Images/Activités/@item" class="Miniature" alt="" />
                             </a>
                             <br />
-                            <div><button class="close pull-right">&times;</button></div>
+                            <div><button class="close pull-right" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageActivite')">&times;</button></div>
                             <br />
                         </div>
                     </div>

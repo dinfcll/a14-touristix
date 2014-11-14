@@ -47,6 +47,7 @@
 
 var EnvoyerImageBatiment = function () {
 
+    var ThumbnailsBatiment = document.getElementById('ThumbnailsBatiment');
     var _file = document.getElementById('FichierBatiment');
     if (_file.files.length === 0) {
         return;
@@ -69,6 +70,18 @@ var EnvoyerImageBatiment = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             BoutonVoirImage.href = "Images/Batiments/" + _file.value;
             NomImage.innerHTML = _file.value;
+            var Output = "";
+            Output += "<div class='GrilleImages' onclick='SupprimerImage(this, '" + _file.value + "', '/Admin/SupprimerImageBatiment')'>";
+            Output += "<div class='thumbnail'>";
+            Output += "<a href='/Images/Batiments/" + _file.value + "'>";
+            Output += "<img src='/Images/Batiments/" + _file.value + "' class='Miniature' alt='' />";
+            Output += "</a>";
+            Output += "<br />";
+            Output += "<div><button class='close pull-right'>&times;</button></div>";
+            Output += "<br />";
+            Output += "</div>";
+            Output += "</div>";
+            ThumbnailsBatiment.innerHTML += Output;
         }
     };
 
@@ -81,6 +94,7 @@ var EnvoyerImageBatiment = function () {
 
 var EnvoyerImageActivite = function () {
 
+    var ThumbnailsActivite = document.getElementById('ThumbnailsActivité');
     var _file = document.getElementById('FichierActivité');
     if (_file.files.length === 0) {
         return;
@@ -103,6 +117,18 @@ var EnvoyerImageActivite = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             BoutonVoirImage.href = "Images/Activités/" + _file.value;
             NomImage.innerHTML = _file.value;
+            var Output = "";
+            Output += "<div class='GrilleImages' onclick='SupprimerImage(this, '" + _file.value + "', '/Admin/SupprimerImageActivite')'>";
+            Output += "<div class='thumbnail'>";
+            Output += "<a href='/Images/Activités/" + _file.value + "'>";
+            Output += "<img src='/Images/Activités/" + _file.value + "' class='Miniature' alt='' />";
+            Output += "</a>";
+            Output += "<br />";
+            Output += "<div><button class='close pull-right'>&times;</button></div>";
+            Output += "<br />";
+            Output += "</div>";
+            Output += "</div>";
+            ThumbnailsActivite.innerHTML += Output;
         }
     };
 
