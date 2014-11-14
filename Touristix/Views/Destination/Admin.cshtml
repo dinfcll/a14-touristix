@@ -202,7 +202,7 @@
         </form>
 
         <div class="row-fluid">
-            <div class="thumbnails">
+            <div class="thumbnails" id="ThumbnailsDestination">
                 @foreach (var item in Model.ArrayDestinationImage)
                 {
                     <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageDestination')">
@@ -226,7 +226,7 @@
         </form>
 
         <div class="row-fluid">
-            <div class="thumbnails">
+            <div class="thumbnails" id="ThumbnailsBatiment">
                 @foreach (var item in Model.ArrayBatimentImage)
                 {
                     <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageBatiment')">
@@ -250,7 +250,7 @@
         </form>
         
         <div class="row-fluid">
-            <div class="thumbnails">
+            <div class="thumbnails" id="ThumbnailsActivité">
                 @foreach (var item in Model.ArrayActiviteImage)
                 {
                     <div class="GrilleImages" onclick="SupprimerImage(this, '@item', '/Admin/SupprimerImageActivite')">

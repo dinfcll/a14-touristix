@@ -1,5 +1,6 @@
 ﻿var EnvoyerImageDestination = function () {
 
+    var ThumbnailsDestination = document.getElementById('ThumbnailsDestination');
     var _file = document.getElementById('FichierDestination');
     if (_file.files.length === 0) {
         return;
@@ -22,6 +23,18 @@
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             BoutonVoirImage.href = "Images/Destinations/" + _file.value;
             NomImage.innerHTML = _file.value;
+            var Output = "";
+            Output += "<div class='GrilleImages' onclick='SupprimerImage(this, '" + _file.value + "', '/Admin/SupprimerImageDestination')'>";
+            Output += "<div class='thumbnail'>";
+            Output += "<a href='/Images/Destinations/" + _file.value + "'>";
+            Output += "<img src='/Images/Destinations/" + _file.value + "' class='Miniature' alt='' />";
+            Output += "</a>";
+            Output += "<br />";
+            Output += "<div><button class='close pull-right'>&times;</button></div>";
+            Output += "<br />";
+            Output += "</div>";
+            Output += "</div>";
+            ThumbnailsDestination.innerHTML += Output;
         }
     };
 
