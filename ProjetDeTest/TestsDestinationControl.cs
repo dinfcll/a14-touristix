@@ -140,5 +140,17 @@ namespace ProjetDeTest
                 Assert.AreEqual(TestListAdmin.ArrayActiviteImage[i], liste.ArrayActiviteImage[i]);
             }
         }
+
+        [TestMethod]
+        public void TestDestinationAdminRetourModelListDestinationModel()
+        {
+            var controller = new DestinationController();
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var liste = (AdministrationList)result.ViewData.Model;
+
+            List<DestinationModel> ListDestinationModel = db.Destinations.ToList();
+
+            Assert.AreEqual(ListDestinationModel.ToString(), liste.ListDestinationModel.ToString());
+        }
     }
 }
