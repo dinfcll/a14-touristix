@@ -23,7 +23,7 @@ namespace ProjetDeTest
         }
 
         [TestMethod]
-        public void TestDestinationIndexRetourModelTuple()
+        public void TestDestinationIndexRetourModelTupleItem1Array5DerniereDestination()
         {
             var controller = new DestinationController();
             var result = controller.Index() as ViewResult;
@@ -32,30 +32,46 @@ namespace ProjetDeTest
             var TestDestinations = from m in db.Destinations
                                                         select m;
 
+            DestinationModel[] TestArray5DerniereDestination = db.Destinations
+                    .OrderByDescending(m => m.Nom)
+                    .Take(5)
+                    .ToArray();
+
+            Assert.AreEqual(TestArray5DerniereDestination.ToString(), tuple.Item1.ToString());
+        }
+
+        [TestMethod]
+        public void TestDestinationIndexRetourModelTupleItem2DestinationRecu()
+        {
+            var controller = new DestinationController();
+            var result = controller.Index() as ViewResult;
+            var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
+
+            var TestDestinations = from m in db.Destinations
+                                   select m;
+
+            object TestDestinationRecu = TestDestinations.GroupBy(item => item.Pays);
+
+            Assert.AreEqual(TestDestinationRecu.ToString(), tuple.Item2.ToString());
+        }
+
+        [TestMethod]
+        public void TestDestinationIndexRetourModelTupleItem3ListePays()
+        {
+            var controller = new DestinationController();
+            var result = controller.Index() as ViewResult;
+            var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
+
+            var TestDestinations = from m in db.Destinations
+                                   select m;
+
             var TestSelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays => Pays);
 
             var TestListePays = new List<SelectListItem>(TestSelectPays.Count());
 
             Assistant.RemplirListe(ref TestListePays, TestSelectPays);
 
-            object TestDestinationRecu = TestDestinations.GroupBy(item => item.Pays);
-
-            DestinationModel[] TestArray5DerniereDestination = db.Destinations
-                    .OrderByDescending(m => m.Nom)
-                    .Take(5)
-                    .ToArray();
-
-            for (int i = 0; i < TestArray5DerniereDestination.Length; i++)
-            {
-                Assert.AreEqual(TestArray5DerniereDestination[i].Nom, tuple.Item1[i].Nom);
-            }
-
-            Assert.AreEqual(TestDestinationRecu.ToString(), tuple.Item2.ToString());
-
-            for (int i = 0; i < TestListePays.Count; i++)
-            {
-                Assert.AreEqual(TestListePays[i].Value, tuple.Item3[i].Value);
-            }
+            Assert.AreEqual(TestListePays.ToString(), tuple.Item3.ToString());
         }
 
         [TestMethod]
