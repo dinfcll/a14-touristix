@@ -10,6 +10,8 @@ namespace Touristix.Controllers
     public class AdminController : Controller
     {
         const string MessageSuppressImage = "Image supprimée";
+        const string MessageTeleversementEchoue = "Le téléversement a échoué";
+        const string MessageTeleversementComplete = "Téléversement complété";
 
         public ActionResult Index()
         {
@@ -18,65 +20,38 @@ namespace Touristix.Controllers
 
         public JsonResult ReceptionImageDestination()
         {
-            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
-
-            for (int i = 0; i < Request.Files.Count; i++)
-            {
-                HttpPostedFileBase Image = Request.Files[i];
-
-                string CheminComplet = System.IO.Path.Combine(
-                                       Server.MapPath("~/Images/Destinations/"), System.IO.Path.GetFileName(Image.FileName));
-
-                if (System.IO.File.Exists(CheminComplet))
-                {
-                    return Json("Le téléversement a échoué");
-                }
-
-                Image.SaveAs(CheminComplet);
-            }
-            return Json("Téléversement complété");
+            return ReceptionImage("Destinations");
         }
 
         public JsonResult ReceptionImageBatiment()
         {
-            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
-
-            for (int i = 0; i < Request.Files.Count; i++)
-            {
-                HttpPostedFileBase Image = Request.Files[i];
-
-                string CheminComplet = System.IO.Path.Combine(
-                                       Server.MapPath("~/Images/Batiments/"), System.IO.Path.GetFileName(Image.FileName));
-
-                if (System.IO.File.Exists(CheminComplet))
-                {
-                    return Json("Le téléversement a échoué");
-                }
-
-                Image.SaveAs(CheminComplet);
-            }
-            return Json("Téléversement complété");
+            return ReceptionImage("Batiments");
         }
 
         public JsonResult ReceptionImageActivite()
         {
-            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/Activités/"), "*.*");
+            return ReceptionImage("Activités");
+        }
+
+        private JsonResult ReceptionImage(string Chemin)
+        {
+            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/" + Chemin + "/"), "*.*");
 
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 HttpPostedFileBase Image = Request.Files[i];
 
                 string CheminComplet = System.IO.Path.Combine(
-                                       Server.MapPath("~/Images/Activités/"), System.IO.Path.GetFileName(Image.FileName));
+                                       Server.MapPath("~/Images/" + Chemin + "/"), System.IO.Path.GetFileName(Image.FileName));
 
                 if (System.IO.File.Exists(CheminComplet))
                 {
-                    return Json("Le téléversement a échoué");
+                    return Json(MessageTeleversementEchoue);
                 }
 
                 Image.SaveAs(CheminComplet);
             }
-            return Json("Téléversement complété");
+            return Json(MessageTeleversementComplete);
         }
 
         public JsonResult SupprimerImageDestination(string Nom)
