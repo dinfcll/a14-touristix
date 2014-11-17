@@ -59,6 +59,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestContactControl.cs" />
     <Compile Include="TestModifierDestinationControl.cs" />
     <Compile Include="TestCreerDestinationControl.cs" />
     <Compile Include="TestsDestinationControl.cs" />
