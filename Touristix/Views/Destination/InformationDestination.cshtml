@@ -101,7 +101,7 @@
             string IdNom = "Batiment" + B;
             <dt id=@IdNom></dt>
 
-            <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
+            <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B)</script>
         }
         <br />
     <dt><legend>Activités</legend></dt>
@@ -116,28 +116,25 @@
             string IdNom = "Activite" + B;
             <dt id=@IdNom></dt>
 
-            <script type="text/javascript">ObtenirActivite(@IdActif, "Activite" + @B);</script>
+            <script type="text/javascript">ObtenirActivite(@IdActif, "Activite" + @B)</script>
         }
     </dl> 
 </fieldset>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
-    @if (@ViewData["carte"] != "")
-    {
-        <script>
-
-            var map;
-            function initialize()
-            {
-
+<script type = "text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> 
+   
+        <script type = "text/javascript">
+            function AfficheLaCarte() {
+                var map;                
+                var Lieu = document.getElementById("AfficheCarte").value;                            
                 var mapOptions = {
                     zoom: 8,
                     center: new google.maps.LatLng(-34.397, 150.644)
                 };
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-                new google.maps.Geocoder().geocode({ 'address': "@Model.Item1.Pays, @Model.Item1.Region, @Model.Item1.Ville, @Model.Item1.Nom" }, function (results, status) {
+                new google.maps.Geocoder().geocode({ 'address': Lieu }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var marker = new google.maps.Marker({
                             map: map,
@@ -151,14 +148,16 @@
                         alert("Une erreur s'est produite en affichant la carte: " + status);
                     }
                 });
+                google.maps.event.addDomListener(window, 'load', initialize);
             }
-
-            google.maps.event.addDomListener(window, 'load', initialize);
-    
-</script>
-        }
+        </script>
+        
 @section Map {
-<div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;"/>
+  @Html.Label("Rechercher un lieu par Adresse:")
+  <input type="text" id="AfficheCarte"/>
+  <input type ="button" value="Afficher la carte" onclick="AfficheLaCarte()" />
+
+  <div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;"/>
 }
 <br /><br />
 <h4>Météo</h4>
@@ -178,5 +177,3 @@
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
 </p>
-
-
