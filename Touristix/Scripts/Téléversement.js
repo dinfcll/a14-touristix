@@ -24,13 +24,16 @@
             BoutonVoirImage.href = "Images/Destinations/" + _file.value;
             NomImage.innerHTML = _file.value;
             var Output = "";
-            Output += "<div class='GrilleImages' onclick='SupprimerImage(this, '" + _file.value + "', '/Admin/SupprimerImageDestination')'>";
+            Output += "<div class='GrilleImages'>";
             Output += "<div class='thumbnail'>";
             Output += "<a href='/Images/Destinations/" + _file.value + "'>";
             Output += "<img src='/Images/Destinations/" + _file.value + "' class='Miniature' alt='' />";
             Output += "</a>";
             Output += "<br />";
-            Output += "<div><button class='close pull-right'>&times;</button></div>";
+            Output += "<div>";
+            Output += "<button class='close pull-right' onclick='SupprimerImage(this, \"" + _file.value;
+            Output += "\", \"/Admin/SupprimerImageDestination\")'>&times;</button>"
+            Output += "</div>";
             Output += "<br />";
             Output += "</div>";
             Output += "</div>";
@@ -71,13 +74,16 @@ var EnvoyerImageBatiment = function () {
             BoutonVoirImage.href = "Images/Batiments/" + _file.value;
             NomImage.innerHTML = _file.value;
             var Output = "";
-            Output += "<div class='GrilleImages' onclick='SupprimerImage(this, '" + _file.value + "', '/Admin/SupprimerImageBatiment')'>";
+            Output += "<div class='GrilleImages'>";
             Output += "<div class='thumbnail'>";
             Output += "<a href='/Images/Batiments/" + _file.value + "'>";
             Output += "<img src='/Images/Batiments/" + _file.value + "' class='Miniature' alt='' />";
             Output += "</a>";
             Output += "<br />";
-            Output += "<div><button class='close pull-right'>&times;</button></div>";
+            Output += "<div>";
+            Output += "<button class='close pull-right' onclick='SupprimerImage(this, \"" + _file.value;
+            Output += "\", \"/Admin/SupprimerImageBatiment\")'>&times;</button>"
+            Output += "</div>";
             Output += "<br />";
             Output += "</div>";
             Output += "</div>";
@@ -118,13 +124,16 @@ var EnvoyerImageActivite = function () {
             BoutonVoirImage.href = "Images/Activités/" + _file.value;
             NomImage.innerHTML = _file.value;
             var Output = "";
-            Output += "<div class='GrilleImages' onclick='SupprimerImage(this, '" + _file.value + "', '/Admin/SupprimerImageActivite')'>";
+            Output += "<div class='GrilleImages'>";
             Output += "<div class='thumbnail'>";
             Output += "<a href='/Images/Activités/" + _file.value + "'>";
             Output += "<img src='/Images/Activités/" + _file.value + "' class='Miniature' alt='' />";
             Output += "</a>";
             Output += "<br />";
-            Output += "<div><button class='close pull-right'>&times;</button></div>";
+            Output += "<div>";
+            Output += "<button class='close pull-right' onclick='SupprimerImage(this, \"" + _file.value;
+            Output += "\", \"/Admin/SupprimerImageActivite\")'>&times;</button>"
+            Output += "</div>";
             Output += "<br />";
             Output += "</div>";
             Output += "</div>";
