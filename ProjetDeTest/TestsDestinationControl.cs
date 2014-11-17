@@ -39,12 +39,7 @@ namespace ProjetDeTest
 
             Assistant.RemplirListe(ref TestListePays, TestSelectPays);
 
-            List<DestinationModel> TestDestinationRecu = new List<DestinationModel>();
-
-            foreach (DestinationModel dstElem in TestDestinations.GroupBy(item => item.Pays))
-            {
-                TestDestinationRecu.Add(dstElem);
-            }
+            object TestDestinationRecu = TestDestinations.GroupBy(item => item.Pays);
 
             DestinationModel[] TestArray5DerniereDestination = db.Destinations
                     .OrderByDescending(m => m.Nom)
@@ -56,19 +51,7 @@ namespace ProjetDeTest
                 Assert.AreEqual(TestArray5DerniereDestination[i].Nom, tuple.Item1[i].Nom);
             }
 
-            List<DestinationModel> DestinationRecu = new List<DestinationModel>();
-
-            foreach (DestinationModel dstElem in (IQueryable<IGrouping<string, DestinationModel>>)tuple.Item2)
-            {
-                DestinationRecu.Add(dstElem);
-            }
-
-
-            for (int i = 0; i < TestDestinationRecu.Count; i++)
-            {
-                Assert.AreEqual(TestDestinationRecu[i].Nom,
-                    DestinationRecu[i].Nom);
-            }
+            Assert.AreEqual(TestDestinationRecu.ToString(), tuple.Item2.ToString());
 
             for (int i = 0; i < TestListePays.Count; i++)
             {
