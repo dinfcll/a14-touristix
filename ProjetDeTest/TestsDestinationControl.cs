@@ -23,14 +23,14 @@ namespace ProjetDeTest
             Assert.AreEqual("Index", result.ViewName);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void TestDestinationIndexRetourModelTuple()
         {
             var controller = new DestinationController();
             var result = controller.Index() as ViewResult;
             var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
 
-            IQueryable<DestinationModel> TestDestinations = from m in db.Destinations
+            var TestDestinations = from m in db.Destinations
                                                         select m;
 
             var TestSelectPays = (from m in db.Destinations select m.Pays).Distinct().OrderBy(Pays => Pays);
@@ -53,7 +53,7 @@ namespace ProjetDeTest
 
             for (int i = 0; i < TestArray5DerniereDestination.Length; i++)
             {
-                Assert.AreEqual(TestArray5DerniereDestination[i], tuple.Item1[i]);
+                Assert.AreEqual(TestArray5DerniereDestination[i].Nom, tuple.Item1[i].Nom);
             }
 
             List<DestinationModel> DestinationRecu = new List<DestinationModel>();
@@ -66,15 +66,15 @@ namespace ProjetDeTest
 
             for (int i = 0; i < TestDestinationRecu.Count; i++)
             {
-                Assert.AreEqual(TestDestinationRecu[i],
-                    DestinationRecu[i]);
+                Assert.AreEqual(TestDestinationRecu[i].Nom,
+                    DestinationRecu[i].Nom);
             }
 
             for (int i = 0; i < TestListePays.Count; i++)
             {
-                Assert.AreEqual(TestListePays[i], tuple.Item3[i]);
+                Assert.AreEqual(TestListePays[i].Value, tuple.Item3[i].Value);
             }
-        }*/
+        }
 
         [TestMethod]
         public void TestOuvrirDestinationAdminControlleur()
@@ -84,7 +84,7 @@ namespace ProjetDeTest
             Assert.AreEqual("Admin", result.ViewName);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void TestDestinationAdminRetourModelList()
         {
             var controller = new DestinationController();
@@ -114,17 +114,17 @@ namespace ProjetDeTest
 
             for (int i = 0; i < TestListAdmin.ListDestinationModel.Count; i++)
             {
-                Assert.AreEqual(TestListAdmin.ListDestinationModel[i], liste.ListDestinationModel[i]);
+                Assert.AreEqual(TestListAdmin.ListDestinationModel[i].Nom, liste.ListDestinationModel[i].Nom);
             }
 
             for (int i = 0; i < TestListAdmin.ListBatimentModel.Count; i++)
             {
-                Assert.AreEqual(TestListAdmin.ListBatimentModel[i], liste.ListBatimentModel[i]);
+                Assert.AreEqual(TestListAdmin.ListBatimentModel[i].Nom, liste.ListBatimentModel[i].Nom);
             }
 
             for (int i = 0; i < TestListAdmin.ListActiviteModel.Count; i++)
             {
-                Assert.AreEqual(TestListAdmin.ListActiviteModel[i], liste.ListActiviteModel[i]);
+                Assert.AreEqual(TestListAdmin.ListActiviteModel[i].Nom, liste.ListActiviteModel[i].Nom);
             }
 
             for (int i = 0; i < TestListAdmin.ArrayDestinationImage.Length; i++)
@@ -141,6 +141,6 @@ namespace ProjetDeTest
             {
                 Assert.AreEqual(TestListAdmin.ArrayActiviteImage[i], liste.ArrayActiviteImage[i]);
             }
-        }*/
+        }
     }
 }
