@@ -29,6 +29,15 @@ namespace ProjetDeTest
         }
 
         [TestMethod]
+        public void TestRetourModelModifierDestination()
+        {
+            var controller = new DestinationController();
+            var result = controller.ModifierDestination(1) as ViewResult;
+            var destinationModel = (DestinationModel)result.ViewData.Model;
+            Assert.AreEqual(1,destinationModel.Id);
+        }
+
+        [TestMethod]
         public void TestOuvrirModifierBatimentErreur()
         {
             var controller = new DestinationController();
@@ -45,6 +54,15 @@ namespace ProjetDeTest
         }
 
         [TestMethod]
+        public void TestRetourModelModifierBatiment()
+        {
+            var controller = new DestinationController();
+            var result = controller.ModifierBatiment(1) as ViewResult;
+            var batimentModel = (BatimentModel)result.ViewData.Model;
+            Assert.AreEqual(1, batimentModel.Id);
+        }
+
+        [TestMethod]
         public void TestOuvrirModifierActiviteErreur()
         {
             var controller = new DestinationController();
@@ -58,6 +76,15 @@ namespace ProjetDeTest
             var controller = new DestinationController();
             var result = controller.ModifierActivite(1) as ViewResult;
             Assert.AreEqual("ModifierActivite", result.ViewName);
+        }
+
+        [TestMethod]
+        public void TestRetourModelModifierActivite()
+        {
+            var controller = new DestinationController();
+            var result = controller.ModifierActivite(1) as ViewResult;
+            var activiteModel = (ActiviteModel)result.ViewData.Model;
+            Assert.AreEqual(1, activiteModel.Id);
         }
     }
 }
