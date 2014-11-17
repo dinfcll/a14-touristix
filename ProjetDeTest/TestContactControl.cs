@@ -27,6 +27,5 @@ namespace ProjetDeTest
             var result = controller.Index() as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }
-
     }
 }

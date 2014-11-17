@@ -12,7 +12,6 @@ namespace ProjetDeTest
     [TestClass]
     public class TestCreerDestinationControl
     {
-
         [TestMethod]
         public void TestOuvrirCreerDestination()
         {

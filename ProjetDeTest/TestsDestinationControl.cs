@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Touristix.Controllers;
-using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
 using System.Linq;

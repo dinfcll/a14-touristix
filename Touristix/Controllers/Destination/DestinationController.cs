@@ -69,19 +69,19 @@ namespace Touristix.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult Admin(string urlDestiation, string urlBatiment)
+        public ActionResult Admin(string urlDestination, string urlBatiment)
         {
             AdministrationList NouvelleListe = new AdministrationList();
             NouvelleListe.ListDestinationModel = db.Destinations.ToList();
             NouvelleListe.ListBatimentModel = db.Batiments.ToList();
             NouvelleListe.ListActiviteModel = db.Activites.ToList();
 
-            if (string.IsNullOrEmpty(urlDestiation))
+            if (string.IsNullOrEmpty(urlDestination))
             {
-                urlDestiation = Server.MapPath("~/Images/Destinations/");
+                urlDestination = Server.MapPath("~/Images/Destinations/");
             }
 
-            string[] ArrayDestinationImage = Directory.GetFiles(urlDestiation, "*.*");
+            string[] ArrayDestinationImage = Directory.GetFiles(urlDestination, "*.*");
             NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
             for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
             {
