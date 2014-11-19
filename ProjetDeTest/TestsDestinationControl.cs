@@ -83,65 +83,6 @@ namespace ProjetDeTest
         }
 
         [TestMethod]
-        public void TestDestinationAdminRetourModelList()
-        {
-            var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
-            var liste = (AdministrationList)result.ViewData.Model;
-
-            AdministrationList TestListAdmin = new AdministrationList();
-            TestListAdmin.ListDestinationModel = db.Destinations.ToList();
-            TestListAdmin.ListBatimentModel = db.Batiments.ToList();
-            TestListAdmin.ListActiviteModel = db.Activites.ToList();
-
-            string[] ArrayDestinationImage = Directory.GetFiles("../../../Touristix/Images/Destinations/", "*.*");
-            TestListAdmin.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
-            for (int D = ArrayDestinationImage.Length - 1; D >= 0; --D)
-            {
-                TestListAdmin.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
-            }
-
-            string[] ArrayBatimentImage = Directory.GetFiles("../../../Touristix/Images/Batiments/", "*.*");
-            TestListAdmin.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
-            for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
-            {
-                TestListAdmin.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
-            }
-
-            TestListAdmin.ArrayActiviteImage = new string[0];
-
-            for (int i = 0; i < TestListAdmin.ListDestinationModel.Count; i++)
-            {
-                Assert.AreEqual(TestListAdmin.ListDestinationModel[i].Nom, liste.ListDestinationModel[i].Nom);
-            }
-
-            for (int i = 0; i < TestListAdmin.ListBatimentModel.Count; i++)
-            {
-                Assert.AreEqual(TestListAdmin.ListBatimentModel[i].Nom, liste.ListBatimentModel[i].Nom);
-            }
-
-            for (int i = 0; i < TestListAdmin.ListActiviteModel.Count; i++)
-            {
-                Assert.AreEqual(TestListAdmin.ListActiviteModel[i].Nom, liste.ListActiviteModel[i].Nom);
-            }
-
-            for (int i = 0; i < TestListAdmin.ArrayDestinationImage.Length; i++)
-            {
-                Assert.AreEqual(TestListAdmin.ArrayDestinationImage[i], liste.ArrayDestinationImage[i]);
-            }
-
-            for (int i = 0; i < TestListAdmin.ArrayBatimentImage.Length; i++)
-            {
-                Assert.AreEqual(TestListAdmin.ArrayBatimentImage[i], liste.ArrayBatimentImage[i]);
-            }
-
-            for (int i = 0; i < TestListAdmin.ArrayActiviteImage.Length; i++)
-            {
-                Assert.AreEqual(TestListAdmin.ArrayActiviteImage[i], liste.ArrayActiviteImage[i]);
-            }
-        }
-
-        [TestMethod]
         public void TestDestinationAdminRetourModelListDestinationModel()
         {
             var controller = new DestinationController();
@@ -151,6 +92,68 @@ namespace ProjetDeTest
             List<DestinationModel> ListDestinationModel = db.Destinations.ToList();
 
             Assert.AreEqual(ListDestinationModel.ToString(), liste.ListDestinationModel.ToString());
+        }
+
+        [TestMethod]
+        public void TestDestinationAdminRetourModelListBatimentModel()
+        {
+            var controller = new DestinationController();
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var liste = (AdministrationList)result.ViewData.Model;
+
+            List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
+
+            Assert.AreEqual(ListBatimentModel.ToString(), liste.ListBatimentModel.ToString());
+        }
+
+        [TestMethod]
+        public void TestDestinationAdminRetourModelListActiviteModel()
+        {
+            var controller = new DestinationController();
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var liste = (AdministrationList)result.ViewData.Model;
+
+            List<ActiviteModel> ListActiviteModel = db.Activites.ToList();
+
+            Assert.AreEqual(ListActiviteModel.ToString(), liste.ListBatimentModel.ToString());
+        }
+
+        [TestMethod]
+        public void TestDestinationAdminRetourModelListArrayDestinationImage()
+        {
+            var controller = new DestinationController();
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var liste = (AdministrationList)result.ViewData.Model;
+
+            string[] ArrayDestinationImage = Directory.GetFiles("../../../Touristix/Images/Destinations/", "*.*");
+            string TestDestinationImage = Path.GetFileName(ArrayDestinationImage[0]);
+
+            Assert.AreEqual(TestDestinationImage, liste.ArrayDestinationImage[0]);
+        }
+
+        [TestMethod]
+        public void TestDestinationAdminRetourModelListArrayBatimentImage()
+        {
+            var controller = new DestinationController();
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var liste = (AdministrationList)result.ViewData.Model;
+
+            string[] ArrayBatimentImage = Directory.GetFiles("../../../Touristix/Images/Batiments/", "*.*");
+            string TestBatimentImage = Path.GetFileName(ArrayBatimentImage[0]);
+
+            Assert.AreEqual(TestBatimentImage, liste.ArrayDestinationImage[0]);
+        }
+
+        [TestMethod]
+        public void TestDestinationAdminRetourModelListArrayActiviteImage()
+        {
+            var controller = new DestinationController();
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var liste = (AdministrationList)result.ViewData.Model;
+
+            string[] ArrayActiviteImage = new string[0];
+
+            Assert.AreEqual(ArrayActiviteImage.ToString(), liste.ArrayActiviteImage.ToString());
         }
     }
 }
