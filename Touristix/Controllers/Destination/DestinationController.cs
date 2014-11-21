@@ -102,7 +102,7 @@ namespace Touristix.Controllers
 
             if (string.IsNullOrEmpty(urlActivite))
             {
-                urlBatiment = Server.MapPath("~/Images/Batiments/");
+                urlActivite = Server.MapPath("~/Images/Activités/");
             }
 
             string[]  ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
