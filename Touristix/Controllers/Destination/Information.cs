@@ -34,8 +34,8 @@ namespace Touristix.Controllers
                 }
             }
 
-            ViewData["Verif"] = "Erreur";           
-            return View(DestinationModelActif);
+            ViewData["Verif"] = "Erreur";
+            return View(new Tuple<DestinationModel, Temperature>(DestinationModelActif, null));
         }
 
         public ActionResult InformationBatiment(int id = 0)

@@ -1,10 +1,11 @@
-﻿@model Tuple<Touristix.Models.DestinationModel, Touristix.Models.Temperature >
+﻿@model Tuple<Touristix.Models.DestinationModel, Touristix.Models.Temperature>
 
 @{
     ViewBag.Title = "Information";
 }
-
-<img src= "/Images/Destinations/@Model.Item1.Image" alt="Image" />
+<object data="/Images/Destinations/@Model.Item1.Image" type="image/png">
+    Image non disponible
+</object>
 
 <script type="text/javascript">
     function ObtenirBatiment(Id, NomObjet) {
@@ -156,19 +157,22 @@
 }
 <br /><br />
 <h4>Météo</h4>
-<h5>Prévisions actuelles</h5>    
-    Pays: @Model.Item2.sys.country <br />
-    Température actuelle: @Model.Item2.main.temp<br/>  
-    Pression: @Model.Item2.main.pressure kPa <br />
-    Taux d'humidité: @Model.Item2.main.humidity % <br />
-    Vitesse du vent: @Model.Item2.wind.speed km/h<br/>
-    Direction du vent: @Model.Item2.wind.DirectionVent<br />
-    Temps actuel: @Model.Item2.weather[0].description
+<h5>Prévisions actuelles</h5>
+@if (Model.Item2 != null)
+{
+    @Html.Raw("Pays: @Model.Item2.sys.country"); <br />
+    @Html.Raw("Température actuelle: @Model.Item2.main.temp"); <br/>
+    @Html.Raw("Pression: @Model.Item2.main.pressure kPa"); <br />
+    @Html.Raw("Taux d'humidité: @Model.Item2.main.humidity %"); <br />
+    @Html.Raw("Vitesse du vent: @Model.Item2.wind.speed km/h");<br/>
+    @Html.Raw("Direction du vent: @Model.Item2.wind.DirectionVent");<br />
+    @Html.Raw("Temps actuel: @Model.Item2.weather[0].description");
     <img src ="@Model.Item2.weather[0].icon" alt="image manquant" /><br/>      
     
 <h5>Tendances</h5>
-    Température minimale: @Model.Item2.main.temp_min<br/>
-    Température maximale: @Model.Item2.main.temp_max<br/> <br/> <br/> 
+    @Html.Raw("Température minimale: @Model.Item2.main.temp_min");<br/>
+    @Html.Raw("Température maximale: @Model.Item2.main.temp_max");<br/> <br/> <br/>
+}
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
 </p>
