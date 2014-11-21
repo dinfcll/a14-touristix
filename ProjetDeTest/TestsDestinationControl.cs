@@ -113,9 +113,9 @@ namespace ProjetDeTest
             var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
-            List<ActiviteModel> ListActiviteModel = db.Activites.ToList();
+            List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
 
-            Assert.AreEqual(ListActiviteModel.ToString(), liste.ListBatimentModel.ToString());
+            Assert.AreEqual(ListBatimentModel.ToString(), liste.ListBatimentModel.ToString());
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace ProjetDeTest
             string[] ArrayBatimentImage = Directory.GetFiles("../../../Touristix/Images/Batiments/", "*.*");
             string TestBatimentImage = Path.GetFileName(ArrayBatimentImage[0]);
 
-            Assert.AreEqual(TestBatimentImage, liste.ArrayDestinationImage[0]);
+            Assert.AreEqual(TestBatimentImage, liste.ArrayBatimentImage[0]);
         }
 
         [TestMethod]
