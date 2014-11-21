@@ -102,7 +102,7 @@
                 <ul>
                 @foreach (var item in group.Value)
                 {
-                    <li>@Html.ActionLink(item.Nom, "InformationActivité", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, "../Destination/InformationActivite", new { id = item.Id })</li>
                     nbActivité++;
                 }
                 </ul>
@@ -114,7 +114,7 @@
                 <ul>
                 @foreach (var item in ActivitéParOrdre)
                 {
-                    <li>@Html.ActionLink(item.Nom, "InformationActivité", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, "../Destination/InformationActivite", new { id = item.Id })</li>
                     nbActivité++;
                 }
                 </ul>
