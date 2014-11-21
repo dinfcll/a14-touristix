@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Information";
 }
-<object data="/Images/Destinations/@Model.Item1.Image" type="image/png">
-    Image non disponible
-</object>
+<img src="/Images/Destinations/@Model.Item1.Image"
+    onerror='if (this.src != "error.jpg") this.src = "error.jpg";this.alt="Image non disponible"; this.onerror=""'
+    alt="@Model.Item1.Image"/>
 
 <script type="text/javascript">
     function ObtenirBatiment(Id, NomObjet) {
