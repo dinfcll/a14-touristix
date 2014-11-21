@@ -78,7 +78,7 @@ namespace ProjetDeTest
         public void TestOuvrirDestinationAdminControlleur()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             Assert.AreEqual("Admin", result.ViewName);
         }
 
@@ -86,7 +86,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListDestinationModel()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<DestinationModel> ListDestinationModel = db.Destinations.ToList();
@@ -98,7 +98,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListBatimentModel()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
@@ -110,7 +110,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListActiviteModel()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
@@ -122,7 +122,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListArrayDestinationImage()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayDestinationImage = Directory.GetFiles("../../../Touristix/Images/Destinations/", "*.*");
@@ -135,7 +135,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListArrayBatimentImage()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayBatimentImage = Directory.GetFiles("../../../Touristix/Images/Batiments/", "*.*");
@@ -148,7 +148,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListArrayActiviteImage()
         {
             var controller = new DestinationController();
-            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/") as ViewResult;
+            var result = controller.Admin("../../../Touristix/Images/Destinations/", "../../../Touristix/Images/Batiments/", "../../../Touristix/Images/Activités/") as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayActiviteImage = new string[0];

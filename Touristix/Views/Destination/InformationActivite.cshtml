@@ -4,7 +4,8 @@
     ViewBag.Title = "Information";
 }
 
-<img src= "/Images/Activite/@Model.Image" alt="Image" />
+<script type="text/javascript" src="/Scripts/Touristix/Erreur Image.js"></script>
+<img src="/Images/Activite/@Model.Image" onerror="ErreurImage(this)" alt="@Model.Image"/>
 
 <fieldset>
     <legend>@Html.DisplayFor(model => model.Nom)</legend>

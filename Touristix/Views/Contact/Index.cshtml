@@ -16,7 +16,14 @@
         @Html.RadioButton("tri", "Information", new { onchange = "this.form.submit();" })Informations   &nbsp;&nbsp;&nbsp;
         @Html.RadioButton("tri", "Commentaire", new { onchange = "this.form.submit();" })Commentaires   &nbsp;&nbsp;&nbsp;
         @Html.RadioButton("tri", "Plainte", new { onchange = "this.form.submit();" })Plaintes&nbsp;&nbsp;&nbsp;
-        @Html.RadioButton("tri", "Aucun", new { onchange = "this.form.submit();" })Aucun filtre<br /> <br />      
+        @if (ViewData["query"] == "")
+        {
+            @Html.RadioButton("tri", "Aucun", new { onchange = "this.form.submit();", @checked = "true" })<span>Aucun filtre<br /> <br />  </span>
+        }
+        else
+        {
+            @Html.RadioButton("tri", "Aucun", new { onchange = "this.form.submit();" })<span>Aucun filtre<br /> <br />  </span>
+        }   
     </div>   
 }
 
@@ -67,10 +74,10 @@
     }
 }
 else
-{   
-    
-        foreach (var item in Model.Item1.contacts)
-        {
+{
+
+    foreach (var item in Model.Item1.contacts)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.id)

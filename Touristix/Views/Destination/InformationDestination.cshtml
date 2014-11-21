@@ -1,10 +1,11 @@
-﻿@model Tuple<Touristix.Models.DestinationModel, Touristix.Models.Temperature >
+﻿@model Tuple<Touristix.Models.DestinationModel, Touristix.Models.Temperature>
 
 @{
     ViewBag.Title = "Information";
 }
 
-<img src= "/Images/Destinations/@Model.Item1.Image" alt="Image" />
+<script type="text/javascript" src="/Scripts/Touristix/Erreur Image.js"></script>
+<img src="/Images/Destinations/@Model.Item1.Image" onerror="ErreurImage(this)" alt="@Model.Item1.Image"/>
 
 <script type="text/javascript">
     function ObtenirBatiment(Id, NomObjet) {
@@ -101,7 +102,7 @@
             string IdNom = "Batiment" + B;
             <dt id=@IdNom></dt>
 
-            <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B);</script>
+            <script type="text/javascript">ObtenirBatiment(@IdActif, "Batiment" + @B)</script>
         }
         <br />
     <dt><legend>Activités</legend></dt>
@@ -116,23 +117,24 @@
             string IdNom = "Activite" + B;
             <dt id=@IdNom></dt>
 
-            <script type="text/javascript">ObtenirActivite(@IdActif, "Activite" + @B);</script>
+            <script type="text/javascript">ObtenirActivite(@IdActif, "Activite" + @B)</script>
         }
     </dl> 
 </fieldset>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-<script>
-    var map;
-    function initialize()
-    {
+<script type = "text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> 
+   
+<script type = "text/javascript">
+    function AfficheLaCarte() {
+        var map;                
+        var Lieu = document.getElementById("AfficheCarte").value;                            
         var mapOptions = {
             zoom: 8,
             center: new google.maps.LatLng(-34.397, 150.644)
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-        new google.maps.Geocoder().geocode({ 'address': "@Model.Item1.Pays, @Model.Item1.Region, @Model.Item1.Ville, @Model.Item1.Nom" }, function (results, status) {
+        new google.maps.Geocoder().geocode({ 'address': Lieu }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var marker = new google.maps.Marker({
                     map: map,
@@ -146,31 +148,35 @@
                 alert("Une erreur s'est produite en affichant la carte: " + status);
             }
         });
+        google.maps.event.addDomListener(window, 'load', initialize);
     }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
+        
 @section Map {
-<div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;"/>
+  @Html.Label("Rechercher un lieu par adresse:")
+  <input type="text" id="AfficheCarte"/>
+  <input type ="button" value="Afficher la carte" onclick="AfficheLaCarte()" />
+
+  <div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;"/>
 }
 <br /><br />
 <h4>Météo</h4>
-<h5>Prévisions actuelles</h5>    
-    Pays: @Model.Item2.sys.country <br />
-    Température actuelle: @Model.Item2.main.temp<br/>  
-    Pression: @Model.Item2.main.pressure kPa <br />
-    Taux d'humidité: @Model.Item2.main.humidity % <br />
-    Vitesse du vent: @Model.Item2.wind.speed km/h<br/>
-    Direction du vent: @Model.Item2.wind.DirectionVent<br />
-    Temps actuel: @Model.Item2.weather[0].description
+<h5>Prévisions actuelles</h5>
+@if (Model.Item2 != null)
+{
+    @Html.Raw("Pays: @Model.Item2.sys.country"); <br />
+    @Html.Raw("Température actuelle: @Model.Item2.main.temp"); <br/>
+    @Html.Raw("Pression: @Model.Item2.main.pressure kPa"); <br />
+    @Html.Raw("Taux d'humidité: @Model.Item2.main.humidity %"); <br />
+    @Html.Raw("Vitesse du vent: @Model.Item2.wind.speed km/h");<br/>
+    @Html.Raw("Direction du vent: @Model.Item2.wind.DirectionVent");<br />
+    @Html.Raw("Temps actuel: @Model.Item2.weather[0].description");
     <img src ="@Model.Item2.weather[0].icon" alt="image manquant" /><br/>      
     
 <h5>Tendances</h5>
-    Température minimale: @Model.Item2.main.temp_min<br/>
-    Température maximale: @Model.Item2.main.temp_max<br/> <br/> <br/> 
+    @Html.Raw("Température minimale: @Model.Item2.main.temp_min");<br/>
+    @Html.Raw("Température maximale: @Model.Item2.main.temp_max");<br/> <br/> <br/>
+}
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
 </p>
-
-

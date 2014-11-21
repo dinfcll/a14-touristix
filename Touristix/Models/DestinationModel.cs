@@ -45,6 +45,8 @@ namespace Touristix.Models
         public string Details { get; set; }
 
         public string URL { get; set; }
+
+        public string TypeURL { get; set; }
     }
 
     public class ActiviteModel

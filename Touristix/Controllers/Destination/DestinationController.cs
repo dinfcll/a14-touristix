@@ -69,7 +69,7 @@ namespace Touristix.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult Admin(string urlDestination, string urlBatiment)
+        public ActionResult Admin(string urlDestination, string urlBatiment, string urlActivite)
         {
             AdministrationList NouvelleListe = new AdministrationList();
             NouvelleListe.ListDestinationModel = db.Destinations.ToList();
@@ -100,7 +100,17 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
 
-            NouvelleListe.ArrayActiviteImage = new string[0];
+            if (string.IsNullOrEmpty(urlActivite))
+            {
+                urlBatiment = Server.MapPath("~/Images/Batiments/");
+            }
+
+            string[]  ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
+            NouvelleListe.ArrayActiviteImage = new string[ArrayActiviteImage.Length];
+            for (int D = ArrayActiviteImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
+            }
 
             return View("Admin", NouvelleListe);
         }
@@ -132,9 +142,13 @@ namespace Touristix.Controllers
 
         public void MettreAJourBatiment(BatimentModel BatimentModelActif)
         {
-            if (BatimentModelActif.URL.StartsWith("www."))
+            if (BatimentModelActif.TypeURL == "http")
             {
                 BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
+            }
+            else
+            {
+                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "https://");
             }
         }
 
