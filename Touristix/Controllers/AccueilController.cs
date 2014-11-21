@@ -15,7 +15,7 @@ namespace Touristix.Controllers
 
         public ActionResult Index(string url)
         {
-            if (url == null)
+            if (string.IsNullOrEmpty(url))
             {
                 url = Server.MapPath("~/Images/Destinations/");
             }

@@ -69,34 +69,50 @@ namespace Touristix.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult Admin()
+        public ActionResult Admin(string urlDestination, string urlBatiment, string urlActivite)
         {
             AdministrationList NouvelleListe = new AdministrationList();
             NouvelleListe.ListDestinationModel = db.Destinations.ToList();
             NouvelleListe.ListBatimentModel = db.Batiments.ToList();
             NouvelleListe.ListActiviteModel = db.Activites.ToList();
-            string[] ArrayDestinationImage = Directory.GetFiles(Server.MapPath("~/Images/Destinations/"), "*.*");
+
+            if (string.IsNullOrEmpty(urlDestination))
+            {
+                urlDestination = Server.MapPath("~/Images/Destinations/");
+            }
+
+            string[] ArrayDestinationImage = Directory.GetFiles(urlDestination, "*.*");
             NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
             for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
             {
                 NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
 
-            string[] ArrayBatimentImage = Directory.GetFiles(Server.MapPath("~/Images/Batiments/"), "*.*");
+            if (string.IsNullOrEmpty(urlBatiment))
+            {
+                urlBatiment = Server.MapPath("~/Images/Batiments/");
+            }
+
+            string[] ArrayBatimentImage = Directory.GetFiles(urlBatiment, "*.*");
             NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
             for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
             {
                 NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
 
-            string[]  ArrayActiviteImage = Directory.GetFiles(Server.MapPath("~/Images/Activités/"), "*.*");
+            if (string.IsNullOrEmpty(urlActivite))
+            {
+                urlBatiment = Server.MapPath("~/Images/Batiments/");
+            }
+
+            string[]  ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
             NouvelleListe.ArrayActiviteImage = new string[ArrayActiviteImage.Length];
             for (int D = ArrayActiviteImage.Length - 1; D >= 0; --D)
             {
                 NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
             }
 
-            return View(NouvelleListe);
+            return View("Admin", NouvelleListe);
         }
 
         public void MettreAJourDestination(DestinationModel DestinationModelActif)

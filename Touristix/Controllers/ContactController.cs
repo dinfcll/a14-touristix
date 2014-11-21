@@ -16,7 +16,7 @@ namespace Touristix.Controllers
         [HttpGet]
         public ActionResult ContactForm()
         {
-            return View();
+            return View("ContactForm");
         }
 
         [HttpPost]
@@ -98,7 +98,7 @@ namespace Touristix.Controllers
         {
             ViewData["query"] = "";
             ContactMessage mess = new ContactMessage();
-            return View(new Tuple<Touristix.Models.ContactMessage, IEnumerable<Touristix.Models.ContactDB>>(mess, db.Contacts.ToList()));
+            return View("Index", new Tuple<Touristix.Models.ContactMessage, IEnumerable<Touristix.Models.ContactDB>>(mess, db.Contacts.ToList()));
         }
 
         [Authorize(Roles = "admin")]

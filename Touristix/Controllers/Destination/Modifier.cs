@@ -20,7 +20,7 @@ namespace Touristix.Controllers
                 return HttpNotFound();
             }
 
-            return View(DestinationModelActif);
+            return View("ModifierDestination", DestinationModelActif);
         }
 
         [Authorize(Roles = "admin")]
@@ -35,7 +35,7 @@ namespace Touristix.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Admin");
             }
-            return View(DestinationModelActif.Id);
+            return View("ModifierDestination", DestinationModelActif.Id);
         }
 
         [Authorize(Roles = "admin")]
@@ -57,7 +57,7 @@ namespace Touristix.Controllers
                 BatimentModelActif.URL = BatimentModelActif.URL.Remove(0, 8);
             }
 
-            return View(BatimentModelActif);
+            return View("ModifierBatiment", BatimentModelActif);
         }
 
         [Authorize(Roles = "admin")]
@@ -72,7 +72,7 @@ namespace Touristix.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Admin");
             }
-            return View(BatimentModelActif);
+            return View("ModifierBatiment", BatimentModelActif);
         }
 
         [Authorize(Roles = "admin")]
@@ -83,7 +83,7 @@ namespace Touristix.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ActiviteModelActif);
+            return View("ModifierActivite", ActiviteModelActif);
         }
 
         [Authorize(Roles = "admin")]
@@ -96,7 +96,7 @@ namespace Touristix.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Admin");
             }
-            return View(ActiviteModelActif);
+            return View("ModifierActivite", ActiviteModelActif);
         }
     }
 }
