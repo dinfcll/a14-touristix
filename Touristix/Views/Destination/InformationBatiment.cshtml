@@ -4,9 +4,8 @@
     ViewBag.Title = "Information";
 }
 
-<img src="/Images/Batiments/@Model.Image"
-    onerror='if (this.src != "error.jpg") this.src = "error.jpg";this.alt="Image non disponible"; this.onerror=""'
-    alt="@Model.Image"/>
+<script type="text/javascript" src="/Scripts/Touristix/Erreur Image.js"></script>
+<img src="/Images/Batiments/@Model.Image" onerror="ErreurImage(this)" alt="@Model.Image"/>
 
 <fieldset>
     <legend>@Html.DisplayFor(model => model.Nom)</legend>
