@@ -45,7 +45,7 @@ namespace Touristix.Controllers
             {
                 return HttpNotFound();
             }
-            return View(BatimentModelActif);
+            return View(BatimentModelActif);            
         }
 
         public ActionResult InformationActivite(int id = 0)

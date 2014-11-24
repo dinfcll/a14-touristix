@@ -32,6 +32,17 @@
             })
             @Html.ValidationMessageFor(model => model.Lieu)
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ville)
+            @Html.TextBoxFor(model => model.Ville, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez ville",
+                type = "text"
+            })
+            @Html.ValidationMessageFor(model => model.Ville)
+        </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Adresse)

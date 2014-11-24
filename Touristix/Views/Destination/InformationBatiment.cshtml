@@ -1,24 +1,26 @@
-﻿@model Tuple<Touristix.Models.BatimentModel, Touristix.Models.DestinationModel>
+﻿@model Touristix.Models.BatimentModel
 
 @{
     ViewBag.Title = "Information";
 }
 
 <script type="text/javascript" src="/Scripts/Touristix/Erreur Image.js"></script>
-<img src="/Images/Batiments/@Model.Item1.Image" onerror="ErreurImage(this)" alt="@Model.Item1.Image"/>
+<img src="/Images/Batiments/@Model.Image" onerror="ErreurImage(this)" alt="@Model.Image"/>
 
 <fieldset>
-    <legend>@Html.DisplayFor(model => model.Item1.Nom)</legend>
+    <legend>@Html.DisplayFor(model => model.Nom)</legend>
 
     <dl>
-        <dt>@Html.DisplayNameFor(model => model.Item1.URL)</dt>
-        <dd><a href="@Html.DisplayFor(model => model.Item1.URL)">@Html.DisplayFor(model => model.Item1.URL)</a></dd>
-        <dt>@Html.DisplayNameFor(model => model.Item1.Adresse)</dt>
-        <dd>@Html.DisplayFor(model => model.Item1.Adresse)</dd>
+        <dt>@Html.DisplayNameFor(model => model.URL)</dt>
+        <dd><a href="@Html.DisplayFor(model => model.URL)">@Html.DisplayFor(model => model.URL)</a></dd>
+        <dt>@Html.DisplayNameFor(model => model.Ville)</dt>
+        <dd>@Html.DisplayFor(model => model.Ville)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Adresse)</dt>
+        <dd>@Html.DisplayFor(model => model.Adresse)</dd>
         <dt>Aperçu</dt>
-        <dd>@Html.DisplayFor(model => model.Item1.Apercu)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Item1.Details)</dt>
-        <dd>@Html.DisplayFor(model => model.Item1.Details)</dd>
+        <dd>@Html.DisplayFor(model => model.Apercu)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Details)</dt>
+        <dd>@Html.DisplayFor(model => model.Details)</dd>
     </dl>
 </fieldset>
 
@@ -26,8 +28,8 @@
    
 <script type = "text/javascript">
     window.onload = AfficheLaCarte;
-    function AfficheLaCarte() {
-        var donnee = Model.Item2.Ville;
+    function onload() {
+        var donnee = Model.Ville;
         alert(donnee);/*
         
         var map;
