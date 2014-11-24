@@ -10,11 +10,12 @@ namespace ProjetDeTest
     [TestClass]
     public class TestsAccueil
     {
+        const string urlImagesDestinations = "../../../Touristix/Images/Destinations/";
         [TestMethod]
         public void TestOuvrirAccueilControlleur()
         {
             var controller = new AccueilController();
-            var result = controller.Index("../../../Touristix/Images/Destinations/") as ViewResult;
+            var result = controller.Index(urlImagesDestinations) as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }
 
@@ -22,12 +23,12 @@ namespace ProjetDeTest
         public void TestAccueilRetourTableauImages()
         {
             var controller = new AccueilController();
-            var result = controller.Index("../../../Touristix/Images/Destinations/") as ViewResult;
+            var result = controller.Index(urlImagesDestinations) as ViewResult;
             var images = (ImagesAccueilModel)result.ViewData.Model;
 
             string[] ExtensionsRecherche = { ".png", ".jpg", ".bmp" };
 
-            string[] TestTableauImagesAccueil = Directory.GetFiles("../../../Touristix/Images/Destinations/", "*.*")
+            string[] TestTableauImagesAccueil = Directory.GetFiles(urlImagesDestinations, "*.*")
                 .Where(f => ExtensionsRecherche.Contains(new FileInfo(f).Extension.ToLower())).ToArray();
 
             for (int i = 0; i < TestTableauImagesAccueil.Length; i++)
