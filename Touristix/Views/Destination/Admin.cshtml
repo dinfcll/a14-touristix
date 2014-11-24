@@ -23,30 +23,32 @@
 <script type="text/javascript">
 
     function SupprimerImage(TagImage, Nom, url) {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        }
-        else {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                Succes(xmlhttp.responseText);
+        if (confirm("Voulez-vous vraiment supprimer cette image?")) {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
             }
-        }
-        var params = "Nom=" + Nom
-        xmlhttp.open("POST", url);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.setRequestHeader("Content-length", params.length);
-        xmlhttp.setRequestHeader("Connection", "close");
-        xmlhttp.send(params);
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
 
-        function Succes(response) {
-            alert("Image supprimée");
-            var TagASupprimer = TagImage.parentNode.parentNode;
-            TagASupprimer.parentNode.removeChild(TagASupprimer);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    Succes(xmlhttp.responseText);
+                }
+            }
+            var params = "Nom=" + Nom
+            xmlhttp.open("POST", url);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.setRequestHeader("Content-length", params.length);
+            xmlhttp.setRequestHeader("Connection", "close");
+            xmlhttp.send(params);
+
+            function Succes(response) {
+                alert("Image supprimée");
+                var TagASupprimer = TagImage.parentNode.parentNode;
+                TagASupprimer.parentNode.removeChild(TagASupprimer);
+            }
         }
     }
 
