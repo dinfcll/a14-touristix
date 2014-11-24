@@ -34,6 +34,16 @@
         </div>
         
         <div class="form-group">
+            @Html.LabelFor(model => model.Adresse)
+            @Html.TextBoxFor(model => model.Adresse, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez adresse",
+                type = "text"
+            })           
+        </div>
+        
+        <div class="form-group">
             @Html.LabelFor(model => model.Image)
             @Html.TextBoxFor(model => model.Image, new
             {

@@ -27,6 +27,17 @@
         
         @Html.Partial("~/Views/Destination/_AjoutModifActivite.cshtml", Model)
         
+         <div class="form-group">
+            @Html.LabelFor(model => model.Adresse)
+            @Html.TextBoxFor(model => model.Adresse, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez adresse",
+                type = "text"
+            })
+            @Html.ValidationMessageFor(model => model.Adresse)
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Image)
             @Html.TextBoxFor(model => model.Image, new

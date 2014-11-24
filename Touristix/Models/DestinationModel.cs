@@ -43,6 +43,8 @@ namespace Touristix.Models
         public string Apercu { get; set; }
         [Required]
         public string Details { get; set; }
+        [Required]
+        public string Adresse { get; set; }
 
         public string URL { get; set; }
 
@@ -63,6 +65,8 @@ namespace Touristix.Models
         public string Apercu { get; set; }
         [Required]
         public string Details { get; set; }
+
+        public string Adresse { get; set; }
     }
 
     /// <summary>

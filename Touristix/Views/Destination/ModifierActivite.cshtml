@@ -33,15 +33,25 @@
             })
             @Html.ValidationMessageFor(model => model.Lieu)
         </div>
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adresse)
+            @Html.TextBoxFor(model => model.Adresse, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez adresse",
+                type = "text"
+           })            
+        </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Image)
             @Html.EditorFor(model => model.Image, new
-            {
-                @class = "form-control",
-                placeholder = "Entrez image",
-                type = "text"
-            })
+       {
+           @class = "form-control",
+           placeholder = "Entrez image",
+           type = "text"
+       })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
         
