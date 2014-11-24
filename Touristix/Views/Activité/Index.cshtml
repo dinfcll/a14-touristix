@@ -90,6 +90,7 @@
 @{
     int trier = Convert.ToInt32(Request.Params.Get("Trier"));
     int nbActivité = 0;
+    const string urlInformationActivite = "../Destination/InformationActivite";
     switch (trier)
     {
         case 0:
@@ -102,7 +103,7 @@
                 <ul>
                 @foreach (var item in group.Value)
                 {
-                    <li>@Html.ActionLink(item.Nom, "../Destination/InformationActivite", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, urlInformationActivite, new { id = item.Id })</li>
                     nbActivité++;
                 }
                 </ul>
@@ -114,7 +115,7 @@
                 <ul>
                 @foreach (var item in ActivitéParOrdre)
                 {
-                    <li>@Html.ActionLink(item.Nom, "../Destination/InformationActivite", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, urlInformationActivite, new { id = item.Id })</li>
                     nbActivité++;
                 }
                 </ul>
