@@ -13,9 +13,10 @@ namespace ProjetDeTest
     public class TestsDestinationControl
     {
         private DestinationDBContext db = new DestinationDBContext();
-        const string urlImagesDestinations = "../../../Touristix/Images/Destinations/";
-        const string urlImagesBatiments = "../../../Touristix/Images/Batiments/";
-        const string urlImagesActivites = "../../../Touristix/Images/Activités/";
+        const string urlBase = "../../../Touristix/Images/";
+        const string urlImagesDestinations = "Destinations/";
+        const string urlImagesBatiments = "Batiments/";
+        const string urlImagesActivites = "Activités/";
 
         [TestMethod]
         public void TestOuvrirDestinationControlleur()
@@ -81,7 +82,7 @@ namespace ProjetDeTest
         public void TestOuvrirDestinationAdminControlleur()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             Assert.AreEqual("Admin", result.ViewName);
         }
 
@@ -89,7 +90,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListDestinationModel()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<DestinationModel> ListDestinationModel = db.Destinations.ToList();
@@ -101,7 +102,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListBatimentModel()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
@@ -113,7 +114,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListActiviteModel()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
@@ -125,10 +126,10 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListArrayDestinationImage()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
-            string[] ArrayDestinationImage = Directory.GetFiles(urlImagesDestinations, "*.*");
+            string[] ArrayDestinationImage = Directory.GetFiles(urlBase + urlImagesDestinations, "*.*");
             string TestDestinationImage = Path.GetFileName(ArrayDestinationImage[0]);
 
             Assert.AreEqual(TestDestinationImage, liste.ArrayDestinationImage[0]);
@@ -138,10 +139,10 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListArrayBatimentImage()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
-            string[] ArrayBatimentImage = Directory.GetFiles(urlImagesBatiments, "*.*");
+            string[] ArrayBatimentImage = Directory.GetFiles(urlBase + urlImagesBatiments, "*.*");
             string TestBatimentImage = Path.GetFileName(ArrayBatimentImage[0]);
 
             Assert.AreEqual(TestBatimentImage, liste.ArrayBatimentImage[0]);
@@ -151,7 +152,7 @@ namespace ProjetDeTest
         public void TestDestinationAdminRetourModelListArrayActiviteImage()
         {
             var controller = new DestinationController();
-            var result = controller.Admin(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            var result = controller.Admin(urlBase + urlImagesDestinations, urlBase + urlImagesBatiments, urlBase + urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayActiviteImage = new string[0];
