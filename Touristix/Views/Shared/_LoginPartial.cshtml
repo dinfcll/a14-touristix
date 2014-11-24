@@ -7,7 +7,7 @@
     {
         @Html.ActionLink("Administrer", "Admin", "Destination", routeValues: null, htmlAttributes: new { id = "gererLink" })
         <br>       
-        <a href="/Contact/Index">Contacts</a>
+        @Html.ActionLink("Contacts", "Index", "Contact", routeValues: null, htmlAttributes: new { id = "contactLink" })
     }
     
     <text>
