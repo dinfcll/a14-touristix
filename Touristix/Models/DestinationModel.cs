@@ -38,8 +38,6 @@ namespace Touristix.Models
         [Required]
         public string Nom { get; set; }
         [Required]
-        public string Ville { get; set; }
-        [Required]
         public string Image { get; set; }
         [Required]
         public string Apercu { get; set; }
@@ -47,6 +45,8 @@ namespace Touristix.Models
         public string Details { get; set; }
         [Required]
         public string Adresse { get; set; }
+        [Required]
+        public string Ville { get; set; }
 
         public string URL { get; set; }
 
@@ -60,11 +60,11 @@ namespace Touristix.Models
         [Required]
         public string Nom { get; set; }
         [Required]
-        public string Ville { get; set; }
-        [Required]
         public string Image { get; set; }
         [Required]
         public string Lieu { get; set; }
+        [Required]
+        public string Ville { get; set; }
         [Required]
         public string Apercu { get; set; }
         [Required]
