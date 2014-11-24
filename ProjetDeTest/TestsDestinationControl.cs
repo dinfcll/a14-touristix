@@ -30,7 +30,7 @@ namespace ProjetDeTest
             var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
 
             var TestDestinations = from m in db.Destinations
-                                                        select m;
+                                   select m;
 
             DestinationModel[] TestArray5DerniereDestination = db.Destinations
                     .OrderByDescending(m => m.Nom)
