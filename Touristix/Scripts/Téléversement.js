@@ -21,7 +21,7 @@
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            BoutonVoirImage.href = "Images/Destinations/" + _file.value;
+            BoutonVoirImage.href = "/Images/Destinations/" + _file.value;
             NomImage.innerHTML = _file.value;
             var Output = "";
             Output += "<div class='GrilleImages'>";
@@ -71,7 +71,7 @@ var EnvoyerImageBatiment = function () {
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            BoutonVoirImage.href = "Images/Batiments/" + _file.value;
+            BoutonVoirImage.href = "/Images/Batiments/" + _file.value;
             NomImage.innerHTML = _file.value;
             var Output = "";
             Output += "<div class='GrilleImages'>";
@@ -121,7 +121,7 @@ var EnvoyerImageActivite = function () {
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            BoutonVoirImage.href = "Images/Activités/" + _file.value;
+            BoutonVoirImage.href = "/Images/Activités/" + _file.value;
             NomImage.innerHTML = _file.value;
             var Output = "";
             Output += "<div class='GrilleImages'>";
