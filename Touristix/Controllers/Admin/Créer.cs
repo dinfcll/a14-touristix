@@ -9,7 +9,7 @@ using Touristix.Models;
 
 namespace Touristix.Controllers
 {
-    public partial class DestinationController : Controller
+    public partial class AdminController : Controller
     {
         [Authorize(Roles="admin")]
         public ActionResult CreerDestination()
@@ -23,11 +23,11 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
-                MettreAJourDestination(DestinationModelActif);
+                Assistant.MettreAJourDestination(DestinationModelActif, Request);
 
                 db.Destinations.Add(DestinationModelActif);
                 db.SaveChanges();
-                return RedirectToAction("Admin");
+                return RedirectToAction("Index");
             }
 
             return View("CreerDestination", DestinationModelActif);
@@ -45,11 +45,11 @@ namespace Touristix.Controllers
         {
             if (ModelState.IsValid)
             {
-                MettreAJourBatiment(BatimentModelActif);
+                Assistant.MettreAJourBatiment(BatimentModelActif);
 
                 db.Batiments.Add(BatimentModelActif);
                 db.SaveChanges();
-                return RedirectToAction("admin");
+                return RedirectToAction("Index");
             }
 
             return View("CreerBatiment", BatimentModelActif);
@@ -69,7 +69,7 @@ namespace Touristix.Controllers
             {
                 db.Activites.Add(ActiviteModelActif);
                 db.SaveChanges();
-                return RedirectToAction("Admin");
+                return RedirectToAction("Index");
             }
 
             return View("CreerActivite", ActiviteModelActif);

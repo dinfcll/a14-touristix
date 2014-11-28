@@ -170,11 +170,11 @@
     <Compile Include="Controllers\ActivitéController.cs" />
     <Compile Include="Controllers\BatimentController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
-    <Compile Include="Controllers\Destination\Assistant.cs" />
+    <Compile Include="Controllers\Assistant.cs" />
     <Compile Include="Controllers\Destination\Information.cs" />
-    <Compile Include="Controllers\Destination\Supprimer.cs" />
-    <Compile Include="Controllers\Destination\Modifier.cs" />
-    <Compile Include="Controllers\Destination\Créer.cs" />
+    <Compile Include="Controllers\Admin\Supprimer.cs" />
+    <Compile Include="Controllers\Admin\Modifier.cs" />
+    <Compile Include="Controllers\Admin\Créer.cs" />
     <Compile Include="Controllers\Destination\DestinationController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -270,28 +270,25 @@
     <Content Include="Views\Destination\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\ModifierDestination.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Destination\Admin.cshtml" />
+    <Content Include="Views\Admin\ModifierDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\InformationDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\CreerDestination.cshtml" />
+    <Content Include="Views\Admin\CreerDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\CreerActivite.cshtml" />
+    <Content Include="Views\Admin\CreerActivite.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\CreerBatiment.cshtml" />
+    <Content Include="Views\Admin\CreerBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\ModifierActivite.cshtml" />
+    <Content Include="Views\Admin\ModifierActivite.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Destination\ModifierBatiment.cshtml" />
+    <Content Include="Views\Admin\ModifierBatiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accueil\Index.cshtml" />

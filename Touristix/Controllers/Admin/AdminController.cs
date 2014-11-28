@@ -4,18 +4,58 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using Touristix.Models;
 
 namespace Touristix.Controllers
 {
-    public class AdminController : Controller
+    public partial class AdminController : Controller
     {
+        private DestinationDBContext db = new DestinationDBContext();
+
         const string MessageSuppressImage = "Image supprimée";
         const string MessageTeleversementEchoue = "Le téléversement a échoué";
         const string MessageTeleversementComplete = "Téléversement complété";
 
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            return View();
+            string urlDestination;
+            string urlBatiment;
+            string urlActivite;
+
+            AdministrationList NouvelleListe = new AdministrationList();
+            NouvelleListe.ListDestinationModel = db.Destinations.ToList();
+            NouvelleListe.ListBatimentModel = db.Batiments.ToList();
+            NouvelleListe.ListActiviteModel = db.Activites.ToList();
+
+            urlDestination = Server.MapPath("~/Images/Destinations/");
+
+            string[] ArrayDestinationImage = Directory.GetFiles(urlDestination, "*.*");
+            NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
+            for (int D = ArrayDestinationImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
+            }
+
+            urlBatiment = Server.MapPath("~/Images/Batiments/");
+
+            string[] ArrayBatimentImage = Directory.GetFiles(urlBatiment, "*.*");
+            NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
+            for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
+            }
+
+            urlActivite = Server.MapPath("~/Images/Activités/");
+
+            string[] ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
+            NouvelleListe.ArrayActiviteImage = new string[ArrayActiviteImage.Length];
+            for (int D = ArrayActiviteImage.Length - 1; D >= 0; --D)
+            {
+                NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
+            }
+
+            return View("Index", NouvelleListe);
         }
 
         public JsonResult ReceptionImageDestination()
