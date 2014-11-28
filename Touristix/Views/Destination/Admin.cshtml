@@ -81,22 +81,7 @@
             @Html.ActionLink("Créer nouvelle destination", "CreerDestination")
             </p>
 
-            <table>
-                <tr>
-                    <th>
-                        @Html.DisplayText("Nom")
-                    </th>
-                    <th>
-                        @Html.DisplayText("Pays")
-                    </th>
-                    <th>
-                        @Html.DisplayText("Region")
-                    </th>
-                    <th>
-                        @Html.DisplayText("Ville")
-                    </th>
-                    <th></th>
-                </tr>
+            <table>           
             @foreach (var item in Model.ListDestinationModel)
             {
                 <tr>
@@ -118,7 +103,6 @@
                     </td>
                 </tr>
             }
-
             </table>
         </div>
 
@@ -129,17 +113,7 @@
             @Html.ActionLink("Créer nouveau bâtiment", "CreerBatiment")
             </p>
 
-            <table>
-                <tr>
-                    <th>
-                        @Html.DisplayText("Nom")
-                    </th>
-                    <th>
-                        @Html.DisplayText("URL")
-                    </th>
-                    <th></th>
-                </tr>
-
+            <table> 
             @foreach (var item in Model.ListBatimentModel)
             {
                 <tr>
@@ -147,13 +121,13 @@
                         @Html.ActionLink(@item.Nom, "InformationBatiment", new { id = item.Id })
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.URL)
+                       <a href="@item.URL">@Html.DisplayFor(modelItem => item.URL)</a>
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.Id }) |
                         <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmationSupprimerBatiment")'>Effacer</a>
                     </td>
-                </tr>
+                </tr>s
             }
 
             </table>
@@ -166,17 +140,7 @@
             @Html.ActionLink("Créer nouvelle activité", "CreerActivite")
             </p>
 
-            <table>
-                <tr>
-                    <th>
-                        @Html.DisplayText("Nom")
-                    </th>
-                    <th>
-                        @Html.DisplayText("URL")
-                    </th>
-                    <th></th>
-                </tr>
-
+            <table>  
             @foreach (var item in Model.ListActiviteModel)
             {
                 <tr>
