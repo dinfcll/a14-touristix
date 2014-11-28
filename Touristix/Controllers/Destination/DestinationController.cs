@@ -75,6 +75,7 @@ namespace Touristix.Controllers
             NouvelleListe.ListDestinationModel = db.Destinations.ToList();
             NouvelleListe.ListBatimentModel = db.Batiments.ToList();
             NouvelleListe.ListActiviteModel = db.Activites.ToList();
+            NouvelleListe.ListALaUneModel = db.ALaUne.ToList();
 
             if (string.IsNullOrEmpty(urlDestination))
             {
@@ -150,6 +151,38 @@ namespace Touristix.Controllers
             {
                 BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "https://");
             }
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult AjouterDestinationALaUne(DestinationModel DestinationModelSelect)
+        {
+            ALaUneModel NouvelleALaUne = new ALaUneModel();
+
+            NouvelleALaUne.Id = DestinationModelSelect.Id;
+            NouvelleALaUne.DestinationModel = DestinationModelSelect;
+            NouvelleALaUne.Description = "allo";
+
+            db.ALaUne.Add(NouvelleALaUne);
+            db.SaveChanges();
+            return View("Admin");
+
+
+            return View("Admin");
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult SupprimerDestinationALaUne(ALaUneModel ALaUneModelSelect)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ALaUne.Remove(ALaUneModelSelect);
+                db.SaveChanges();
+                return View("Admin");
+            }
+
+            return View("Admin");
         }
 
         #region Fonctions AJAX

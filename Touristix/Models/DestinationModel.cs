@@ -78,7 +78,6 @@ namespace Touristix.Models
 
         public virtual DestinationModel DestinationModel { get; set; }
 
-
         public string Description { get; set; }
         [Required]
         public char TypeCar { get; set; }
@@ -92,6 +91,7 @@ namespace Touristix.Models
         public List<DestinationModel> ListDestinationModel;
         public List<BatimentModel> ListBatimentModel;
         public List<ActiviteModel> ListActiviteModel;
+        public List<ALaUneModel> ListALaUneModel;
         public string[] ArrayDestinationImage;
         public string[] ArrayBatimentImage;
         public string[] ArrayActiviteImage;

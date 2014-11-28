@@ -115,7 +115,8 @@
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
-                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a>
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a> |
+                        @Html.ActionLink("Ajouter à la une", "AjouterDestinationALaUne", item)
                     </td>
                 </tr>
             }
@@ -274,8 +275,54 @@
 
     <div class="tab-pane" id="ALaUne">
         
-        <h3>Destinations à la une</h3>
-            
+        <h3>À la une</h3>
+        
+        <div id="ListeALaUne">
+            <p>
+            @Html.ActionLink("Ajouter une nouvelle destination à la une", "CreerDestination")
+            </p>
+
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayText("Nom")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Pays")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Region")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Ville")
+                    </th>
+                    <th></th>
+                </tr>
+            @foreach (var item in Model.ListALaUneModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Pays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Ville)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modifier la description", "ModifierDestination", new { id = item.Id }) |
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a>
+                    </td>
+                </tr>
+            }
+
+            </table>
+        </div>
+        
 
     </div>
 </div>
