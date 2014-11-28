@@ -17,7 +17,7 @@
             @Html.EditorFor(model => model.Nom, new
             {
                 @class = "form-control",
-                placeholder = "Entrez nom",
+                placeholder = "Entrez un nom",
                 type = "text"
             })
             @Html.ValidationMessageFor(model => model.Nom)
@@ -28,18 +28,28 @@
             @Html.EditorFor(model => model.Lieu, new
             {
                 @class = "form-control",
-                placeholder = "Entrez lieu",
+                placeholder = "Entrez un lieu",
                 type = "text"
             })
             @Html.ValidationMessageFor(model => model.Lieu)
         </div>
-        
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adresse)
+            @Html.TextBoxFor(model => model.Adresse, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez un adresse",
+                type = "text"
+           })            
+        </div>
+            
         <div class="form-group">
             @Html.LabelFor(model => model.Image)
             @Html.EditorFor(model => model.Image, new
             {
                 @class = "form-control",
-                placeholder = "Entrez image",
+                placeholder = "Entrez une image",
                 type = "text"
             })
             @Html.ValidationMessageFor(model => model.Image)

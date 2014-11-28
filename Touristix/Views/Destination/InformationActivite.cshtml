@@ -5,6 +5,7 @@
 }
 
 <script type="text/javascript" src="/Scripts/Touristix/Erreur Image.js"></script>
+<script type = "text/javascript" src="/Scripts/destination.js"></script> 
 <img src="/Images/Activités/@Model.Image" onerror="ErreurImage(this)" alt="@Model.Image"/>
 
 <fieldset>
@@ -13,12 +14,28 @@
     <dl>
         <dt>@Html.DisplayNameFor(model => model.Lieu)</dt>
         <dd>@Html.DisplayFor(model => model.Lieu)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Adresse)</dt>
+        <dd><a href="#" onclick="AfficheLaCarte();">@Html.DisplayFor(model => model.Adresse)</a></dd> 
         <dt>Aperçu</dt>
         <dd>@Html.DisplayFor(model => model.Apercu)</dd>
         <dt>@Html.DisplayNameFor(model => model.Details)</dt>
         <dd>@Html.DisplayFor(model => model.Details)</dd>
     </dl>
 </fieldset>
+
+<script type = "text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> 
+   
+<script type = "text/javascript">
+    function AfficheLaCarte() {
+        var Lieu = "@Model.Adresse" + ", " + "@Model.Lieu";
+        AfficheMap(Lieu);    
+    }
+</script>
+        
+@section Map {
+  <div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;"/>
+}
+
 <p>
     @Html.ActionLink("Retour à l'index", "Index")
 </p>

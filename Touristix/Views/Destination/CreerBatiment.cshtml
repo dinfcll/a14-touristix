@@ -19,7 +19,7 @@
             @Html.TextBoxFor(model => model.Nom, new
             {
                 @class = "form-control",
-                placeholder = "Entrez nom",
+                placeholder = "Entrez un nom",
                 type = "text"
             })
             @Html.ValidationMessageFor(model => model.Nom)
@@ -27,12 +27,33 @@
         
         @Html.Partial("~/Views/Destination/_AjoutModifActivite.cshtml", Model)
         
+         <div class="form-group">
+            @Html.LabelFor(model => model.Adresse)
+            @Html.TextBoxFor(model => model.Adresse, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez une adresse",
+                type = "text"
+            })
+            @Html.ValidationMessageFor(model => model.Adresse)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ville)
+            @Html.TextBoxFor(model => model.Ville, new
+            {
+                @class = "form-control",
+                placeholder = "Entrez une ville",
+                type = "text"
+            })
+            @Html.ValidationMessageFor(model => model.Ville)
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Image)
             @Html.TextBoxFor(model => model.Image, new
             {
                 @class = "form-control",
-                placeholder = "Entrez image",
+                placeholder = "Entrez une image",
                 type = "text"
             })
             @Html.ValidationMessageFor(model => model.Image)
