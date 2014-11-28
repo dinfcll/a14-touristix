@@ -10,7 +10,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirCreerDestination()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.CreerDestination() as ViewResult;
             Assert.AreEqual("CreerDestination", result.ViewName);
         }
@@ -18,7 +18,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirCreerBatiment()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.CreerBatiment() as ViewResult;
             Assert.AreEqual("CreerBatiment", result.ViewName);
         }
@@ -26,7 +26,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirCreerActivite()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.CreerActivite() as ViewResult;
             Assert.AreEqual("CreerActivite", result.ViewName);
         }

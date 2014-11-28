@@ -9,7 +9,7 @@ using Touristix.Models;
 
 namespace Touristix.Controllers
 {
-    public partial class DestinationController : Controller
+    public partial class AdminController : Controller
     {
         [Authorize(Roles = "admin")]
         [HttpPost]

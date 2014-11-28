@@ -5,7 +5,7 @@
     
     if (User.IsInRole("admin"))
     {
-        @Html.ActionLink("Administrer", "Admin", "Destination", routeValues: null, htmlAttributes: new { id = "gererLink" })
+        @Html.ActionLink("Administrer", "Index", "Admin", routeValues: null, htmlAttributes: new { id = "gererLink" })
         <br>       
         @Html.ActionLink("Contacts", "Index", "Contact", routeValues: null, htmlAttributes: new { id = "contactLink" })
     }

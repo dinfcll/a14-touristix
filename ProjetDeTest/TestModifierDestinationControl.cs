@@ -11,7 +11,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirModifierDestinationErreur()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierDestination() as ViewResult;
             Assert.AreEqual(null, result);
         }
@@ -19,7 +19,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirModifierDestination()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierDestination(1) as ViewResult;
             Assert.AreEqual("ModifierDestination", result.ViewName);
         }
@@ -27,7 +27,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestRetourModelModifierDestination()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierDestination(1) as ViewResult;
             var destinationModel = (DestinationModel)result.ViewData.Model;
             Assert.AreEqual(1,destinationModel.Id);
@@ -36,7 +36,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirModifierBatimentErreur()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierBatiment() as ViewResult;
             Assert.AreEqual(null, result);
         }
@@ -44,7 +44,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirModifierBatiment()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierBatiment(1) as ViewResult;
             Assert.AreEqual("ModifierBatiment", result.ViewName);
         }
@@ -52,7 +52,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestRetourModelModifierBatiment()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierBatiment(1) as ViewResult;
             var batimentModel = (BatimentModel)result.ViewData.Model;
             Assert.AreEqual(1, batimentModel.Id);
@@ -61,7 +61,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirModifierActiviteErreur()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierActivite() as ViewResult;
             Assert.AreEqual(null, result);
         }
@@ -69,7 +69,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestOuvrirModifierActivite()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierActivite(1) as ViewResult;
             Assert.AreEqual("ModifierActivite", result.ViewName);
         }
@@ -77,7 +77,7 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestRetourModelModifierActivite()
         {
-            var controller = new DestinationController();
+            var controller = new AdminController();
             var result = controller.ModifierActivite(1) as ViewResult;
             var activiteModel = (ActiviteModel)result.ViewData.Model;
             Assert.AreEqual(1, activiteModel.Id);
