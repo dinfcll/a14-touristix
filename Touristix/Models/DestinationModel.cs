@@ -10,6 +10,8 @@ namespace Touristix.Models
 {
     public class DestinationModel
     {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -67,12 +69,16 @@ namespace Touristix.Models
 
     public class ALaUneModel
     {
-        public int Id { get; set; }
-
         [Key]
-        [ForeignKey("Destination")]
-        public int DestinationId { get; set; }
-        
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int ALaUneId { get; set; }
+
+        [ForeignKey("DestinationModel")]
+        public virtual int Id { get; set; }
+
+        public virtual DestinationModel DestinationModel { get; set; }
+
+
         public string Description { get; set; }
         [Required]
         public char TypeCar { get; set; }
