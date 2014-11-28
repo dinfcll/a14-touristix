@@ -16,7 +16,7 @@
         <dt>@Html.DisplayNameFor(model => model.Ville)</dt>
         <dd>@Html.DisplayFor(model => model.Ville)</dd>
         <dt>@Html.DisplayNameFor(model => model.Adresse)</dt>
-        <dd>@Html.DisplayFor(model => model.Adresse)</dd>
+        <dd><a href="#" onclick="AfficheLaCarte();" >@Html.DisplayFor(model => model.Adresse)</a></dd>        
         <dt>Aperçu</dt>
         <dd>@Html.DisplayFor(model => model.Apercu)</dd>
         <dt>@Html.DisplayNameFor(model => model.Details)</dt>
@@ -28,20 +28,16 @@
 <script type = "text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> 
    
 <script type = "text/javascript">
-    window.onload = AfficheLaCarte();
-    function AfficheLaCarte() {
-    
-        //var Donnee = @Model.Adresse + "' " + @Model.Ville;        
-       // alert('ok');        
+    function AfficheLaCarte() {   
         var map;
-        //var Lieu = document.getElementById("AfficheCarte").value;        
+        var Lieu = "@Model.Adresse" + ", " + "@Model.Ville";
         var mapOptions = {
             zoom: 8,
             center: new google.maps.LatLng(-34.397, 150.644)
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    
-        new google.maps.Geocoder().geocode({ 'address': "1200 Boulevard Alphonse-Desjardins"}, function (results, status) {
+
+        new google.maps.Geocoder().geocode({ 'address': Lieu }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var marker = new google.maps.Marker({
                     map: map,
