@@ -65,6 +65,19 @@ namespace Touristix.Models
         public string Details { get; set; }
     }
 
+    public class ALaUneModel
+    {
+        public int Id { get; set; }
+
+        [Key]
+        [ForeignKey("Destination")]
+        public int DestinationId { get; set; }
+        
+        public string Description { get; set; }
+        [Required]
+        public char TypeCar { get; set; }
+    }
+
     /// <summary>
     /// Utilisé pour envoyer toute les données à la page d'administration.
     /// </summary>
@@ -83,5 +96,6 @@ namespace Touristix.Models
         public DbSet<DestinationModel> Destinations { get; set; }
         public DbSet<BatimentModel> Batiments { get; set; }
         public DbSet<ActiviteModel> Activites { get; set; }
+        public DbSet<ALaUneModel> ALaUne { get; set; }
     }
 }
