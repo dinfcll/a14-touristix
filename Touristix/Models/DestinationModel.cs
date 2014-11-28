@@ -62,9 +62,7 @@ namespace Touristix.Models
         [Required]
         public string Image { get; set; }
         [Required]
-        public string Lieu { get; set; }
-        [Required]
-        public string Ville { get; set; }
+        public string Lieu { get; set; }      
         [Required]
         public string Apercu { get; set; }
         [Required]
