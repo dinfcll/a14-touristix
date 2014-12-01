@@ -149,7 +149,7 @@ function AfficheMap(Adresse)
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-        new google.maps.Geocoder().geocode({ 'address': Adresse }, function (results, status) {
+        new google.maps.Geocoder().geocode({ 'address': Adresse}, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var marker = new google.maps.Marker({
                     map: map,
@@ -160,7 +160,7 @@ function AfficheMap(Adresse)
                 map.setZoom(15);
             }
             else {
-                alert("Une erreur s'est produite en affichant la carte: " + status);
+                alert("Une erreur s'est produite en affichant la carte: " + status + "\n\nNous vous renvoyons à Sydney.");
             }
         });
         google.maps.event.addDomListener(window, 'load', initialize);

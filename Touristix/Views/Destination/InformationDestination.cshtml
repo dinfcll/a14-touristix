@@ -128,14 +128,14 @@
    
 <script type = "text/javascript">
     function AfficheLaCarte() {
-        var Lieu = "@Model.Item1.Ville";
+        var Lieu = "@Model.Item1.Ville" + ", " + "@Model.Item1.Region";        
         AfficheMap(Lieu);
     }
 </script>
         
 @section Map {  
 
-  <div id="map-canvas" style="width: 100%; height: 480px; margin: 0px; padding: 0px;"/>
+  <div id="map-canvas" style="width: 600px; height: 480px; margin: 0px; padding: 0px;"/>
 }
 <br /><br />
 <h4>Météo</h4>
