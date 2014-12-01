@@ -153,38 +153,6 @@ namespace Touristix.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
-        [HttpPost]
-        public ActionResult AjouterDestinationALaUne(DestinationModel DestinationModelSelect)
-        {
-            ALaUneModel NouvelleALaUne = new ALaUneModel();
-
-            NouvelleALaUne.Id = DestinationModelSelect.Id;
-            NouvelleALaUne.DestinationModel = DestinationModelSelect;
-            NouvelleALaUne.Description = "allo";
-
-            db.ALaUne.Add(NouvelleALaUne);
-            db.SaveChanges();
-            return View("Admin");
-
-
-            return View("Admin");
-        }
-
-        [Authorize(Roles = "admin")]
-        [HttpPost]
-        public ActionResult SupprimerDestinationALaUne(ALaUneModel ALaUneModelSelect)
-        {
-            if (ModelState.IsValid)
-            {
-                db.ALaUne.Remove(ALaUneModelSelect);
-                db.SaveChanges();
-                return View("Admin");
-            }
-
-            return View("Admin");
-        }
-
         #region Fonctions AJAX
 
         public JsonResult ObtenirListeBatiment(string Id)

@@ -171,6 +171,7 @@
     <Compile Include="Controllers\BatimentController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Destination\Assistant.cs" />
+    <Compile Include="Controllers\Destination\DestinationALaUne.cs" />
     <Compile Include="Controllers\Destination\Information.cs" />
     <Compile Include="Controllers\Destination\Supprimer.cs" />
     <Compile Include="Controllers\Destination\Modifier.cs" />
@@ -319,6 +320,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\_AjoutModifActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\CreerDestinationALaUne.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

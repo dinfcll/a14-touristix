@@ -116,7 +116,7 @@
                     <td>
                         @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
                         <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a> |
-                        @Html.ActionLink("Ajouter à la une", "AjouterDestinationALaUne", item)
+                        @Html.ActionLink("Ajouter à la une", "CreerDestinationALaUne", item)
                     </td>
                 </tr>
             }
@@ -315,7 +315,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Modifier la description", "ModifierDestination", new { id = item.Id }) |
-                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a>
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
                     </td>
                 </tr>
             }
