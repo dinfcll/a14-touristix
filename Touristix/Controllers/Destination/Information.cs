@@ -33,7 +33,6 @@ namespace Touristix.Controllers
                     return View(new Tuple<DestinationModel, Temperature >(DestinationModelActif, temperature));                    
                 }
             }
-
             ViewData["Verif"] = "Erreur";
             return View(new Tuple<DestinationModel, Temperature>(DestinationModelActif, null));
         }
