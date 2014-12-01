@@ -10,8 +10,7 @@ namespace Touristix.Controllers
 {
     public class AccueilController : Controller
     {
-        //
-        // GET: /Accueil/
+        private DestinationDBContext db = new DestinationDBContext();
 
         public ActionResult Index(string url)
         {
@@ -21,6 +20,8 @@ namespace Touristix.Controllers
             }
             
             var modelImagesAccueil = new ImagesAccueilModel(url);
+
+            modelImagesAccueil.ListALaUne = db.ALaUne.ToList();
 
             return View("Index", modelImagesAccueil);
         }

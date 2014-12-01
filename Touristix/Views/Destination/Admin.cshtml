@@ -116,7 +116,14 @@
                     <td>
                         @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
                         <a href="#" onclick ='MessageBox(@item.Id, "/Destination/SupprimerDestination")'>Effacer</a> |
-                        @Html.ActionLink("Ajouter à la une", "CreerDestinationALaUne", item)
+                        @if (Model.ArrayALaUneDestinationId.Contains(item.Id))
+                        {
+                            <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmerSupprimerDestinationALaUneDepuisCleEtrangere")'>Enlever de la une</a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Ajouter à la une", "CreerDestinationALaUne", item)
+                        }
                     </td>
                 </tr>
             }
@@ -278,10 +285,6 @@
         <h3>À la une</h3>
         
         <div id="ListeALaUne">
-            <p>
-            @Html.ActionLink("Ajouter une nouvelle destination à la une", "CreerDestination")
-            </p>
-
             <table>
                 <tr>
                     <th>
@@ -314,7 +317,7 @@
                         @Html.DisplayFor(modelItem => item.DestinationModel.Ville)
                     </td>
                     <td>
-                        @Html.ActionLink("Modifier la description", "ModifierALAUne", new { id = item.ALaUneId }) |
+                        @Html.ActionLink("Modifier la description", "ModifierALaUne", new { id = item.ALaUneId }) |
                         <a href="#" onclick ='MessageBox(@item.ALaUneId, "/Destination/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
                     </td>
                 </tr>
@@ -322,8 +325,6 @@
 
             </table>
         </div>
-        
-
     </div>
 </div>
 

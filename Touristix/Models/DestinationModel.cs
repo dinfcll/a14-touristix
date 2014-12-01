@@ -93,20 +93,7 @@ namespace Touristix.Models
         public string[] ArrayDestinationImage;
         public string[] ArrayBatimentImage;
         public string[] ArrayActiviteImage;
-    }
-
-    public class CreerDestinationALaUneModel
-    {
-        public ALaUneModel ALaUne { get; set; }
-        public DestinationModel Destination { get; set; }
-
-        public CreerDestinationALaUneModel() { }
-
-        public CreerDestinationALaUneModel(ALaUneModel aLaUne, DestinationModel destination)
-        {
-            ALaUne = aLaUne;
-            Destination = destination;
-        }
+        public int[] ArrayALaUneDestinationId;
     }
 
     public class DestinationDBContext : DbContext

@@ -113,6 +113,12 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
             }
 
+            NouvelleListe.ArrayALaUneDestinationId = new int[NouvelleListe.ListALaUneModel.Count()];
+            for (int i = 0; i < NouvelleListe.ArrayALaUneDestinationId.Length; i++)
+            {
+                NouvelleListe.ArrayALaUneDestinationId[i] = NouvelleListe.ListALaUneModel[i].Id;
+            }
+
             return View("Admin", NouvelleListe);
         }
 

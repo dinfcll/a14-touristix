@@ -1,4 +1,4 @@
-﻿@model Touristix.Models.CreerDestinationALaUneModel
+﻿@model Touristix.Models.ALaUneModel
 
 @{
     ViewBag.Title = "CreerDestinationALaUne";
@@ -13,35 +13,35 @@
         <legend>Ajouter une destination à la une</legend>
 
         <div>
-            <img src="/Images/Destinations/@Model.Destination.Image" onerror="ErreurImage(this)" alt="aucune image disponible"/>
+            <img src="/Images/Destinations/@ViewBag.Destination.Image" onerror="ErreurImage(this)" alt="aucune image disponible"/>
         </div>
         
         <div>
-            <h4>@Html.DisplayFor(model => model.Destination.Nom)</h4>
-            @Html.DisplayNameFor(model => model.Destination.Pays)
-            @Html.DisplayFor(model => model.Destination.Pays) <br />
-            @Html.DisplayNameFor(model => model.Destination.Region)
-            @Html.DisplayFor(model => model.Destination.Region)<br />
-            @Html.DisplayNameFor(model => model.Destination.Ville)
-            @Html.DisplayFor(model => model.Destination.Ville)<br /><br />
+            <h4>@ViewBag.Destination.Nom</h4>
+            <b>Ville</b><br />
+            @ViewBag.Destination.Ville<br /><br />
+            <b>Région</b><br />
+            @ViewBag.Destination.Region<br />
+            <b>Pays</b><br />
+            @ViewBag.Destination.Pays<br /><br />
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ALaUne.Description)
+            @Html.LabelFor(model => model.Description)
         </div>
 
         <div class="editor-field">
-            @Html.EditorFor(model => model.ALaUne.Description)
-            @Html.ValidationMessageFor(model => model.ALaUne.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
         </div>
 
         @{
-            Model.ALaUne.Id = Model.Destination.Id;
-            Model.ALaUne.DestinationModel = Model.Destination;
+            Model.Id = ViewBag.Destination.Id;
+            Model.DestinationModel = ViewBag.Destination;
         }
 
         <p>
-            <input type="submit" value="Ajouter" />
+            <input type="submit" value="Ajouter" class="btn btn-default" />
         </p>
 
     </fieldset>

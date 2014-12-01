@@ -11,6 +11,8 @@ namespace Touristix.Models
     {
         public string[] TableauImagesAccueil { get; set; }
 
+        public List<ALaUneModel> ListALaUne { get; set; }
+
         public ImagesAccueilModel(string url)
         {
             string[] ExtensionsRecherche = { ".png", ".jpg", ".bmp" };

@@ -9,11 +9,11 @@
 
 
 <!-- it works the same with all jquery version from 1.x to 2.x -->
-    <script type="text/javascript" src="../../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.9.1.min.js"></script>
     <!-- use jssor.slider.mini.js (40KB) instead for release -->
     <!-- jssor.slider.mini.js = (jssor.js + jssor.slider.js) -->
-    <script type="text/javascript" src="../../../Scripts/jssor.js"></script>
-    <script type="text/javascript" src="../../../Scripts/jssor.slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/jssor.js"></script>
+    <script type="text/javascript" src="~/Scripts/jssor.slider.js"></script>
     <script type="text/javascript">
 
         jQuery(document).ready(function ($) {
@@ -120,6 +120,17 @@
             //responsive code end
         });
     </script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        function SliderOnMouseOver(id) {
+            $(id).show();
+        }
+
+        function SliderOnMouseOff(id) {
+            $(id).hide();
+        }
+    });
+</script>
 
 <script type="text/javascript">
 
@@ -153,8 +164,8 @@
     }
 
     setInterval(function () { RafraichirImage() }, 10000);
-    document.getElementById("img1").src=(Repertoire + Images[NombreAleatoire()]);
-    document.getElementById("thu1").src=(Repertoire + Images[NombreAleatoire()]);
+
+
 </script>
 }
 
@@ -179,55 +190,16 @@
 
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
-            <div>
-                <img id="img1" u="image" src="../../../Images/Batiments/Ashton.jpg" />
-                <img id="thu1" u="thumb" src="../../../Images/Batiments/Ashton.jpg"" />
-            </div>
-            <div>
-                <img id="img2" u="image" src="../../../Images/Batiments/Ashton.jpg" />
-                <img u="thumb" src="../img/alila/thumb-02.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/03.jpg" />
-                <img u="thumb" src="../img/alila/thumb-03.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/04.jpg" />
-                <img u="thumb" src="../img/alila/thumb-04.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/05.jpg" />
-                <img u="thumb" src="../img/alila/thumb-05.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/06.jpg" />
-                <img u="thumb" src="../img/alila/thumb-06.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/07.jpg" />
-                <img u="thumb" src="../img/alila/thumb-07.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/08.jpg" />
-                <img u="thumb" src="../img/alila/thumb-08.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/09.jpg" />
-                <img u="thumb" src="../img/alila/thumb-09.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/10.jpg" />
-                <img u="thumb" src="../img/alila/thumb-10.jpg" />
-            </div>
-            
-            <div>
-                <img u="image" src="../img/alila/11.jpg" />
-                <img u="thumb" src="../img/alila/thumb-11.jpg" />
-            </div>
-            <div>
-                <img u="image" src="../img/alila/12.jpg" />
-                <img u="thumb" src="../img/alila/thumb-12.jpg" />
-            </div>
+            @foreach (var item in Model.ListALaUne)
+            {
+                <text>
+                    <div>
+                        <span id="@item.ALaUneId">@item.Description</span>
+                        <img u="image" src="~/Images/Destinations/@item.DestinationModel.Image" onmouseover="SliderOnMouseOver(@item.ALaUneId)" onmouseout="SliderOnMouseOff(@item.ALaUneId)"/>
+                        <img u="thumb" src="~/Images/Destinations/@item.DestinationModel.Image" />
+                    </div>
+                </text>
+            }
         </div>
         
         <!-- Arrow Navigator Skin Begin -->
