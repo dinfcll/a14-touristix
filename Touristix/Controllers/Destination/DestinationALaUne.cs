@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace Touristix.Controllers
 {
@@ -20,14 +22,42 @@ namespace Touristix.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult CreerDestinationALaUne(CreerDestinationALaUneModel CreerALaUneModelActif)
+        public ActionResult CreerDestinationALaUne(ALaUneModel ALaUneModelActif)
         {
-            CreerALaUneModelActif.ALaUne.Id = CreerALaUneModelActif.Destination.Id;
-            CreerALaUneModelActif.ALaUne.DestinationModel = CreerALaUneModelActif.Destination;
+            if (ModelState.IsValid)
+            {
+                db.ALaUne.Add(ALaUneModelActif);
+                db.SaveChanges();
 
-            db.ALaUne.Add(CreerALaUneModelActif.ALaUne);
-            db.SaveChanges();
-            return View("Admin");
+                return RedirectToAction("Admin");
+            }
+
+            return View("CreerDestinationALaUne", ALaUneModelActif);
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult ModifierALaUne(int id = 0)
+        {
+            ALaUneModel ALaUneModelActif = db.ALaUne.Find(id);
+            if (ALaUneModelActif == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("ModifierALaUne", ALaUneModelActif);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult ModifierALaUne(ALaUneModel ALaUneModelActif)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(ALaUneModelActif).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Admin");
+            }
+            return View("ModifierALaUne", ALaUneModelActif.ALaUneId);
         }
 
         [Authorize(Roles = "admin")]

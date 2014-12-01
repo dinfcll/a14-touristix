@@ -27,16 +27,6 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Destination.Nom)
-        </div>
-
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Destination.Nom)
-            @Html.ValidationMessageFor(model => model.Destination.Nom)
-        </div>
-
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.ALaUne.Description)
         </div>
 
@@ -44,6 +34,11 @@
             @Html.EditorFor(model => model.ALaUne.Description)
             @Html.ValidationMessageFor(model => model.ALaUne.Description)
         </div>
+
+        @{
+            Model.ALaUne.Id = Model.Destination.Id;
+            Model.ALaUne.DestinationModel = Model.Destination;
+        }
 
         <p>
             <input type="submit" value="Ajouter" />

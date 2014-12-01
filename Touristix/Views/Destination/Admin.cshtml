@@ -314,8 +314,8 @@
                         @Html.DisplayFor(modelItem => item.DestinationModel.Ville)
                     </td>
                     <td>
-                        @Html.ActionLink("Modifier la description", "ModifierDestination", new { id = item.Id }) |
-                        <a href="#" onclick ='MessageBox(@item.Id, "/Destination/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
+                        @Html.ActionLink("Modifier la description", "ModifierALAUne", new { id = item.ALaUneId }) |
+                        <a href="#" onclick ='MessageBox(@item.ALaUneId, "/Destination/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
                     </td>
                 </tr>
             }
