@@ -37,6 +37,24 @@ namespace Touristix.Controllers
             return View(new Tuple<DestinationModel, Temperature>(DestinationModelActif, null));
         }
 
+        [HttpPost]
+        public ActionResult InformationDestination(string depart, DestinationModel destination, Temperature temp)     
+        {            
+            var route = new RouteModel();
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/directions/json?");
+            var response = client.GetAsync("origin=Toronto&destination=Levis,Quebec&key=AIzaSyBZU1Ge4vQTo2LT2gyT-4FrosrmQyd0__8&mode=driving").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                route = new JavaScriptSerializer().Deserialize<RouteModel>(responseBody);
+               
+                return View(new Tuple<DestinationModel, Temperature, RouteModel>(destination, temp, route));
+            }
+            return View(new Tuple<DestinationModel, Temperature, RouteModel>(destination, temp, null));
+        }
+
         public ActionResult InformationBatiment(int id = 0)
         {
             BatimentModel BatimentModelActif = db.Batiments.Find(id);
