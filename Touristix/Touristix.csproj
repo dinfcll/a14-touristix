@@ -232,6 +232,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\ModifEffacer.js" />
     <Content Include="Scripts\Touristix\Erreur Image.js" />
+    <Content Include="Scripts\SliderJssorAccueil.js" />
     <Content Include="Scripts\Téléversement.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
