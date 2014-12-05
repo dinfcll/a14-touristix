@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data;
 using System.Web.Mvc;
 using Touristix.Models;
 
 namespace Touristix.Controllers
 {
-    public partial class AdminController : Controller
+    public partial class AdminController
     {
         [Authorize(Roles = "admin")]
         public ActionResult ModifierDestination(int id = 0)
@@ -48,14 +43,7 @@ namespace Touristix.Controllers
                 return HttpNotFound();
             }
 
-            if (BatimentModelActif.TypeURL == "http")
-            {
-                BatimentModelActif.URL = BatimentModelActif.URL.Remove(0, 7);
-            }
-            else
-            {
-                BatimentModelActif.URL = BatimentModelActif.URL.Remove(0, 8);
-            }
+            BatimentModelActif.URL = BatimentModelActif.URL.Remove(0, BatimentModelActif.TypeURL == "http" ? 7 : 8);
 
             return View("ModifierBatiment", BatimentModelActif);
         }

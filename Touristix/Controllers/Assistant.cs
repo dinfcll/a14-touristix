@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,14 +36,7 @@ namespace Touristix.Controllers
 
         public static void MettreAJourBatiment(BatimentModel BatimentModelActif)
         {
-            if (BatimentModelActif.TypeURL == "http")
-            {
-                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "http://");
-            }
-            else
-            {
-                BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, "https://");
-            }
+            BatimentModelActif.URL = BatimentModelActif.URL.Insert(0, BatimentModelActif.TypeURL == "http" ? "http://" : "https://");
         }
 
         public static void RemplirListe(ref List<SelectListItem> ListeItem, IQueryable<String> SelectElem)

@@ -37,7 +37,7 @@
                     Succes(xmlhttp.responseText);
                 }
             }
-            var params = "Nom=" + Nom
+            var params = "Nom=" + Nom;
             xmlhttp.open("POST", url);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.setRequestHeader("Content-length", params.length);
@@ -64,7 +64,7 @@
 <div class="modal fade" id="BoiteDeContenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <img id="Aperçu"/>
     <div class="progress" id="Contenantprogressbar">
-        <div class="progress bar" role="progressbar" style="width: 10%; height=100%" id="Barre de progression">
+        <div class="progress bar" role="progressbar" style="width: 10%; height:100%" id="Barre de progression">
         0%
         </div>
     </div>

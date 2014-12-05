@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Touristix.Models;
 
 namespace Touristix.Controllers
 {
-    public partial class AdminController : Controller
+    public partial class AdminController
     {
         [Authorize(Roles="admin")]
         public ActionResult CreerDestination()

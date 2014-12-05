@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.IO;
 using Touristix.Models;
 
 namespace Touristix.Controllers
@@ -19,16 +17,14 @@ namespace Touristix.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            string urlDestination;
-            string urlBatiment;
-            string urlActivite;
+            AdministrationList NouvelleListe = new AdministrationList
+            {
+                ListDestinationModel = db.Destinations.ToList(),
+                ListBatimentModel = db.Batiments.ToList(),
+                ListActiviteModel = db.Activites.ToList()
+            };
 
-            AdministrationList NouvelleListe = new AdministrationList();
-            NouvelleListe.ListDestinationModel = db.Destinations.ToList();
-            NouvelleListe.ListBatimentModel = db.Batiments.ToList();
-            NouvelleListe.ListActiviteModel = db.Activites.ToList();
-
-            urlDestination = Server.MapPath("~/Images/Destinations/");
+            var urlDestination = Server.MapPath("~/Images/Destinations/");
 
             string[] ArrayDestinationImage = Directory.GetFiles(urlDestination, "*.*");
             NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
@@ -37,7 +33,7 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
 
-            urlBatiment = Server.MapPath("~/Images/Batiments/");
+            var urlBatiment = Server.MapPath("~/Images/Batiments/");
 
             string[] ArrayBatimentImage = Directory.GetFiles(urlBatiment, "*.*");
             NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
@@ -46,7 +42,7 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
 
-            urlActivite = Server.MapPath("~/Images/Activités/");
+            var urlActivite = Server.MapPath("~/Images/Activités/");
 
             string[] ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
             NouvelleListe.ArrayActiviteImage = new string[ArrayActiviteImage.Length];
@@ -75,14 +71,12 @@ namespace Touristix.Controllers
 
         private JsonResult ReceptionImage(string Chemin)
         {
-            string[] Images = Directory.GetFiles(Server.MapPath("~/Images/" + Chemin + "/"), "*.*");
-
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 HttpPostedFileBase Image = Request.Files[i];
 
-                string CheminComplet = System.IO.Path.Combine(
-                                       Server.MapPath("~/Images/" + Chemin + "/"), System.IO.Path.GetFileName(Image.FileName));
+                string CheminComplet = Path.Combine(
+                                       Server.MapPath("~/Images/" + Chemin + "/"), Path.GetFileName(Image.FileName));
 
                 if (System.IO.File.Exists(CheminComplet))
                 {

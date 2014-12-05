@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
-using System.IO;
 
 namespace Touristix.Controllers
 {
@@ -44,7 +41,6 @@ namespace Touristix.Controllers
 
             switch (Trier)
             {
-                case 0:
                 default:
                 DestinationRecu = Destinations.GroupBy(item => item.Pays);
                     break;
@@ -71,10 +67,12 @@ namespace Touristix.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Admin(string urlDestination, string urlBatiment, string urlActivite)
         {
-            AdministrationList NouvelleListe = new AdministrationList();
-            NouvelleListe.ListDestinationModel = db.Destinations.ToList();
-            NouvelleListe.ListBatimentModel = db.Batiments.ToList();
-            NouvelleListe.ListActiviteModel = db.Activites.ToList();
+            AdministrationList NouvelleListe = new AdministrationList
+            {
+                ListDestinationModel = db.Destinations.ToList(),
+                ListBatimentModel = db.Batiments.ToList(),
+                ListActiviteModel = db.Activites.ToList()
+            };
 
             if (string.IsNullOrEmpty(urlDestination))
             {

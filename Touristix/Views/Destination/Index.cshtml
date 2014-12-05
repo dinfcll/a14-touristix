@@ -1,4 +1,5 @@
-﻿@model Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>
+﻿@using Touristix.Models
+@model Tuple<DestinationModel[], object, List<SelectListItem>>
 
 @{
     ViewBag.Title = "Index";
@@ -44,7 +45,7 @@
     string Image = "";
     string Nom = "";
     string Apercu = "";
-    if (Model.Item1.Count() > 0)
+    if (Model.Item1.Any())
     {
         Image = Model.Item1.First().Image;
         Nom = Model.Item1.First().Nom;
@@ -96,7 +97,7 @@
         case 0:
         case 1:
         case 2:
-            IQueryable<IGrouping<string, Touristix.Models.DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, Touristix.Models.DestinationModel>>)Model.Item2;
+            IQueryable<IGrouping<string, DestinationModel>> DestinationParPays = (IQueryable<IGrouping<string, DestinationModel>>)Model.Item2;
             foreach (var group in DestinationParPays)
             {
                 @group.Key
@@ -111,7 +112,7 @@
             break;
 
         case 3:
-            IOrderedQueryable<Touristix.Models.DestinationModel> DestinationParOrdre = (IOrderedQueryable<Touristix.Models.DestinationModel>)Model.Item2;
+            IOrderedQueryable<DestinationModel> DestinationParOrdre = (IOrderedQueryable<DestinationModel>)Model.Item2;
                 <ul>
                 @foreach (var item in DestinationParOrdre)
                 {

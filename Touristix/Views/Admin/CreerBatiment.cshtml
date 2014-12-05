@@ -10,9 +10,9 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        
-        @Html.Hidden("DernierBatiment", (int)0)
-        @Html.Hidden("DerniereActivite", (int)0)
+
+        @Html.Hidden("DernierBatiment", 0)
+        @Html.Hidden("DerniereActivite", 0)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nom)

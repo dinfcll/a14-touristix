@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
 
@@ -45,7 +44,6 @@ namespace Touristix.Controllers
 
             switch (Trier)
             {
-                case 0:
                 default:
                     DestinationRecu = Destinations.GroupBy(item => item.Pays);
                     TrierBatiments(DestinationRecu, out ResultatRecherche);
@@ -81,18 +79,14 @@ namespace Touristix.Controllers
                 List<BatimentModel> ListBatiment = new List<BatimentModel>(Groupe.Count());
                 List<DestinationModel> GroupeList = Groupe.ToList();
 
-                for (int i = 0; i < GroupeList.Count; i++)
+                foreach (DestinationModel DestinationModelActif in GroupeList)
                 {
                     string[] ArrayParametreBatiment = new string[1];
                     ArrayParametreBatiment[0] = ";";
 
-                    string[] ArrayBatimentIds = GroupeList[i].BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
+                    string[] ArrayBatimentIds = DestinationModelActif.BatimentIds.Split(ArrayParametreBatiment, StringSplitOptions.RemoveEmptyEntries);
 
-                    for (int B = 0; B < ArrayBatimentIds.Length; B++)
-                    {
-                        BatimentModel BatimentActif = db.Batiments.Find(Convert.ToInt32(ArrayBatimentIds[B]));
-                        ListBatiment.Add(BatimentActif);
-                    }
+                    ListBatiment.AddRange(ArrayBatimentIds.Select(t => db.Batiments.Find(Convert.ToInt32(t))));
                 }
                 DicTrieBatiment.Add(Groupe.Key, ListBatiment);
             }

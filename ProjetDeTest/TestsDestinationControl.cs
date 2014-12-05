@@ -31,7 +31,7 @@ namespace ProjetDeTest
         {
             var controller = new DestinationController();
             var result = controller.Index() as ViewResult;
-            var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
+            var tuple = (Tuple<DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
 
             var TestDestinations = from m in db.Destinations
                                    select m;
@@ -49,7 +49,7 @@ namespace ProjetDeTest
         {
             var controller = new DestinationController();
             var result = controller.Index() as ViewResult;
-            var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
+            var tuple = (Tuple<DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
 
             var TestDestinations = from m in db.Destinations
                                    select m;
@@ -64,7 +64,7 @@ namespace ProjetDeTest
         {
             var controller = new DestinationController();
             var result = controller.Index() as ViewResult;
-            var tuple = (Tuple<Touristix.Models.DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
+            var tuple = (Tuple<DestinationModel[], object, List<SelectListItem>>)result.ViewData.Model;
 
             var TestDestinations = from m in db.Destinations
                                    select m;
