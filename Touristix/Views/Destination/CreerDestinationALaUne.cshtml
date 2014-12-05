@@ -26,12 +26,9 @@
             @ViewBag.Destination.Pays<br /><br />
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-
+        <b>Description</b>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { rows = "3", cols = "200" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
