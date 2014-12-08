@@ -57,10 +57,10 @@
         </div>
     </div>
 
-     <ul>
+     <ul id="ImageCinqDestinations">
          @foreach (var p in Model.Item1)
          {
-            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Activités/@p.Image" alt="@p.Nom" /> 
+            <a href="/Destination/InformationActivite/@p.Id"><img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Activités/@p.Image" alt="@p.Nom" /></a>
          }
      </ul>
 }

@@ -9,7 +9,7 @@
     left: 0.5em;
     width: 400px;
     font-weight: bold;
-    color: #fff;
+    color: black;
   }
  .TexteEnHaut {
     position: absolute;
@@ -23,7 +23,13 @@
   }
   .ImageEnBas 
   {
-      width: 120px;
+      width: 97px;
       height: 50px;
+  }
+  
+  #ImageCinqDestinations
+  {    
+    margin-left: 0px;
+    margin-top: 10px;
   }
   

@@ -57,10 +57,10 @@
         </div>
     </div>
 
-     <ul>
+     <ul id="ImageCinqDestinations">
          @foreach (var p in Model.Item1)
          {
-            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Batiments/@p.Image" alt="@p.Nom" /> 
+            <a href="/Destination/InformationBatiment/@p.Id"><img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Batiments/@p.Image" alt="@p.Nom" /></a>
          }
      </ul>
 }
@@ -91,6 +91,7 @@
 @{
     int trier = Convert.ToInt32(Request.Params.Get("Trier"));
     int nbBatiment = 0;
+    const string urlInformationBatiment = "../Destination/InformationBatiment";
     switch (trier)
     {
         case 0:
@@ -103,7 +104,7 @@
                 <ul>
                 @foreach (var item in group.Value)
                 {
-                    <li>@Html.ActionLink(item.Nom, "InformationBatiment", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, urlInformationBatiment, new { id = item.Id })</li>
                     nbBatiment++;
                 }
                 </ul>
@@ -115,7 +116,7 @@
                 <ul>
                 @foreach (var item in BatimentParOrdre)
                 {
-                    <li>@Html.ActionLink(item.Nom, "InformationBatiment", new { id = item.Id })</li>
+                    <li>@Html.ActionLink(item.Nom, urlInformationBatiment, new { id = item.Id })</li>
                     nbBatiment++;
                 }
                 </ul>
