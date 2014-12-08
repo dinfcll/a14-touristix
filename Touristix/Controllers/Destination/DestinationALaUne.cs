@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Touristix.Models;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
 
 namespace Touristix.Controllers
 {
