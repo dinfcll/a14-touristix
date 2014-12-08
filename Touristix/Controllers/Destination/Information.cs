@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Touristix.Models;
-using System.Web.Script.Serialization;
 using System.Net.Http;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Touristix.Models;
 
 namespace Touristix.Controllers
 {
@@ -16,15 +11,13 @@ namespace Touristix.Controllers
         public ActionResult InformationDestination(int id = 0)
         {
             DestinationModel DestinationModelActif = db.Destinations.Find(id);
-            var temperature = new Temperature();
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://api.openweathermap.org");
+            var client = new HttpClient {BaseAddress = new Uri("http://api.openweathermap.org")};
             var response = client.GetAsync("/data/2.5/weather?q=" + DestinationModelActif.Ville).Result;
 
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = response.Content.ReadAsStringAsync().Result;
-                temperature = new JavaScriptSerializer().Deserialize<Temperature>(responseBody);
+                var temperature = new JavaScriptSerializer().Deserialize<Temperature>(responseBody);
 
                 if (temperature.cod == 200)
                 {
@@ -171,15 +164,7 @@ namespace Touristix.Controllers
                 }
             }
 
-            if (Trouve)
-            {
-                temp.description = tDescription[i, 1];
-            }
-            else
-            {
-                temp.description = "Description non Disponible";
-
-            }
+            temp.description = Trouve ? tDescription[i, 1] : "Description non Disponible";
         }
     }
 }

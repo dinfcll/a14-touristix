@@ -32,7 +32,7 @@
             Output += "<br />";
             Output += "<div>";
             Output += "<button class='close pull-right' onclick='SupprimerImage(this, \"" + _file.value;
-            Output += "\", \"/Admin/SupprimerImageDestination\")'>&times;</button>"
+            Output += "\", \"/Admin/SupprimerImageDestination\")'>&times;</button>";
             Output += "</div>";
             Output += "<br />";
             Output += "</div>";
@@ -82,7 +82,7 @@ var EnvoyerImageBatiment = function () {
             Output += "<br />";
             Output += "<div>";
             Output += "<button class='close pull-right' onclick='SupprimerImage(this, \"" + _file.value;
-            Output += "\", \"/Admin/SupprimerImageBatiment\")'>&times;</button>"
+            Output += "\", \"/Admin/SupprimerImageBatiment\")'>&times;</button>";
             Output += "</div>";
             Output += "<br />";
             Output += "</div>";
@@ -132,7 +132,7 @@ var EnvoyerImageActivite = function () {
             Output += "<br />";
             Output += "<div>";
             Output += "<button class='close pull-right' onclick='SupprimerImage(this, \"" + _file.value;
-            Output += "\", \"/Admin/SupprimerImageActivite\")'>&times;</button>"
+            Output += "\", \"/Admin/SupprimerImageActivite\")'>&times;</button>";
             Output += "</div>";
             Output += "<br />";
             Output += "</div>";

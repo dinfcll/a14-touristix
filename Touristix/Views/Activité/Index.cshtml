@@ -1,4 +1,5 @@
-﻿@model Tuple<Touristix.Models.ActiviteModel[], object, List<SelectListItem>>
+﻿@using Touristix.Models
+@model Tuple<ActiviteModel[], object, List<SelectListItem>>
 
 @{
     ViewBag.Title = "Index";
@@ -44,7 +45,7 @@
     string Image = "";
     string Nom = "";
     string Apercu = "";
-    if (Model.Item1.Count() > 0)
+    if (Model.Item1.Any())
     {
         Image = Model.Item1.First().Image;
         Nom = Model.Item1.First().Nom;
@@ -96,7 +97,7 @@
         case 0:
         case 1:
         case 2:
-            Dictionary<string, List<Touristix.Models.ActiviteModel>> ActivitéParPays = (Dictionary<string, List<Touristix.Models.ActiviteModel>>)Model.Item2;
+            Dictionary<string, List<ActiviteModel>> ActivitéParPays = (Dictionary<string, List<ActiviteModel>>)Model.Item2;
             foreach (var group in ActivitéParPays)
             {
                 @group.Key
@@ -111,7 +112,7 @@
             break;
 
         case 3:
-            IOrderedQueryable<Touristix.Models.ActiviteModel> ActivitéParOrdre = (IOrderedQueryable<Touristix.Models.ActiviteModel>)Model.Item2;
+            IOrderedQueryable<ActiviteModel> ActivitéParOrdre = (IOrderedQueryable<ActiviteModel>)Model.Item2;
                 <ul>
                 @foreach (var item in ActivitéParOrdre)
                 {

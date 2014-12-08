@@ -24,7 +24,7 @@
                 Succes(xmlhttp.responseText);
             }
         }
-        var params = "Id=" + Id
+        var params = "Id=" + Id;
         xmlhttp.open("POST", url);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.setRequestHeader("Content-length", params.length);
@@ -33,11 +33,10 @@
 
         function Succes(response) {
             var Batiment = JSON.parse(response);
-            var i;
             var out = "<a href=";
-            out += "/Destination/InformationBatiment/" + Id + ">"
+            out += "/Destination/InformationBatiment/" + Id + ">";
             out += Batiment.Nom;
-            out += "</a>"
+            out += "</a>";
 
             document.getElementById(NomObjet).innerHTML = out;
         }
@@ -57,7 +56,7 @@
                 Succes(xmlhttp.responseText);
             }
         }
-        var params = "Id=" + Id
+        var params = "Id=" + Id;
         xmlhttp.open("POST", url);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.setRequestHeader("Content-length", params.length);
@@ -66,11 +65,10 @@
 
         function Succes(response) {
             var Activite = JSON.parse(response);
-            var i;
             var out = "<a href=";
-            out += "/Destination/InformationActivite/" + Id + ">"
+            out += "/Destination/InformationActivite/" + Id + ">";
             out += Activite.Nom;
-            out += "</a>"
+            out += "</a>";
 
             document.getElementById(NomObjet).innerHTML = out;
         }

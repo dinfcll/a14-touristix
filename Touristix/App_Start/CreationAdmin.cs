@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Security;
-using WebMatrix.WebData;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Touristix.Filters;
-using Touristix.Models;
+using WebMatrix.WebData;
 
 [assembly: PreApplicationStartMethod(typeof(PreApplicationTasks), "Initializer")]
 
@@ -13,7 +10,7 @@ public static class PreApplicationTasks
 {
     public static void Initializer()
     {
-        Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility
+        DynamicModuleUtility
         .RegisterModule(typeof(UserInitializationModule));
     }
 }
