@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Touristix.Models;
 using System.IO;
+using WebGrease.Css.Extensions;
 
 namespace Touristix.Controllers
 {
@@ -113,11 +114,7 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
             }
 
-            NouvelleListe.ArrayALaUneDestinationId = new int[NouvelleListe.ListALaUneModel.Count()];
-            for (int i = 0; i < NouvelleListe.ArrayALaUneDestinationId.Length; i++)
-            {
-                NouvelleListe.ArrayALaUneDestinationId[i] = NouvelleListe.ListALaUneModel[i].Id;
-            }
+            NouvelleListe.ArrayALaUneDestinationId = NouvelleListe.ListALaUneModel.Select(model => model.Id).ToArray();
 
             return View("Admin", NouvelleListe);
         }
