@@ -1,0 +1,53 @@
+﻿@model Touristix.Models.ALaUneModel
+
+@{
+    ViewBag.Title = "CreerDestinationALaUne";
+}
+
+<h2>CreerDestinationALaUne</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Ajouter une destination à la une</legend>
+
+        <div>
+            <img src="/Images/Destinations/@ViewBag.Destination.Image" onerror="ErreurImage(this)" alt="aucune image disponible"/>
+        </div>
+        
+        <div>
+            <h4>@ViewBag.Destination.Nom</h4>
+            <b>Ville</b><br />
+            @ViewBag.Destination.Ville<br /><br />
+            <b>Région</b><br />
+            @ViewBag.Destination.Region<br /><br />
+            <b>Pays</b><br />
+            @ViewBag.Destination.Pays<br /><br />
+        </div>
+
+        <b>Description</b>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description, new { rows = "3", cols = "200" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        @{
+            Model.Id = ViewBag.Destination.Id;
+            Model.DestinationModel = ViewBag.Destination;
+        }
+
+        <p>
+            <input type="submit" value="Ajouter" class="btn btn-default" />
+        </p>
+
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Retour à l'index", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

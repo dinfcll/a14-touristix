@@ -1,0 +1,50 @@
+﻿@model Touristix.Models.ALaUneModel
+
+@{
+    ViewBag.Title = "Modifier";
+}
+
+<h2>Modifier</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Modifier la description</legend>
+
+        <div>
+            <img src="/Images/Destinations/@Model.DestinationModel.Image" onerror="ErreurImage(this)" alt="aucune image disponible"/>
+        </div>
+
+        <div>
+            <h4>@Model.DestinationModel.Nom</h4>
+            <b>Ville</b><br />
+            @Model.DestinationModel.Ville<br /><br />
+            <b>Région</b><br />
+            @Model.DestinationModel.Region<br /><br />
+            <b>Pays</b> <br />
+            @Model.DestinationModel.Pays<br /><br />
+        </div>
+
+        @Html.HiddenFor(model => model.ALaUneId)
+
+        <b>Description</b>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description, new { rows = "3", cols = "200" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <p>
+            <input type="submit" value="Modifier" class="btn btn-default" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Retour à l'index", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

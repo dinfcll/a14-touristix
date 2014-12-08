@@ -59,6 +59,7 @@
 <ul class="nav nav-tabs" role="tablist">
   <li class="active"><a href="#Données" role="tab" data-toggle="tab">Données</a></li>
   <li><a href="#Images" role="tab" data-toggle="tab">Images</a></li>
+  <li><a href="#ALaUne" role="tab" data-toggle="tab">À la une</a></li>
 </ul>
 
 <div class="modal fade" id="BoiteDeContenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -112,6 +113,14 @@
                     <td>
                         @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
                         <a href="#" onclick ='MessageBox(@item.Id, "/Admin/SupprimerDestination")'>Effacer</a>
+                        @if (Model.ArrayALaUneDestinationId.Contains(item.Id))
+                        {
+                            <a href="#" onclick ='MessageBox(@item.Id, "/Admin/ConfirmerSupprimerDestinationALaUneDepuisCleEtrangere")'>Enlever de la une</a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Ajouter à la une", "CreerDestinationALaUne", item)
+                        }
                     </td>
                 </tr>
             }
@@ -259,6 +268,53 @@
                     </div>
                 }
             </div>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="ALaUne">
+        
+        <h3>À la une</h3>
+        
+        <div id="ListeALaUne">
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayText("Nom")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Pays")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Region")
+                    </th>
+                    <th>
+                        @Html.DisplayText("Ville")
+                    </th>
+                    <th></th>
+                </tr>
+            @foreach (var item in Model.ListALaUneModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Pays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationModel.Ville)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modifier la description", "ModifierALaUne", new { id = item.ALaUneId }) |
+                        <a href="#" onclick ='MessageBox(@item.ALaUneId, "/Admin/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
+                    </td>
+                </tr>
+            }
+
+            </table>
         </div>
     </div>
 </div>

@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Touristix.Models
 {
     public class DestinationModel
     {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -67,6 +70,20 @@ namespace Touristix.Models
         public string Adresse { get; set; }
     }
 
+    public class ALaUneModel
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int ALaUneId { get; set; }
+
+        [ForeignKey("DestinationModel")]
+        public virtual int Id { get; set; }
+
+        public virtual DestinationModel DestinationModel { get; set; }
+
+        public string Description { get; set; }
+    }
+
     /// <summary>
     /// Utilisé pour envoyer toute les données à la page d'administration.
     /// </summary>
@@ -75,9 +92,11 @@ namespace Touristix.Models
         public List<DestinationModel> ListDestinationModel;
         public List<BatimentModel> ListBatimentModel;
         public List<ActiviteModel> ListActiviteModel;
+        public List<ALaUneModel> ListALaUneModel;
         public string[] ArrayDestinationImage;
         public string[] ArrayBatimentImage;
         public string[] ArrayActiviteImage;
+        public int[] ArrayALaUneDestinationId;
     }
 
     public class DestinationDBContext : DbContext
@@ -85,5 +104,6 @@ namespace Touristix.Models
         public DbSet<DestinationModel> Destinations { get; set; }
         public DbSet<BatimentModel> Batiments { get; set; }
         public DbSet<ActiviteModel> Activites { get; set; }
+        public DbSet<ALaUneModel> ALaUne { get; set; }
     }
 }
