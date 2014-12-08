@@ -126,7 +126,7 @@
    
 <script type = "text/javascript">
     function AfficheLaCarte() {
-        var Lieu = "@Model.Item1.Ville";
+        var Lieu = "@Model.Item1.Ville, @Model.Item1.Region, @Model.Item1.Pays";
         AfficheMap(Lieu);
     }
 </script>

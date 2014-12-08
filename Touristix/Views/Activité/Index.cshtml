@@ -10,7 +10,7 @@
 
     <script type="text/javascript">
         function MouseOverImage(Image, Nom, Apercu) {
-            document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;
+            document.getElementById("Text").innerHTML = Nom + "<br />" + Apercu;            
             document.getElementById("ImagePrincipale").style.backgroundImage = "url('Images/Activités/" + Image + "')";
             document.getElementById("ImagePrincipale").style.backgroundSize = "500px 300px";
         }
@@ -57,10 +57,10 @@
         </div>
     </div>
 
-     <ul class="ImageCinqDestinations">
+     <ul id="ImageCinqDestinations">
          @foreach (var p in Model.Item1)
          {
-            <img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Activités/@p.Image" alt="@p.Nom" /> 
+            <a href="/Destination/InformationActivite/@p.Id"><img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Activités/@p.Image" alt="@p.Nom" /></a>
          }
      </ul>
 }
