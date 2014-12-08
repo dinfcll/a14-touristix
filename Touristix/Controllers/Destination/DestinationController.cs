@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Touristix.Models;
@@ -62,55 +61,6 @@ namespace Touristix.Controllers
 
             return View("Index", new Tuple<DestinationModel[], object, List<SelectListItem>>
                                     (Array5DerniereDestination, DestinationRecu, ListePays));
-        }
-
-        [Authorize(Roles = "admin")]
-        public ActionResult Admin(string urlDestination, string urlBatiment, string urlActivite)
-        {
-            AdministrationList NouvelleListe = new AdministrationList
-            {
-                ListDestinationModel = db.Destinations.ToList(),
-                ListBatimentModel = db.Batiments.ToList(),
-                ListActiviteModel = db.Activites.ToList()
-            };
-
-            if (string.IsNullOrEmpty(urlDestination))
-            {
-                urlDestination = Server.MapPath("~/Images/Destinations/");
-            }
-
-            string[] ArrayDestinationImage = Directory.GetFiles(urlDestination, "*.*");
-            NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
-            for (int D = ArrayDestinationImage.Length - 1; D >= 0 ; --D)
-            {
-                NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
-            }
-
-            if (string.IsNullOrEmpty(urlBatiment))
-            {
-                urlBatiment = Server.MapPath("~/Images/Batiments/");
-            }
-
-            string[] ArrayBatimentImage = Directory.GetFiles(urlBatiment, "*.*");
-            NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
-            for (int D = ArrayBatimentImage.Length - 1; D >= 0; --D)
-            {
-                NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
-            }
-
-            if (string.IsNullOrEmpty(urlActivite))
-            {
-                urlActivite = Server.MapPath("~/Images/Activités/");
-            }
-
-            string[]  ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
-            NouvelleListe.ArrayActiviteImage = new string[ArrayActiviteImage.Length];
-            for (int D = ArrayActiviteImage.Length - 1; D >= 0; --D)
-            {
-                NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
-            }
-
-            return View("Admin", NouvelleListe);
         }
 
         #region Fonctions AJAX

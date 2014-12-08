@@ -168,6 +168,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\ActivitéController.cs" />
+    <Compile Include="Controllers\Admin\DestinationALaUne.cs" />
     <Compile Include="Controllers\BatimentController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\Assistant.cs" />
@@ -189,6 +190,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Destination.mdf" />
+    <Content Include="App_Data\Destination_log.ldf">
+      <DependentUpon>Destination.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -212,6 +217,7 @@
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -219,10 +225,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jssor.js" />
+    <Content Include="Scripts\jssor.slider.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\ModifEffacer.js" />
+    <Content Include="Scripts\SliderJssorAccueil.js" />
     <Content Include="Scripts\Touristix\Erreur Image.js" />
     <Content Include="Scripts\Téléversement.js" />
     <Content Include="Web.config">
@@ -259,7 +268,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Images\Activités\" />
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +321,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Destination\_AjoutModifActivite.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\CreerDestinationALaUne.cshtml" />
+    <Content Include="Views\Admin\ModifierALaUne.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

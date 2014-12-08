@@ -21,7 +21,8 @@ namespace Touristix.Controllers
             {
                 ListDestinationModel = db.Destinations.ToList(),
                 ListBatimentModel = db.Batiments.ToList(),
-                ListActiviteModel = db.Activites.ToList()
+                ListActiviteModel = db.Activites.ToList(),
+                ListALaUneModel = db.ALaUne.ToList()
             };
 
             var urlDestination = Server.MapPath("~/Images/Destinations/");
@@ -50,6 +51,8 @@ namespace Touristix.Controllers
             {
                 NouvelleListe.ArrayActiviteImage[D] = Path.GetFileName(ArrayActiviteImage[D]);
             }
+
+            NouvelleListe.ArrayALaUneDestinationId = NouvelleListe.ListALaUneModel.Select(model => model.Id).ToArray();
 
             return View("Index", NouvelleListe);
         }

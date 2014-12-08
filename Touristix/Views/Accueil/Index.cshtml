@@ -5,6 +5,54 @@
 }
 
 @section scripts {
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jssor.js"></script>
+    <script type="text/javascript" src="~/Scripts/jssor.slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/SliderJssorAccueil.js"></script>
+
+<script type="text/javascript">
+    function SliderOnMouseOver(desc) {
+        $("#descImage").html(desc);
+    }
+
+    function SliderOnMouseOff() {
+        $("#descImage").html("");
+    }
+
+    function AllerADestination(IdDestination) {
+        window.location.href = "Destination/InformationDestination/" + IdDestination;
+    }
+</script>
+
+<style>
+    .description {
+        text-decoration:none;
+        position: absolute;
+        width: 500px;
+    }
+    .description span {
+        display:none;
+    }
+    .description:hover span {
+        display:block;
+        position:fixed;
+        overflow:hidden;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var descSpan = document.getElementById('descImage');
+
+    window.onmousemove = function (e) {
+        var x = e.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft),
+            y = e.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+        descSpan.style.top = (y + 20) + 'px';
+        descSpan.style.left = (x + 20) + 'px';
+    };
+</script>
+
 <script type="text/javascript">
 
     var Repertoire = 'Images/Destinations/';
@@ -38,9 +86,88 @@
 
     setInterval(function () { RafraichirImage() }, 10000);
 
+
 </script>
-    }
+}
 
 <h2>Bienvenue sur Touristix, le meilleur site sur les destinations</h2>
 
 <div class="outer" id="ImageActive" style="background-size:100% 100%; height:300px; width:500px"></div>
+<h3>À la une!</h3>
+<span class="description" id="descImage" style="background-color: white; z-index: 100;"></span>
+
+    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
+        height: 456px; background: #191919; overflow: hidden;">
+
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
+            @foreach (var item in Model.ListALaUne)
+            {
+                <text>
+                    <div>
+                        <img u="image"  src="~/Images/Destinations/@item.DestinationModel.Image"
+                                        onmouseover='SliderOnMouseOver("@item.Description");' 
+                                        onmouseout='SliderOnMouseOff();' 
+                                        ondblclick='AllerADestination(@item.Id);'/>
+                        <img u="thumb" src="~/Images/Destinations/@item.DestinationModel.Image" />
+                    </div>
+                </text>
+            }
+        </div>
+        
+        <div u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
+            <style>
+                .jssort01 .w {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .jssort01 .c {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 68px;
+                    height: 68px;
+                    border: #000 2px solid;
+                }
+
+                .jssort01 .p:hover .c, .jssort01 .pav:hover .c, .jssort01 .pav .c {
+                    background: url(../img/t01.png) center center;
+                    border-width: 0px;
+                    top: 2px;
+                    left: 2px;
+                    width: 68px;
+                    height: 68px;
+                }
+
+                .jssort01 .p:hover .c, .jssort01 .pav:hover .c {
+                    top: 0px;
+                    left: 0px;
+                    width: 70px;
+                    height: 70px;
+                    border: #fff 1px solid;
+                }
+            </style>
+            <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                    <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
+                    <div class=c>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a style="display: none" href="http://www.jssor.com">image carousel</a>
+    </div>
+
+<p>Afin d'accéder à la destination, veuillez double-cliquer sur l'image</p>
