@@ -292,28 +292,27 @@
                     </th>
                     <th></th>
                 </tr>
-            @foreach (var item in Model.ListALaUneModel)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DestinationModel.Nom)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DestinationModel.Pays)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DestinationModel.Region)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DestinationModel.Ville)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Modifier la description", "ModifierALaUne", new { id = item.ALaUneId }) |
-                        <a href="#" onclick ='MessageBox(@item.ALaUneId, "/Admin/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
-                    </td>
-                </tr>
-            }
-
+                @foreach (var item in Model.ListALaUneModel)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DestinationModel.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DestinationModel.Pays)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DestinationModel.Region)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DestinationModel.Ville)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Modifier la description", "ModifierALaUne", new { id = item.ALaUneId }) |
+                            <a href="#" onclick ='MessageBox(@item.ALaUneId, "/Admin/ConfirmerSupprimerDestinationALaUne")'>Enlever</a>
+                        </td>
+                    </tr>
+                }
             </table>
         </div>
     </div>
