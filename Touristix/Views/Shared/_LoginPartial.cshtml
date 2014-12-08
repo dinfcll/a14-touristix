@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated) {
     <text>
-        Bonjour, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+        @Html.ActionLink("Modifier le mot de passe", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
     </text>
     
     if (User.IsInRole("admin"))
