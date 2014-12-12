@@ -112,7 +112,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierDestination", new { id = item.Id }) |
-                        <a href="#" onclick ='MessageBox(@item.Id, "/Admin/SupprimerDestination")'>Effacer</a>
+                        <a href="#" onclick ='MessageBox(@item.Id, "/Admin/SupprimerDestination")'>Effacer</a> |
                         @if (Model.ArrayALaUneDestinationId.Contains(item.Id))
                         {
                             <a href="#" onclick ='MessageBox(@item.Id, "/Admin/ConfirmerSupprimerDestinationALaUneDepuisCleEtrangere")'>Enlever de la une</a>
@@ -277,21 +277,18 @@
         
         <div id="ListeALaUne">
             <table>
-                <tr>
-                    <th>
-                        @Html.DisplayText("Nom")
-                    </th>
-                    <th>
-                        @Html.DisplayText("Pays")
-                    </th>
-                    <th>
-                        @Html.DisplayText("Region")
-                    </th>
-                    <th>
-                        @Html.DisplayText("Ville")
-                    </th>
-                    <th></th>
-                </tr>
+                <th>
+                    Nom
+                </th>
+                <th>
+                    Pays
+                </th>
+                <th>
+                    Région
+                </th>
+                <th>
+                    Ville
+                </th>
                 @foreach (var item in Model.ListALaUneModel)
                 {
                     <tr>
