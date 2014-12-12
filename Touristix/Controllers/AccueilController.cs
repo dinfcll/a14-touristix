@@ -8,14 +8,9 @@ namespace Touristix.Controllers
     {
         private DestinationDBContext db = new DestinationDBContext();
 
-        public ActionResult Index(string url)
+        public ActionResult Index()
         {
-            if (string.IsNullOrEmpty(url))
-            {
-                url = Server.MapPath("~/Images/Destinations/");
-            }
-
-            var modelImagesAccueil = new ImagesAccueilModel(url);
+            var modelImagesAccueil = new ImagesAccueilModel();
 
             modelImagesAccueil.ListALaUne = db.ALaUne.ToList();
 
