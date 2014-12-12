@@ -160,7 +160,7 @@ function AfficheMap(Adresse)
                 map.setZoom(15);
             }
             else {
-                alert("Une erreur s'est produite en affichant la carte: " + status);
+                alert("Impossible d'afficher la carte. Renvoi automatique vers Sydney.");
             }
         });
         google.maps.event.addDomListener(window, 'load', initialize);
