@@ -15,7 +15,7 @@ namespace Touristix.Controllers
         const string MessageTeleversementComplete = "Téléversement complété";
 
         [Authorize(Roles = "admin")]
-        public ActionResult Index()
+        public ActionResult Index(string urlDestination, string urlBatiment, string urlActivite)
         {
             AdministrationList NouvelleListe = new AdministrationList
             {
@@ -25,7 +25,10 @@ namespace Touristix.Controllers
                 ListALaUneModel = db.ALaUne.ToList()
             };
 
-            var urlDestination = Server.MapPath("~/Images/Destinations/");
+            if (string.IsNullOrEmpty(urlDestination))
+            {
+                urlDestination = Server.MapPath("~/Images/Destinations/");
+            }
 
             string[] ArrayDestinationImage = Directory.GetFiles(urlDestination, "*.*");
             NouvelleListe.ArrayDestinationImage = new string[ArrayDestinationImage.Length];
@@ -34,7 +37,10 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayDestinationImage[D] = Path.GetFileName(ArrayDestinationImage[D]);
             }
 
-            var urlBatiment = Server.MapPath("~/Images/Batiments/");
+            if (string.IsNullOrEmpty(urlBatiment))
+            {
+                urlBatiment = Server.MapPath("~/Images/Batiments/");
+            }
 
             string[] ArrayBatimentImage = Directory.GetFiles(urlBatiment, "*.*");
             NouvelleListe.ArrayBatimentImage = new string[ArrayBatimentImage.Length];
@@ -43,7 +49,10 @@ namespace Touristix.Controllers
                 NouvelleListe.ArrayBatimentImage[D] = Path.GetFileName(ArrayBatimentImage[D]);
             }
 
-            var urlActivite = Server.MapPath("~/Images/Activités/");
+            if (string.IsNullOrEmpty(urlActivite))
+            {
+                urlActivite = Server.MapPath("~/Images/Activités/");
+            }
 
             string[] ArrayActiviteImage = Directory.GetFiles(urlActivite, "*.*");
             NouvelleListe.ArrayActiviteImage = new string[ArrayActiviteImage.Length];

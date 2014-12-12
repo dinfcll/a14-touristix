@@ -82,15 +82,15 @@ namespace ProjetDeTest
         public void TestOuvrirDestinationAdminControlleur()
         {
             var controller = new AdminController();
-            var result = controller.Index() as ViewResult;
-            Assert.AreEqual("Admin", result.ViewName);
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
+            Assert.AreEqual("Index", result.ViewName);
         }
 
         [TestMethod]
         public void TestDestinationAdminRetourModelListDestinationModel()
         {
-            var controller = new DestinationController();
-            var result = controller.Index() as ViewResult;
+            var controller = new AdminController();
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<DestinationModel> ListDestinationModel = db.Destinations.ToList();
@@ -101,8 +101,8 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestDestinationAdminRetourModelListBatimentModel()
         {
-            var controller = new DestinationController();
-            var result = controller.Index() as ViewResult;
+            var controller = new AdminController();
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
@@ -113,8 +113,8 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestDestinationAdminRetourModelListActiviteModel()
         {
-            var controller = new DestinationController();
-            var result = controller.Index() as ViewResult;
+            var controller = new AdminController();
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             List<BatimentModel> ListBatimentModel = db.Batiments.ToList();
@@ -125,8 +125,8 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestDestinationAdminRetourModelListArrayDestinationImage()
         {
-            var controller = new DestinationController();
-            var result = controller.Index() as ViewResult;
+            var controller = new AdminController();
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayDestinationImage = Directory.GetFiles(urlImagesDestinations, "*.*");
@@ -138,8 +138,8 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestDestinationAdminRetourModelListArrayBatimentImage()
         {
-            var controller = new DestinationController();
-            var result = controller.Index() as ViewResult;
+            var controller = new AdminController();
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayBatimentImage = Directory.GetFiles(urlImagesBatiments, "*.*");
@@ -151,8 +151,8 @@ namespace ProjetDeTest
         [TestMethod]
         public void TestDestinationAdminRetourModelListArrayActiviteImage()
         {
-            var controller = new DestinationController();
-            var result = controller.Index() as ViewResult;
+            var controller = new AdminController();
+            var result = controller.Index(urlImagesDestinations, urlImagesBatiments, urlImagesActivites) as ViewResult;
             var liste = (AdministrationList)result.ViewData.Model;
 
             string[] ArrayActiviteImage = new string[0];
