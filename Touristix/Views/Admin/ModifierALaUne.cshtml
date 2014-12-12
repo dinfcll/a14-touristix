@@ -4,15 +4,13 @@
     ViewBag.Title = "Modifier";
 }
 
-<h2>Modifier</h2>
+<h2>Modifier la description de la destination à la une</h2>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Modifier la description</legend>
-
         <div>
             <img src="/Images/Destinations/@Model.DestinationModel.Image" width="500" height="350" onerror="ErreurImage(this)" alt="aucune image disponible"/>
         </div>

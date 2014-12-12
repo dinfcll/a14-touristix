@@ -28,11 +28,11 @@
         @Html.Partial("~/Views/Destination/_AjoutModifActivite.cshtml", Model)
         
          <div class="form-group">
-            @Html.LabelFor(model => model.Adresse)
+            @Html.Label("Adresse civique")
             @Html.TextBoxFor(model => model.Adresse, new
             {
                 @class = "form-control",
-                placeholder = "Entrez une adresse",
+                placeholder = "Entrez une adresse civique",
                 type = "text"
             })
             @Html.ValidationMessageFor(model => model.Adresse)

@@ -35,11 +35,11 @@
         </div>
     
         <div class="form-group">
-            @Html.LabelFor(model => model.Adresse)
+            @Html.Label("Adresse civique")
             @Html.TextBoxFor(model => model.Adresse, new
             {
                 @class = "form-control",
-                placeholder = "Entrez un adresse",
+                placeholder = "Entrez un adresse civique",
                 type = "text"
            })            
         </div>

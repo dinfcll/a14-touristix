@@ -145,7 +145,7 @@ function AfficheMap(Adresse)
      var map;                             
         var mapOptions = {
             zoom: 8,
-            center: new google.maps.LatLng(-34.397, 150.644)
+            center: new google.maps.LatLng(46.8171527, -71.1516502)
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
@@ -160,7 +160,7 @@ function AfficheMap(Adresse)
                 map.setZoom(15);
             }
             else {
-                alert("Impossible d'afficher la carte. Renvoi automatique vers Sydney.");
+                alert("Impossible d'afficher la carte. Renvoi automatique vers le cégep de Lévis-Lauzon.");
             }
         });
         google.maps.event.addDomListener(window, 'load', initialize);
