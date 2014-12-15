@@ -76,7 +76,7 @@
                 <text>
                     <div>
                         <img u="image"  src="~/Images/Destinations/@item.DestinationModel.Image"
-                                        onmouseover='SliderOnMouseOver("@item.Description");' 
+                                        onmouseover='SliderOnMouseOver("@item.DestinationModel.Nom : @item.Description");' 
                                         onmouseout='SliderOnMouseOff();' 
                                         ondblclick='AllerADestination(@item.Id);'/>
                         <img u="thumb" src="~/Images/Destinations/@item.DestinationModel.Image" />
