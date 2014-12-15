@@ -160,7 +160,7 @@ function AfficheMap(Adresse)
                 map.setZoom(15);
             }
             else {
-                alert("Impossible d'afficher la carte. Renvoi automatique vers le cégep de Lévis-Lauzon.");
+                alert("Impossible d'afficher la carte. Renvoi automatique vers le Cégep de Lévis-Lauzon.");
             }
         });
         google.maps.event.addDomListener(window, 'load', initialize);
