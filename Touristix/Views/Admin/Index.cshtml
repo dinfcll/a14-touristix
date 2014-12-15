@@ -150,7 +150,7 @@
                         @Html.ActionLink(@item.Nom, "InformationBatiment", "Destination", new { id = item.Id }, null)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.URL)
+                        <a href="@Html.DisplayFor(modelItem => item.URL)" target="_blank">@Html.DisplayFor(modelItem => item.URL)</a>
                     </td>
                     <td>
                         @Html.ActionLink("Modifier", "ModifierBatiment", new { id = item.Id }) |

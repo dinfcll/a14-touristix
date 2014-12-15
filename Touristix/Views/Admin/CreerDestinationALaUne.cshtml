@@ -4,14 +4,12 @@
     ViewBag.Title = "CreerDestinationALaUne";
 }
 
-<h2>CreerDestinationALaUne</h2>
+<h2>Ajout d'une destination à la une</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Ajouter une destination à la une</legend>
-
         <div>
             <img src="/Images/Destinations/@ViewBag.Destination.Image" width="500" height="350" onerror="ErreurImage(this)" alt="aucune image disponible"/>
         </div>
