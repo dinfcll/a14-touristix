@@ -60,7 +60,13 @@
      <ul id="ImageCinqDestinations">
          @foreach (var p in Model.Item1)
          {
-            <a href="/Destination/InformationDestination/@p.Id"><img onmouseover="MouseOverImage('@p.Image', '@p.Nom', '@p.Apercu')" class="ImageEnBas" src="Images/Destinations/@p.Image" alt="@p.Nom" /> </a>
+             string SousImage = "\"" + p.Image + "\"";
+             string SousImageNom = "\"" + p.Nom + "\"";
+             string SousImageApercu = "\"" + p.Apercu + "\"";
+             
+            <a href="/Destination/InformationDestination/@p.Id">
+                <img onmouseover="MouseOverImage(@SousImage, @SousImageNom, @SousImageApercu)" class="ImageEnBas" src="Images/Destinations/@p.Image" alt="@p.Nom" />
+            </a>
          }
      </ul>
 }
